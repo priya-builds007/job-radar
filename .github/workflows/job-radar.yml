@@ -8,8 +8,8 @@ on:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-env:
-  PYTHONPATH: ${{ github.workspace }}
+    env:
+      PYTHONPATH: ${{ github.workspace }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
