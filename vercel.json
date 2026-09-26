@@ -4,10 +4,6 @@
     {
       "source": "/",
       "destination": "/web/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/web/index.html"
     }
   ]
 }
