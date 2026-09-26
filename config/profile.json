@@ -1,0 +1,31 @@
+{
+  "name": "Priyanka",
+  "skills": [
+    "C",
+    "C++",
+    "Java",
+    "Python",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Firebase",
+    "IoT fundamentals",
+    "Embedded Systems"
+  ],
+  "roles": [
+    "Software Developer Intern",
+    "Python Developer Intern",
+    "Java Developer Intern",
+    "Web Developer Intern",
+    "IoT Intern",
+    "Embedded Systems Intern"
+  ],
+  "locations": [
+    "Coimbatore",
+    "Chennai",
+    "Bengaluru",
+    "Tamil Nadu",
+    "India",
+    "Remote"
+  ]
+}
