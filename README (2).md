@@ -1,0 +1,1 @@
+The dashboard uses only data/processed_jobs.json built from actual JobSpy results. Serve the project root with `python -m http.server 8000`, then visit http://localhost:8000/web/. Do not open index.html as a file:// URL, since fetch requires a local server. Empty/error states are honest, not placeholder jobs.
