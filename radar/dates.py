@@ -1,25 +1,22 @@
-"""Date helpers for Job Radar."""
+"""Non-overlapping date categories, based on the viewer's local calendar day."""
+from datetime import date, timedelta
 
-from datetime import date, datetime
 
-
-def parse_date(value):
-    if not value:
-        return None
-
-    if isinstance(value, date):
-        return value
-
+def date_group(posted, today=None):
+    today = today or date.today()
+    if not posted:
+        return "Unknown date"
     try:
-        return datetime.fromisoformat(str(value)).date()
+        day = date.fromisoformat(str(posted))
     except ValueError:
-        return None
-
-
-def days_old(value):
-    parsed = parse_date(value)
-
-    if parsed is None:
-        return None
-
-    return (date.today() - parsed).days
+        return "Unknown date"
+    if day > today:
+        return "Unknown date"
+    if day == today:
+        return "Today"
+    # This Week means current calendar week, Monday through Sunday.
+    if day >= today - timedelta(days=today.weekday()):
+        return "This Week"
+    if day.year == today.year and day.month == today.month:
+        return "This Month"
+    return "Older"

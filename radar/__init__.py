@@ -1,3 +1,1 @@
-"""Job Radar package."""
-
-__version__ = "1.0.0"
+"""Job Radar. Phase 1 contains configuration checks; scraping follows in Phase 2."""

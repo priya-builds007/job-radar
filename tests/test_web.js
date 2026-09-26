@@ -1,0 +1,13 @@
+'use strict';
+const assert = require('node:assert/strict');
+const {dateBucket,safeLink} = require('../web/app.js');
+const today=new Date(2026,8,25);
+assert.equal(dateBucket('2026-09-25', today), 'Today');
+assert.equal(dateBucket('2026-09-21', today), 'This Week');
+assert.equal(dateBucket('2026-09-15', today), 'This Month');
+assert.equal(dateBucket('2026-08-31', today), 'Older');
+assert.equal(dateBucket(null, today), 'Unknown date');
+assert.equal(dateBucket('2026-09-26', today), 'Unknown date');
+assert.equal(safeLink('javascript:alert(1)'), null);
+assert.equal(safeLink('https://in.indeed.com/viewjob?jk=123'), 'https://in.indeed.com/viewjob?jk=123');
+console.log('Dashboard date and URL tests pass');

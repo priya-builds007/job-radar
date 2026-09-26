@@ -1,4 +1,334 @@
 {
-  "schema_version": 1,
-  "jobs": []
+  "jobs": [
+    {
+      "company": "",
+      "date_posted": "2026-09-25",
+      "description": "Xaryom is looking for a motivated and enthusiastic **Full Stack Developer Intern** to join our development team. This internship is designed for candidates who want to gain practical experience in building real\\-world web applications and working across both frontend and backend technologies.\n\nYou will collaborate with developers and other team members to develop, test, and improve scalable digital products.\n\n**Key Responsibilities**\n\n* Develop and maintain responsive web applications.\n* Work on both frontend and backend development tasks.\n* Build user interfaces using HTML, CSS, JavaScript, and React.js.\n* Develop backend services and APIs using Node.js and Express.js.\n* Work with relational and NoSQL databases.\n* Integrate frontend applications with backend APIs.\n* Write clean, maintainable, and reusable code.\n* Debug and troubleshoot application issues.\n* Collaborate with the development team using GitHub.\n* Participate in code reviews and project discussions.\n* Follow development best practices and contribute to ongoing projects.\n\n**Required Technical Skills**\n\n**Frontend**\n\n* HTML\n* CSS\n* JavaScript\n* React.js\n\n**Backend**\n\n* Node.js\n* Express.js\n* REST API development\n\n**Database**\n\nKnowledge of one or more of the following:\n\n* MySQL\n* PostgreSQL\n* MongoDB\n\nVersion Control\n\n* Git\n* GitHub\n\n**Who Can Apply?**\n\n* Students or recent graduates in Computer Science, Information Technology, Software Engineering, or related fields.\n* Candidates with personal, academic, or portfolio projects are encouraged to apply.\n* Basic understanding of full\\-stack web development is required.\n* Strong willingness to learn and work on real\\-world projects.\n* Good problem\\-solving and communication skills.\n* Ability to work effectively as part of a team.\n\n**Internship Details**\n\n**Duration:** 3 Months  \n**Work Mode:** On\\-site  \n**Stipend:** Available  \n**Job Opportunity:** Successful interns may receive an opportunity for continued employment with Xaryom based on performance and organizational requirements.\n\n**What You'll Gain**\n\n* Hands\\-on experience with real\\-world software projects.\n* Practical experience in frontend and backend development.\n* Experience working with databases and APIs.\n* Exposure to professional Git/GitHub workflows.\n* Collaboration experience with experienced developers.\n* Opportunity to strengthen your development portfolio.\n* Understanding of professional software development practices.\n\nPay: ₹5,000\\.00 \\- ₹15,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n* Paid sick time\n* Provident Fund\n* Work from home\n\nWork Location: Hybrid remote in Bhubaneswar, Odisha",
+      "id": "f423187e51c5af6770cf",
+      "is_remote": true,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=ac403fc635404dc3",
+      "location": "OR, IN",
+      "matched_skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: HTML, CSS, JavaScript",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 95,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-ac403fc635404dc3",
+      "title": "Full Stack Developer Intern"
+    },
+    {
+      "company": "Exdera",
+      "date_posted": "2026-09-25",
+      "description": "**Location:** Bangalore (Work from Office)  \n**Job Type:** Internship (Full\\-Time)  \n**Duration:** 3–6 Months (Potential for Full\\-Time Conversion / PPO)\n\n**About Exdera**  \nExdera is a digital product engineering agency specializing in UX/UI Design, Scalable Web Applications, Mobile Apps, and AI\\-driven Enterprise Solutions. We build high\\-performance systems and modern digital products for businesses worldwide.\n\nWe are looking for an ambitious **AI \\& Full Stack Developer Intern** who is eager to build scalable web applications, work with high\\-concurrency backend services, and integrate machine learning workflows into real\\-world applications.\n\n**Responsibilities**\n\n**Full Stack Development:** Develop and maintain web applications using the MERN Stack (MongoDB, Express.js, React.js, Node.js).\n\n**Backend Systems:** Assist in building high\\-throughput backend microservices and APIs using **Golang (Go)**.\n\n**AI \\& Machine Learning:** Assist in fine\\-tuning, training, and deploying ML models (e.g., PyTorch, TensorFlow, or Scikit\\-Learn) and integrating local/cloud LLMs into existing applications.\n\n**API \\& Data Pipeline Integration:** Design and optimize RESTful/gRPC APIs to serve ML inference pipeline results seamlessly to the frontend.  \n**Database Management:** Work with MongoDB, Postgres, vector databases (e.g., Pinecone, Milvus, Qdrant), and perform query optimization.  \n**Performance \\& Testing:** Debug, test, and optimize application performance, responsiveness, and AI inference latency.  \n**Collaboration:** Partner with UI/UX designers, AI engineers, and senior developers in an Agile environment (sprints, stand\\-ups, code reviews).  \n**Required Skills**  \n**Core Web Stack:** Strong foundation in JavaScript/TypeScript (ES6\\+), React.js, Node.js, and Express.js.  \n**Backend \\& Systems:** Basic understanding of Golang (Go) or strong willingness to learn low\\-level concurrency patterns.  \n**Machine Learning Fundamentals:** Knowledge of Python and core AI/ML frameworks (PyTorch, TensorFlow, Scikit\\-Learn, or Hugging Face).  \n**Data \\& APIs:** Solid grasp of REST APIs, JSON, and working with relational or document databases (MongoDB).  \n**Tooling:** Proficiency with Git/GitHub and Linux/command\\-line environments.  \n**Mindset:** Strong analytical problem\\-solving skills, curiosity for AI engineering, and an eager\\-to\\-learn attitude.  \n**Preferred Qualifications**  \nFinal\\-year students or recent graduates in Computer Science, Data Science, AI/ML, or related technical fields.  \nHands\\-on academic or personal projects involving full\\-stack web applications integrated with ML models, RAG architectures, or LLM APIs.  \nExposure to vector databases, prompt engineering, or model deployment (Docker, ONNX, Fast\\-API).  \nFamiliarity with modern UI frameworks like Tailwind CSS.  \n**What You'll Gain**  \n**Live Project Exposure:** Work on production\\-grade client applications and AI\\-driven products.  \n**Direct Mentorship:** Learn directly from experienced developers across full\\-stack architecture and machine learning engineering.  \n**Modern Stack Experience:** Master a rare and highly valuable combination of modern tools (React, Node, Go, and Python AI frameworks).  \n**Career Growth:** High possibility of a **Pre\\-Placement Offer (PPO)** for full\\-time conversion based on performance.  \n**Certification:** Internship Certificate and formal letter of recommendation upon successful completion.  \n**How to Apply**  \nIf you are passionate about full\\-stack engineering, love experimenting with AI models, and want to build real\\-world software, we’d love to hear from you! Please submit your resume along with a link to your GitHub profile or portfolio.\n\nPay: From ₹20,000\\.00 per month\n\nApplication Question(s):\n\n* Do you have any prior internship experience?\n\nExperience:\n\n* Full\\-stack development: 1 year (Preferred)\n* APIs: 1 year (Preferred)\n* Machine learning: 1 year (Preferred)\n* Vision AI: 1 year (Preferred)\n\nWork Location: In person",
+      "id": "6dd4ffd8c0209446dd93",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=504edff87f0ac7b9",
+      "location": "KA, IN",
+      "matched_skills": [
+        "Python",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, CSS, JavaScript",
+        "Preferred geography from source location: KA, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-504edff87f0ac7b9",
+      "title": "Full Stack and AI Developer Intern"
+    },
+    {
+      "company": "Unistanz Software Pvt Ltd",
+      "date_posted": "2026-09-25",
+      "description": "**Unistanz Software Pvt Ltd** is hiring **.NET Core Interns** who will gain hands\\-on experience in real\\-time development projects. **Interested candidates can send** their resume to **Keyurir.unistanz@outlook.com** with the subject line: Application for .NET Core Internship.\n\n**Unistanz Software Pvt Ltd** is an IT services and consulting company specializing in Software Product Development, Customized Application Development, and Client Deputation. We work on the latest technologies including .NET Core, MS SQL Server, and ReactJS with AI integration.\n\n**Visit us:** www.unistanz.com\n\n**Location \\-** Borivali East( 5 mins walk from Magathane Metro Station)\n\n**Responsibilities:**\n\n**Assist** in **developing** and **maintaining applications** using **.NET Core**\n\n**Work** with **MS SQL Serve**r for database design and queries\n\n**Collaborate** with the team on **ReactJS front\\-end integration**\n\n**Participate** in **debugging, testing, and performance optimization**\n\n**Contribute** to **product features** involving AI integration\n\n**Desired Skills:**\n\n**Basic knowledge** of **C\\#** and **.NET Core framework**\n\n**Understanding** of **OOP concepts** and **software development fundamentals**\n\n**Familiarity** with **MS SQL/Entity Framework**\n\nExposure to **ReactJS** is a plus\n\nStrong analytical and problem\\-solving skills\n\nEagerness to learn and adapt quickly\n\n**Internship Details:**\n\n**3‑month full‑time** internship **(9:30 AM to 6:00 PM)** in Mumbai\n\n**Paid internship**\n\nHands\\-on experience with live projects\n\n**Mentorship** from **industry experts**\n\n**Exposure** to **modern tools, frameworks, and best practices**\n\n**Opportunity** to convert into a **full\\-time role** based on performance\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nApplication Question(s):\n\n* 1\\.Are you interested for Dotnet core internship (conversion to full time job within or post 3 months)?\n* 2\\.Do you have any months of experience in dotnet core?\n* 3\\.Do you have any months of experience in MS SQL server?\n* 4\\.The stipend would be in range of 8k to 10k per month. (varies as per candidature). Are you ready for the same?\n* 5\\. Have you made any project from scratch for an academic project or in a previous internship?\n* 6\\.Internship would be work from the office from Mon \\- Fri(9\\.30 am to 6 pm). Are you ready for the same?\n* 7\\.Where are you located in Mumbai. Are you ready to commute to office Mon to Fri?\n* 8\\.Post selection, we want you to start immediately. Are you ready for the same?\n* 9\\.Please mention your scores in academics X, XII and Degree\n\nWork Location: In person",
+      "id": "e5da5e4f68dc80a479e9",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=c0fd8ffefb0929c9",
+      "location": "MH, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: MH, IN"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-c0fd8ffefb0929c9",
+      "title": ".NET Core Developer Intern"
+    },
+    {
+      "company": "YourfriendlyHR",
+      "date_posted": "2026-09-21",
+      "description": "",
+      "id": "88aaaa8bc36d2ec9f0b4",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4468711543",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4468711543",
+      "title": "Software Development Intern - Full Stack / Backend Focus"
+    },
+    {
+      "company": "Vahan.ai",
+      "date_posted": "2026-09-17",
+      "description": "",
+      "id": "91948d6c811f6bbd2e35",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4468619421",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4468619421",
+      "title": "Software Engineer Intern"
+    },
+    {
+      "company": "Vidyalai",
+      "date_posted": "2026-09-15",
+      "description": "",
+      "id": "68d9bfa442105d3beacd",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4467410588",
+      "location": "Kochi, Kerala, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Kochi, Kerala, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4467410588",
+      "title": "Full Stack Development Internship in Cochin"
+    },
+    {
+      "company": "GharPayy",
+      "date_posted": "2026-09-06",
+      "description": "",
+      "id": "288f36d8aceb5d52bce6",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4463782926",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4463782926",
+      "title": "Full Stack Development Internship in Bangalore"
+    },
+    {
+      "company": "Aawas Yojana",
+      "date_posted": "2026-08-27",
+      "description": "",
+      "id": "3da35e89a8ab2975a221",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4459629344",
+      "location": "Dehradun, Uttarakhand, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Dehradun, Uttarakhand, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4459629344",
+      "title": "Software Development Engineering (Web) Internship in Dehradun (Hybrid)"
+    },
+    {
+      "company": "Faveo",
+      "date_posted": "2026-08-23",
+      "description": "",
+      "id": "7610a1f977fc5405ae47",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4467164914",
+      "location": "Jammu, Jammu & Kashmir, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Jammu, Jammu & Kashmir, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4467164914",
+      "title": "Internship For Software Engineers - Freshers"
+    },
+    {
+      "company": "T.I.M.E. (Triumphant Institute of Management Education)",
+      "date_posted": "2026-08-13",
+      "description": "",
+      "id": "c5612d177e33d54185da",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4453602602",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4453602602",
+      "title": "Python Development Internship in Bangalore"
+    },
+    {
+      "company": "Lascade",
+      "date_posted": "2026-07-11",
+      "description": "",
+      "id": "35fc825964af8633ec93",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4436646379",
+      "location": "Kochi, Kerala, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Kochi, Kerala, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4436646379",
+      "title": "Software Engineer Intern (Web & Mobile)"
+    }
+  ],
+  "schema_version": 1
 }

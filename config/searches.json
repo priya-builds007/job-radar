@@ -1,34 +1,33 @@
 {
   "boards": [
     "indeed",
-    "linkedin",
-    "glassdoor"
+    "linkedin"
   ],
   "results_per_board_per_search": 10,
   "searches": [
     {
       "term": "software developer intern",
-      "location": "Coimbatore"
+      "location": "India"
     },
     {
       "term": "python developer intern",
-      "location": "Coimbatore"
+      "location": "Tamil Nadu, India"
     },
     {
       "term": "java developer intern",
-      "location": "Coimbatore"
+      "location": "Chennai, India"
     },
     {
-      "term": "web developer intern",
-      "location": "Coimbatore"
+      "term": "web development intern",
+      "location": "Coimbatore, India"
     },
     {
-      "term": "iot intern",
-      "location": "Coimbatore"
+      "term": "software engineer fresher",
+      "location": "Bengaluru, India"
     },
     {
-      "term": "embedded systems intern",
-      "location": "Coimbatore"
+      "term": "embedded software intern",
+      "location": "India"
     }
   ]
 }

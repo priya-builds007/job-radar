@@ -1,31 +1,8 @@
 {
   "name": "Priyanka",
-  "skills": [
-    "C",
-    "C++",
-    "Java",
-    "Python",
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Firebase",
-    "IoT fundamentals",
-    "Embedded Systems"
-  ],
-  "roles": [
-    "Software Developer Intern",
-    "Python Developer Intern",
-    "Java Developer Intern",
-    "Web Developer Intern",
-    "IoT Intern",
-    "Embedded Systems Intern"
-  ],
-  "locations": [
-    "Coimbatore",
-    "Chennai",
-    "Bengaluru",
-    "Tamil Nadu",
-    "India",
-    "Remote"
-  ]
+  "education": "2nd-year B.E. Computer Science and Engineering student",
+  "skills": ["C", "C++", "Java", "Python", "HTML", "CSS", "JavaScript", "Firebase", "Real-Time Database", "IoT fundamentals", "Embedded Systems"],
+  "interests": ["Software Development", "IoT", "Embedded Systems", "Cloud and Real-Time Systems", "Problem Solving", "Real-world technology projects"],
+  "roles": ["Software Developer", "Software Engineer", "Python Developer", "Java Developer", "Web Developer", "Software Development Intern", "Python Intern", "Java Intern", "Web Development Intern", "IoT / Embedded Software", "Fresher software roles"],
+  "locations": ["India", "Tamil Nadu", "Coimbatore", "Chennai", "Bengaluru", "Remote"]
 }
