@@ -1,6 +1,263 @@
 {
   "jobs": [
     {
+      "company": "Delta Endure Technologies",
+      "date_posted": "2026-09-26",
+      "description": "Build Real Products. Learn by Doing.\n\n**Deldure.com** is an early\\-stage AI\\-powered local discovery and marketplace platform connecting customers with businesses and service providers.\n\nWe are looking for motivated students and aspiring developers who want to gain **hands\\-on experience building a real\\-world technology product**.\n\nDeldure is currently being developed as an early\\-stage project and is not yet incorporated as a company.\n\nWhat You Will Learn\n\nDepending on your interests, you may get exposure to:\n\n* Java, Spring Boot and REST APIs\n* React / HTML / CSS / JavaScript\n* PostgreSQL and Redis\n* Apache Solr and search technology\n* AWS and cloud infrastructure\n* AI / Generative AI / LLM applications\n* Microservices and distributed systems\n* Software testing and automation\n* Git and collaborative development\n* Production\\-oriented software engineering\n* System design and architecture\n\nWhat You May Work On\n\nInterns will work on selected projects related to the Deldure platform, such as:\n\n* Developing new website features\n* Improving existing UI/UX\n* Building backend APIs\n* Developing AI\\-powered features\n* Improving search and discovery\n* Database and performance optimization\n* Automated testing\n* Technical research and experimentation\n* Developer tools and internal applications\n\nProjects will be selected based on your experience and learning objectives.\n\nInternship Structure\n\n**Type:** Project\\-based learning internship  \n**Mode:** Remote / flexible  \n**Duration:** 3 months  \n**Time commitment:** Approximately 40 hours per week\n\nThis is intended primarily as a **learning and practical experience opportunity**, rather than conventional employment.\n\nInterns will receive guidance and mentorship and will have the opportunity to work with technologies used in a real\\-world software platform.\n\nWho Should Apply?\n\nStudents or recent graduates interested in:\n\n* Computer Science\n* Software Engineering\n* AI/ML\n* Web Development\n* Cloud Computing\n* Backend Engineering\n* Data Engineering\n* DevOps\n* UI/UX\n\nYou don't need to know everything. **Curiosity, willingness to learn, and the ability to take ownership of a small project are more important.**\n\nWhat You Get\n\n* Hands\\-on experience with a real technology product\n* Mentorship and technical guidance\n* Opportunity to build portfolio\\-worthy projects\n* Experience working with modern software technologies\n* Internship/project completion certificate\n* Opportunity for a recommendation/reference based on performance\n* Potential consideration for future paid opportunities as Deldure grows\n\nImportant\n\nThis is currently an **project\\-based learning opportunity**. There is no guarantee of employment or future compensation.\n\nInterested candidates can share their **resume/GitHub/LinkedIn profile** along with a brief description of what they would like to learn or build.\n\n**Deldure**  \nAI\\-Powered Local Discovery \\& Marketplace\n\nPay: ₹3,000\\.00 per month\n\nWork Location: In person",
+      "id": "9c1e8bfc55d2935e97f5",
+      "is_remote": true,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=d4bb5b379dc3aa3b",
+      "location": "WB, IN",
+      "matched_skills": [
+        "Java",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, HTML, CSS, JavaScript",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 100,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-d4bb5b379dc3aa3b",
+      "title": "Software Engineering Intern — AI, Web Development"
+    },
+    {
+      "company": "profenaa technologies",
+      "date_posted": "2026-09-26",
+      "description": "**Java Full Stack Developer Intern**\n\n**Company:** Profenaa Technologies  \n**Location:** Gandhipuram, Coimbatore, Tamil Nadu  \n**Job Type:** Internship – Paid  \n**Work Mode:** On\\-site  \n**Experience:** Fresher / Students / Recent Graduates\n\nJob Description\n\nProfenaa Technologies is looking for enthusiastic and motivated **Java Full Stack Developer Interns** to join our development team. This internship provides an opportunity to gain practical experience in frontend and backend development, work on real\\-time projects, and learn industry\\-oriented development practices.\n\nWhat You Will Learn\n\n* Core Java \\& Object\\-Oriented Programming\n* HTML5, CSS3 \\& JavaScript\n* React.js\n* Spring Boot\n* REST API Development\n* MySQL / Database Management\n* Git \\& GitHub\n* Frontend \\& Backend Integration\n* Debugging and Testing\n* Real\\-Time Project Development\n\nResponsibilities\n\n* Develop and maintain web applications.\n* Build responsive frontend interfaces.\n* Develop backend applications using Java and Spring Boot.\n* Create and integrate REST APIs.\n* Work with MySQL databases.\n* Debug and fix application issues.\n* Participate in real\\-time project development.\n* Collaborate with developers and mentors.\n* Follow coding standards and best practices.\n\nEligibility\n\n* BCA / B.Sc. CS / B.Sc. IT / B.E. / B.Tech / MCA / M.Sc. CS or related degree.\n* Final\\-year students and recent graduates can apply.\n* Basic knowledge of Java is preferred.\n* Knowledge of HTML, CSS and JavaScript is an advantage.\n* Good learning attitude and problem\\-solving skills.\n* Candidates interested in Full Stack Development are encouraged to apply.\n\nInternship Benefits\n\n* **Paid Internship**\n* Practical hands\\-on training\n* Real\\-time project exposure\n* Industry\\-oriented learning\n* Mentor guidance\n* Certificate upon successful completion\n* Opportunity to improve technical and professional skills\n\nLocation\n\n**Gandhipuram, Coimbatore, Tamil Nadu**\n\nApply Now\n\nInterested candidates can apply through Indeed or contact Profenaa Technologies for further details.\n\n**Website:** www.profenaatechnologies.com  \n**Contact:** 9092099600 / 9944897638\n\nPay: ₹12,000\\.00 \\- ₹25,000\\.00 per month\n\nWork Location: In person",
+      "id": "f2ee532cc27b6d1b1c57",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=4a8e2d3fee5055bf",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-4a8e2d3fee5055bf",
+      "title": "Java Full Stack Developer-Internship"
+    },
+    {
+      "company": "COFA Studio - Design Agency",
+      "date_posted": "2026-09-26",
+      "description": "Job Summary\n\nWe are looking for passionate and motivated **Full Stack Developer Interns** to join our team. This internship is designed to provide hands\\-on industry experience by working on live web development projects under the guidance of experienced developers.\n\nIf you're eager to learn modern web technologies and build real\\-world applications, this internship is the perfect opportunity to kickstart your software development career.\n\nWhat You'll Learn\n\n* Frontend Development using HTML5, CSS3, JavaScript, and React.js\n* Backend Development using Node.js, PHP, and Python\n* Database Management with MySQL and MongoDB\n* REST API Development and Integration\n* Git \\& GitHub Version Control\n* Responsive Web Development\n* Real Client Project Development\n* Software Development Best Practices\n\nKey Responsibilities\n\n* Develop and maintain responsive web applications\n* Assist in frontend and backend development\n* Build and integrate APIs\n* Design and manage databases\n* Test, debug, and optimize applications\n* Collaborate with designers and developers on live projects\n* Write clean, efficient, and maintainable code\n* Follow coding standards and development best practices\n\nRequirements\n\n* Basic knowledge of HTML, CSS, and JavaScript\n* Understanding of web development fundamentals\n* Basic knowledge of any programming language (PHP, Python, JavaScript, etc.) is an advantage\n* Familiarity with MySQL or MongoDB is a plus\n* Strong problem\\-solving and analytical skills\n* Willingness to learn and work in a team environment\n* Freshers, final\\-year students, and recent graduates are welcome to apply\n\nInternship Benefits\n\n* 7\\-Month Professional Training \\& Internship\n* Work on Live Client Projects\n* Hands\\-on Practical Learning\n* Internship \\& Experience Certificate upon successful completion\n* 100% Technical Support \\& Mentorship\n* Build a Strong Professional Portfolio\n* Exposure to Real Industry Workflows\n* Full\\-Time, In\\-Office Internship\n* Opportunity for Full\\-Time Employment based on performance\n* Career Guidance and Job Support after successful completion\n\n**Work Schedule:** Monday to Saturday (Full\\-Time)\n\n**Work Location:** In\\-person, Nashik, Maharashtra\n\nPay: ₹3,160\\.91 \\- ₹4,746\\.70 per month\n\nWork Location: In person",
+      "id": "c282f7d357b4a11d4ac4",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=d49be79db07a8a79",
+      "location": "MH, IN",
+      "matched_skills": [
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, HTML, CSS, JavaScript",
+        "Preferred geography from source location: MH, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-d49be79db07a8a79",
+      "title": "Full Stack Developer Internship"
+    },
+    {
+      "company": "Infyle Technology",
+      "date_posted": "2026-09-26",
+      "description": "**Job Description**\n\n**Company**: Infyle Technologies\n\n**Job Title**: Full Stack Developer Intern / Fresher\n\n**Job Location**: Zirakpur, Punjab\n\n**Work Mode**: Work from Office (On\\-site)\n\n**Experience**: Fresher / Internship\n\n**Job Type**: Full\\-time / Internship\n\n**About the Company:** \n\nInfyle Technologies is a technology company specializing in web development, mobile application development, custom software development, and digital solutions. We are looking for passionate and motivated Full Stack Developer Interns / Freshers who are eager to learn, develop their technical skills, and work on real\\-world projects.\n\n**Roles and Responsibilities:**\n\n* Develop and maintain responsive websites and web applications.\n* Work on frontend technologies such as HTML, CSS, JavaScript, and React.js.\n* Assist in backend development using Node.js and Express.js.\n* Work with databases such as MongoDB and MySQL.\n* Develop and integrate REST APIs.\n* Write clean, reusable, and efficient code.\n* Identify and fix bugs and troubleshoot technical issues.\n* Collaborate with the development team to complete projects on time.\n* Participate in code reviews and follow development best practices.\n* Learn and implement new technologies as required.\n\n**Required Skills:**\n\n* Basic knowledge of HTML, CSS, and JavaScript.\n* Understanding of React.js and frontend development.\n* Basic knowledge of Node.js and Express.js.\n* Familiarity with MongoDB or MySQL.\n* Understanding of REST APIs and database concepts.\n* Knowledge of Git and GitHub will be an added advantage.\n* Good logical thinking and problem\\-solving skills.\n* Ability to learn quickly and work in a team.\n\n**Eligibility Criteria:**\n\n* B.Tech / B.E. (Computer Science / IT), BCA, MCA, or any relevant technical qualification.\n* Freshers and candidates with internship experience can apply.\n* Candidates with academic projects, personal projects, or a GitHub portfolio will be preferred.\n* Must be willing to work from our Zirakpur office.\n* Immediate joiners will be preferred.\n\n**What We Offer:**\n\n* Hands\\-on experience with live projects.\n* Opportunity to work with modern technologies.\n* Mentorship and technical guidance from experienced developers.\n* Friendly and collaborative work environment.\n* Learning opportunities and career growth based on performance.\n\n**How to Apply:**\n\nInterested candidates can apply through Indeed with their updated resume. Candidates may also share their GitHub profile or project portfolio, if available.\n\n**Important: This is an urgent hiring requirement for our Zirakpur office. Candidates must be willing to work on\\-site.**\n\n**Job Type**: Full\\-time / Internship\n\n**Location**: Zirakpur, Punjab\n\n**Work Location**: In person\n\nPay: ₹8,000\\.00 \\- ₹15,000\\.00 per month\n\nWork Location: In person",
+      "id": "6869f1c6711c2a3f9a43",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=f5315ae974f2df1e",
+      "location": "PB, IN",
+      "matched_skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: HTML, CSS, JavaScript",
+        "Preferred geography from source location: PB, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-f5315ae974f2df1e",
+      "title": "Full Stack Developer Intern"
+    },
+    {
+      "company": "Redknot Immigration",
+      "date_posted": "2026-09-26",
+      "description": "**Role Description:** This is a remote internship role for a Mobile Application Developer at RedKnot Immigration. The intern will assist in designing, developing, and testing mobile applications that support immigration services and enhance the digital experience for clients. Day\\-to\\-day tasks include collaborating with team members to refine requirements, implementing new features, fixing bugs, and optimizing performance for mobile platforms. The role also involves participating in code reviews, documenting technical work, and learning best practices in secure and scalable application development.\n\n**Qualifications:**\n\n* Candidates should possess skills in Mobile Application Development and experience working with Mobile Applications (Preferred)\n* Candidates should possess skills in Application Development.\n* Candidates should possess skills in flutter/ios/android Development and familiarity with related tools and frameworks.\n* Basic knowledge of software version control (e.g., Git) and collaborative development workflows.\n* Strong problem\\-solving abilities, attention to detail, and willingness to learn new technologies.\n* Effective written and verbal communication skills and ability to work independently in a remote environment.\n* Enrollment in or completion of any degree or coursework in Computer Science, Software Engineering, or a related field is preferred\n* Freshers / Interns and also experienced candidates are welcome.\n\n**Note:**\n\n* You will get hands\\-on experience developing an app from the scratch\n* Training will be provided\n* Convenient working hours (Any shift you want)\n* Experience Letter will be provided\n* Immediate Joinees preferred!!!\n\nPay: Up to ₹10,000\\.00 per month\n\nWork Location: Remote",
+      "id": "dce03b4a04ba699f1de2",
+      "is_remote": true,
+      "job_type": "volunteer, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=2ee51de29ff5ff91",
+      "location": "KA, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-2ee51de29ff5ff91",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "Gravit InfoSystems Pvt. Ltd.",
+      "date_posted": "2026-09-26",
+      "description": "**Job description:**\n\n**Key Responsibilities:**\n\n* **Design and Development:** Create high\\-quality mobile applications using \\[iOS/Android/React Native/Flutter/other technologies], following best practices and coding standards.\n* **Collaborate:** Work with cross\\-functional teams including designers, product managers, and other developers to gather requirements and deliver solutions that meet user needs and business objectives.\n* **Testing and Debugging:** Conduct thorough testing of applications to identify and fix bugs, ensuring optimal performance, security, and usability.\n* **Maintenance:** Continuously monitor and maintain applications, making improvements and updates as needed to ensure compatibility with new operating system versions and devices.\n* **Documentation:** Prepare and maintain comprehensive documentation for code, APIs, and application functionality to support development and troubleshooting efforts.\n* **User Experience:** Focus on creating seamless and engaging user experiences by implementing intuitive designs and incorporating user feedback.\n\n**Qualifications:**\n\n* **Experience:** 0\\-1 years of experience in mobile app development, with a strong portfolio of completed projects.\n* **Technical Skills:** Proficiency in \\[iOS development (Swift/Objective\\-C), Android development (Java/Kotlin), React Native, Flutter, etc.]. Familiarity with RESTful APIs, version control systems (e.g., Git), and development tools.\n* **Education:** Bachelor’s degree in Computer Science, Software Engineering, or a related field, or equivalent practical experience.\n* **Problem\\-Solving:** Strong analytical and problem\\-solving skills with the ability to troubleshoot and resolve issues efficiently.\n* **Communication:** Excellent communication skills, with the ability to clearly articulate technical concepts to non\\-technical stakeholders.\n* **Attention to Detail:** A keen eye for detail and a commitment to delivering high\\-quality work.\n\n**Preferred Qualifications:**\n\n* Experience with \\[additional technologies or frameworks relevant to the role].\n* Knowledge of \\[specific industry or domain, if applicable].\n* Experience with Agile/Scrum methodologies.\n\nJob Type: Internship/Full\\-time \\-\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Application development: 1 year (Preferred)\n\nWork Location: On\\-site\n\nJob Type: Internship\n\nPay: ₹5,000\\.00 \\- ₹8,000\\.00 per month\n\nSchedule:\n\n* Day shift\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Application development: 1 year (Required)\n\nWork Location: Gwalior (Madhya Pradesh)\n\nJob Type: Internship\n\nSchedule:\n\n* Day shift\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Application development: 1 year (Preferred)\n\nLocation:\n\n* Gwalior\n\nWork Location: On\\-site\n\nJob Type: Internship\n\nSchedule:\n\n* Day shift\n\nEducation:\n\n* Bachelor's (Preferred)\n\nWork Location: Gwalior (Madhya Pradesh)\n\nJob Type: Internship\n\nSchedule:\n\n* Day shift\n\nEducation:\n\n* Bachelor's (Preferred)\n\nWork Location: In person\n\nJob Type: Internship\n\nContract length: 6 months\n\nSchedule:\n\n* Day shift\n\nAbility to commute/relocate:\n\n* Gwalior District, Madhya Pradesh: Reliably commute or planning to relocate before starting work (Preferred)\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Flutter: 1 year (Preferred)\n* Mobile applications: 1 year (Preferred)\n\nWork Location: In person\n\nJob Types: Internship\n\nContract length: 6 months\n\nSchedule:\n\n* Day shift\n\nApplication Question(s):\n\n* Are You able to Relocated in Gwalior Location\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Application development: 1 year (Preferred)\n* total work: 1 year (Preferred)\n\nWork Location: In person\n\n\\*Speak with the employer\\* \\+91 9425151787\n\nJob Type: Internship\n\nContract length: 6 months\n\nSchedule:\n\n* Day shift\n\nAbility to commute/relocate:\n\n* Govindpuri, Gwalior, Madhya Pradesh: Reliably commute or planning to relocate before starting work (Preferred)\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* Flutter: 1 year (Preferred)\n\nWork Location: In person\n\nJob Type: Internship\n\nContract length: 6 months\n\nSchedule:\n\n* Day shift\n\nAbility to commute/relocate:\n\n* Govindpuri, Gwalior, Madhya Pradesh: Reliably commute or planning to relocate before starting work (Preferred)\n\nEducation:\n\n* Bachelor's (Preferred)\n\nWork Location: In person\n\nJob Type: Internship\n\nAbility to commute/relocate:\n\n* Govindpuri, Gwalior, Madhya Pradesh: Reliably commute or planning to relocate before starting work (Preferred)\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* total work: 1 year (Preferred)\n* software development: 1 year (Preferred)\n* HTML5: 1 year (Preferred)\n\nWork Location: In person",
+      "id": "8ed4034e1c665a4835fa",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=dc2fdd31d456adfd",
+      "location": "MP, IN",
+      "matched_skills": [
+        "C",
+        "Java"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C, Java",
+        "Preferred geography from source location: MP, IN"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-dc2fdd31d456adfd",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "KVM ASSET EXPERTS LLP",
+      "date_posted": "2026-09-26",
+      "description": "We're looking for a **Software Developer Intern** to join our team.\n\n**Preferred Skills**:\n\n* Hands\\-on experience in programming\n* Background in Computer Science or related field\n* Exposure to **full stack development** using **Flutter**, **Python**, and **SQL**\n\n**What You’ll Do**:\n\n* 3 months training on fundamentals\n* Assist in developing and maintaining web/mobile apps\n* Work on real projects with mentorship and guidance\n\n**Location**: Shankaramatam Road, visakhapatnam  \n**Duration**: 6 months  \n**Stipend**: 5k (based on your skills and output)\n\nJob Type: Full\\-time\n\nPay: ₹5,000\\.00 \\- ₹8,000\\.00 per month\n\nAbility to commute/relocate:\n\n* Visakhapatnam, Andhra Pradesh 530040: Reliably commute or planning to relocate before starting work (Preferred)\n\nEducation:\n\n* Bachelor's (Preferred)\n\nWork Location: In person",
+      "id": "bbe92a7f30617a09ecc6",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=8997f9a872303c8c",
+      "location": "AP, IN",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: AP, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-8997f9a872303c8c",
+      "title": "Full Stack Software Developer Intern"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-26",
+      "description": "IPTechie is a technology\\-driven software development company specializing in Web Applications, Blockchain, Web3, AI\\-powered Solutions, and Enterprise Software Development.\n\nWe are looking for enthusiastic and motivated Full Stack Developer Interns who are passionate about coding, problem\\-solving, and learning modern web technologies.\n\nRoles \\& Responsibilities\n\n* Assist in developing and maintaining responsive web applications.\n* Work on frontend development using React.js and Next.js.\n* Develop and integrate RESTful APIs using Node.js and Express.js.\n* Work with databases such as MySQL and MongoDB.\n* Collaborate with senior developers to design, develop, and test new features.\n* Write clean, reusable, and maintainable code.\n* Identify and resolve bugs and performance issues.\n* Participate in code reviews and technical discussions.\n* Use Git and GitHub for version control.\n* Gain exposure to real\\-world software development projects.\n\nPay: From ₹10,000\\.00 per month\n\nWork Location: In person",
+      "id": "2e4ed7489e4db33f9f61",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=732a5da0071aa2e0",
+      "location": "PB, IN",
+      "matched_skills": [
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: JavaScript",
+        "Preferred geography from source location: PB, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-732a5da0071aa2e0",
+      "title": "Full Stack Developer Internship"
+    },
+    {
       "company": "",
       "date_posted": "2026-09-25",
       "description": "Xaryom is looking for a motivated and enthusiastic **Full Stack Developer Intern** to join our development team. This internship is designed for candidates who want to gain practical experience in building real\\-world web applications and working across both frontend and backend technologies.\n\nYou will collaborate with developers and other team members to develop, test, and improve scalable digital products.\n\n**Key Responsibilities**\n\n* Develop and maintain responsive web applications.\n* Work on both frontend and backend development tasks.\n* Build user interfaces using HTML, CSS, JavaScript, and React.js.\n* Develop backend services and APIs using Node.js and Express.js.\n* Work with relational and NoSQL databases.\n* Integrate frontend applications with backend APIs.\n* Write clean, maintainable, and reusable code.\n* Debug and troubleshoot application issues.\n* Collaborate with the development team using GitHub.\n* Participate in code reviews and project discussions.\n* Follow development best practices and contribute to ongoing projects.\n\n**Required Technical Skills**\n\n**Frontend**\n\n* HTML\n* CSS\n* JavaScript\n* React.js\n\n**Backend**\n\n* Node.js\n* Express.js\n* REST API development\n\n**Database**\n\nKnowledge of one or more of the following:\n\n* MySQL\n* PostgreSQL\n* MongoDB\n\nVersion Control\n\n* Git\n* GitHub\n\n**Who Can Apply?**\n\n* Students or recent graduates in Computer Science, Information Technology, Software Engineering, or related fields.\n* Candidates with personal, academic, or portfolio projects are encouraged to apply.\n* Basic understanding of full\\-stack web development is required.\n* Strong willingness to learn and work on real\\-world projects.\n* Good problem\\-solving and communication skills.\n* Ability to work effectively as part of a team.\n\n**Internship Details**\n\n**Duration:** 3 Months  \n**Work Mode:** On\\-site  \n**Stipend:** Available  \n**Job Opportunity:** Successful interns may receive an opportunity for continued employment with Xaryom based on performance and organizational requirements.\n\n**What You'll Gain**\n\n* Hands\\-on experience with real\\-world software projects.\n* Practical experience in frontend and backend development.\n* Experience working with databases and APIs.\n* Exposure to professional Git/GitHub workflows.\n* Collaboration experience with experienced developers.\n* Opportunity to strengthen your development portfolio.\n* Understanding of professional software development practices.\n\nPay: ₹5,000\\.00 \\- ₹15,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n* Paid sick time\n* Provident Fund\n* Work from home\n\nWork Location: Hybrid remote in Bhubaneswar, Odisha",
@@ -67,6 +324,38 @@
       "title": "Full Stack and AI Developer Intern"
     },
     {
+      "company": "KorInno Technologies Private Limited",
+      "date_posted": "2026-09-25",
+      "description": "",
+      "id": "8840b3383c709ffe72e0",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470165113",
+      "location": "Hyderabad, Telangana, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Hyderabad, Telangana, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4470165113",
+      "title": "Embedded SW Engineering Intern"
+    },
+    {
       "company": "Unistanz Software Pvt Ltd",
       "date_posted": "2026-09-25",
       "description": "**Unistanz Software Pvt Ltd** is hiring **.NET Core Interns** who will gain hands\\-on experience in real\\-time development projects. **Interested candidates can send** their resume to **Keyurir.unistanz@outlook.com** with the subject line: Application for .NET Core Internship.\n\n**Unistanz Software Pvt Ltd** is an IT services and consulting company specializing in Software Product Development, Customized Application Development, and Client Deputation. We work on the latest technologies including .NET Core, MS SQL Server, and ReactJS with AI integration.\n\n**Visit us:** www.unistanz.com\n\n**Location \\-** Borivali East( 5 mins walk from Magathane Metro Station)\n\n**Responsibilities:**\n\n**Assist** in **developing** and **maintaining applications** using **.NET Core**\n\n**Work** with **MS SQL Serve**r for database design and queries\n\n**Collaborate** with the team on **ReactJS front\\-end integration**\n\n**Participate** in **debugging, testing, and performance optimization**\n\n**Contribute** to **product features** involving AI integration\n\n**Desired Skills:**\n\n**Basic knowledge** of **C\\#** and **.NET Core framework**\n\n**Understanding** of **OOP concepts** and **software development fundamentals**\n\n**Familiarity** with **MS SQL/Entity Framework**\n\nExposure to **ReactJS** is a plus\n\nStrong analytical and problem\\-solving skills\n\nEagerness to learn and adapt quickly\n\n**Internship Details:**\n\n**3‑month full‑time** internship **(9:30 AM to 6:00 PM)** in Mumbai\n\n**Paid internship**\n\nHands\\-on experience with live projects\n\n**Mentorship** from **industry experts**\n\n**Exposure** to **modern tools, frameworks, and best practices**\n\n**Opportunity** to convert into a **full\\-time role** based on performance\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nApplication Question(s):\n\n* 1\\.Are you interested for Dotnet core internship (conversion to full time job within or post 3 months)?\n* 2\\.Do you have any months of experience in dotnet core?\n* 3\\.Do you have any months of experience in MS SQL server?\n* 4\\.The stipend would be in range of 8k to 10k per month. (varies as per candidature). Are you ready for the same?\n* 5\\. Have you made any project from scratch for an academic project or in a previous internship?\n* 6\\.Internship would be work from the office from Mon \\- Fri(9\\.30 am to 6 pm). Are you ready for the same?\n* 7\\.Where are you located in Mumbai. Are you ready to commute to office Mon to Fri?\n* 8\\.Post selection, we want you to start immediately. Are you ready for the same?\n* 9\\.Please mention your scores in academics X, XII and Degree\n\nWork Location: In person",
@@ -93,6 +382,269 @@
       "source": "indeed",
       "source_id": "in-c0fd8ffefb0929c9",
       "title": ".NET Core Developer Intern"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-24",
+      "description": "Role Overview:  \nWe are looking for an enthusiastic Embedded Systems Intern to support the development and testing of embedded electronic products, including healthcare and medical\\-device projects. The selected candidate will work with microcontrollers, sensors, communication modules and electronic circuits under the guidance of the engineering team.\n\nKey Responsibilities:\n\n* Assist in designing, developing and testing embedded hardware and firmware.\n* Work with microcontrollers such as ESP32, ESP8266, Arduino and STM32\\. Interface sensors, displays, relays, motors, cameras and communication modules with microcontrollers. Develop and debug embedded programs using C and C\\+\\+.\n* Assist in circuit design, breadboard assembly, soldering and prototype development. Read circuit diagrams, component datasheets and technical documentation.\n* Test electronic circuits and identify hardware or firmware issues. Work with communication protocols such as UART, I²C, SPI, Wi\\-Fi, Bluetooth and MQTT.\n* Support the development of IoT\\-enabled monitoring and control systems. Record test results and prepare technical documentation.\n* Assist in preparing the bill of materials and selecting appropriate electronic components. Follow electrical\\-safety, product\\-quality and confidentiality requirements.\n* Coordinate with software, mechanical\\-design and product\\-development teams.\n* Complete assigned project tasks within the agreed timelines.\n\nEligibility:\n\n* Currently pursuing or recently completed a diploma or bachelor’s degree in Electronics and Communication Engineering, Electrical and Electronics Engineering, Biomedical Engineering, Mechatronics, Instrumentation or a related field.\n* Fresh graduates are welcome to apply.\n* Basic knowledge of electronic components and digital and analogue circuits.\n* Basic programming knowledge in Embedded C or C\\+\\+.\n* Familiarity with Arduino IDE, PlatformIO or similar development tools.\n* Ability to understand basic circuit diagrams and component datasheets.\n* Willingness to perform practical hardware assembly and testing.\n\nPreferred Skills:\n\n* Hands\\-on experience with ESP32, Arduino, Raspberry Pi or STM32\\.\n* Familiarity with sensors, cameras, NFC/RFID and biometric modules.\n* Basic PCB\\-design knowledge using KiCad, EasyEDA or similar software.\n* Understanding of IoT platforms, APIs and cloud\\-connected devices.\n* Knowledge of battery\\-powered circuits and power\\-management systems.\n* Familiarity with oscilloscopes, multimeters and soldering equipment.\n* Interest in healthcare technology and medical\\-device development.\n\nWhat We Offer:\n\n* Practical experience in embedded systems and IoT product development.\n* Opportunity to work on healthcare and medical\\-device prototypes.\n* Training in firmware development, circuit assembly, debugging and testing.\n* Exposure to the complete product\\-development process.\n* Internship certificate upon successful completion.\n* Opportunity for full\\-time employment based on performance and company requirements.\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: In person",
+      "id": "5ba60ebdf6feac3386b1",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=5ea149a535e98cab",
+      "location": "TN, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "IoT fundamentals",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, IoT fundamentals, Embedded Systems",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-5ea149a535e98cab",
+      "title": "Embedded Systems Intern"
+    },
+    {
+      "company": "UpMentor-X",
+      "date_posted": "2026-09-23",
+      "description": "",
+      "id": "e52164cb4f3243d8f410",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470653252",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4470653252",
+      "title": "Embedded Systems Internship in Hyderabad, Noida, Bangalore, Chennai (Hybrid)"
+    },
+    {
+      "company": "UpMentor-X",
+      "date_posted": "2026-09-23",
+      "description": "",
+      "id": "5a5678d9211ca313b9a2",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470647393",
+      "location": "Hyderabad, Telangana, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Hyderabad, Telangana, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4470647393",
+      "title": "Embedded Systems Internship in Hyderabad, Noida, Bangalore, Chennai (Hybrid)"
+    },
+    {
+      "company": "Novixpert Private limited",
+      "date_posted": "2026-09-22",
+      "description": "Embedded Engineer Intern (Embedded Systems / Firmware)\n\n**Location:** Jaipur, Rajasthan  \n**Job Type:** Internship  \n**Duration:** 3 Months  \n**Stipend:** ₹10,000 – ₹15,000 per month  \n**Work Location:** In\\-person\n\nAbout the Company\n\nNovixpert Tech Inc. is a technology\\-focused company developing advanced solutions in embedded systems, edge AI, and intelligent vision\\-based devices. Our engineering team works on real\\-world embedded platforms integrating firmware, sensors, edge computing, and high\\-performance hardware systems.\n\nJob Overview\n\nWe are looking for a passionate Embedded Engineer Intern interested in firmware development, RTOS\\-based systems, and hardware\\-software integration. The intern will work closely with embedded and hardware teams on real\\-world embedded products involving microcontrollers, communication protocols, sensors, and edge devices.\n\nThis role is ideal for candidates interested in low\\-level programming, embedded Linux/RTOS environments, and embedded firmware optimization.\n\nKey Responsibilities\n\n* Develop and maintain embedded firmware in C/C\\+\\+\n* Work with microcontrollers and embedded development boards such as STM32, ESP32, or similar platforms\n* Interface with peripherals and communication protocols including UART, SPI, I2C, CAN, GPIO, and PWM\n* Work with RTOS environments such as Zephyr RTOS or FreeRTOS\n* Assist in board bring\\-up, firmware debugging, and hardware\\-software integration\n* Debug embedded systems using tools like JTAG, logic analyzers, oscilloscopes, or serial debugging\n* Optimize firmware performance, memory usage, and power efficiency\n* Collaborate with hardware and software teams for testing and integration\n* Maintain technical documentation for firmware modules and system workflows\n\nRequired Skills\n\n* Strong understanding of Embedded Systems fundamentals\n* Good programming skills in C/C\\+\\+\n* Familiarity with microcontrollers and embedded development workflows\n* Understanding of communication protocols such as UART, SPI, I2C, CAN\n* Basic knowledge of RTOS concepts (Zephyr RTOS / FreeRTOS preferred)\n* Familiarity with debugging embedded hardware and firmware\n* Understanding of memory management, interrupts, and peripheral interfacing\n* Basic knowledge of Git/Linux development environment is a plus\n\nPreferred Skills (Good to Have)\n\n* Experience with Zephyr RTOS, FreeRTOS, or Embedded Linux\n* Familiarity with STM32, ESP32, Nordic nRF, Raspberry Pi, or similar platforms\n* Exposure to device driver development\n* Understanding of BLE, Wi\\-Fi, or IoT\\-based systems\n* Knowledge of low\\-power embedded systems and edge devices\n\nQualifications\n\n* Currently pursuing or recently completed B.Tech / B.E in Electronics, Electrical Engineering, Embedded Systems, ECE, Instrumentation, or related field\n* Strong problem\\-solving and debugging skills\n* Interest in firmware, RTOS, and hardware\\-level development\n* Eagerness to work on production\\-oriented embedded systems\n\nWhat We Offer\n\n* Hands\\-on experience with real embedded hardware and firmware projects\n* Opportunity to work on edge AI and intelligent embedded systems\n* Exposure to RTOS\\-based development workflows\n* Mentorship from experienced embedded engineers\n* Collaborative and learning\\-focused engineering environment\n\nApplication Process\n\nInterested candidates can apply directly through the Indeed application portal.\n\n**Job Type:** Contractual / Temporary  \n**Contract length:** 3 months  \n**Work Location:** In person\n\nPay: ₹10,000\\.00 \\- ₹15,000\\.00 per month\n\nWork Location: In person",
+      "id": "2d13726106ba8cb18b16",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=293c392033501327",
+      "location": "RJ, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "IoT fundamentals",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, IoT fundamentals, Embedded Systems",
+        "Preferred geography from source location: RJ, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-293c392033501327",
+      "title": "Embedded Engineer Intern (Embedded Systems / Firmware)"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-22",
+      "description": "**Key Responsibilities:**\n\n* **Generative AI Development:** Assist in building and integrating Generative AI solutions using LLMs, AI APIs, and modern AI frameworks for real\\-world business applications.\n* **AI Application Development:** Develop and integrate AI\\-powered features such as chatbots, intelligent assistants, content generation, document processing, and workflow automation into web applications.\n* **Prompt Engineering \\& Model Integration:** Create, test, and improve prompts, explore LLM capabilities, and integrate suitable AI models and APIs based on product requirements.\n* **AI Testing \\& Optimization:** Test AI outputs for accuracy, relevance, consistency, and reliability, while identifying issues and improving prompts, workflows, and model performance.\n* **Research \\& Team Collaboration:** Research emerging Gen AI technologies, tools, and frameworks, and work closely with developers and technical teams to implement practical AI solutions.\n\n**Requirements and Qualifications:**\n\n* Freshers with **0–1 year of experience** in Generative AI, AI/ML, or software development are welcome to apply.\n* Candidates from **any relevant degree/background** are welcome to apply.\n* Basic knowledge of **Python, APIs, LLMs, Generative AI concepts, and prompt engineering** is preferred.\n* Strong interest in **AI technologies, problem\\-solving, experimentation, and learning new tools**.\n\n**Job Details:**\n\n* **Job Type:** Internship\n* **Work Mode:** Onsite\n* **Intern** **Duration:** 1 Year\n* **Experience:** Fresher\n* **Stipend:** Performance\\-Based\n\nPay: ₹4,000\\.00 \\- ₹8,000\\.00 per month\n\nBenefits:\n\n* Paid sick time\n\nWork Location: In person",
+      "id": "b90e8893fe05ff1f12b3",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=71aff4362b983c67",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-71aff4362b983c67",
+      "title": "Gen AI Developer Intern"
+    },
+    {
+      "company": "Crazy for Success Foundation",
+      "date_posted": "2026-09-22",
+      "description": "",
+      "id": "afa8a69d0ad718ebff66",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470220255",
+      "location": "Hathras, Uttar Pradesh, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Hathras, Uttar Pradesh, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4470220255",
+      "title": "Software Development Internship in Hathras (Hybrid)"
+    },
+    {
+      "company": "PAPAYA CODERS PRIVATE LIMITED",
+      "date_posted": "2026-09-21",
+      "description": "As an IoT Intern, you will have the opportunity to gain hands\\-on experience and contribute to exciting projects in the field of Internet of Things (IoT). Under the guidance of experienced mentors, you will support various aspects of IoT solution development, deployment, and management. This internship offers a unique learning opportunity to explore emerging technologies, work on real\\-world projects, and develop valuable skills in IoT engineering.\n\nKey Responsibilities:\n\n* Research and Analysis:\n* Conduct research on IoT technologies, protocols, and industry trends.\n* Analyze case studies and best practices in IoT implementation across different domains.\n* Assist in evaluating potential IoT platforms, devices, and sensors for specific project requirements.\n* Prototype Development:\n* Collaborate with the engineering team to design and build IoT prototypes and proof\\-of\\-concepts.\n* Develop code snippets or scripts for sensor data collection, device communication, and data processing.\n* Participate in testing and troubleshooting activities to validate prototype functionality and performance.\n* Data Collection and Visualization:\n* Assist in setting up IoT sensors, actuators, and data acquisition systems.\n* Collect and analyze IoT\\-generated data using tools and software platforms.\n* Create visualizations, dashboards, or reports to present insights derived from IoT data streams.\n* System Integration:\n* Support the integration of IoT components with existing systems and infrastructure.\n* Configure IoT gateways, communication protocols, and cloud services as per project requirements.\n* Collaborate with cross\\-functional teams to ensure seamless interoperability and data exchange.\n* Documentation and Reporting:\n* Document project activities, experiments, and findings in technical reports or documentation.\n* Prepare presentations or posters summarizing internship projects for internal or external dissemination.\n* Contribute to knowledge sharing within the organization through presentations or brown bag sessions.\n* Learning and Development:\n* Actively participate in training sessions, workshops, and mentorship opportunities provided during the internship.\n* Seek feedback from mentors and peers to enhance technical skills and professional growth.\n* Explore additional areas of interest within the IoT domain and take initiative in self\\-directed learning.\n\nQualifications:\n\n* Pursuing a Bachelor's or Master's degree in Computer Science, Electrical Engineering, or a related field.\n* Basic understanding of programming languages such as Python, C/C\\+\\+, or Java.\n* Familiarity with fundamental concepts of networking, embedded systems, and sensor technologies.\n* Strong analytical and problem\\-solving skills, with a passion for exploring innovative solutions.\n* Excellent communication and interpersonal skills, with the ability to work effectively in a collaborative environment.\n* Eagerness to learn and adapt to new technologies and tools.\n\nJoin our team as an IoT Intern and kickstart your career in the exciting field of Internet of Things. If you are enthusiastic about technology and eager to make a meaningful contribution, we encourage you to apply and embark on this rewarding learning journey with us!\n\nJob Type: Internship\n\nPay: ₹4,500\\.00 \\- ₹5,000\\.00 per month\n\nAbility to commute/relocate:\n\n* Lucknow, Uttar Pradesh: Reliably commute or planning to relocate before starting work (Required)\n\nExperience:\n\n* total work: 1 year (Preferred)\n\nLocation:\n\n* Lucknow, Uttar Pradesh (Required)\n\nWork Location: In person",
+      "id": "cbbd145e83261ed63543",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=99522cb25670932f",
+      "location": "UP, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Java",
+        "Python",
+        "IoT fundamentals",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Java, Python, IoT fundamentals, Embedded Systems",
+        "Preferred geography from source location: UP, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-99522cb25670932f",
+      "title": "IoT Intern"
+    },
+    {
+      "company": "EdZola Technologies",
+      "date_posted": "2026-09-21",
+      "description": "**Position:** Full Stack Developer\n\n**Location:** Kovaipudur, Coimbatore.\n\n**Key Responsibilities:**\n\n* Collaborate with cross\\-functional teams (development, product management) to explore and\n\ndesign software solutions.\n\n* Assist in writing front\\-end (HTML, CSS, JavaScript) and back\\-end (Node.js, Python) code under\n\nguidance.\n\n* Learn and gain exposure to client\\-side and server\\-side architecture and design patterns.\n* Support in implementing basic web application security best practices (e.g., input validation,\n\nauthentication).\n\n* Stay updated with the latest web development trends and industry best practices.\n* Assist in documenting software specifications, technical designs, and user stories.\n* Troubleshoot and resolve user issues, and participate in software testing and quality\n\nassurance.\n\nRequirements:\n\n* Basic proficiency in HTML, CSS, JavaScript, with an interest in front\\-end frameworks (e.g.,\n\nReact, Angular).\n\n* Hands\\-on experience working with at least one back\\-end technology such as Node.js, Python,\n\nor Java.\n\n* Interest in databases and data management systems (e.g., MySQL, MongoDB, PostgreSQL).\n* Curiosity and interest in RESTful APIs and web services.\n* Familiarity with GIT version control is a plus.\n* Excellent communication, teamwork, and problem\\-solving skills.\n* Familiarity with Zoho Creator and its low\\-code/no\\-code platform for building business\n\napplications.\n\nNice\\-to\\-Have:\n\n* Interest in Full Stack Development.\n* Basic knowledge of common web development technology stacks.\n* Interest in mobile app development and cross\\-platform frameworks.\n* Awareness of web security best practices.\n* Familiarity with popular open\\-source tools, libraries, and frameworks.\n\nJob Types: Full\\-time, Internship\n\nInternship Duration: 6 months\n\nCompensation: 10 – 15K/month (Based on Performance)\n\nBenefits: Complimentary breakfast and lunch provided\n\nWork Location: In\\-person\n\nJob Types: Full\\-time, Internship\n\nPay: ₹10,000\\.00 \\- ₹15,000\\.00 per month\n\nBenefits:\n\n* Food provided\n\nWork Location: In person",
+      "id": "9007a58c8b5f5fe3cdb4",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=01cf070a9de89fc1",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, Python, HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-01cf070a9de89fc1",
+      "title": "Software Engineer Intern"
     },
     {
       "company": "YourfriendlyHR",
@@ -122,6 +674,140 @@
       "source": "linkedin",
       "source_id": "li-4468711543",
       "title": "Software Development Intern - Full Stack / Backend Focus"
+    },
+    {
+      "company": "bhramakar solution pvt ltd",
+      "date_posted": "2026-09-20",
+      "description": "Dear Candidate, thanks for your application, Walkin at 11 am, before coming message your work and notify us that you are coming on a given date at **11 am to 11:30am only along with your laptop** .\n\n**Whatsapp your work on** : \\+91 6354915722 ;\n\n**Address of work is** : Advrd Technologies, 218, Sangath Mall 1, Second Floor, Near Viswakarma Engg. college, Near GTU, Motera, Ahmedabad 380005\\.\n\n**Map:** https://www.google.com/maps/place/Shop\\+no.1,1st\\+floor,\\+Sangath\\+Mall\\-1,\\+Visat\\-Gandhinagar,\\+opp.\\+Vishwkarma\\+Engineering\\+college\\+%26\\+Ashok\\+Vihar\\+Municipal\\+Garden,\\+Highway,\\+Motera,\\+Ahmedabad,\\+Gujarat\\+380005/@23\\.1044626,72\\.5971691,21z/data\\=!4m6!3m5!1s0x395e83073c54251b:0xca9d6c2b273bb189!8m2!3d23\\.1044615!4d72\\.5975217!16s%2Fg%2F11v17kqw2s?entry\\=ttu\\&g\\_ep\\=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D\n\n**Please apply only if you can come and work daily 9 am to 3 pm.** \n\nIf you are learning or willing to learn; you can still apply or come. We can plan your learning path. For learners we will give max 2 month of learning time.\n\nElectronics, VLSI \\& IoT Engineering InternRole Overview We are seeking a versatile Electronics, VLSI, and IoT Engineering Intern to join our hardware engineering team. This specialized internship bridges the gap between semiconductor logic design, physical circuit layout, and cloud\\-connected smart hardware devices. You will work closely with senior mentors to design, simulate, prototype, and program edge\\-computing electronic systems from the silicon abstraction level up to live network deployments. Responsibilities\n\n* **VLSI \\& Logic Design:** Write and test Register Transfer Level (RTL) code using functional blocks, and perform logic simulation and verification.\n* **EDA Tooling:** Assist in running synthesis, analyzing static timing analysis (STA) reports, and reviewing clock tree synthesis (CTS) configurations using industry\\-standard tools.\n* **Circuit \\& PCB Design:** Create schematic diagrams, select components based on procurement constraints, and route multi\\-layer Printed Circuit Boards (PCBs).\n* **IoT Hardware Prototyping:** Wire up sensor nodes, integrate communication modules (such as Wi\\-Fi, BLE, or Cellular), and build rapid physical hardware prototypes.\n* **Firmware Development:** Program microcontrollers and processors in Embedded C/C\\+\\+ to read sensors, handle interrupts, and manage local data processing.\n* **Network \\& Cloud Integration:** Implement IoT data transport protocols like MQTT or HTTP to transmit telemetry data securely to cloud backends or visualization dashboards.\n* **Hardware Debugging:** Use lab equipment including oscilloscopes, logic analyzers, and digital multimeters to find and fix electrical faults or signal integrity issues. VLSIGuru \\+7\n\nQualifications \\& Requirements\n\n* **Education:** Currently pursuing or recently graduated with a Bachelor's or Master's degree in Electronics Engineering, ECE, Electrical Engineering, or a strictly related semiconductor/embedded domain.\n* **Hardware Description Knowledge:** Foundational understanding of digital electronics, CMOS technology, and HDLs like Verilog or VHDL.\n* **Embedded Software Skills:** Strong proficiency in C or C\\+\\+ for microcontrollers, alongside basic Python scripting for testing automation.\n* **Circuit Fundamentals:** Clear understanding of passive/active analog components, logic gates, power management, and communication interfaces like I2C, SPI, and UART.\n* **Problem Solving:** Ability to analytically isolate issues across the software, firmware, and physical hardware layers. BeBee \\+4\n\nPreferred Skills \\& Software Tooling\n\n* **VLSI Design Software:** Academic or project exposure to electronic design automation tools from platforms like Cadence, Synopsys, or Xilinx.\n* **PCB Layout Programs:** Experience designing physical boards using software like Altium Designer, KiCad, or Autodesk Eagle.\n* **Hardware Platforms:** Hands\\-on experience deploying code to architectures such as ESP32, STM32, ARM Cortex\\-M, or Raspberry Pi.\n* **IoT Protocols:** Basic knowledge of cloud messaging configurations, network sockets, or over\\-the\\-air (OTA) firmware update workflows. BeBee \\+5\n\nWhat We Offer\n\n* **Full\\-Stack Hardware Exposure:** Unique experience combining microchip engineering concepts with physical device creation and wireless cloud networking.\n* **Structured Technical Mentorship:** Direct interaction with senior silicon verification and systems engineers to rapidly build your technical toolkit.\n* **Professional Equipment:** Access to fully equipped testing labs and modern software suites used globally by industry leaders.\n* **Employment Pathway:** Successful performance tracking during the internship duration opens pathways for a full\\-time engineering placement offer.\n\nPay: Up to ₹6,000\\.00 per month\n\nWork Location: In person",
+      "id": "3d47e40acf7b9c50cf2c",
+      "is_remote": false,
+      "job_type": "parttime, fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=379a16c79bd5f5d3",
+      "location": "GJ, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Python",
+        "IoT fundamentals",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Python, IoT fundamentals, Embedded Systems",
+        "Preferred geography from source location: GJ, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-379a16c79bd5f5d3",
+      "title": "Electronics / VLSI / IOT/5g/Drones/Robotics Intern"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-20",
+      "description": "Python / AI Developer Intern\n\nWe are looking for a **Python / AI Developer Intern** to work on real\\-world projects involving **Python backend development, Local AI/LLMs, OCR, document processing, RAG, automation, and API integration**.\n\n**Responsibilities:**\n\n* Develop and maintain Python\\-based applications and backend modules.\n* Build REST APIs using **FastAPI / Flask**.\n* Work with **Local LLMs and open\\-source AI models**.\n* Assist in building **RAG and document intelligence systems**.\n* Process PDFs, images, tables, and structured/unstructured documents.\n* Work on **OCR, data extraction, validation, and document conversion**.\n* Convert extracted data into **Excel, Word, JSON, CSV, and structured formats**.\n* Build automation scripts and background processing workflows.\n* Integrate APIs and external services.\n* Debug, test, and improve existing Python modules.\n* Maintain clean, modular, and reusable code using Git/GitHub.\n\n**Required Skills:**\n\n* Good knowledge of **Python**.\n* Understanding of OOP, functions, data structures, exception handling, and file handling.\n* Basic knowledge of **REST APIs, JSON, and databases**.\n* Strong problem\\-solving and debugging skills.\n* Willingness to learn and work with AI technologies.\n\n**Good to Have:**\n\n* FastAPI / Flask\n* Ollama / Local LLMs\n* RAG / Embeddings / Vector Databases\n* OCR / OpenCV\n* Pandas / OpenPyXL\n* PDF processing\n* Git / GitHub\n* Docker\n* Basic SQL\n\n**Eligibility:** Freshers / Students / Recent Graduates / 0–1 year experience  \n**Job Type:** Internship  \n**Domain:** Python / AI / Backend / Automation / Document Intelligence  \n**Opportunity:** Full\\-time role based on performance\n\nPay: ₹5,000\\.00 \\- ₹6,000\\.00 per month\n\nWork Location: In person",
+      "id": "2a35ab0b415ddee9352b",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=d430f3d87a0d8ff2",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-d430f3d87a0d8ff2",
+      "title": "Python Intern"
+    },
+    {
+      "company": "Zooye Info Technologies",
+      "date_posted": "2026-09-19",
+      "description": "**Job Title** : Web Developer\n\n**Company** : Zooye Info technologies\n\n**Location**: Nambiyur, Erode, Tamil Nadu\n\n**Job Summary**\n\nWe are seeking a motivated, enthusiastic, and detail\\-oriented Fresher Python and HTML/CSS Developer to join our growing engineering team. In this role, you will bridge the gap between user interface design and server\\-side logic. You will work alongside senior developers to build responsive web interfaces, write clean backend logic, and manage database integrations. This is an excellent opportunity for an entry\\-level candidate to gain hands\\-on industry experience and accelerate their career in full\\-stack software development.\n\n**Key Responsibilities**\n\n**Front\\-End Development (HTML \\& CSS)**\n\n* **Build web pages**: Convert UI/UX design mockups into clean, semantic, and well\\-structured HTML5 and CSS3 code.\n* **Responsive Design** : Ensure web layouts are fully responsive and look seamless across all mobile, tablet, and desktop devices.\n* **Cross\\-Browser Testing** : Debug and test layouts to ensure compatibility across popular web browsers (Chrome, Safari, Firefox, Edge).\n\n**Back\\-End Development (Python)**\n\n* **Write Server Logic** : Write clean, readable, and maintainable Python code to power application workflows.\n* **Framework Support** : Assist in developing web applications using Python frameworks like Django or Flask.\n* **API Integration** : Help build, test, and consume RESTful APIs to connect the frontend with backend services.\n\n**Database \\& Tools**\n\n* **Database Management**: Write basic SQL queries and work with relational databases like MySQL, PostgreSQL, or SQLite.\n* **Version Control** : Use Git/GitHub to manage source code, track changes, and collaborate with the development team.\n\n**Required Skills \\& Qualifications**\n\n* **Education** : Bachelor’s degree in Computer Science, IT, BCA, B.Tech, or a related field (Recent graduates preferred).\n* **Core Front\\-End** : Strong foundational knowledge of HTML5, CSS3, and basic JavaScript.\n* **Core Back\\-End** : Solid understanding of Python syntax and Object\\-Oriented Programming (OOP) concepts.\n* **Databases** : Basic familiarity with databases and handling datasets.\n* **Soft Skills** : Strong analytical thinking, problem\\-solving skills, and a high willingness to learn new technologies.\n\nContact No: 63801 15548\n\nEmail: hrteamzooye@gmail.com\n\nPay: ₹5,000\\.00 \\- ₹35,000\\.00 per month\n\nApplication Question(s):\n\n* Will you be able to relocate?\n* Are you a Fresher or Experienced candidate?\n* Have you completed Full stack Coureses?(HTML, CSS, Python)\n* What is your current salary?\n* What is your expected salary?\n* Are you located in Tamil nadu?\n* Have you attended any internships?\n\nEducation:\n\n* Bachelor's (Preferred)\n\nWork Location: In person",
+      "id": "e4218d61aa80d6672060",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=510c5d72e5bbbe31",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-510c5d72e5bbbe31",
+      "title": "Web Developer Intern"
+    },
+    {
+      "company": "VEKTAS TECHNOLOGIES",
+      "date_posted": "2026-09-17",
+      "description": "Company:\\* VEKTAS Technologies Private Limited\n\n\\*Position:\\* Electronics \\& Communication Engineering Intern\n\n\\*Location:\\* Kazhakuttom, Thiruvananthapuram, Kerala\n\n\\*Work Mode:\\* On\\-site / Offline\n\n\\*Duration:\\* 6 Months\n\n\\*Job Type:\\* Internship\n\n\\*Field:\\* UAV / Drones / Embedded Systems / Electronics\n\n\\#\\# Key Responsibilities\n\n\\* Assist in the development and testing of \\*UAV/drone electronics systems\\*.\n\n\\* Work with \\*flight controllers, sensors, telemetry systems, GPS, ESCs, motors, batteries, and communication modules\\*.\n\n\\* Assist with drone assembly, wiring, integration, configuration, and troubleshooting.\n\n\\* Write and modify basic \\*embedded/programming code\\* for UAV and electronics applications.\n\n\\* Work with \\*Arduino, ESP32, STM32, Raspberry Pi, or similar platforms\\*.\n\n\\* Assist with sensor integration and data acquisition.\n\n\\* Configure and test \\*flight controllers and telemetry systems\\*.\n\n\\* Work with \\*MAVLink, Mission Planner, QGroundControl\\*, or similar UAV software.\n\n\\* Assist in drone flight testing and troubleshooting.\n\n\\* Perform electronics testing using \\*multimeter, oscilloscope, power supply, soldering tools\\*, and other laboratory equipment.\n\n\\* Debug hardware and software issues.\n\n\\* Assist in PCB\\-related work, circuit development, and component selection.\n\n\\* Document test results, configurations, wiring diagrams, and technical observations.\n\n\\* Collaborate with mechanical, firmware, and UAV engineering teams.\n\n\\* Support research and development activities for ongoing UAV projects.\n\n\\#\\#\\# Required Skills\n\n\\* B.Tech / B.E. in \\*Electronics \\& Communication Engineering (ECE)\\* or related field.\n\n\\* Basic knowledge of \\*electronics and electrical circuits\\*.\n\n\\* Programming knowledge in at least one of:\n\n\\* C / C\\+\\+\n\n\\* Python\n\n\\* Embedded C\n\n\\* Basic understanding of \\*microcontrollers and embedded systems\\*.\n\n\\* Strong interest in \\*drones/UAV technology\\*.\n\n\\* Basic knowledge of sensors, motors, ESCs, batteries, and communication systems.\n\n\\* Ability to troubleshoot hardware and software problems.\n\n\\* Willingness to work hands\\-on with hardware and participate in field testing.\n\nWork Location: In person",
+      "id": "7cab73613165c77b50a6",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=00e980de5e2b045a",
+      "location": "KL, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Python",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Python, Embedded Systems",
+        "Preferred geography from source location: KL, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-00e980de5e2b045a",
+      "title": "Communication Engineering Intern – UAV & Embedded Systems"
     },
     {
       "company": "Vahan.ai",
@@ -182,6 +868,129 @@
       "title": "Full Stack Development Internship in Cochin"
     },
     {
+      "company": "Kaleris",
+      "date_posted": "2026-09-12",
+      "description": "",
+      "id": "e3a3216373415b67ccce",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4465195495",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4465195495",
+      "title": "Associate Software Engineer - Intern"
+    },
+    {
+      "company": "Kaleris",
+      "date_posted": "2026-09-12",
+      "description": "",
+      "id": "23b184d20c14b4c492cc",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4465176566",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4465176566",
+      "title": "Associate Software Engineer - Intern"
+    },
+    {
+      "company": "Beetloop Global Solutions Private Limited",
+      "date_posted": "2026-09-11",
+      "description": "**Position: Full Stack Developer Intern \\- Immediate Joiner** \n\n**Interview Process:** Online Technical Interview (Candidates will be invited for an in\\-person discussion only after clearing the online interview.)\n\n**Employment Type:** Internship\n\n**Duration:** 3 to 6 Months\n\n**Joining:** Immediate Joiners Preferred\n\n**Stipend:** Based on Interview Performance\n\n**Experience:** Freshers\n\n**About Beetloop**\n\nBeetloop is a regulatory\\-first, evidence\\-based B2B intelligence and execution platform incubated at **IIT Madras**, focused on transforming regulated product ecosystems through technology, compliance, and AI\\-driven solutions.\n\n**About the Role**\n\nWe are looking for a Full Stack Developer with strong frontend expertise to join our development team. The ideal candidate will have solid hands\\-on experience in React.js, Next.js, TypeScript, JavaScript, and Tailwind CSS, along with working knowledge of Java, Spring Boot, PostgreSQL, and AWS.\n\nThis role will primarily focus on building modern, scalable, responsive, and high\\-performance frontend applications, while also contributing to backend APIs and cloud\\-based solutions.\n\n**Key Responsibilities**\n\n* Develop and maintain scalable web applications using React.js and Next.js.\n* Build reusable, responsive, and high\\-quality UI components using TypeScript, JavaScript, and Tailwind CSS.\n* Integrate RESTful APIs and handle frontend\\-backend communication.\n* Implement form validation, authentication, authorization, and application\\-level business requirements.\n* Optimize frontend performance, page loading, and overall user experience.\n* Develop and maintain backend REST APIs using Java and Spring Boot.\n* Work with PostgreSQL for database queries and data management.\n* Collaborate with UI/UX designers, backend developers, and product teams.\n* Deploy and maintain applications on AWS.\n* Use Git/GitHub for version control, branching, pull requests, and collaborative development.\n* Troubleshoot, debug, and resolve application issues across frontend and backend.\n* Follow clean coding practices, code reviews, and Agile/Scrum methodologies.\n\n**Good to Have**\n\n* Experience with state management such as Redux / Redux Toolkit\n* Knowledge of authentication mechanisms such as JWT\n* Understanding of AWS deployment and cloud services\n* Experience with performance optimization and scalable frontend architecture\n* Familiarity with Agile/Scrum development\n* What We’re Looking For\n* Strong problem\\-solving and debugging skills.\n* Ability to write clean, reusable, and maintainable code.\n* Good communication and collaboration skills.\n* Ability to work independently as well as within a team.\n* Passion for learning and working with modern web technologies.\n\n**Eligibility**\n\n* Pursuing or completed **B.E./B.Tech, M.E./M.Tech, BCA, MCA, B.Sc. (Computer Science/IT), M.Sc. (Computer Science/IT)**, or equivalent.\n* Good understanding of Full Stack Development concepts.\n* Strong problem\\-solving and communication skills.\n* Immediate joiners will be given preference.\n\n**Work Location:** In Person (IIT Madras Incubation Cell, Tharamani)\n\n**Contact:** 87544 46692\n\nJob Type: Internship\n\nPay: ₹7,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: In person",
+      "id": "2c3ef531a7b302ef116d",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=db71c0394aff3afc",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-db71c0394aff3afc",
+      "title": "Full Stack Developer Internship"
+    },
+    {
+      "company": "Renovus",
+      "date_posted": "2026-09-08",
+      "description": "Skills Required\n\nC , C\\+\\+ , C\\#, MySQL\n\nAbility to Adapt to new tools and programming languages quickly\n\nAbility to work with Cross functional Teams\n\nPay: Up to ₹25,000\\.00 per month\n\nWork Location: In person",
+      "id": "2bbde077ed9f8efa289e",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=b08658d1345e9a03",
+      "location": "KA, IN",
+      "matched_skills": [
+        "C++",
+        "C"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C",
+        "Preferred geography from source location: KA, IN"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-b08658d1345e9a03",
+      "title": "Software Development Engineer - Fresher"
+    },
+    {
       "company": "GharPayy",
       "date_posted": "2026-09-06",
       "description": "",
@@ -209,6 +1018,70 @@
       "source": "linkedin",
       "source_id": "li-4463782926",
       "title": "Full Stack Development Internship in Bangalore"
+    },
+    {
+      "company": "Nerve Cells AI pvt. ltd.",
+      "date_posted": "2026-09-03",
+      "description": "",
+      "id": "e1a5e58de43e66aa7607",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4462818449",
+      "location": "Chandigarh, Chandigarh, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Chandigarh, Chandigarh, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4462818449",
+      "title": "Embedded Systems Engineer - Intern"
+    },
+    {
+      "company": "fritado AI",
+      "date_posted": "2026-08-31",
+      "description": "**Company:** Tattvalogic  \n**Role:** AI Developer Intern  \n**Experience:** Freshers / Students / 0–1 Year  \n**Employment Type:** Internship  \n**Location:** Bangalore / Remote  \n**Department:** Product \\& Engineering\n\nAbout Fritado\n\nFritado is an AI\\-powered growth automation platform designed to help businesses discover prospects, identify the right buyers, engage them through personalized outreach, and automate their sales and marketing workflows.\n\nFritado combines **Artificial Intelligence, Lead Generation, Sales Automation, Data Intelligence, Email Outreach, Workflow Automation, and AI\\-powered insights** into a single platform.\n\nWe are looking for enthusiastic and curious **AI Developer Interns** who want to work on a real\\-world AI SaaS product and gain practical experience building intelligent features that are used by businesses.\n\nAbout the Role\n\nAs an **AI Developer Intern**, you will work closely with our product and engineering teams to build, test, improve, and deploy AI\\-powered capabilities within Fritado.\n\nThis is a hands\\-on role where you will have the opportunity to work with **Generative AI, LLMs, prompt engineering, AI agents, APIs, data processing, automation workflows, and AI\\-based decision systems**.\n\nYou will not simply be working on training exercises or sample projects. You will contribute to actual product features and engineering initiatives within Fritado.\n\nKey ResponsibilitiesAI \\& Generative AI\n\n* Work with Large Language Models (LLMs) and Generative AI APIs.\n* Develop and optimize prompts for different product use cases.\n* Build AI\\-powered content generation and personalization features.\n* Experiment with different AI models and evaluate their performance.\n* Develop structured prompts and AI workflows for reliable outputs.\n* Implement AI\\-based classification, extraction, summarization, and recommendation capabilities.\n* Help improve the accuracy, relevance, and consistency of AI\\-generated responses.\n\nAI Automation \\& Agents\n\n* Assist in developing AI agents and autonomous workflows.\n* Work on AI\\-driven lead research and prospect intelligence.\n* Help build AI systems that analyze companies, contacts, industries, and buyer profiles.\n* Contribute to automated decision\\-making and qualification workflows.\n* Build integrations between AI services and Fritado's backend systems.\n* Work on AI\\-powered sales and marketing automation.\n\nProduct Engineering\n\n* Develop and integrate AI features into the Fritado platform.\n* Work with REST APIs and backend services.\n* Write clean, maintainable, and reusable code.\n* Debug and troubleshoot AI and application\\-related issues.\n* Test AI features against different inputs and edge cases.\n* Collaborate with developers, product managers, and other interns.\n* Participate in code reviews and technical discussions.\n\nData \\& Intelligence\n\n* Work with structured and unstructured data.\n* Assist with data cleaning, transformation, extraction, and enrichment.\n* Build logic for analyzing prospect and company information.\n* Help improve AI\\-based lead qualification and scoring.\n* Work with databases and APIs to support AI\\-powered product functionality.\n\nRequired SkillsMust Have\n\n* Basic programming knowledge in **Python or JavaScript/Node.js**.\n* Understanding of APIs and JSON.\n* Basic understanding of Artificial Intelligence and Machine Learning concepts.\n* Interest in Generative AI and Large Language Models.\n* Understanding of prompt engineering concepts.\n* Strong problem\\-solving and analytical skills.\n* Ability to learn new technologies quickly.\n* Good debugging and troubleshooting skills.\n\nGood to Have\n\n* Experience with OpenAI, Gemini, Claude, or other LLM APIs.\n* Experience with Python AI/ML libraries.\n* Knowledge of LangChain, LangGraph, CrewAI, or similar AI frameworks.\n* Basic knowledge of MongoDB, PostgreSQL, or other databases.\n* Experience building REST APIs.\n* Knowledge of Node.js, Express, React, or Next.js.\n* Familiarity with Git and GitHub.\n* Experience with vector databases or RAG.\n* Understanding of embeddings and semantic search.\n* Previous AI/ML or Generative AI projects.\n\nWhat You Will Learn\n\nDuring the internship, you will get practical exposure to:\n\n* Generative AI and LLM application development\n* Prompt engineering\n* AI agents and autonomous workflows\n* AI\\-powered SaaS product development\n* API integration\n* AI evaluation and quality control\n* Data processing and enrichment\n* Lead intelligence and sales automation\n* Backend and product engineering\n* Database integration\n* Git/GitHub and software development practices\n* Production\\-level debugging and deployment\n\nWho Should Apply?\n\nThis opportunity is ideal for:\n\n* B.Tech / B.E. students\n* M.Tech students\n* MCA students\n* Computer Science / IT students\n* AI/ML students\n* Recent graduates\n* Self\\-taught developers with strong AI interest\n\nCandidates with **personal AI projects, GitHub repositories, hackathon projects, or college projects involving AI/ML or Generative AI** are encouraged to apply.\n\nWe value **ability and curiosity over certificates**.\n\nWhat We Look For\n\nWe are looking for candidates who:\n\n* Are genuinely interested in AI.\n* Enjoy building and experimenting.\n* Can solve problems independently.\n* Are comfortable learning unfamiliar technologies.\n* Can understand an existing codebase.\n* Pay attention to quality and details.\n* Are willing to take ownership of assigned tasks.\n* Can work in a fast\\-moving product environment.\n* Want to build technology that solves real business problems.\n\nInternship Experience\n\nYou will work on real Fritado product initiatives rather than isolated academic assignments.\n\nDepending on your skills and performance, you may get opportunities to contribute to areas such as:\n\n**AI Lead Intelligence → AI Research → Lead Qualification → AI Outreach → Workflow Automation → AI Agents → Sales Intelligence → Generative AI**\n\nHigh\\-performing interns may be considered for a **full\\-time AI Developer / AI Engineer opportunity** based on business requirements and performance.\n\nSelection Process\n\nThe selection process may include:\n\n* Resume / Application Review\n* Technical Screening\n* AI / Programming Assignment\n* Technical Interview\n* Final Discussion\n\nCandidates may be asked to demonstrate an existing AI project or build a small AI\\-powered application as part of the evaluation.\n\nWhy Join Fritado?\n\n* Work on a real AI SaaS product.\n* Get hands\\-on experience with Generative AI.\n* Work closely with an experienced product/engineering team.\n* Build features that can reach real users.\n* Gain exposure to AI agents and automation.\n* Develop production\\-level engineering skills.\n* Opportunity for full\\-time employment based on performance.\n\n**If you are excited about AI and want to move beyond tutorials into building real AI products, we would love to hear from you.**\n\nPay: From ₹10,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n\nWork Location: Remote",
+      "id": "e7b96b52f0addf41f2cb",
+      "is_remote": true,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=ec3417bd260aab5b",
+      "location": "KA, IN",
+      "matched_skills": [
+        "Python",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, JavaScript",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-ec3417bd260aab5b",
+      "title": "AI Product Developer Intern"
     },
     {
       "company": "Aawas Yojana",
@@ -240,6 +1113,35 @@
       "title": "Software Development Engineering (Web) Internship in Dehradun (Hybrid)"
     },
     {
+      "company": "Improva",
+      "date_posted": "2026-08-25",
+      "description": "",
+      "id": "6e051b1dc183b939a2d5",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4457474593",
+      "location": "Coimbatore, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Coimbatore, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4457474593",
+      "title": "Software Engineer Intern"
+    },
+    {
       "company": "Faveo",
       "date_posted": "2026-08-23",
       "description": "",
@@ -267,6 +1169,38 @@
       "source": "linkedin",
       "source_id": "li-4467164914",
       "title": "Internship For Software Engineers - Freshers"
+    },
+    {
+      "company": "METEOROS SENSING PRIVATE LIMITED",
+      "date_posted": "2026-08-20",
+      "description": "1\\. Design, develop, and maintain backend features for the in\\-house IoT platform, ensuring reliability, scalability, and\\-performance.  \n2\\. Develop and integrate APIs to manage IoT devices, data streams, and rules within the platform.  \n3\\. Design and implement high\\-performance services using gRPC, REST API for efficient communication between system components.  \n4\\. Collaborate with the frontend development team to implement and optimize data flow and APIs for real\\-time monitoring and device management.  \n5\\. Contribute to the research and development of new backend features and enhancements.  \n6\\. Collaborate with the development team to support ongoing projects and system improvements.  \n7\\. Assist in creating and maintaining technical documentation.  \n8\\. Support senior developers in day\\-to\\-day processes and tasks.  \n9\\. Test and validate new backend features to ensure stability and performance.\n\n**Skill(s) required**\n\nDocker/Java/Linux/REST API/Spring Boot/SQL\n\nPay: ₹10,000\\.00 \\- ₹12,500\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n\nWork Location: In person",
+      "id": "42640ef4d3977e686721",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=dbf599e747e0e90f",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "IoT fundamentals"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, IoT fundamentals",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-dbf599e747e0e90f",
+      "title": "Backend Engineer Intern"
     },
     {
       "company": "T.I.M.E. (Triumphant Institute of Management Education)",
@@ -301,6 +1235,144 @@
       "title": "Python Development Internship in Bangalore"
     },
     {
+      "company": "Lakshagath Enterprises",
+      "date_posted": "2026-08-07",
+      "description": "Software Engineer Intern (AI\\-Assisted Product Development)\n\nWe are looking for Software Engineers (Freshers / Interns ) who enjoy building products, solving real\\-world problems, and continuously learning new technologies.\n\nAt Lakshagath Enterprises, we build multiple software products across web, mobile, desktop, AI, automation, cloud, and media platforms. We believe strong engineering fundamentals are more important than expertise in any single programming language or framework.\n\nWe actively use modern AI development tools to accelerate software development. Therefore, we're looking for engineers who can understand systems, learn quickly, solve problems, and work effectively with AI\\-assisted development.\n\nCore RequirementsStrong Programming Fundamentals\n\n* Data Structures \\& Algorithms (Basic to Intermediate)\n* Object\\-Oriented Programming\n* Design Patterns (Basic understanding)\n* Debugging \\& Troubleshooting\n* Reading and understanding existing codebases\n* Writing clean, maintainable code\n* Problem\\-solving mindset\n\nProgramming Languages\n\nExperience in **one or more** of the following is sufficient:\n\n* Python\n* PHP\n* Java\n* C\\#\n* JavaScript\n* TypeScript\n* Dart\n* Go\n* Kotlin\n* Swift\n* C\\+\\+\n* C\n* Ruby\n* Rust\n* Any other modern programming language\n\nBackend Technologies (Any)\n\nExperience with **one or more** of:\n\n* FastAPI\n* Django\n* Flask\n* Laravel\n* CodeIgniter\n* Symfony\n* Spring Boot\n* ASP.NET / .NET Core\n* Express.js\n* NestJS\n* Go Frameworks\n* Ruby on Rails\n* Any modern backend framework\n\nFrontend / Mobile Technologies (Any)\n\nExperience with **one or more** of:\n\n* Flutter\n* React\n* Next.js\n* Vue.js\n* Angular\n* React Native\n* Svelte\n* Nuxt.js\n* HTML5\n* CSS3\n* JavaScript\n* TypeScript\n* Any modern frontend or mobile framework\n\nDatabases\n\nExperience with one or more of:\n\n* PostgreSQL\n* MySQL\n* MariaDB\n* SQL Server\n* SQLite\n* Oracle\n* MongoDB\n* Redis\n* Firebase\n* Supabase\n* Any modern database\n\nAPIs \\& System Integration\n\nGood understanding of:\n\n* REST APIs\n* JSON\n* WebSockets\n* Authentication (JWT, OAuth, Sessions)\n* API Integration\n* Third\\-party SDK Integration\n\nDevelopment Tools\n\nExperience with:\n\n* Git \\& GitHub\n* Docker (Basic)\n* Linux (Basic)\n* VS Code or similar IDE\n* Package Managers\n* Command Line\n\nAI\\-Assisted Development\n\nWe encourage engineers to use AI development tools to improve productivity.\n\nExperience with one or more of:\n\n* ChatGPT\n* Codex\n* Claude\n* Cursor\n* GitHub Copilot\n* Gemini\n* Windsurf\n* Other AI coding assistants\n\nAI is a productivity tool—not a replacement for engineering skills. Candidates should be able to understand, review, test, debug, and improve AI\\-generated code.\n\nWhat Matters Most\n\nWe care more about your ability to:\n\n* Learn new technologies quickly.\n* Read and understand unfamiliar codebases.\n* Solve challenging engineering problems.\n* Debug production issues efficiently.\n* Build reliable and scalable software.\n* Take ownership of assigned work.\n* Communicate effectively.\n* Adapt to new tools and technologies.\n\nWe welcome candidates from any technology stack who are eager to learn and build great products.\n\nWhy Join Us?\n\n* Build products from the ground up.\n* Work directly with the Product Architect.\n* Use the latest AI\\-powered development tools.\n* Gain exposure to multiple technologies instead of being limited to a single stack.\n* Opportunity to work on web, mobile, desktop, AI, automation, and cloud\\-based products.\n* Grow with a fast\\-moving product company focused on innovation.\n\nIf you enjoy building software, solving complex problems, and learning continuously, we'd love to hear from you.\n\nPay: ₹3,000\\.00 per month\n\nWork Location: In person",
+      "id": "a88af198c2a7b7a9748d",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=018116cb40513bf3",
+      "location": "TN, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Java",
+        "Python",
+        "JavaScript",
+        "Firebase"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Java, Python, JavaScript, Firebase",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-018116cb40513bf3",
+      "title": "Software Developer Intern"
+    },
+    {
+      "company": "Blackfig Technologies",
+      "date_posted": "2026-08-07",
+      "description": "",
+      "id": "869ff3f6cdf5ee8ee14e",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4450024153",
+      "location": "Bengaluru East, Karnataka, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Bengaluru East, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4450024153",
+      "title": "SDE- Intern- Embedded Linux & Yocto"
+    },
+    {
+      "company": "SHANTHI IT SOLUTION",
+      "date_posted": "2026-07-21",
+      "description": "Job Summary\n\nWe are seeking a motivated and enthusiastic Full Stack Development Intern to join our development team. This internship offers hands\\-on experience in designing, developing, testing, and maintaining web applications. The intern will work closely with experienced developers, participate in real\\-world projects, and gain exposure to both front\\-end and back\\-end technologies.\n\nKey Responsibilities\n\n* Assist in the development and maintenance of web applications.\n* Build responsive and user\\-friendly front\\-end interfaces using HTML, CSS, JavaScript, and modern frameworks.\n* Develop and integrate back\\-end services and APIs.\n* Work with databases to design, query, and maintain application data.\n* Collaborate with designers, developers, and project managers to implement new features.\n* Debug, troubleshoot, and resolve software issues.\n* Participate in code reviews and follow coding standards and best practices.\n* Write clean, maintainable, and well\\-documented code.\n* Test applications to ensure functionality, performance, and security.\n* Learn and apply new technologies, tools, and development methodologies.\n\nRequired Qualifications\n\n* Currently pursuing or recently completed a Bachelor's degree in Computer Science, Information Technology, Software Engineering, or a related field.\n* Basic understanding of front\\-end technologies such as HTML, CSS, and JavaScript.\n* Familiarity with at least one front\\-end framework (React, Angular, or Vue.js) is an advantage.\n* Basic knowledge of back\\-end technologies such as Node.js, Python, Java, or PHP.\n* Understanding of databases such as MySQL, PostgreSQL, or MongoDB.\n* Familiarity with Git and version control systems.\n* Basic understanding of RESTful APIs.\n\nRequired Skills\n\n* Strong problem\\-solving and analytical skills.\n* Willingness to learn and adapt to new technologies.\n* Good communication and teamwork skills.\n* Attention to detail and eagerness to write high\\-quality code.\n* Ability to manage tasks and meet deadlines.\n\nPreferred Skills\n\n* Experience with personal, academic, or open\\-source projects.\n* Knowledge of cloud platforms (AWS, Azure, or Google Cloud) is a plus.\n* Familiarity with Agile or Scrum development methodologies.\n\nInternship Details\n\n* Duration: 3–6 months\n* Employment Type: Internship\n* Location: On\\-site / Hybrid / Remote (as applicable)\n* Stipend: As per company policy\n* Potential opportunity for full\\-time employment based on performance.\n\nContact Us: 9566012122\\.\n\nPrime Location : Valasaravakkam, chennai .\n\nWebsite: shanthiitsolution.com.\n\nPay: From ₹5,000\\.00 per month\n\nWork Location: In person",
+      "id": "5dee368e69e3c36d5025",
+      "is_remote": true,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=17b40fb4c3aeaa8b",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, Python, HTML, CSS, JavaScript",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 100,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-17b40fb4c3aeaa8b",
+      "title": "Full Stack Developer Intern"
+    },
+    {
+      "company": "SHANTHI IT SOLUTION",
+      "date_posted": "2026-07-21",
+      "description": "Key Responsibilities\n\n* Develop responsive and user\\-friendly web applications.\n* Design and implement front\\-end interfaces using HTML, CSS, JavaScript, and frameworks such as React or Angular.\n* Build back\\-end services and RESTful APIs using Node.js, Java, Python, PHP, or similar technologies.\n* Design, manage, and optimize databases (MySQL, PostgreSQL, MongoDB, etc.).\n* Integrate front\\-end applications with back\\-end services.\n* Write clean, maintainable, and reusable code.\n* Debug, test, and resolve software issues.\n* Optimize applications for speed, scalability, and security.\n* Use Git for version control and collaborate with team members.\n* Participate in code reviews and Agile/Scrum development processes.\n* Deploy and maintain applications on cloud platforms or web servers.\n* Contact : 6374419177\\.\n* website: https://shanthiitsolution.com\n\nPay: Up to ₹5,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n\nWork Location: In person",
+      "id": "ad314208ec2427322af0",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=b60c3795f3843716",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, Python, HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-b60c3795f3843716",
+      "title": "Full Stack Developer Intern"
+    },
+    {
       "company": "Lascade",
       "date_posted": "2026-07-11",
       "description": "",
@@ -328,6 +1400,100 @@
       "source": "linkedin",
       "source_id": "li-4436646379",
       "title": "Software Engineer Intern (Web & Mobile)"
+    },
+    {
+      "company": "Eminent Technology",
+      "date_posted": "2026-07-10",
+      "description": "Position: Web Developer\n\nLocation: COIMBATIRE\n\nEmployment Type: Full\\-time\n\nReports To: HR Manager\n\nJob Summary\n\nWe are looking for a skilled and creative Web Developer to join our team at EMINENT TECHNOLOGY. The ideal candidate will have experience in designing, coding, and modifying websites, from layout to function, and ensuring they align with the company’s goals. The Web Developer will work closely with designers, project managers, and other stakeholders to create visually appealing and user\\-friendly websites and applications.\n\nKey Responsibilities\n\nDesign and develop front\\-end and back\\-end web applications.\n\nCollaborate with cross\\-functional teams to understand business requirements and translate them into technical solutions.\n\nCreate responsive and adaptive web pages optimized for desktop and mobile platforms.\n\nWrite clean, well\\-structured, and efficient code using HTML, CSS, JavaScript, and backend technologies.\n\nEnsure website functionality and stability across devices, browsers, and operating systems.\n\nImplement web security measures to protect against cyber threats.\n\nTroubleshoot, debug, and resolve issues related to web applications and website performance.\n\nOptimize websites for maximum speed and scalability.\n\nMonitor and update the website as required, ensuring functionality and stability.\n\nStay updated with emerging trends and technologies in web development.\n\nQualifications\n\nEducation: Bachelor’s degree in Computer Science, Information Technology, or a related field.\n\nExperience: 1 years of proven experience as a Web Developer or a similar role.\n\nTechnical Skills:\n\nProficiency in front\\-end languages such as HTML, CSS, JavaScript, and frameworks like React or Angular.\n\nKnowledge of back\\-end technologies like Node.js, Python, PHP, or other relevant programming languages.\n\nFamiliarity with database management systems, e.g., MySQL, MongoDB.\n\nExperience with web hosting and deployment tools.\n\nFamiliarity with Git and version control systems.\n\nSoft Skills: Strong analytical and problem\\-solving skills, attention to detail, good communication skills, and the ability to work collaboratively in a team environment.\n\nPreferred Skills\n\nKnowledge of UI/UX design principles.\n\nExperience with CMS platforms like WordPress.\n\nUnderstanding of SEO principles and web accessibility standards.\n\nFOR CONTACT :\\-9092748488\n\nJob Types: Full\\-time, Permanent\n\nPay: ₹5,000\\.00 \\- ₹10,000\\.00 per month\n\nEducation:\n\n* Bachelor's (Preferred)\n\nExperience:\n\n* CSS: 1 year (Required)\n* total work: 3 years (Preferred)\n* HTML5: 1 year (Required)\n\nWork Location: In person",
+      "id": "4d986856b02902f04434",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=65fc7a47f3e63673",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 90,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-65fc7a47f3e63673",
+      "title": "Web Developer Intern"
+    },
+    {
+      "company": "ARK Canton Enterprises",
+      "date_posted": "2026-07-01",
+      "description": "Hiring: Application Developer Internship\n\nCompany: Ark Codux Digital\n\nRequired: Fresher\n\nLocation: work from office only Chennai\n\nWorking hours: 9\\.30Am\\-5\\.30pm\n\nQualification: Any degree\n\nPreferred Skills\n\n Experience in Android (Java/Kotlin) or iOS (Swift) development\n\n Knowledge of cross\\-platform frameworks (Flutter / React Native)\n\n Understanding of APIs, databases, and app security\n\n Problem\\-solving and debugging skills Roles \\& Responsibilities\n\n Design, develop, and maintain mobile applications\n\n Write clean, scalable, and efficient code\n\n Collaborate with designers and backend teams\n\n Test, debug, and improve app performance\n\n Publish and update apps on app stores\n\nHR Contact Details:8925532074\n\nPay: ₹1,000\\.00 \\- ₹1,500\\.00 per month\n\nWork Location: In person",
+      "id": "88a5e350668f8e6a7f69",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=81877a22b536b1ac",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-81877a22b536b1ac",
+      "title": "Application Developer Intern"
+    },
+    {
+      "company": "Vigilant Forensic Research And Analytics Pvt. Ltd.",
+      "date_posted": null,
+      "description": "",
+      "id": "5bf33c25d1afa2ec501c",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471008694",
+      "location": "Nagpur, Maharashtra, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Nagpur, Maharashtra, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4471008694",
+      "title": "Full-Stack Developer Intern"
     }
   ],
   "schema_version": 1
