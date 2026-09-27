@@ -128,6 +128,13 @@
           <p>Listings with a score of 80 or above.</p>
         </article>
 
+        <!-- NEW -->
+        <article class="insight-card">
+          <span class="insight-label">ACTIVE APPLICATIONS</span>
+          <strong id="insightApplications">0</strong>
+          <p>Jobs marked Applied or Interview.</p>
+        </article>
+
         <article class="insight-card insight-wide">
           <span class="insight-label">TOP SKILLS DETECTED</span>
           <div id="topSkills" class="insight-tags">
@@ -199,11 +206,24 @@
           </select>
         </label>
 
-        <!-- NEW: SKILL FILTER -->
+        <!-- SKILL FILTER -->
         <label class="field">
           SKILL
           <select id="skill">
             <option value="all">All skills</option>
+          </select>
+        </label>
+
+        <!-- NEW APPLICATION STATUS FILTER -->
+        <label class="field">
+          APPLICATION STATUS
+          <select id="status">
+            <option value="all">All statuses</option>
+            <option value="not-tracked">Not tracked</option>
+            <option value="Saved">Saved</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Closed">Closed</option>
           </select>
         </label>
 
@@ -227,7 +247,6 @@
           </select>
         </label>
 
-        <!-- NEW: SAVED JOBS BUTTON -->
         <button
           class="saved-toggle"
           id="savedToggle"
