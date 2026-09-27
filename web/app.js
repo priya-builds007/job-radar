@@ -1,7 +1,5 @@
 'use strict';
 
-// Listings come from generated JSON.
-// Saved jobs and application status are stored locally in this browser.
 const DATA_URL = '/data/processed_jobs.json';
 
 const SAVED_KEY = 'jobRadarSavedJobs';
@@ -65,9 +63,7 @@ let applicationStatus = new Map();
 let showSavedOnly = false;
 
 
-/* -----------------------------
-   Safe helpers
------------------------------ */
+/* Safe helpers */
 
 function safeLink(value) {
   try {
@@ -94,9 +90,7 @@ function jobId(job) {
 }
 
 
-/* -----------------------------
-   Saved jobs
------------------------------ */
+/* Saved jobs */
 
 function loadSavedJobs() {
   try {
@@ -122,9 +116,7 @@ function persistSavedJobs() {
       SAVED_KEY,
       JSON.stringify([...savedJobs])
     );
-  } catch {
-    // Ignore storage errors.
-  }
+  } catch {}
 }
 
 
@@ -170,9 +162,7 @@ function updateSavedUI() {
 }
 
 
-/* -----------------------------
-   Application tracker
------------------------------ */
+/* Application tracker */
 
 function loadApplicationStatus() {
   try {
@@ -196,17 +186,15 @@ function loadApplicationStatus() {
 
 function persistApplicationStatus() {
   try {
-    const data = Object.fromEntries(
-      applicationStatus.entries()
-    );
-
     localStorage.setItem(
       STATUS_KEY,
-      JSON.stringify(data)
+      JSON.stringify(
+        Object.fromEntries(
+          applicationStatus.entries()
+        )
+      )
     );
-  } catch {
-    // Ignore storage errors.
-  }
+  } catch {}
 }
 
 
@@ -223,17 +211,7 @@ function setApplicationStatus(job, status) {
     applicationStatus.delete(id);
   } else {
     applicationStatus.set(id, status);
-
-    if (
-      ['Saved', 'Applied', 'Interview']
-        .includes(status)
-    ) {
-      savedJobs.add(id);
-    }
-
-    if (status === 'Closed') {
-      savedJobs.add(id);
-    }
+    savedJobs.add(id);
   }
 
   persistApplicationStatus();
@@ -242,9 +220,7 @@ function setApplicationStatus(job, status) {
   updateSavedUI();
   updateInsights();
   render();
-}/* -----------------------------
-   Skill gap
------------------------------ */
+}/* Skill gap */
 
 function extractMentionedSkills(job) {
   const text = [
@@ -257,23 +233,17 @@ function extractMentionedSkills(job) {
     .join(' ')
     .toLowerCase();
 
-  const matched = new Set(
-    Array.isArray(job.matched_skills)
-      ? job.matched_skills.map(
-          skill => String(skill).toLowerCase()
-        )
-      : []
-  );
-
   const found = [];
 
   PROFILE_SKILLS.forEach(skill => {
     const normalized = skill.toLowerCase();
 
-    if (
-      !matched.has(normalized) &&
-      text.includes(normalized)
-    ) {
+    const pattern = new RegExp(
+      `(^|\\s|[^a-z0-9+#.])${normalized.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|\\s|[^a-z0-9+#.])`,
+      'i'
+    );
+
+    if (pattern.test(text)) {
       found.push(skill);
     }
   });
@@ -282,9 +252,7 @@ function extractMentionedSkills(job) {
 }
 
 
-/* -----------------------------
-   Date handling
------------------------------ */
+/* Date handling */
 
 function dateBucket(value, now = new Date()) {
   if (
@@ -343,9 +311,7 @@ function dateBucket(value, now = new Date()) {
 }
 
 
-/* -----------------------------
-   DOM helpers
------------------------------ */
+/* DOM helpers */
 
 function element(tag, className, value) {
   const el = document.createElement(tag);
@@ -372,7 +338,11 @@ function addOptions(select, values) {
   ]
     .sort((a, b) => a.localeCompare(b))
     .forEach(value => {
-      const opt = element('option', '', value);
+      const opt = element(
+        'option',
+        '',
+        value
+      );
 
       opt.value = value;
       select.append(opt);
@@ -380,16 +350,156 @@ function addOptions(select, values) {
 }
 
 
-/* -----------------------------
-   Job card
------------------------------ */
+/* Job details modal */
+
+function openJobModal(job) {
+  const modal = $('jobModal');
+  const content = $('modalContent');
+
+  if (!modal || !content) {
+    return;
+  }
+
+  content.replaceChildren();
+
+  const title = element(
+    'h2',
+    '',
+    job.title || 'Untitled listing'
+  );
+
+  title.id = 'modalTitle';
+
+  content.append(title);
+
+  content.append(
+    element(
+      'p',
+      'company',
+      job.company || 'Company not provided'
+    )
+  );
+
+  const info = element(
+    'div',
+    'modal-info'
+  );
+
+  [
+    `Location: ${job.location || 'Not provided'}`,
+    `Type: ${job.job_type || 'Not provided'}`,
+    `Score: ${job.score || 0}/100`,
+    job.is_remote
+      ? 'Remote: Confirmed'
+      : 'Remote: Not confirmed',
+    job.date_posted
+      ? `Posted: ${job.date_posted}`
+      : 'Posted: Date unavailable'
+  ].forEach(textValue => {
+    info.append(
+      element(
+        'p',
+        '',
+        textValue
+      )
+    );
+  });
+
+  content.append(info);
+
+
+  if (
+    Array.isArray(job.matched_skills) &&
+    job.matched_skills.length
+  ) {
+    content.append(
+      element(
+        'h3',
+        '',
+        'Matched Skills'
+      )
+    );
+
+    const skills = element(
+      'div',
+      'skills'
+    );
+
+    job.matched_skills.forEach(skill => {
+      skills.append(
+        element(
+          'span',
+          'skill',
+          skill
+        )
+      );
+    });
+
+    content.append(skills);
+  }
+
+
+  const description =
+    job.description ||
+    job.job_description ||
+    job.description_text;
+
+  if (description) {
+    content.append(
+      element(
+        'h3',
+        '',
+        'Job Description'
+      )
+    );
+
+    content.append(
+      element(
+        'p',
+        '',
+        description
+      )
+    );
+  }
+
+
+  const link = safeLink(job.job_url);
+
+  if (link) {
+    const a = element(
+      'a',
+      'modal-link',
+      'Open Original Job ↗'
+    );
+
+    a.href = link;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+
+    content.append(a);
+  }
+
+  modal.hidden = false;
+}
+
+
+/* Job card */
 
 function jobCard(job) {
-  const card = element('article', 'job');
+  const card = element(
+    'article',
+    'job'
+  );
 
-  const head = element('div', 'job-head');
+  const head = element(
+    'div',
+    'job-head'
+  );
 
-  const top = element('div', '');
+  const top = element(
+    'div',
+    ''
+  );
 
   top.append(
     element(
@@ -411,7 +521,10 @@ function jobCard(job) {
     )
   );
 
-  const score = element('div', 'score');
+  const score = element(
+    'div',
+    'score'
+  );
 
   score.setAttribute(
     'aria-label',
@@ -419,17 +532,33 @@ function jobCard(job) {
   );
 
   score.append(
-    element('strong', '', job.score),
-    element('small', '', 'FIT / 100')
+    element(
+      'strong',
+      '',
+      job.score
+    ),
+
+    element(
+      'small',
+      '',
+      'FIT / 100'
+    )
   );
 
-  head.append(top, score);
+  head.append(
+    top,
+    score
+  );
+
   card.append(head);
 
 
   /* Meta */
 
-  const meta = element('div', 'meta');
+  const meta = element(
+    'div',
+    'meta'
+  );
 
   [
     job.location || 'Location not provided',
@@ -443,9 +572,13 @@ function jobCard(job) {
     job.date_posted
       ? `Posted ${job.date_posted}`
       : 'Posting date unknown'
-  ].forEach(x => {
+  ].forEach(value => {
     meta.append(
-      element('span', '', x)
+      element(
+        'span',
+        '',
+        value
+      )
     );
   });
 
@@ -454,7 +587,10 @@ function jobCard(job) {
 
   /* Matched skills */
 
-  const skills = element('div', 'skills');
+  const skills = element(
+    'div',
+    'skills'
+  );
 
   (
     Array.isArray(job.matched_skills) &&
@@ -463,14 +599,15 @@ function jobCard(job) {
       : ['No skills detected in available text']
   ).forEach(skill => {
     skills.append(
-      element('span', 'skill', skill)
+      element(
+        'span',
+        'skill',
+        skill
+      )
     );
   });
 
-  card.append(skills);
-
-
-  /* Skill gap */
+  card.append(skills);  /* Skill gap */
 
   const skillGap = extractMentionedSkills(job);
 
@@ -521,7 +658,11 @@ function jobCard(job) {
 
     job.reasons.forEach(reason => {
       why.append(
-        element('li', '', reason)
+        element(
+          'li',
+          '',
+          reason
+        )
       );
     });
 
@@ -550,10 +691,7 @@ function jobCard(job) {
   );
 
   const statusValues = [
-    [
-      'not-tracked',
-      'Not tracked'
-    ],
+    ['not-tracked', 'Not tracked'],
     ...STATUS_OPTIONS.map(
       status => [status, status]
     )
@@ -568,6 +706,7 @@ function jobCard(job) {
       );
 
       option.value = value;
+
       statusSelect.append(option);
     }
   );
@@ -593,7 +732,26 @@ function jobCard(job) {
   );
 
   tracker.append(statusSelect);
+
   card.append(tracker);
+
+
+  /* View details */
+
+  const detailsButton = element(
+    'button',
+    'details-button',
+    'View Details'
+  );
+
+  detailsButton.type = 'button';
+
+  detailsButton.addEventListener(
+    'click',
+    () => openJobModal(job)
+  );
+
+  card.append(detailsButton);
 
 
   /* Footer */
@@ -670,26 +828,31 @@ function jobCard(job) {
   card.append(foot);
 
   return card;
-}/* -----------------------------
-   Insights
------------------------------ */
+}
+
+
+/* Insights */
 
 function updateInsights() {
 
-  const remoteCount = allJobs.filter(
-    job => job.is_remote === true
-  ).length;
+  const remoteCount =
+    allJobs.filter(
+      job => job.is_remote === true
+    ).length;
 
-  const highScoreCount = allJobs.filter(
-    job => Number(job.score) >= 80
-  ).length;
+  const highScoreCount =
+    allJobs.filter(
+      job => Number(job.score) >= 80
+    ).length;
 
-  const activeApplications = allJobs.filter(
-    job =>
-      ['Applied', 'Interview'].includes(
-        getApplicationStatus(job)
-      )
-  ).length;
+  const activeApplications =
+    allJobs.filter(
+      job =>
+        ['Applied', 'Interview']
+          .includes(
+            getApplicationStatus(job)
+          )
+    ).length;
 
   if ($('insightRemote')) {
     $('insightRemote').textContent =
@@ -715,34 +878,45 @@ function updateInsights() {
 
   allJobs.forEach(job => {
 
-    if (!Array.isArray(job.matched_skills)) {
+    if (
+      !Array.isArray(
+        job.matched_skills
+      )
+    ) {
       return;
     }
 
-    job.matched_skills.forEach(skill => {
+    job.matched_skills.forEach(
+      skill => {
 
-      const name =
-        String(skill).trim();
+        const name =
+          String(skill).trim();
 
-      if (!name) return;
+        if (!name) return;
 
-      counts.set(
-        name,
-        (counts.get(name) || 0) + 1
-      );
-    });
+        counts.set(
+          name,
+          (counts.get(name) || 0) + 1
+        );
+      }
+    );
   });
 
 
   const topSkills =
     [...counts.entries()]
-      .sort((a, b) => b[1] - a[1])
+      .sort(
+        (a, b) => b[1] - a[1]
+      )
       .slice(0, 8);
 
 
-  const container = $('topSkills');
+  const container =
+    $('topSkills');
 
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   container.replaceChildren();
 
@@ -772,12 +946,7 @@ function updateInsights() {
       container.append(tag);
     }
   );
-}
-
-
-/* -----------------------------
-   Main rendering
------------------------------ */
+}/* Main rendering */
 
 function render() {
 
@@ -843,7 +1012,9 @@ function render() {
       $('skill').value === 'all' ||
 
       (
-        Array.isArray(job.matched_skills) &&
+        Array.isArray(
+          job.matched_skills
+        ) &&
         job.matched_skills.includes(
           $('skill').value
         )
@@ -882,16 +1053,18 @@ function render() {
   /* Sorting */
 
   const dateValue =
-    x => x.date_posted || '0000-00-00';
+    job => job.date_posted || '0000-00-00';
 
-  const sort = $('sort').value;
+  const sort =
+    $('sort').value;
 
 
   chosen.sort((a, b) => {
 
     if (sort === 'score') {
       return (
-        b.score - a.score ||
+        Number(b.score) -
+          Number(a.score) ||
         dateValue(b).localeCompare(
           dateValue(a)
         )
@@ -904,7 +1077,8 @@ function render() {
         dateValue(a).localeCompare(
           dateValue(b)
         ) ||
-        b.score - a.score
+        Number(b.score) -
+          Number(a.score)
       );
     }
 
@@ -913,7 +1087,8 @@ function render() {
       dateValue(b).localeCompare(
         dateValue(a)
       ) ||
-      b.score - a.score
+      Number(b.score) -
+        Number(a.score)
     );
   });
 
@@ -926,17 +1101,19 @@ function render() {
 
   /* Results */
 
-  const results = $('results');
+  const results =
+    $('results');
 
   results.replaceChildren();
 
 
   if (!chosen.length) {
 
-    const empty = element(
-      'div',
-      'empty'
-    );
+    const empty =
+      element(
+        'div',
+        'empty'
+      );
 
     empty.append(
       element(
@@ -966,27 +1143,38 @@ function render() {
 
   buckets.forEach(label => {
 
-    const jobs = chosen.filter(
-      job =>
-        dateBucket(job.date_posted) ===
-        label
-    );
+    const jobs =
+      chosen.filter(
+        job =>
+          dateBucket(
+            job.date_posted
+          ) === label
+      );
 
-    if (!jobs.length) return;
+    if (!jobs.length) {
+      return;
+    }
 
 
-    const section = element(
-      'section',
-      'bucket'
-    );
+    const section =
+      element(
+        'section',
+        'bucket'
+      );
 
-    const header = element(
-      'div',
-      'bucket-header'
-    );
+    const header =
+      element(
+        'div',
+        'bucket-header'
+      );
 
     header.append(
-      element('h3', '', label),
+      element(
+        'h3',
+        '',
+        label
+      ),
+
       element(
         'span',
         'count',
@@ -995,10 +1183,11 @@ function render() {
     );
 
 
-    const cards = element(
-      'div',
-      'cards'
-    );
+    const cards =
+      element(
+        'div',
+        'cards'
+      );
 
     jobs.forEach(job => {
       cards.append(
@@ -1017,9 +1206,7 @@ function render() {
 }
 
 
-/* -----------------------------
-   Reset
------------------------------ */
+/* Reset */
 
 function resetFilters() {
 
@@ -1042,9 +1229,7 @@ function resetFilters() {
 }
 
 
-/* -----------------------------
-   Initialisation
------------------------------ */
+/* Initialisation */
 
 async function init() {
 
@@ -1074,7 +1259,7 @@ async function init() {
   );
 
 
-  /* Saved jobs toggle */
+  /* Saved jobs */
 
   $('savedToggle').addEventListener(
     'click',
@@ -1090,14 +1275,66 @@ async function init() {
   );
 
 
-  try {
+  /* Job details modal */
 
-    const res = await fetch(
-      DATA_URL,
-      {
-        cache: 'no-store'
+  const modal =
+    $('jobModal');
+
+  const modalClose =
+    $('modalClose');
+
+
+  if (modal && modalClose) {
+
+    modalClose.addEventListener(
+      'click',
+      () => {
+        modal.hidden = true;
       }
     );
+
+
+    modal.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target === modal
+        ) {
+          modal.hidden = true;
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      'keydown',
+      event => {
+
+        if (
+          event.key === 'Escape' &&
+          !modal.hidden
+        ) {
+          modal.hidden = true;
+        }
+
+      }
+    );
+  }
+
+
+  /* Load job data */
+
+  try {
+
+    const res =
+      await fetch(
+        DATA_URL,
+        {
+          cache: 'no-store'
+        }
+      );
 
 
     if (!res.ok) {
@@ -1111,7 +1348,11 @@ async function init() {
       await res.json();
 
 
-    if (!Array.isArray(payload.jobs)) {
+    if (
+      !Array.isArray(
+        payload.jobs
+      )
+    ) {
       throw new Error(
         'No jobs array in data'
       );
@@ -1124,11 +1365,13 @@ async function init() {
           job &&
           job.relevant === true &&
           safeLink(job.job_url) &&
-          Number.isFinite(job.score)
+          Number.isFinite(
+            Number(job.score)
+          )
       );
 
 
-    /* Populate filters */
+    /* Populate location */
 
     addOptions(
       $('location'),
@@ -1138,6 +1381,8 @@ async function init() {
     );
 
 
+    /* Populate job type */
+
     addOptions(
       $('jobType'),
       allJobs.map(
@@ -1146,12 +1391,16 @@ async function init() {
     );
 
 
+    /* Populate skills */
+
     const skills = [];
 
     allJobs.forEach(job => {
 
       if (
-        Array.isArray(job.matched_skills)
+        Array.isArray(
+          job.matched_skills
+        )
       ) {
         skills.push(
           ...job.matched_skills
@@ -1176,7 +1425,10 @@ async function init() {
     $('recent').textContent =
       allJobs.filter(
         job =>
-          ['Today', 'This Week'].includes(
+          [
+            'Today',
+            'This Week'
+          ].includes(
             dateBucket(
               job.date_posted
             )
@@ -1187,7 +1439,9 @@ async function init() {
     $('sources').textContent =
       new Set(
         allJobs
-          .map(job => job.source)
+          .map(
+            job => job.source
+          )
           .filter(Boolean)
       ).size;
 
@@ -1211,7 +1465,8 @@ async function init() {
 
     if (!allJobs.length) {
 
-      $('notice').hidden = false;
+      $('notice').hidden =
+        false;
 
       $('notice').textContent =
         'No relevant listings in the current real-data collection. No demo jobs will be shown.';
@@ -1226,15 +1481,21 @@ async function init() {
       'Job data unavailable';
 
 
-    $('notice').hidden = false;
+    $('notice').hidden =
+      false;
 
     $('notice').textContent =
       'Could not load processed job data. Run the crawler and processor, then serve the project root with a local web server. No listings are invented as a fallback.';
 
 
-    $('total').textContent = '0';
-    $('recent').textContent = '0';
-    $('sources').textContent = '0';
+    $('total').textContent =
+      '0';
+
+    $('recent').textContent =
+      '0';
+
+    $('sources').textContent =
+      '0';
 
 
     updateInsights();
@@ -1249,12 +1510,16 @@ async function init() {
 }
 
 
+/* Start */
+
 if (
   typeof document !== 'undefined'
 ) {
   init();
 }
 
+
+/* Exports */
 
 if (
   typeof module !== 'undefined'
