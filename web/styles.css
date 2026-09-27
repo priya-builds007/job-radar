@@ -1330,4 +1330,28 @@ h2{
 
 .freshness-badge:first-letter{
   color:var(--green);
+}/* =========================
+   PERSONAL MATCH SCORE
+   ========================= */
+
+.personal-match{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:10px;
+  padding:9px 11px;
+  border:1px solid #d7e1d9;
+  background:#f8faf8;
+}
+
+.personal-match-label{
+  color:#64756e;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.personal-match strong{
+  font-size:14px;
+  color:var(--green);
 }
