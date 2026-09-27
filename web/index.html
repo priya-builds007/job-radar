@@ -11,8 +11,10 @@
 </head>
 
 <body>
+
   <a class="skip" href="#results">Skip to jobs</a>
 
+  <!-- TOP BAR -->
   <header class="topbar">
     <div class="shell brand">
       <span class="brand-mark" aria-hidden="true">◎</span>
@@ -23,11 +25,14 @@
     </div>
   </header>
 
+
   <main class="shell">
 
     <!-- HERO -->
     <section class="hero" aria-labelledby="heading">
+
       <div class="hero-copy">
+
         <span class="eyebrow">
           PERSONAL JOB RADAR <span aria-hidden="true">·</span> INDIA
         </span>
@@ -44,20 +49,29 @@
 
         <div class="hero-line">
           <span class="pulse" aria-hidden="true"></span>
-          <span id="sourceStatus">Loading real job data…</span>
+          <span id="sourceStatus">
+            Loading real job data…
+          </span>
         </div>
+
       </div>
 
+
       <div class="hero-aside" aria-label="How this radar works">
-        <span class="aside-label">HOW THE SIGNAL WORKS</span>
+
+        <span class="aside-label">
+          HOW THE SIGNAL WORKS
+        </span>
 
         <div class="radar-art" aria-hidden="true">
           <span class="radar-circle one"></span>
           <span class="radar-circle two"></span>
           <span class="radar-circle three"></span>
+
           <span class="radar-point p1"></span>
           <span class="radar-point p2"></span>
           <span class="radar-point p3"></span>
+
           <span class="radar-cross">+</span>
         </div>
 
@@ -65,8 +79,11 @@
           Role <b>35</b> · Student level <b>20</b> ·
           Skills <b>up to 20</b> · Location <b>15</b> · Remote <b>10</b>
         </p>
+
       </div>
+
     </section>
+
 
     <!-- SUMMARY -->
     <section class="summary" aria-label="Results summary">
@@ -96,167 +113,398 @@
 
     </section>
 
+
     <!-- INSIGHTS -->
-    <section class="insights" aria-labelledby="insights-title">
+    <section
+      class="insights"
+      aria-labelledby="insights-title"
+    >
 
       <div class="section-heading">
+
         <div>
-          <span class="eyebrow dark">RADAR INSIGHTS</span>
-          <h2 id="insights-title">What the data says</h2>
+          <span class="eyebrow dark">
+            RADAR INSIGHTS
+          </span>
+
+          <h2 id="insights-title">
+            What the data says
+          </h2>
         </div>
 
-        <p>Live summary of the loaded job data.</p>
+        <p>
+          Live summary of the loaded job data.
+        </p>
+
       </div>
+
 
       <div class="insight-grid">
 
+        <!-- SAVED -->
         <article class="insight-card">
-          <span class="insight-label">SAVED JOBS</span>
-          <strong id="insightSaved">0</strong>
-          <p>Jobs saved in this browser.</p>
+
+          <span class="insight-label">
+            SAVED JOBS
+          </span>
+
+          <strong id="insightSaved">
+            0
+          </strong>
+
+          <p>
+            Jobs saved in this browser.
+          </p>
+
         </article>
 
+
+        <!-- REMOTE -->
         <article class="insight-card">
-          <span class="insight-label">REMOTE ROLES</span>
-          <strong id="insightRemote">0</strong>
-          <p>Listings explicitly marked remote.</p>
+
+          <span class="insight-label">
+            REMOTE ROLES
+          </span>
+
+          <strong id="insightRemote">
+            0
+          </strong>
+
+          <p>
+            Listings explicitly marked remote.
+          </p>
+
         </article>
 
+
+        <!-- HIGH SCORE -->
         <article class="insight-card">
-          <span class="insight-label">HIGH SCORE</span>
-          <strong id="insightHighScore">0</strong>
-          <p>Listings with a score of 80 or above.</p>
+
+          <span class="insight-label">
+            HIGH SCORE
+          </span>
+
+          <strong id="insightHighScore">
+            0
+          </strong>
+
+          <p>
+            Listings with a score of 80 or above.
+          </p>
+
         </article>
 
-        <!-- NEW -->
+
+        <!-- ACTIVE APPLICATIONS -->
         <article class="insight-card">
-          <span class="insight-label">ACTIVE APPLICATIONS</span>
-          <strong id="insightApplications">0</strong>
-          <p>Jobs marked Applied or Interview.</p>
+
+          <span class="insight-label">
+            ACTIVE APPLICATIONS
+          </span>
+
+          <strong id="insightApplications">
+            0
+          </strong>
+
+          <p>
+            Jobs marked Applied or Interview.
+          </p>
+
         </article>
 
+
+        <!-- TOP SKILLS -->
         <article class="insight-card insight-wide">
-          <span class="insight-label">TOP SKILLS DETECTED</span>
-          <div id="topSkills" class="insight-tags">
-            <span class="insight-muted">Loading skills…</span>
+
+          <span class="insight-label">
+            TOP SKILLS DETECTED
+          </span>
+
+          <div
+            id="topSkills"
+            class="insight-tags"
+          >
+            <span class="insight-muted">
+              Loading skills…
+            </span>
           </div>
+
         </article>
 
       </div>
 
     </section>
 
+
     <!-- SEARCH WORKSPACE -->
-    <section class="workspace" aria-labelledby="results-title">
+    <section
+      class="workspace"
+      aria-labelledby="results-title"
+    >
 
       <div class="section-heading">
+
         <div>
-          <span class="eyebrow dark">YOUR SEARCH SPACE</span>
-          <h2 id="results-title">The opportunities</h2>
+
+          <span class="eyebrow dark">
+            YOUR SEARCH SPACE
+          </span>
+
+          <h2 id="results-title">
+            The opportunities
+          </h2>
+
         </div>
 
-        <p id="resultCount" aria-live="polite">Loading…</p>
+        <p
+          id="resultCount"
+          aria-live="polite"
+        >
+          Loading…
+        </p>
+
       </div>
 
-      <!-- CONTROLS -->
-      <div class="controls" aria-label="Filter jobs">
 
+      <!-- FILTER CONTROLS -->
+      <div
+        class="controls"
+        aria-label="Filter jobs"
+      >
+
+        <!-- SEARCH -->
         <label class="field search-field">
+
           SEARCH BY ROLE, COMPANY OR SKILL
+
           <input
             id="search"
             type="search"
             placeholder="Try Python, developer, company…"
             autocomplete="off"
           >
+
         </label>
 
+
+        <!-- LOCATION -->
         <label class="field">
+
           LOCATION
+
           <select id="location">
-            <option value="all">All locations</option>
+
+            <option value="all">
+              All locations
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- JOB TYPE -->
         <label class="field">
+
           JOB TYPE
+
           <select id="jobType">
-            <option value="all">All types</option>
+
+            <option value="all">
+              All types
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- WORK MODE -->
         <label class="field">
+
           WORK MODE
+
           <select id="remote">
-            <option value="all">All modes</option>
-            <option value="remote">Confirmed remote</option>
-            <option value="onsite">Not marked remote</option>
+
+            <option value="all">
+              All modes
+            </option>
+
+            <option value="remote">
+              Confirmed remote
+            </option>
+
+            <option value="onsite">
+              Not marked remote
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- POSTED -->
         <label class="field">
+
           POSTED
+
           <select id="period">
-            <option value="all">Any date</option>
-            <option value="Today">Today</option>
-            <option value="This Week">This Week</option>
-            <option value="This Month">This Month</option>
-            <option value="Older">Older</option>
-            <option value="Unknown date">Unknown date</option>
+
+            <option value="all">
+              Any date
+            </option>
+
+            <option value="Today">
+              Today
+            </option>
+
+            <option value="This Week">
+              This Week
+            </option>
+
+            <option value="This Month">
+              This Month
+            </option>
+
+            <option value="Older">
+              Older
+            </option>
+
+            <option value="Unknown date">
+              Unknown date
+            </option>
+
           </select>
+
         </label>
 
-        <!-- SKILL FILTER -->
+
+        <!-- SKILL -->
         <label class="field">
+
           SKILL
+
           <select id="skill">
-            <option value="all">All skills</option>
+
+            <option value="all">
+              All skills
+            </option>
+
           </select>
+
         </label>
 
-        <!-- NEW APPLICATION STATUS FILTER -->
+
+        <!-- APPLICATION STATUS -->
         <label class="field">
+
           APPLICATION STATUS
+
           <select id="status">
-            <option value="all">All statuses</option>
-            <option value="not-tracked">Not tracked</option>
-            <option value="Saved">Saved</option>
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Closed">Closed</option>
+
+            <option value="all">
+              All statuses
+            </option>
+
+            <option value="not-tracked">
+              Not tracked
+            </option>
+
+            <option value="Saved">
+              Saved
+            </option>
+
+            <option value="Applied">
+              Applied
+            </option>
+
+            <option value="Interview">
+              Interview
+            </option>
+
+            <option value="Closed">
+              Closed
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- MINIMUM SCORE -->
         <label class="field">
+
           MINIMUM SCORE
+
           <select id="minimum">
-            <option value="0">Any score</option>
-            <option value="60">60+</option>
-            <option value="70">70+</option>
-            <option value="80">80+</option>
-            <option value="90">90+</option>
+
+            <option value="0">
+              Any score
+            </option>
+
+            <option value="60">
+              60+
+            </option>
+
+            <option value="70">
+              70+
+            </option>
+
+            <option value="80">
+              80+
+            </option>
+
+            <option value="90">
+              90+
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- SORT -->
         <label class="field">
+
           SORT
+
           <select id="sort">
-            <option value="newest">Newest posting</option>
-            <option value="score">Highest score</option>
-            <option value="oldest">Oldest posting</option>
+
+            <option value="newest">
+              Newest posting
+            </option>
+
+            <option value="score">
+              Highest score
+            </option>
+
+            <option value="oldest">
+              Oldest posting
+            </option>
+
           </select>
+
         </label>
 
+
+        <!-- SAVED TOGGLE -->
         <button
           class="saved-toggle"
           id="savedToggle"
           type="button"
           aria-pressed="false"
         >
+
           Saved Jobs
-          <span id="savedCount">0</span>
+
+          <span id="savedCount">
+            0
+          </span>
+
         </button>
 
+
+        <!-- RESET -->
         <button
           class="reset"
           id="reset"
@@ -267,6 +515,7 @@
 
       </div>
 
+
       <!-- NOTICE -->
       <div
         id="notice"
@@ -274,6 +523,7 @@
         role="status"
         hidden
       ></div>
+
 
       <!-- RESULTS -->
       <div
@@ -287,10 +537,47 @@
 
   </main>
 
+
+  <!-- JOB DETAILS MODAL -->
+  <div
+    id="jobModal"
+    class="modal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+
+    <div class="modal-box">
+
+      <button
+        id="modalClose"
+        class="modal-close"
+        type="button"
+        aria-label="Close job details"
+      >
+        ×
+      </button>
+
+      <div id="modalContent">
+
+        <!-- JavaScript inserts job details here -->
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <!-- FOOTER -->
   <footer class="footer">
+
     <div class="shell">
-      <p>MENTOR SURPRISE / JOB RADAR</p>
+
+      <p>
+        MENTOR SURPRISE / JOB RADAR
+      </p>
 
       <p>
         Listings from JobSpy. A posting may expire or change; the source link
@@ -298,6 +585,7 @@
       </p>
 
       <p>
+
         <a
           href="https://github.com/speedyapply/JobSpy"
           target="_blank"
@@ -305,8 +593,11 @@
         >
           About JobSpy ↗
         </a>
+
       </p>
+
     </div>
+
   </footer>
 
 </body>
