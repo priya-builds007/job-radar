@@ -238,8 +238,14 @@ function extractMentionedSkills(job) {
   PROFILE_SKILLS.forEach(skill => {
     const normalized = skill.toLowerCase();
 
+    const escaped =
+      normalized.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        '\\$&'
+      );
+
     const pattern = new RegExp(
-      `(^|\\s|[^a-z0-9+#.])${normalized.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|\\s|[^a-z0-9+#.])`,
+      `(^|\\s|[^a-z0-9+#.])${escaped}(?=$|\\s|[^a-z0-9+#.])`,
       'i'
     );
 
@@ -254,7 +260,10 @@ function extractMentionedSkills(job) {
 
 /* Date handling */
 
-function dateBucket(value, now = new Date()) {
+function dateBucket(
+  value,
+  now = new Date()
+) {
   if (
     !value ||
     !/^\d{4}-\d{2}-\d{2}$/.test(value)
@@ -265,7 +274,11 @@ function dateBucket(value, now = new Date()) {
   const [y, m, d] =
     value.split('-').map(Number);
 
-  const day = new Date(y, m - 1, d);
+  const day = new Date(
+    y,
+    m - 1,
+    d
+  );
 
   if (
     day.getFullYear() !== y ||
@@ -285,11 +298,15 @@ function dateBucket(value, now = new Date()) {
     return 'Unknown date';
   }
 
-  if (day.getTime() === current.getTime()) {
+  if (
+    day.getTime() ===
+    current.getTime()
+  ) {
     return 'Today';
   }
 
-  const monday = new Date(current);
+  const monday =
+    new Date(current);
 
   monday.setDate(
     current.getDate() -
@@ -301,8 +318,10 @@ function dateBucket(value, now = new Date()) {
   }
 
   if (
-    day.getFullYear() === current.getFullYear() &&
-    day.getMonth() === current.getMonth()
+    day.getFullYear() ===
+      current.getFullYear() &&
+    day.getMonth() ===
+      current.getMonth()
   ) {
     return 'This Month';
   }
@@ -311,24 +330,98 @@ function dateBucket(value, now = new Date()) {
 }
 
 
-/* DOM helpers */
+/* Job freshness */
 
-function element(tag, className, value) {
-  const el = document.createElement(tag);
-
-  if (className) {
-    el.className = className;
+function freshnessLabel(date) {
+  if (!date) {
+    return 'DATE UNKNOWN';
   }
 
-  if (value !== undefined) {
-    el.textContent = String(value);
+  const posted =
+    new Date(
+      date + 'T00:00:00'
+    );
+
+  if (
+    Number.isNaN(
+      posted.getTime()
+    )
+  ) {
+    return 'DATE UNKNOWN';
+  }
+
+  const today = new Date();
+
+  const current =
+    new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+  const diff =
+    Math.floor(
+      (
+        current.getTime() -
+        posted.getTime()
+      ) /
+      (1000 * 60 * 60 * 24)
+    );
+
+  if (diff < 0) {
+    return 'DATE UNKNOWN';
+  }
+
+  if (diff === 0) {
+    return 'NEW TODAY';
+  }
+
+  if (diff <= 3) {
+    return 'RECENT';
+  }
+
+  if (diff <= 7) {
+    return 'THIS WEEK';
+  }
+
+  if (diff <= 30) {
+    return 'THIS MONTH';
+  }
+
+  return 'OLDER';
+}
+
+
+/* DOM helpers */
+
+function element(
+  tag,
+  className,
+  value
+) {
+  const el =
+    document.createElement(tag);
+
+  if (className) {
+    el.className =
+      className;
+  }
+
+  if (
+    value !== undefined
+  ) {
+    el.textContent =
+      String(value);
   }
 
   return el;
 }
 
 
-function addOptions(select, values) {
+function addOptions(
+  select,
+  values
+) {
   [
     ...new Set(
       values
@@ -336,15 +429,21 @@ function addOptions(select, values) {
         .map(String)
     )
   ]
-    .sort((a, b) => a.localeCompare(b))
+    .sort(
+      (a, b) =>
+        a.localeCompare(b)
+    )
     .forEach(value => {
-      const opt = element(
-        'option',
-        '',
-        value
-      );
+
+      const opt =
+        element(
+          'option',
+          '',
+          value
+        );
 
       opt.value = value;
+
       select.append(opt);
     });
 }
@@ -353,65 +452,102 @@ function addOptions(select, values) {
 /* Job details modal */
 
 function openJobModal(job) {
-  const modal = $('jobModal');
-  const content = $('modalContent');
 
-  if (!modal || !content) {
+  const modal =
+    $('jobModal');
+
+  const content =
+    $('modalContent');
+
+  if (
+    !modal ||
+    !content
+  ) {
     return;
   }
 
   content.replaceChildren();
 
-  const title = element(
-    'h2',
-    '',
-    job.title || 'Untitled listing'
-  );
 
-  title.id = 'modalTitle';
+  const title =
+    element(
+      'h2',
+      '',
+      job.title ||
+        'Untitled listing'
+    );
+
+  title.id =
+    'modalTitle';
 
   content.append(title);
+
 
   content.append(
     element(
       'p',
       'company',
-      job.company || 'Company not provided'
+      job.company ||
+        'Company not provided'
     )
   );
 
-  const info = element(
-    'div',
-    'modal-info'
-  );
+
+  const info =
+    element(
+      'div',
+      'modal-info'
+    );
+
 
   [
-    `Location: ${job.location || 'Not provided'}`,
-    `Type: ${job.job_type || 'Not provided'}`,
-    `Score: ${job.score || 0}/100`,
+    `Location: ${
+      job.location ||
+      'Not provided'
+    }`,
+
+    `Type: ${
+      job.job_type ||
+      'Not provided'
+    }`,
+
+    `Score: ${
+      job.score || 0
+    }/100`,
+
     job.is_remote
       ? 'Remote: Confirmed'
       : 'Remote: Not confirmed',
+
     job.date_posted
-      ? `Posted: ${job.date_posted}`
+      ? `Posted: ${
+          job.date_posted
+        }`
       : 'Posted: Date unavailable'
-  ].forEach(textValue => {
-    info.append(
-      element(
-        'p',
-        '',
-        textValue
-      )
-    );
-  });
+  ]
+    .forEach(textValue => {
+
+      info.append(
+        element(
+          'p',
+          '',
+          textValue
+        )
+      );
+
+    });
+
 
   content.append(info);
 
 
   if (
-    Array.isArray(job.matched_skills) &&
+    Array.isArray(
+      job.matched_skills
+    ) &&
     job.matched_skills.length
   ) {
+
     content.append(
       element(
         'h3',
@@ -420,20 +556,27 @@ function openJobModal(job) {
       )
     );
 
-    const skills = element(
-      'div',
-      'skills'
-    );
 
-    job.matched_skills.forEach(skill => {
-      skills.append(
-        element(
-          'span',
-          'skill',
-          skill
-        )
+    const skills =
+      element(
+        'div',
+        'skills'
       );
-    });
+
+
+    job.matched_skills
+      .forEach(skill => {
+
+        skills.append(
+          element(
+            'span',
+            'skill',
+            skill
+          )
+        );
+
+      });
+
 
     content.append(skills);
   }
@@ -444,7 +587,9 @@ function openJobModal(job) {
     job.job_description ||
     job.description_text;
 
+
   if (description) {
+
     content.append(
       element(
         'h3',
@@ -452,6 +597,7 @@ function openJobModal(job) {
         'Job Description'
       )
     );
+
 
     content.append(
       element(
@@ -463,21 +609,31 @@ function openJobModal(job) {
   }
 
 
-  const link = safeLink(job.job_url);
-
-  if (link) {
-    const a = element(
-      'a',
-      'modal-link',
-      'Open Original Job ↗'
+  const link =
+    safeLink(
+      job.job_url
     );
 
+
+  if (link) {
+
+    const a =
+      element(
+        'a',
+        'modal-link',
+        'Open Original Job ↗'
+      );
+
     a.href = link;
+
     a.target = '_blank';
-    a.rel = 'noopener noreferrer';
+
+    a.rel =
+      'noopener noreferrer';
 
     content.append(a);
   }
+
 
   modal.hidden = false;
 }
@@ -486,52 +642,71 @@ function openJobModal(job) {
 /* Job card */
 
 function jobCard(job) {
-  const card = element(
-    'article',
-    'job'
-  );
 
-  const head = element(
-    'div',
-    'job-head'
-  );
+  const card =
+    element(
+      'article',
+      'job'
+    );
 
-  const top = element(
-    'div',
-    ''
-  );
+
+  const head =
+    element(
+      'div',
+      'job-head'
+    );
+
+
+  const top =
+    element(
+      'div',
+      ''
+    );
+
 
   top.append(
+
     element(
       'span',
       'source',
-      job.source || 'Job board'
+      job.source ||
+        'Job board'
     ),
 
     element(
       'h4',
       '',
-      job.title || 'Untitled listing'
+      job.title ||
+        'Untitled listing'
     ),
 
     element(
       'p',
       'company',
-      job.company || 'Company not provided'
+      job.company ||
+        'Company not provided'
     )
+
   );
 
-  const score = element(
-    'div',
-    'score'
-  );
+
+  const score =
+    element(
+      'div',
+      'score'
+    );
+
 
   score.setAttribute(
     'aria-label',
-    `Fit score ${job.score} out of 100`
+    `Fit score ${
+      job.score
+    } out of 100`
   );
 
+
   score.append(
+
     element(
       'strong',
       '',
@@ -543,36 +718,63 @@ function jobCard(job) {
       '',
       'FIT / 100'
     )
+
   );
+
 
   head.append(
     top,
     score
   );
 
+
   card.append(head);
+
+
+  /* Freshness badge */
+
+  const freshness =
+    element(
+      'span',
+      'freshness-badge',
+      freshnessLabel(
+        job.date_posted
+      )
+    );
+
+  card.append(
+    freshness
+  );
 
 
   /* Meta */
 
-  const meta = element(
-    'div',
-    'meta'
-  );
+  const meta =
+    element(
+      'div',
+      'meta'
+    );
+
 
   [
-    job.location || 'Location not provided',
+    job.location ||
+      'Location not provided',
 
-    job.job_type || 'Type not provided',
+    job.job_type ||
+      'Type not provided',
 
     job.is_remote === true
       ? 'Remote confirmed'
       : 'Remote not confirmed',
 
     job.date_posted
-      ? `Posted ${job.date_posted}`
+      ? `Posted ${
+          job.date_posted
+        }`
       : 'Posting date unknown'
+
   ].forEach(value => {
+
     meta.append(
       element(
         'span',
@@ -580,24 +782,29 @@ function jobCard(job) {
         value
       )
     );
+
   });
 
-  card.append(meta);
 
+  card.append(meta);/* Matched skills */
 
-  /* Matched skills */
-
-  const skills = element(
-    'div',
-    'skills'
-  );
+  const skills =
+    element(
+      'div',
+      'skills'
+    );
 
   (
-    Array.isArray(job.matched_skills) &&
+    Array.isArray(
+      job.matched_skills
+    ) &&
     job.matched_skills.length
       ? job.matched_skills
-      : ['No skills detected in available text']
+      : [
+          'No skills detected in available text'
+        ]
   ).forEach(skill => {
+
     skills.append(
       element(
         'span',
@@ -605,17 +812,25 @@ function jobCard(job) {
         skill
       )
     );
+
   });
 
-  card.append(skills);  /* Skill gap */
+  card.append(skills);
 
-  const skillGap = extractMentionedSkills(job);
+
+/* Skill gap */
+
+  const skillGap =
+    extractMentionedSkills(job);
 
   if (skillGap.length) {
-    const gapBox = element(
-      'div',
-      'skill-gap'
-    );
+
+    const gapBox =
+      element(
+        'div',
+        'skill-gap'
+      );
+
 
     gapBox.append(
       element(
@@ -625,57 +840,82 @@ function jobCard(job) {
       )
     );
 
-    const gapTags = element(
-      'div',
-      'gap-tags'
+
+    const gapTags =
+      element(
+        'div',
+        'gap-tags'
+      );
+
+
+    skillGap.forEach(
+      skill => {
+
+        gapTags.append(
+          element(
+            'span',
+            'gap-tag',
+            skill
+          )
+        );
+
+      }
     );
 
-    skillGap.forEach(skill => {
-      gapTags.append(
-        element(
-          'span',
-          'gap-tag',
-          skill
-        )
-      );
-    });
 
-    gapBox.append(gapTags);
-    card.append(gapBox);
+    gapBox.append(
+      gapTags
+    );
+
+    card.append(
+      gapBox
+    );
   }
 
 
-  /* Reasons */
+/* Reasons */
 
   if (
-    Array.isArray(job.reasons) &&
+    Array.isArray(
+      job.reasons
+    ) &&
     job.reasons.length
   ) {
-    const why = element(
-      'ul',
-      'reasons'
+
+    const why =
+      element(
+        'ul',
+        'reasons'
+      );
+
+
+    job.reasons.forEach(
+      reason => {
+
+        why.append(
+          element(
+            'li',
+            '',
+            reason
+          )
+        );
+
+      }
     );
 
-    job.reasons.forEach(reason => {
-      why.append(
-        element(
-          'li',
-          '',
-          reason
-        )
-      );
-    });
 
     card.append(why);
   }
 
 
-  /* Application tracker */
+/* Application tracker */
 
-  const tracker = element(
-    'div',
-    'tracker'
-  );
+  const tracker =
+    element(
+      'div',
+      'tracker'
+    );
+
 
   tracker.append(
     element(
@@ -685,81 +925,122 @@ function jobCard(job) {
     )
   );
 
-  const statusSelect = element(
-    'select',
-    'status-select'
-  );
+
+  const statusSelect =
+    element(
+      'select',
+      'status-select'
+    );
+
 
   const statusValues = [
-    ['not-tracked', 'Not tracked'],
+    [
+      'not-tracked',
+      'Not tracked'
+    ],
+
     ...STATUS_OPTIONS.map(
-      status => [status, status]
+      status => [
+        status,
+        status
+      ]
     )
   ];
 
+
   statusValues.forEach(
     ([value, label]) => {
-      const option = element(
-        'option',
-        '',
-        label
+
+      const option =
+        element(
+          'option',
+          '',
+          label
+        );
+
+      option.value =
+        value;
+
+      statusSelect.append(
+        option
       );
 
-      option.value = value;
-
-      statusSelect.append(option);
     }
   );
 
+
   statusSelect.value =
-    getApplicationStatus(job);
+    getApplicationStatus(
+      job
+    );
+
 
   statusSelect.setAttribute(
     'aria-label',
     `Application status for ${
-      job.title || 'job'
+      job.title ||
+      'job'
     }`
   );
+
 
   statusSelect.addEventListener(
     'change',
     event => {
+
       setApplicationStatus(
         job,
         event.target.value
       );
+
     }
   );
 
-  tracker.append(statusSelect);
 
-  card.append(tracker);
-
-
-  /* View details */
-
-  const detailsButton = element(
-    'button',
-    'details-button',
-    'View Details'
+  tracker.append(
+    statusSelect
   );
 
-  detailsButton.type = 'button';
+  card.append(
+    tracker
+  );
+
+
+/* View details */
+
+  const detailsButton =
+    element(
+      'button',
+      'details-button',
+      'View Details'
+    );
+
+
+  detailsButton.type =
+    'button';
+
 
   detailsButton.addEventListener(
     'click',
-    () => openJobModal(job)
+    () => {
+      openJobModal(job);
+    }
   );
 
-  card.append(detailsButton);
 
-
-  /* Footer */
-
-  const foot = element(
-    'div',
-    'job-foot'
+  card.append(
+    detailsButton
   );
+
+
+/* Footer */
+
+  const foot =
+    element(
+      'div',
+      'job-foot'
+    );
+
 
   foot.append(
     element(
@@ -773,59 +1054,92 @@ function jobCard(job) {
   );
 
 
-  /* Save button */
+/* Save button */
 
-  const saveButton = element(
-    'button',
-    'save-job',
-    savedJobs.has(jobId(job))
-      ? '★ Saved'
-      : '☆ Save'
-  );
+  const saveButton =
+    element(
+      'button',
+      'save-job',
+      savedJobs.has(
+        jobId(job)
+      )
+        ? '★ Saved'
+        : '☆ Save'
+    );
 
-  saveButton.type = 'button';
+
+  saveButton.type =
+    'button';
+
 
   saveButton.setAttribute(
     'aria-pressed',
     String(
-      savedJobs.has(jobId(job))
+      savedJobs.has(
+        jobId(job)
+      )
     )
   );
 
+
   saveButton.addEventListener(
     'click',
-    () => toggleSavedJob(job)
+    () => {
+      toggleSavedJob(job);
+    }
   );
 
-  foot.append(saveButton);
+
+  foot.append(
+    saveButton
+  );
 
 
-  /* Original job link */
+/* Original job link */
 
-  const link = safeLink(job.job_url);
-
-  if (link) {
-    const a = element(
-      'a',
-      '',
-      'Open original ↗'
+  const link =
+    safeLink(
+      job.job_url
     );
 
-    a.href = link;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
+
+  if (link) {
+
+    const a =
+      element(
+        'a',
+        '',
+        'Open original ↗'
+      );
+
+
+    a.href =
+      link;
+
+    a.target =
+      '_blank';
+
+    a.rel =
+      'noopener noreferrer';
+
 
     a.setAttribute(
       'aria-label',
       `Open original ${
-        job.title || 'job'
+        job.title ||
+        'job'
       } listing`
     );
+
 
     foot.append(a);
   }
 
-  card.append(foot);
+
+  card.append(
+    foot
+  );
+
 
   return card;
 }
@@ -837,76 +1151,103 @@ function updateInsights() {
 
   const remoteCount =
     allJobs.filter(
-      job => job.is_remote === true
+      job =>
+        job.is_remote === true
     ).length;
+
 
   const highScoreCount =
     allJobs.filter(
-      job => Number(job.score) >= 80
+      job =>
+        Number(job.score) >= 80
     ).length;
+
 
   const activeApplications =
     allJobs.filter(
       job =>
-        ['Applied', 'Interview']
-          .includes(
-            getApplicationStatus(job)
+        [
+          'Applied',
+          'Interview'
+        ].includes(
+          getApplicationStatus(
+            job
           )
+        )
     ).length;
+
 
   if ($('insightRemote')) {
     $('insightRemote').textContent =
       remoteCount;
   }
 
+
   if ($('insightHighScore')) {
     $('insightHighScore').textContent =
       highScoreCount;
   }
+
 
   if ($('insightApplications')) {
     $('insightApplications').textContent =
       activeApplications;
   }
 
+
   updateSavedUI();
 
 
-  /* Top skills */
+/* Top skills */
 
-  const counts = new Map();
+  const counts =
+    new Map();
 
-  allJobs.forEach(job => {
 
-    if (
-      !Array.isArray(
-        job.matched_skills
-      )
-    ) {
-      return;
-    }
+  allJobs.forEach(
+    job => {
 
-    job.matched_skills.forEach(
-      skill => {
-
-        const name =
-          String(skill).trim();
-
-        if (!name) return;
-
-        counts.set(
-          name,
-          (counts.get(name) || 0) + 1
-        );
+      if (
+        !Array.isArray(
+          job.matched_skills
+        )
+      ) {
+        return;
       }
-    );
-  });
+
+
+      job.matched_skills.forEach(
+        skill => {
+
+          const name =
+            String(skill).trim();
+
+
+          if (!name) {
+            return;
+          }
+
+
+          counts.set(
+            name,
+            (
+              counts.get(name) ||
+              0
+            ) + 1
+          );
+
+        }
+      );
+
+    }
+  );
 
 
   const topSkills =
     [...counts.entries()]
       .sort(
-        (a, b) => b[1] - a[1]
+        (a, b) =>
+          b[1] - a[1]
       )
       .slice(0, 8);
 
@@ -914,14 +1255,17 @@ function updateInsights() {
   const container =
     $('topSkills');
 
+
   if (!container) {
     return;
   }
+
 
   container.replaceChildren();
 
 
   if (!topSkills.length) {
+
     container.append(
       element(
         'span',
@@ -937,13 +1281,15 @@ function updateInsights() {
   topSkills.forEach(
     ([skill, count]) => {
 
-      const tag = element(
-        'span',
-        'insight-tag',
-        `${skill} · ${count}`
-      );
+      const tag =
+        element(
+          'span',
+          'insight-tag',
+          `${skill} · ${count}`
+        );
 
       container.append(tag);
+
     }
   );
 }/* Main rendering */
@@ -956,150 +1302,168 @@ function render() {
       .toLowerCase();
 
   const min =
-    Number($('minimum').value);
+    Number(
+      $('minimum').value
+    );
 
   const selectedStatus =
     $('status').value;
 
 
-  const chosen = allJobs.filter(job => {
+  const chosen =
+    allJobs.filter(job => {
 
-    const haystack = [
-      job.title,
-      job.company,
-      job.location,
-      ...(job.matched_skills || [])
-    ]
-      .join(' ')
-      .toLowerCase();
-
-
-    const matchesSearch =
-      !q || haystack.includes(q);
+      const haystack = [
+        job.title,
+        job.company,
+        job.location,
+        ...(job.matched_skills || [])
+      ]
+        .join(' ')
+        .toLowerCase();
 
 
-    const matchesLocation =
-      $('location').value === 'all' ||
-      job.location === $('location').value;
+      const matchesSearch =
+        !q ||
+        haystack.includes(q);
 
 
-    const matchesJobType =
-      $('jobType').value === 'all' ||
-      job.job_type === $('jobType').value;
+      const matchesLocation =
+        $('location').value === 'all' ||
+        job.location ===
+          $('location').value;
 
 
-    const matchesRemote =
-      $('remote').value === 'all' ||
+      const matchesJobType =
+        $('jobType').value === 'all' ||
+        job.job_type ===
+          $('jobType').value;
 
-      (
-        $('remote').value === 'remote' &&
-        job.is_remote === true
-      ) ||
 
-      (
-        $('remote').value === 'onsite' &&
-        job.is_remote !== true
+      const matchesRemote =
+        $('remote').value === 'all' ||
+
+        (
+          $('remote').value === 'remote' &&
+          job.is_remote === true
+        ) ||
+
+        (
+          $('remote').value === 'onsite' &&
+          job.is_remote !== true
+        );
+
+
+      const matchesPeriod =
+        $('period').value === 'all' ||
+        dateBucket(
+          job.date_posted
+        ) === $('period').value;
+
+
+      const matchesSkill =
+        $('skill').value === 'all' ||
+
+        (
+          Array.isArray(
+            job.matched_skills
+          ) &&
+          job.matched_skills.includes(
+            $('skill').value
+          )
+        );
+
+
+      const matchesStatus =
+        selectedStatus === 'all' ||
+        getApplicationStatus(job) ===
+          selectedStatus;
+
+
+      const matchesScore =
+        Number(job.score) >= min;
+
+
+      const matchesSaved =
+        !showSavedOnly ||
+        savedJobs.has(
+          jobId(job)
+        );
+
+
+      return (
+        matchesSearch &&
+        matchesLocation &&
+        matchesJobType &&
+        matchesRemote &&
+        matchesPeriod &&
+        matchesSkill &&
+        matchesStatus &&
+        matchesScore &&
+        matchesSaved
       );
+    });
 
 
-    const matchesPeriod =
-      $('period').value === 'all' ||
-      dateBucket(job.date_posted) ===
-        $('period').value;
-
-
-    const matchesSkill =
-      $('skill').value === 'all' ||
-
-      (
-        Array.isArray(
-          job.matched_skills
-        ) &&
-        job.matched_skills.includes(
-          $('skill').value
-        )
-      );
-
-
-    const matchesStatus =
-      selectedStatus === 'all' ||
-      getApplicationStatus(job) ===
-        selectedStatus;
-
-
-    const matchesScore =
-      Number(job.score) >= min;
-
-
-    const matchesSaved =
-      !showSavedOnly ||
-      savedJobs.has(jobId(job));
-
-
-    return (
-      matchesSearch &&
-      matchesLocation &&
-      matchesJobType &&
-      matchesRemote &&
-      matchesPeriod &&
-      matchesSkill &&
-      matchesStatus &&
-      matchesScore &&
-      matchesSaved
-    );
-  });
-
-
-  /* Sorting */
+/* Sorting */
 
   const dateValue =
-    job => job.date_posted || '0000-00-00';
+    job =>
+      job.date_posted ||
+      '0000-00-00';
 
   const sort =
     $('sort').value;
 
 
-  chosen.sort((a, b) => {
+  chosen.sort(
+    (a, b) => {
 
-    if (sort === 'score') {
+      if (sort === 'score') {
+
+        return (
+          Number(b.score) -
+            Number(a.score) ||
+
+          dateValue(b).localeCompare(
+            dateValue(a)
+          )
+        );
+      }
+
+
+      if (sort === 'oldest') {
+
+        return (
+          dateValue(a).localeCompare(
+            dateValue(b)
+          ) ||
+
+          Number(b.score) -
+            Number(a.score)
+        );
+      }
+
+
       return (
-        Number(b.score) -
-          Number(a.score) ||
         dateValue(b).localeCompare(
           dateValue(a)
-        )
-      );
-    }
-
-
-    if (sort === 'oldest') {
-      return (
-        dateValue(a).localeCompare(
-          dateValue(b)
         ) ||
+
         Number(b.score) -
           Number(a.score)
       );
     }
+  );
 
 
-    return (
-      dateValue(b).localeCompare(
-        dateValue(a)
-      ) ||
-      Number(b.score) -
-        Number(a.score)
-    );
-  });
-
-
-  /* Result count */
+/* Result count */
 
   $('resultCount').textContent =
     `${chosen.length} of ${allJobs.length} leads shown`;
 
 
-  /* Results */
+/* Results */
 
   const results =
     $('results');
@@ -1115,7 +1479,9 @@ function render() {
         'empty'
       );
 
+
     empty.append(
+
       element(
         'strong',
         '',
@@ -1131,98 +1497,124 @@ function render() {
           ? 'Try clearing a filter or lowering the minimum score.'
           : 'Run the crawler and processor to populate this radar with real data.'
       )
+
     );
 
-    results.append(empty);
+
+    results.append(
+      empty
+    );
 
     return;
   }
 
 
-  /* Date buckets */
+/* Date buckets */
 
-  buckets.forEach(label => {
+  buckets.forEach(
+    label => {
 
-    const jobs =
-      chosen.filter(
-        job =>
-          dateBucket(
-            job.date_posted
-          ) === label
+      const jobs =
+        chosen.filter(
+          job =>
+            dateBucket(
+              job.date_posted
+            ) === label
+        );
+
+
+      if (!jobs.length) {
+        return;
+      }
+
+
+      const section =
+        element(
+          'section',
+          'bucket'
+        );
+
+
+      const header =
+        element(
+          'div',
+          'bucket-header'
+        );
+
+
+      header.append(
+
+        element(
+          'h3',
+          '',
+          label
+        ),
+
+        element(
+          'span',
+          'count',
+          jobs.length
+        )
+
       );
 
-    if (!jobs.length) {
-      return;
+
+      const cards =
+        element(
+          'div',
+          'cards'
+        );
+
+
+      jobs.forEach(
+        job => {
+
+          cards.append(
+            jobCard(job)
+          );
+
+        }
+      );
+
+
+      section.append(
+        header,
+        cards
+      );
+
+
+      results.append(
+        section
+      );
+
     }
-
-
-    const section =
-      element(
-        'section',
-        'bucket'
-      );
-
-    const header =
-      element(
-        'div',
-        'bucket-header'
-      );
-
-    header.append(
-      element(
-        'h3',
-        '',
-        label
-      ),
-
-      element(
-        'span',
-        'count',
-        jobs.length
-      )
-    );
-
-
-    const cards =
-      element(
-        'div',
-        'cards'
-      );
-
-    jobs.forEach(job => {
-      cards.append(
-        jobCard(job)
-      );
-    });
-
-
-    section.append(
-      header,
-      cards
-    );
-
-    results.append(section);
-  });
+  );
 }
 
 
-/* Reset */
+/* Reset filters */
 
 function resetFilters() {
 
-  controls.forEach(id => {
+  controls.forEach(
+    id => {
 
-    if (id === 'search') {
-      $(id).value = '';
-    } else {
-      $(id).selectedIndex = 0;
+      if (id === 'search') {
+        $(id).value = '';
+      } else {
+        $(id).selectedIndex = 0;
+      }
+
     }
+  );
 
-  });
 
-  showSavedOnly = false;
+  showSavedOnly =
+    false;
+
 
   updateSavedUI();
+
   render();
 
   $('search').focus();
@@ -1234,24 +1626,27 @@ function resetFilters() {
 async function init() {
 
   loadSavedJobs();
+
   loadApplicationStatus();
 
 
-  /* Filter listeners */
+/* Filter listeners */
 
-  controls.forEach(id => {
+  controls.forEach(
+    id => {
 
-    $(id).addEventListener(
-      id === 'search'
-        ? 'input'
-        : 'change',
-      render
-    );
+      $(id).addEventListener(
+        id === 'search'
+          ? 'input'
+          : 'change',
+        render
+      );
 
-  });
+    }
+  );
 
 
-  /* Reset */
+/* Reset */
 
   $('reset').addEventListener(
     'click',
@@ -1259,7 +1654,7 @@ async function init() {
   );
 
 
-  /* Saved jobs */
+/* Saved jobs */
 
   $('savedToggle').addEventListener(
     'click',
@@ -1269,13 +1664,14 @@ async function init() {
         !showSavedOnly;
 
       updateSavedUI();
+
       render();
 
     }
   );
 
 
-  /* Job details modal */
+/* Job details modal */
 
   const modal =
     $('jobModal');
@@ -1284,7 +1680,10 @@ async function init() {
     $('modalClose');
 
 
-  if (modal && modalClose) {
+  if (
+    modal &&
+    modalClose
+  ) {
 
     modalClose.addEventListener(
       'click',
@@ -1321,10 +1720,11 @@ async function init() {
 
       }
     );
+
   }
 
 
-  /* Load job data */
+/* Load job data */
 
   try {
 
@@ -1338,9 +1738,11 @@ async function init() {
 
 
     if (!res.ok) {
+
       throw new Error(
         `HTTP ${res.status}`
       );
+
     }
 
 
@@ -1353,9 +1755,11 @@ async function init() {
         payload.jobs
       )
     ) {
+
       throw new Error(
         'No jobs array in data'
       );
+
     }
 
 
@@ -1364,50 +1768,59 @@ async function init() {
         job =>
           job &&
           job.relevant === true &&
-          safeLink(job.job_url) &&
+          safeLink(
+            job.job_url
+          ) &&
           Number.isFinite(
             Number(job.score)
           )
       );
 
 
-    /* Populate location */
+/* Location filter */
 
     addOptions(
       $('location'),
       allJobs.map(
-        job => job.location
+        job =>
+          job.location
       )
     );
 
 
-    /* Populate job type */
+/* Job type filter */
 
     addOptions(
       $('jobType'),
       allJobs.map(
-        job => job.job_type
+        job =>
+          job.job_type
       )
     );
 
 
-    /* Populate skills */
+/* Skill filter */
 
     const skills = [];
 
-    allJobs.forEach(job => {
 
-      if (
-        Array.isArray(
-          job.matched_skills
-        )
-      ) {
-        skills.push(
-          ...job.matched_skills
-        );
+    allJobs.forEach(
+      job => {
+
+        if (
+          Array.isArray(
+            job.matched_skills
+          )
+        ) {
+
+          skills.push(
+            ...job.matched_skills
+          );
+
+        }
+
       }
-
-    });
+    );
 
 
     addOptions(
@@ -1416,7 +1829,7 @@ async function init() {
     );
 
 
-    /* Summary */
+/* Summary */
 
     $('total').textContent =
       allJobs.length;
@@ -1440,7 +1853,8 @@ async function init() {
       new Set(
         allJobs
           .map(
-            job => job.source
+            job =>
+              job.source
           )
           .filter(Boolean)
       ).size;
@@ -1450,26 +1864,30 @@ async function init() {
       `${allJobs.length} real leads loaded from ${
         new Set(
           allJobs.map(
-            job => job.source
+            job =>
+              job.source
           )
         ).size
       } sources · posting dates shown per card`;
 
 
-    /* Insights */
+/* Insights */
 
     updateInsights();
 
 
-    /* Empty data */
+/* Empty data */
 
-    if (!allJobs.length) {
+    if (
+      !allJobs.length
+    ) {
 
       $('notice').hidden =
         false;
 
       $('notice').textContent =
         'No relevant listings in the current real-data collection. No demo jobs will be shown.';
+
     }
 
 
@@ -1483,6 +1901,7 @@ async function init() {
 
     $('notice').hidden =
       false;
+
 
     $('notice').textContent =
       'Could not load processed job data. Run the crawler and processor, then serve the project root with a local web server. No listings are invented as a fallback.';
@@ -1499,6 +1918,7 @@ async function init() {
 
 
     updateInsights();
+
     render();
 
 
@@ -1506,11 +1926,12 @@ async function init() {
       'Job data load failed:',
       err
     );
+
   }
 }
 
 
-/* Start */
+/* Start application */
 
 if (
   typeof document !== 'undefined'
@@ -1524,10 +1945,19 @@ if (
 if (
   typeof module !== 'undefined'
 ) {
+
   module.exports = {
+
     dateBucket,
+
+    freshnessLabel,
+
     safeLink,
+
     jobId,
+
     extractMentionedSkills
+
   };
+
 }
