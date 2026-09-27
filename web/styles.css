@@ -3243,4 +3243,525 @@ button:active{
   .gap-tag{
     font-size:9px;
   }
+}/* =========================================================
+   PART 8 : ACTUAL APP.JS CLASS FIX
+   Fixes job card layout and browser-default styling
+   ========================================================= */
+
+
+/* =========================================================
+   JOB CARD
+   ========================================================= */
+
+.job{
+  position:relative;
+
+  width:100%;
+
+  padding:22px;
+
+  border:1px solid var(--line);
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,48,40,.96),
+      rgba(7,27,23,.96)
+    );
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.22);
+
+  overflow:hidden;
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.job:hover{
+  transform:translateY(-5px);
+
+  border-color:var(--line-bright);
+
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.30),
+    0 0 25px rgba(53,211,154,.08);
+}
+
+
+/* =========================================================
+   JOB HEADER
+   ========================================================= */
+
+.job-head{
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:18px;
+}
+
+.job-head h4{
+  margin:8px 0 5px;
+
+  color:var(--text);
+
+  font-size:22px;
+
+  line-height:1.2;
+
+  font-weight:bold;
+}
+
+.source{
+  display:inline-flex;
+
+  padding:5px 8px;
+
+  border:1px solid rgba(82,217,208,.20);
+
+  border-radius:5px;
+
+  background:rgba(82,217,208,.06);
+
+  color:var(--cyan);
+
+  font-family:Arial,sans-serif;
+
+  font-size:9px;
+
+  font-weight:bold;
+
+  text-transform:uppercase;
+
+  letter-spacing:.08em;
+}
+
+.company{
+  margin:0;
+
+  color:var(--green);
+
+  font-family:Arial,sans-serif;
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+.job-head .score{
+  flex-shrink:0;
+
+  min-width:72px;
+
+  padding:9px 10px;
+
+  border:1px solid rgba(53,211,154,.20);
+
+  border-radius:9px;
+
+  background:rgba(53,211,154,.06);
+
+  text-align:center;
+}
+
+.job-head .score strong{
+  display:block;
+
+  color:var(--green);
+
+  font-family:Arial,sans-serif;
+
+  font-size:18px;
+
+  line-height:1;
+}
+
+.job-head .score small{
+  display:block;
+
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-family:Arial,sans-serif;
+
+  font-size:8px;
+
+  font-weight:bold;
+
+  letter-spacing:.08em;
+}
+
+
+/* =========================================================
+   FRESHNESS
+   ========================================================= */
+
+.job > .freshness-badge{
+  margin-top:13px;
+}
+
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.meta{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:15px;
+}
+
+.meta span{
+  display:inline-flex;
+
+  padding:6px 9px;
+
+  border:1px solid var(--line);
+
+  border-radius:6px;
+
+  background:rgba(255,255,255,.025);
+
+  color:var(--text-soft);
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+
+  line-height:1.2;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.skills{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:15px;
+}
+
+.skill{
+  display:inline-flex;
+
+  padding:6px 9px;
+
+  border:1px solid rgba(53,211,154,.20);
+
+  border-radius:6px;
+
+  background:rgba(53,211,154,.07);
+
+  color:#b8ead5;
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease;
+}
+
+.skill:hover{
+  transform:translateY(-2px);
+
+  background:rgba(53,211,154,.13);
+
+  border-color:var(--green);
+
+  color:var(--green);
+}
+
+
+/* =========================================================
+   SKILL GAP
+   ========================================================= */
+
+.job .skill-gap{
+  margin-top:15px;
+}
+
+
+/* =========================================================
+   REASONS
+   ========================================================= */
+
+.reasons{
+  margin:16px 0 0;
+
+  padding:14px 16px 14px 30px;
+
+  border-left:2px solid rgba(53,211,154,.30);
+
+  border-radius:0 8px 8px 0;
+
+  background:rgba(53,211,154,.035);
+
+  color:var(--text-soft);
+
+  font-size:13px;
+
+  line-height:1.7;
+}
+
+.reasons li{
+  margin:3px 0;
+}
+
+
+/* =========================================================
+   APPLICATION TRACKER
+   ========================================================= */
+
+.job .tracker{
+  margin-top:17px;
+
+  padding-top:15px;
+
+  border-top:1px solid var(--line);
+}
+
+
+/* =========================================================
+   JOB FOOT
+   ========================================================= */
+
+.job-foot{
+  display:flex;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-top:16px;
+
+  padding-top:14px;
+
+  border-top:1px solid var(--line);
+
+  color:var(--muted);
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+}
+
+
+/* =========================================================
+   SAVE BUTTON — ACTUAL CLASS FROM APP.JS
+   ========================================================= */
+
+.save-job{
+  min-height:36px;
+
+  padding:0 13px;
+
+  border:1px solid var(--green);
+
+  border-radius:7px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--green),
+      var(--green-dark)
+    );
+
+  color:#04130e;
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.save-job:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(53,211,154,.18);
+}
+
+.save-job[aria-pressed="true"]{
+  background:
+    linear-gradient(
+      135deg,
+      #126e50,
+      #0c563f
+    );
+
+  color:#fff;
+}
+
+
+/* =========================================================
+   DETAILS BUTTON
+   ========================================================= */
+
+.details-button{
+  min-height:36px;
+
+  padding:0 13px;
+
+  border:1px solid rgba(82,217,208,.25);
+
+  border-radius:7px;
+
+  background:rgba(82,217,208,.05);
+
+  color:var(--cyan);
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+.details-button:hover{
+  transform:translateY(-2px);
+
+  border-color:var(--cyan);
+
+  background:rgba(82,217,208,.10);
+}
+
+
+/* =========================================================
+   ORIGINAL JOB LINK
+   ========================================================= */
+
+.modal-link{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:36px;
+
+  padding:0 13px;
+
+  border:1px solid var(--line);
+
+  border-radius:7px;
+
+  background:rgba(255,255,255,.025);
+
+  color:var(--text-soft);
+
+  font-family:Arial,sans-serif;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  text-decoration:none;
+
+  transition:
+    transform .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    background .2s ease;
+}
+
+.modal-link:hover{
+  transform:translateY(-2px);
+
+  border-color:var(--green);
+
+  background:rgba(53,211,154,.07);
+
+  color:var(--green);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:650px){
+
+  .job{
+    padding:18px;
+  }
+
+  .job-head{
+    gap:10px;
+  }
+
+  .job-head h4{
+    font-size:19px;
+  }
+
+  .job-head .score{
+    min-width:64px;
+
+    padding:8px;
+  }
+
+  .job-head .score strong{
+    font-size:16px;
+  }
+
+  .meta{
+    gap:6px;
+  }
+
+  .meta span{
+    font-size:9px;
+  }
+
+  .job-foot{
+    align-items:stretch;
+
+    flex-direction:column;
+  }
+
+  .save-job,
+  .details-button,
+  .modal-link{
+    width:100%;
+  }
 }
