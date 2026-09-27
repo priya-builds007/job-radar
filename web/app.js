@@ -35,11 +35,6 @@ const PROFILE_SKILLS = [
   'Docker'
 ];
 
-/*
- * Skills that can be detected from job descriptions.
- * Skills already present in PROFILE_SKILLS will not be
- * shown as "Skills to explore".
- */
 const JOB_SKILL_POOL = [
   'Python',
   'Java',
@@ -323,9 +318,6 @@ function getJobText(job) {
 }
 
 
-/*
- * Finds skills mentioned in the job.
- */
 function extractMentionedSkills(job) {
   const text = getJobText(job);
 
@@ -341,76 +333,99 @@ function extractMentionedSkills(job) {
 }
 
 
-/*
- * Finds only additional skills that are NOT
- * already present in the user's profile.
- */
-function extractSkillGap(job) {
-  const text = getJobText(job);
+/* =========================
+   PERSONALIZED MATCH SCORE
+   ========================= */
 
-  const profileSet =
-    new Set(
-      PROFILE_SKILLS.map(
-        skill => skill.toLowerCase()
-      )
-    );
+function getJobSkills(job) {
+  const detected = extractMentionedSkills(job);
 
-  const found = [];
-
-  JOB_SKILL_POOL.forEach(skill => {
-
-    const alreadyKnown =
-      profileSet.has(
-        skill.toLowerCase()
-      );
-
-    if (
-      !alreadyKnown &&
-      skillMentioned(text, skill)
-    ) {
-      found.push(skill);
-    }
-
-  });
-
-  /*
-   * Also check matched_skills from processed data.
-   * This helps when the crawler already detected
-   * a skill that is not in JOB_SKILL_POOL.
-   */
   if (
     Array.isArray(job.matched_skills)
   ) {
-
     job.matched_skills.forEach(skill => {
 
       const clean =
         String(skill).trim();
 
-      if (!clean) {
-        return;
-      }
-
-      const alreadyKnown =
-        profileSet.has(
-          clean.toLowerCase()
-        );
-
       if (
-        !alreadyKnown &&
-        !found.some(
+        clean &&
+        !detected.some(
           item =>
             item.toLowerCase() ===
             clean.toLowerCase()
         )
       ) {
-        found.push(clean);
+        detected.push(clean);
       }
 
     });
   }
 
-  return found.slice(0, 5);
+  return detected;
+}
+
+
+function calculatePersonalMatch(job) {
+  const jobSkills =
+    getJobSkills(job);
+
+  if (!jobSkills.length) {
+    return {
+      score: 0,
+      matched: [],
+      missing: []
+    };
+  }
+
+  const profile =
+    PROFILE_SKILLS.map(
+      skill => skill.toLowerCase()
+    );
+
+  const matched = [];
+  const missing = [];
+
+  jobSkills.forEach(skill => {
+
+    const exists =
+      profile.includes(
+        String(skill).toLowerCase()
+      );
+
+    if (exists) {
+      matched.push(skill);
+    } else {
+      missing.push(skill);
+    }
+
+  });
+
+  const score =
+    Math.round(
+      (
+        matched.length /
+        jobSkills.length
+      ) * 100
+    );
+
+  return {
+    score,
+    matched,
+    missing
+  };
+}
+
+
+/* =========================
+   REAL SKILL GAP
+   ========================= */
+
+function extractSkillGap(job) {
+  const result =
+    calculatePersonalMatch(job);
+
+  return result.missing.slice(0, 5);
 }
 
 
@@ -657,6 +672,51 @@ function openJobModal(job) {
   );
 
 
+  const personal =
+    calculatePersonalMatch(job);
+
+
+  const matchBox =
+    element(
+      'div',
+      'modal-info'
+    );
+
+
+  matchBox.append(
+    element(
+      'p',
+      '',
+      `Personal Match: ${personal.score}%`
+    ),
+
+    element(
+      'p',
+      '',
+      `Matched profile skills: ${
+        personal.matched.length
+          ? personal.matched.join(', ')
+          : 'None detected'
+      }`
+    ),
+
+    element(
+      'p',
+      '',
+      `Skills to explore: ${
+        personal.missing.length
+          ? personal.missing.join(', ')
+          : 'None detected'
+      }`
+    )
+  );
+
+
+  content.append(
+    matchBox
+  );
+
+
   const info =
     element(
       'div',
@@ -675,7 +735,7 @@ function openJobModal(job) {
       'Not provided'
     }`,
 
-    `Score: ${
+    `Crawler Score: ${
       job.score || 0
     }/100`,
 
@@ -894,7 +954,7 @@ function jobCard(job) {
   card.append(head);
 
 
-  /* Freshness badge */
+  /* Freshness */
 
   const freshness =
     element(
@@ -907,6 +967,39 @@ function jobCard(job) {
 
   card.append(
     freshness
+  );
+
+
+  /* Personal Match */
+
+  const personal =
+    calculatePersonalMatch(job);
+
+
+  const personalBox =
+    element(
+      'div',
+      'personal-match'
+    );
+
+
+  personalBox.append(
+    element(
+      'span',
+      'personal-match-label',
+      'PERSONAL MATCH'
+    ),
+
+    element(
+      'strong',
+      '',
+      `${personal.score}%`
+    )
+  );
+
+
+  card.append(
+    personalBox
   );
 
 
@@ -952,9 +1045,7 @@ function jobCard(job) {
   card.append(meta);
 
 
-/* =========================
-   MATCHED SKILLS
-   ========================= */
+/* Matched skills */
 
   const skills =
     element(
@@ -986,9 +1077,7 @@ function jobCard(job) {
   card.append(skills);
 
 
-/* =========================
-   REAL SKILL GAP
-   ========================= */
+/* Skill gap */
 
   const skillGap =
     extractSkillGap(job);
@@ -1043,9 +1132,7 @@ function jobCard(job) {
   }
 
 
-/* =========================
-   REASONS
-   ========================= */
+/* Reasons */
 
   if (
     Array.isArray(
@@ -1080,9 +1167,7 @@ function jobCard(job) {
   }
 
 
-/* =========================
-   APPLICATION TRACKER
-   ========================= */
+/* Application tracker */
 
   const tracker =
     element(
@@ -1180,9 +1265,7 @@ function jobCard(job) {
   );
 
 
-/* =========================
-   VIEW DETAILS
-   ========================= */
+/* View details */
 
   const detailsButton =
     element(
@@ -1209,9 +1292,7 @@ function jobCard(job) {
   );
 
 
-/* =========================
-   FOOTER
-   ========================= */
+/* Footer */
 
   const foot =
     element(
@@ -1232,7 +1313,7 @@ function jobCard(job) {
   );
 
 
-/* Save button */
+/* Save */
 
   const saveButton =
     element(
@@ -1273,7 +1354,7 @@ function jobCard(job) {
   );
 
 
-/* Original job link */
+/* Original link */
 
   const link =
     safeLink(
@@ -1587,9 +1668,7 @@ function render() {
     });
 
 
-/* =========================
-   SORTING
-   ========================= */
+/* Sorting */
 
   const dateValue =
     job =>
@@ -1641,17 +1720,13 @@ function render() {
   );
 
 
-/* =========================
-   RESULT COUNT
-   ========================= */
+/* Result count */
 
   $('resultCount').textContent =
     `${chosen.length} of ${allJobs.length} leads shown`;
 
 
-/* =========================
-   RESULTS
-   ========================= */
+/* Results */
 
   const results =
     $('results');
@@ -1697,9 +1772,7 @@ function render() {
   }
 
 
-/* =========================
-   DATE BUCKETS
-   ========================= */
+/* Date buckets */
 
   buckets.forEach(
     label => {
@@ -1865,9 +1938,7 @@ async function init() {
   );
 
 
-/* =========================
-   JOB DETAILS MODAL
-   ========================= */
+/* Modal */
 
   const modal =
     $('jobModal');
@@ -1920,9 +1991,7 @@ async function init() {
   }
 
 
-/* =========================
-   LOAD JOB DATA
-   ========================= */
+/* Load data */
 
   try {
 
@@ -1975,7 +2044,7 @@ async function init() {
       );
 
 
-/* Location filter */
+/* Location */
 
     addOptions(
       $('location'),
@@ -1986,7 +2055,7 @@ async function init() {
     );
 
 
-/* Job type filter */
+/* Job type */
 
     addOptions(
       $('jobType'),
@@ -2074,7 +2143,7 @@ async function init() {
     updateInsights();
 
 
-/* Empty data */
+/* Empty */
 
     if (
       !allJobs.length
@@ -2130,7 +2199,7 @@ async function init() {
 
 
 /* =========================
-   START APPLICATION
+   START
    ========================= */
 
 if (
@@ -2160,7 +2229,9 @@ if (
 
     extractMentionedSkills,
 
-    extractSkillGap
+    extractSkillGap,
+
+    calculatePersonalMatch
 
   };
 }
