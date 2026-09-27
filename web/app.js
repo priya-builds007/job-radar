@@ -1,9 +1,41 @@
 'use strict';
 
 // Listings come from generated JSON.
-// Saved jobs are stored locally in this browser.
+// Saved jobs and application status are stored locally in this browser.
 const DATA_URL = '/data/processed_jobs.json';
+
 const SAVED_KEY = 'jobRadarSavedJobs';
+const STATUS_KEY = 'jobRadarApplicationStatus';
+
+const STATUS_OPTIONS = [
+  'Saved',
+  'Applied',
+  'Interview',
+  'Closed'
+];
+
+const PROFILE_SKILLS = [
+  'Python',
+  'Java',
+  'JavaScript',
+  'HTML',
+  'CSS',
+  'SQL',
+  'MySQL',
+  'C',
+  'C++',
+  'Git',
+  'GitHub',
+  'React',
+  'Node.js',
+  'Firebase',
+  'Arduino',
+  'ESP32',
+  'Raspberry Pi',
+  'IoT',
+  'AWS',
+  'Docker'
+];
 
 const $ = id => document.getElementById(id);
 
@@ -14,14 +46,22 @@ const controls = [
   'remote',
   'period',
   'skill',
+  'status',
   'minimum',
   'sort'
 ];
 
-const buckets = ['Today', 'This Week', 'This Month', 'Older', 'Unknown date'];
+const buckets = [
+  'Today',
+  'This Week',
+  'This Month',
+  'Older',
+  'Unknown date'
+];
 
 let allJobs = [];
 let savedJobs = new Set();
+let applicationStatus = new Map();
 let showSavedOnly = false;
 
 
@@ -54,6 +94,10 @@ function jobId(job) {
 }
 
 
+/* -----------------------------
+   Saved jobs
+----------------------------- */
+
 function loadSavedJobs() {
   try {
     const stored = JSON.parse(
@@ -61,7 +105,9 @@ function loadSavedJobs() {
     );
 
     savedJobs = new Set(
-      Array.isArray(stored) ? stored.map(String) : []
+      Array.isArray(stored)
+        ? stored.map(String)
+        : []
     );
 
   } catch {
@@ -111,7 +157,11 @@ function updateSavedUI() {
   }
 
   if (button) {
-    button.classList.toggle('active', showSavedOnly);
+    button.classList.toggle(
+      'active',
+      showSavedOnly
+    );
+
     button.setAttribute(
       'aria-pressed',
       String(showSavedOnly)
@@ -121,15 +171,131 @@ function updateSavedUI() {
 
 
 /* -----------------------------
+   Application tracker
+----------------------------- */
+
+function loadApplicationStatus() {
+  try {
+    const stored = JSON.parse(
+      localStorage.getItem(STATUS_KEY) || '{}'
+    );
+
+    applicationStatus = new Map(
+      Object.entries(
+        stored && typeof stored === 'object'
+          ? stored
+          : {}
+      )
+    );
+
+  } catch {
+    applicationStatus = new Map();
+  }
+}
+
+
+function persistApplicationStatus() {
+  try {
+    const data = Object.fromEntries(
+      applicationStatus.entries()
+    );
+
+    localStorage.setItem(
+      STATUS_KEY,
+      JSON.stringify(data)
+    );
+  } catch {
+    // Ignore storage errors.
+  }
+}
+
+
+function getApplicationStatus(job) {
+  return applicationStatus.get(jobId(job)) ||
+    'not-tracked';
+}
+
+
+function setApplicationStatus(job, status) {
+  const id = jobId(job);
+
+  if (status === 'not-tracked') {
+    applicationStatus.delete(id);
+  } else {
+    applicationStatus.set(id, status);
+
+    if (
+      ['Saved', 'Applied', 'Interview']
+        .includes(status)
+    ) {
+      savedJobs.add(id);
+    }
+
+    if (status === 'Closed') {
+      savedJobs.add(id);
+    }
+  }
+
+  persistApplicationStatus();
+  persistSavedJobs();
+
+  updateSavedUI();
+  updateInsights();
+  render();
+}/* -----------------------------
+   Skill gap
+----------------------------- */
+
+function extractMentionedSkills(job) {
+  const text = [
+    job.title,
+    job.description,
+    job.job_description,
+    job.description_text
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
+  const matched = new Set(
+    Array.isArray(job.matched_skills)
+      ? job.matched_skills.map(
+          skill => String(skill).toLowerCase()
+        )
+      : []
+  );
+
+  const found = [];
+
+  PROFILE_SKILLS.forEach(skill => {
+    const normalized = skill.toLowerCase();
+
+    if (
+      !matched.has(normalized) &&
+      text.includes(normalized)
+    ) {
+      found.push(skill);
+    }
+  });
+
+  return found.slice(0, 5);
+}
+
+
+/* -----------------------------
    Date handling
 ----------------------------- */
 
 function dateBucket(value, now = new Date()) {
-  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+  if (
+    !value ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(value)
+  ) {
     return 'Unknown date';
   }
 
-  const [y, m, d] = value.split('-').map(Number);
+  const [y, m, d] =
+    value.split('-').map(Number);
 
   const day = new Date(y, m - 1, d);
 
@@ -207,6 +373,7 @@ function addOptions(select, values) {
     .sort((a, b) => a.localeCompare(b))
     .forEach(value => {
       const opt = element('option', '', value);
+
       opt.value = value;
       select.append(opt);
     });
@@ -285,7 +452,7 @@ function jobCard(job) {
   card.append(meta);
 
 
-  /* Skills */
+  /* Matched skills */
 
   const skills = element('div', 'skills');
 
@@ -303,13 +470,54 @@ function jobCard(job) {
   card.append(skills);
 
 
+  /* Skill gap */
+
+  const skillGap = extractMentionedSkills(job);
+
+  if (skillGap.length) {
+    const gapBox = element(
+      'div',
+      'skill-gap'
+    );
+
+    gapBox.append(
+      element(
+        'strong',
+        '',
+        'Skills to explore'
+      )
+    );
+
+    const gapTags = element(
+      'div',
+      'gap-tags'
+    );
+
+    skillGap.forEach(skill => {
+      gapTags.append(
+        element(
+          'span',
+          'gap-tag',
+          skill
+        )
+      );
+    });
+
+    gapBox.append(gapTags);
+    card.append(gapBox);
+  }
+
+
   /* Reasons */
 
   if (
     Array.isArray(job.reasons) &&
     job.reasons.length
   ) {
-    const why = element('ul', 'reasons');
+    const why = element(
+      'ul',
+      'reasons'
+    );
 
     job.reasons.forEach(reason => {
       why.append(
@@ -321,16 +529,87 @@ function jobCard(job) {
   }
 
 
+  /* Application tracker */
+
+  const tracker = element(
+    'div',
+    'tracker'
+  );
+
+  tracker.append(
+    element(
+      'span',
+      'tracker-label',
+      'APPLICATION'
+    )
+  );
+
+  const statusSelect = element(
+    'select',
+    'status-select'
+  );
+
+  const statusValues = [
+    [
+      'not-tracked',
+      'Not tracked'
+    ],
+    ...STATUS_OPTIONS.map(
+      status => [status, status]
+    )
+  ];
+
+  statusValues.forEach(
+    ([value, label]) => {
+      const option = element(
+        'option',
+        '',
+        label
+      );
+
+      option.value = value;
+      statusSelect.append(option);
+    }
+  );
+
+  statusSelect.value =
+    getApplicationStatus(job);
+
+  statusSelect.setAttribute(
+    'aria-label',
+    `Application status for ${
+      job.title || 'job'
+    }`
+  );
+
+  statusSelect.addEventListener(
+    'change',
+    event => {
+      setApplicationStatus(
+        job,
+        event.target.value
+      );
+    }
+  );
+
+  tracker.append(statusSelect);
+  card.append(tracker);
+
+
   /* Footer */
 
-  const foot = element('div', 'job-foot');
+  const foot = element(
+    'div',
+    'job-foot'
+  );
 
   foot.append(
     element(
       'span',
       '',
       job.date_posted
-        ? 'Source date · ' + job.date_posted
+        ? 'Source date · ' +
+          job.date_posted
         : 'Source date unavailable'
     )
   );
@@ -350,7 +629,9 @@ function jobCard(job) {
 
   saveButton.setAttribute(
     'aria-pressed',
-    String(savedJobs.has(jobId(job)))
+    String(
+      savedJobs.has(jobId(job))
+    )
   );
 
   saveButton.addEventListener(
@@ -378,7 +659,9 @@ function jobCard(job) {
 
     a.setAttribute(
       'aria-label',
-      `Open original ${job.title || 'job'} listing`
+      `Open original ${
+        job.title || 'job'
+      } listing`
     );
 
     foot.append(a);
@@ -387,14 +670,12 @@ function jobCard(job) {
   card.append(foot);
 
   return card;
-}
-
-
-/* -----------------------------
+}/* -----------------------------
    Insights
 ----------------------------- */
 
 function updateInsights() {
+
   const remoteCount = allJobs.filter(
     job => job.is_remote === true
   ).length;
@@ -403,6 +684,12 @@ function updateInsights() {
     job => Number(job.score) >= 80
   ).length;
 
+  const activeApplications = allJobs.filter(
+    job =>
+      ['Applied', 'Interview'].includes(
+        getApplicationStatus(job)
+      )
+  ).length;
 
   if ($('insightRemote')) {
     $('insightRemote').textContent =
@@ -414,6 +701,11 @@ function updateInsights() {
       highScoreCount;
   }
 
+  if ($('insightApplications')) {
+    $('insightApplications').textContent =
+      activeApplications;
+  }
+
   updateSavedUI();
 
 
@@ -422,12 +714,15 @@ function updateInsights() {
   const counts = new Map();
 
   allJobs.forEach(job => {
+
     if (!Array.isArray(job.matched_skills)) {
       return;
     }
 
     job.matched_skills.forEach(skill => {
-      const name = String(skill).trim();
+
+      const name =
+        String(skill).trim();
 
       if (!name) return;
 
@@ -439,9 +734,10 @@ function updateInsights() {
   });
 
 
-  const topSkills = [...counts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8);
+  const topSkills =
+    [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8);
 
 
   const container = $('topSkills');
@@ -449,6 +745,7 @@ function updateInsights() {
   if (!container) return;
 
   container.replaceChildren();
+
 
   if (!topSkills.length) {
     container.append(
@@ -462,8 +759,10 @@ function updateInsights() {
     return;
   }
 
+
   topSkills.forEach(
     ([skill, count]) => {
+
       const tag = element(
         'span',
         'insight-tag',
@@ -482,13 +781,17 @@ function updateInsights() {
 
 function render() {
 
-  const q = $('search').value
-    .trim()
-    .toLowerCase();
+  const q =
+    $('search').value
+      .trim()
+      .toLowerCase();
 
-  const min = Number(
-    $('minimum').value
-  );
+  const min =
+    Number($('minimum').value);
+
+  const selectedStatus =
+    $('status').value;
+
 
   const chosen = allJobs.filter(job => {
 
@@ -518,10 +821,12 @@ function render() {
 
     const matchesRemote =
       $('remote').value === 'all' ||
+
       (
         $('remote').value === 'remote' &&
         job.is_remote === true
       ) ||
+
       (
         $('remote').value === 'onsite' &&
         job.is_remote !== true
@@ -531,17 +836,24 @@ function render() {
     const matchesPeriod =
       $('period').value === 'all' ||
       dateBucket(job.date_posted) ===
-      $('period').value;
+        $('period').value;
 
 
     const matchesSkill =
       $('skill').value === 'all' ||
+
       (
         Array.isArray(job.matched_skills) &&
         job.matched_skills.includes(
           $('skill').value
         )
       );
+
+
+    const matchesStatus =
+      selectedStatus === 'all' ||
+      getApplicationStatus(job) ===
+        selectedStatus;
 
 
     const matchesScore =
@@ -560,6 +872,7 @@ function render() {
       matchesRemote &&
       matchesPeriod &&
       matchesSkill &&
+      matchesStatus &&
       matchesScore &&
       matchesSaved
     );
@@ -568,40 +881,41 @@ function render() {
 
   /* Sorting */
 
-  const dateValue = x =>
-    x.date_posted || '0000-00-00';
+  const dateValue =
+    x => x.date_posted || '0000-00-00';
 
   const sort = $('sort').value;
 
-  chosen.sort(
-    (a, b) => {
 
-      if (sort === 'score') {
-        return (
-          b.score - a.score ||
-          dateValue(b).localeCompare(
-            dateValue(a)
-          )
-        );
-      }
+  chosen.sort((a, b) => {
 
-      if (sort === 'oldest') {
-        return (
-          dateValue(a).localeCompare(
-            dateValue(b)
-          ) ||
-          b.score - a.score
-        );
-      }
-
+    if (sort === 'score') {
       return (
+        b.score - a.score ||
         dateValue(b).localeCompare(
           dateValue(a)
+        )
+      );
+    }
+
+
+    if (sort === 'oldest') {
+      return (
+        dateValue(a).localeCompare(
+          dateValue(b)
         ) ||
         b.score - a.score
       );
     }
-  );
+
+
+    return (
+      dateValue(b).localeCompare(
+        dateValue(a)
+      ) ||
+      b.score - a.score
+    );
+  });
 
 
   /* Result count */
@@ -654,7 +968,8 @@ function render() {
 
     const jobs = chosen.filter(
       job =>
-        dateBucket(job.date_posted) === label
+        dateBucket(job.date_posted) ===
+        label
     );
 
     if (!jobs.length) return;
@@ -670,14 +985,8 @@ function render() {
       'bucket-header'
     );
 
-    const heading = element(
-      'h3',
-      '',
-      label
-    );
-
     header.append(
-      heading,
+      element('h3', '', label),
       element(
         'span',
         'count',
@@ -740,6 +1049,7 @@ function resetFilters() {
 async function init() {
 
   loadSavedJobs();
+  loadApplicationStatus();
 
 
   /* Filter listeners */
@@ -841,9 +1151,7 @@ async function init() {
     allJobs.forEach(job => {
 
       if (
-        Array.isArray(
-          job.matched_skills
-        )
+        Array.isArray(job.matched_skills)
       ) {
         skills.push(
           ...job.matched_skills
@@ -868,12 +1176,11 @@ async function init() {
     $('recent').textContent =
       allJobs.filter(
         job =>
-          ['Today', 'This Week']
-            .includes(
-              dateBucket(
-                job.date_posted
-              )
+          ['Today', 'This Week'].includes(
+            dateBucket(
+              job.date_posted
             )
+          )
       ).length;
 
 
@@ -888,7 +1195,9 @@ async function init() {
     $('sourceStatus').textContent =
       `${allJobs.length} real leads loaded from ${
         new Set(
-          allJobs.map(job => job.source)
+          allJobs.map(
+            job => job.source
+          )
         ).size
       } sources · posting dates shown per card`;
 
@@ -906,12 +1215,10 @@ async function init() {
 
       $('notice').textContent =
         'No relevant listings in the current real-data collection. No demo jobs will be shown.';
-
     }
 
 
     render();
-
 
   } catch (err) {
 
@@ -931,8 +1238,8 @@ async function init() {
 
 
     updateInsights();
-
     render();
+
 
     console.error(
       'Job data load failed:',
@@ -955,6 +1262,7 @@ if (
   module.exports = {
     dateBucket,
     safeLink,
-    jobId
+    jobId,
+    extractMentionedSkills
   };
 }
