@@ -35,6 +35,63 @@ const PROFILE_SKILLS = [
   'Docker'
 ];
 
+/*
+ * Skills that can be detected from job descriptions.
+ * Skills already present in PROFILE_SKILLS will not be
+ * shown as "Skills to explore".
+ */
+const JOB_SKILL_POOL = [
+  'Python',
+  'Java',
+  'JavaScript',
+  'TypeScript',
+  'HTML',
+  'CSS',
+  'SQL',
+  'MySQL',
+  'PostgreSQL',
+  'MongoDB',
+  'C',
+  'C++',
+  'C#',
+  'Git',
+  'GitHub',
+  'GitLab',
+  'React',
+  'Angular',
+  'Vue',
+  'Node.js',
+  'Express',
+  'Django',
+  'Flask',
+  'FastAPI',
+  'Firebase',
+  'AWS',
+  'Azure',
+  'GCP',
+  'Docker',
+  'Kubernetes',
+  'Jenkins',
+  'Linux',
+  'REST API',
+  'GraphQL',
+  'Machine Learning',
+  'Deep Learning',
+  'TensorFlow',
+  'PyTorch',
+  'Pandas',
+  'NumPy',
+  'OpenCV',
+  'Arduino',
+  'ESP32',
+  'Raspberry Pi',
+  'IoT',
+  'Embedded Systems',
+  'Figma',
+  'Power BI',
+  'Tableau'
+];
+
 const $ = id => document.getElementById(id);
 
 const controls = [
@@ -63,13 +120,18 @@ let applicationStatus = new Map();
 let showSavedOnly = false;
 
 
-/* Safe helpers */
+/* =========================
+   SAFE HELPERS
+   ========================= */
 
 function safeLink(value) {
   try {
     const u = new URL(value);
 
-    return ['http:', 'https:'].includes(u.protocol) &&
+    return [
+      'http:',
+      'https:'
+    ].includes(u.protocol) &&
       !u.username &&
       !u.password
       ? u.href
@@ -90,7 +152,9 @@ function jobId(job) {
 }
 
 
-/* Saved jobs */
+/* =========================
+   SAVED JOBS
+   ========================= */
 
 function loadSavedJobs() {
   try {
@@ -162,7 +226,9 @@ function updateSavedUI() {
 }
 
 
-/* Application tracker */
+/* =========================
+   APPLICATION TRACKER
+   ========================= */
 
 function loadApplicationStatus() {
   try {
@@ -220,45 +286,137 @@ function setApplicationStatus(job, status) {
   updateSavedUI();
   updateInsights();
   render();
-}/* Skill gap */
+}/* =========================
+   SKILL DETECTION
+   ========================= */
 
-function extractMentionedSkills(job) {
-  const text = [
+function skillMentioned(text, skill) {
+  const normalized = skill.toLowerCase();
+
+  const escaped = normalized.replace(
+    /[.*+?^${}()|[\]\\]/g,
+    '\\$&'
+  );
+
+  const pattern = new RegExp(
+    `(^|\\s|[^a-z0-9+#.])${escaped}(?=$|\\s|[^a-z0-9+#.])`,
+    'i'
+  );
+
+  return pattern.test(text);
+}
+
+
+function getJobText(job) {
+  return [
     job.title,
     job.description,
     job.job_description,
-    job.description_text
+    job.description_text,
+    Array.isArray(job.matched_skills)
+      ? job.matched_skills.join(' ')
+      : ''
   ]
     .filter(Boolean)
     .join(' ')
     .toLowerCase();
+}
+
+
+/*
+ * Finds skills mentioned in the job.
+ */
+function extractMentionedSkills(job) {
+  const text = getJobText(job);
 
   const found = [];
 
-  PROFILE_SKILLS.forEach(skill => {
-    const normalized = skill.toLowerCase();
-
-    const escaped =
-      normalized.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        '\\$&'
-      );
-
-    const pattern = new RegExp(
-      `(^|\\s|[^a-z0-9+#.])${escaped}(?=$|\\s|[^a-z0-9+#.])`,
-      'i'
-    );
-
-    if (pattern.test(text)) {
+  JOB_SKILL_POOL.forEach(skill => {
+    if (skillMentioned(text, skill)) {
       found.push(skill);
     }
   });
+
+  return found.slice(0, 8);
+}
+
+
+/*
+ * Finds only additional skills that are NOT
+ * already present in the user's profile.
+ */
+function extractSkillGap(job) {
+  const text = getJobText(job);
+
+  const profileSet =
+    new Set(
+      PROFILE_SKILLS.map(
+        skill => skill.toLowerCase()
+      )
+    );
+
+  const found = [];
+
+  JOB_SKILL_POOL.forEach(skill => {
+
+    const alreadyKnown =
+      profileSet.has(
+        skill.toLowerCase()
+      );
+
+    if (
+      !alreadyKnown &&
+      skillMentioned(text, skill)
+    ) {
+      found.push(skill);
+    }
+
+  });
+
+  /*
+   * Also check matched_skills from processed data.
+   * This helps when the crawler already detected
+   * a skill that is not in JOB_SKILL_POOL.
+   */
+  if (
+    Array.isArray(job.matched_skills)
+  ) {
+
+    job.matched_skills.forEach(skill => {
+
+      const clean =
+        String(skill).trim();
+
+      if (!clean) {
+        return;
+      }
+
+      const alreadyKnown =
+        profileSet.has(
+          clean.toLowerCase()
+        );
+
+      if (
+        !alreadyKnown &&
+        !found.some(
+          item =>
+            item.toLowerCase() ===
+            clean.toLowerCase()
+        )
+      ) {
+        found.push(clean);
+      }
+
+    });
+  }
 
   return found.slice(0, 5);
 }
 
 
-/* Date handling */
+/* =========================
+   DATE HANDLING
+   ========================= */
 
 function dateBucket(
   value,
@@ -330,7 +488,9 @@ function dateBucket(
 }
 
 
-/* Job freshness */
+/* =========================
+   FRESHNESS
+   ========================= */
 
 function freshnessLabel(date) {
   if (!date) {
@@ -392,7 +552,9 @@ function freshnessLabel(date) {
 }
 
 
-/* DOM helpers */
+/* =========================
+   DOM HELPERS
+   ========================= */
 
 function element(
   tag,
@@ -449,7 +611,9 @@ function addOptions(
 }
 
 
-/* Job details modal */
+/* =========================
+   JOB DETAILS MODAL
+   ========================= */
 
 function openJobModal(job) {
 
@@ -636,10 +800,9 @@ function openJobModal(job) {
 
 
   modal.hidden = false;
-}
-
-
-/* Job card */
+}/* =========================
+   JOB CARD
+   ========================= */
 
 function jobCard(job) {
 
@@ -786,7 +949,12 @@ function jobCard(job) {
   });
 
 
-  card.append(meta);/* Matched skills */
+  card.append(meta);
+
+
+/* =========================
+   MATCHED SKILLS
+   ========================= */
 
   const skills =
     element(
@@ -818,10 +986,12 @@ function jobCard(job) {
   card.append(skills);
 
 
-/* Skill gap */
+/* =========================
+   REAL SKILL GAP
+   ========================= */
 
   const skillGap =
-    extractMentionedSkills(job);
+    extractSkillGap(job);
 
   if (skillGap.length) {
 
@@ -873,7 +1043,9 @@ function jobCard(job) {
   }
 
 
-/* Reasons */
+/* =========================
+   REASONS
+   ========================= */
 
   if (
     Array.isArray(
@@ -908,7 +1080,9 @@ function jobCard(job) {
   }
 
 
-/* Application tracker */
+/* =========================
+   APPLICATION TRACKER
+   ========================= */
 
   const tracker =
     element(
@@ -1006,7 +1180,9 @@ function jobCard(job) {
   );
 
 
-/* View details */
+/* =========================
+   VIEW DETAILS
+   ========================= */
 
   const detailsButton =
     element(
@@ -1033,7 +1209,9 @@ function jobCard(job) {
   );
 
 
-/* Footer */
+/* =========================
+   FOOTER
+   ========================= */
 
   const foot =
     element(
@@ -1145,7 +1323,9 @@ function jobCard(job) {
 }
 
 
-/* Insights */
+/* =========================
+   INSIGHTS
+   ========================= */
 
 function updateInsights() {
 
@@ -1292,7 +1472,9 @@ function updateInsights() {
 
     }
   );
-}/* Main rendering */
+}/* =========================
+   MAIN RENDERING
+   ========================= */
 
 function render() {
 
@@ -1405,7 +1587,9 @@ function render() {
     });
 
 
-/* Sorting */
+/* =========================
+   SORTING
+   ========================= */
 
   const dateValue =
     job =>
@@ -1457,13 +1641,17 @@ function render() {
   );
 
 
-/* Result count */
+/* =========================
+   RESULT COUNT
+   ========================= */
 
   $('resultCount').textContent =
     `${chosen.length} of ${allJobs.length} leads shown`;
 
 
-/* Results */
+/* =========================
+   RESULTS
+   ========================= */
 
   const results =
     $('results');
@@ -1509,7 +1697,9 @@ function render() {
   }
 
 
-/* Date buckets */
+/* =========================
+   DATE BUCKETS
+   ========================= */
 
   buckets.forEach(
     label => {
@@ -1592,7 +1782,9 @@ function render() {
 }
 
 
-/* Reset filters */
+/* =========================
+   RESET FILTERS
+   ========================= */
 
 function resetFilters() {
 
@@ -1621,7 +1813,9 @@ function resetFilters() {
 }
 
 
-/* Initialisation */
+/* =========================
+   INITIALISATION
+   ========================= */
 
 async function init() {
 
@@ -1671,7 +1865,9 @@ async function init() {
   );
 
 
-/* Job details modal */
+/* =========================
+   JOB DETAILS MODAL
+   ========================= */
 
   const modal =
     $('jobModal');
@@ -1724,7 +1920,9 @@ async function init() {
   }
 
 
-/* Load job data */
+/* =========================
+   LOAD JOB DATA
+   ========================= */
 
   try {
 
@@ -1931,7 +2129,9 @@ async function init() {
 }
 
 
-/* Start application */
+/* =========================
+   START APPLICATION
+   ========================= */
 
 if (
   typeof document !== 'undefined'
@@ -1940,7 +2140,9 @@ if (
 }
 
 
-/* Exports */
+/* =========================
+   EXPORTS
+   ========================= */
 
 if (
   typeof module !== 'undefined'
@@ -1956,8 +2158,9 @@ if (
 
     jobId,
 
-    extractMentionedSkills
+    extractMentionedSkills,
+
+    extractSkillGap
 
   };
-
 }
