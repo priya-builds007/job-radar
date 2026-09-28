@@ -4038,4 +4038,435 @@ select{
 
     scroll-behavior:auto !important;
   }
+}/* =========================================================
+   JOB RADAR — CREATIVE MOTION PACK
+   ========================================================= */
+
+/* Smooth page entrance */
+body {
+  animation: pageEnter 0.8s ease both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   HERO GLOW
+   ========================================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(78, 227, 170, 0.08);
+  filter: blur(35px);
+  top: -100px;
+  right: -80px;
+  animation: heroGlow 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes heroGlow {
+  from {
+    transform: translate(0, 0) scale(0.9);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: translate(-30px, 25px) scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+
+/* =========================================================
+   RADAR PULSE
+   ========================================================= */
+
+.radar {
+  animation: radarFloat 5s ease-in-out infinite;
+}
+
+@keyframes radarFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+
+/* Radar glowing center */
+.radar::after {
+  animation: radarPulse 2.4s ease-out infinite;
+}
+
+@keyframes radarPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.8);
+  }
+
+  70% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+
+/* =========================================================
+   METRIC CARDS
+   ========================================================= */
+
+.metric,
+.insight-card {
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.metric:hover,
+.insight-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(78, 227, 170, 0.3);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25),
+    0 0 25px rgba(78, 227, 170, 0.05);
+}
+
+
+/* =========================================================
+   JOB CARDS
+   ========================================================= */
+
+.job {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.job::before {
+  transition:
+    transform 0.7s ease,
+    opacity 0.7s ease;
+}
+
+.job:hover {
+  transform: translateY(-7px);
+  border-color: rgba(78, 227, 170, 0.28);
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(78, 227, 170, 0.06);
+}
+
+.job:hover::before {
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+
+/* =========================================================
+   SKILL TAG ANIMATION
+   ========================================================= */
+
+.skill,
+.agent-tag {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.skill:hover,
+.agent-tag:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   AGENT CARD
+   ========================================================= */
+
+.agent-panel {
+  animation: agentReveal 0.9s ease both;
+}
+
+@keyframes agentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.agent-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-card::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(78, 227, 170, 0.08);
+  filter: blur(40px);
+  top: -90px;
+  right: -60px;
+  animation: agentGlow 5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes agentGlow {
+  from {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: scale(1.3);
+    opacity: 0.9;
+  }
+}
+
+
+/* =========================================================
+   AGENT MATCH SCORE
+   ========================================================= */
+
+.agent-match {
+  animation: matchAppear 0.8s ease both;
+}
+
+.agent-match strong {
+  animation: scoreGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes matchAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scoreGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 0 rgba(78, 227, 170, 0);
+  }
+
+  50% {
+    text-shadow:
+      0 0 18px rgba(78, 227, 170, 0.5);
+  }
+}
+
+
+/* =========================================================
+   AGENT SKILLS — STAGGER
+   ========================================================= */
+
+.agent-tag {
+  animation: tagPop 0.45s ease both;
+}
+
+.agent-tag:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.agent-tag:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.agent-tag:nth-child(3) {
+  animation-delay: 0.26s;
+}
+
+.agent-tag:nth-child(4) {
+  animation-delay: 0.34s;
+}
+
+.agent-tag:nth-child(5) {
+  animation-delay: 0.42s;
+}
+
+@keyframes tagPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   NEXT ACTION — SCANNING LINE
+   ========================================================= */
+
+.agent-next {
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-next::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(78, 227, 170, 0.08),
+    transparent
+  );
+  animation: scanAction 4s ease-in-out infinite;
+}
+
+@keyframes scanAction {
+  0% {
+    left: -100%;
+  }
+
+  45%,
+  100% {
+    left: 130%;
+  }
+}
+
+
+/* =========================================================
+   AGENT BUTTON
+   ========================================================= */
+
+.agent-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: buttonShine 3.5s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+  0%,
+  55% {
+    left: -120%;
+  }
+
+  75%,
+  100% {
+    left: 140%;
+  }
+}
+
+
+/* =========================================================
+   READY STATUS
+   ========================================================= */
+
+.agent-status span {
+  animation: statusBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px rgba(78, 227, 170, 0.8);
+  }
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.agent-button:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.agent-button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
 }
