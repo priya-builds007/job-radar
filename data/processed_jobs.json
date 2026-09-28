@@ -1,6 +1,66 @@
 {
   "jobs": [
     {
+      "company": "",
+      "date_posted": "2026-09-27",
+      "description": "About Us\n\nCONVOSIS Technologies is a Software Development and Technology Consulting company focused on delivering innovative digital solutions. We are looking for passionate and motivated candidates who are interested in web application development, software engineering, and modern technologies.\n\nThis internship provides hands\\-on experience working on real\\-world software development projects, web applications, APIs, databases, and deployment environments.\n\nKey Responsibilities\n\n* Assist in developing and maintaining web applications.\n* Build responsive user interfaces using modern frontend technologies.\n* Develop backend applications and REST APIs using Python.\n* Work with databases for data storage and management.\n* Participate in software design, testing, and debugging.\n* Collaborate with developers on real\\-world projects.\n* Integrate frontend and backend components.\n* Write clean, maintainable, and scalable code.\n* Troubleshoot and resolve application issues.\n* Document development processes and project updates.\n\nRequired Technical Skills\n\n* Basic Programming Knowledge\n* HTML5\n* CSS3\n* JavaScript\n* Problem\\-Solving Skills\n* Understanding of Web Development Fundamentals\n\nPreferred Skills\n\n* Python\n* Django or Flask\n* Bootstrap\n* REST API Concepts\n* SQL \\& Database Fundamentals\n* Git \\& GitHub\n* Basic Deployment Knowledge\n* Good Communication and Team Collaboration Skills\n\nEligibility\n\n* Any Degree / Diploma\n* Students, Freshers, Graduates, and Career Switchers can apply.\n* No prior industry experience required.\n\nWhat You Will Gain\n\n* Real Project Experience\n* Industry Mentorship\n* Internship Certificate\n* Portfolio Development Support\n* Exposure to Professional Software Development Environment\n* Experience Working with Development Teams\n* Hands\\-On Web Application Development Experience\n\nInternship Details\n\n* Position: Python Full Stack Developer Intern\n* Company: CONVOSIS Technologies\n* Location: IT Park, Kottayam\n* Internship Fee: ₹15,000\n* Duration: 3 Months\n* Internship Mode: Practical Project\\-Based Learning with Industry Exposure\n\nTechnologies CoveredFrontend\n\n* HTML5\n* CSS3\n* JavaScript\n* Bootstrap\n\nBackend\n\n* Python\n* Django\n* REST APIs\n\nDatabase \\& Tools\n\n* SQL\n* Git \\& GitHub\n* Deployment Fundamentals\n\nApply Now\n\nInternship Application Form:\n\nhttps://docs.google.com/forms/d/e/1FAIpQLSfU\\-OHWHf02Mb6Bg8uMhHsD4r3kfBSv3TfTm6TGA6qhQpVeZA/viewform?usp\\=publish\\-editor\n\nBuild real\\-world web applications, gain practical software development experience, and kick\\-start your career as a Full Stack Developer with CONVOSIS Technologies.\n\nWork Location: In person",
+      "id": "90df6b59570e47a757b1",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=a905e6355ee2dc0e",
+      "location": "KL, IN",
+      "matched_skills": [
+        "Python",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, JavaScript",
+        "Preferred geography from source location: KL, IN"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-a905e6355ee2dc0e",
+      "title": "Python Full Stack Developer Intern"
+    },
+    {
+      "company": "CloudHouse Technologies Pvt.Ltd",
+      "date_posted": "2026-09-27",
+      "description": "Description\n\n\nCloudHouse Technologies Pvt. Ltd. is looking for a motivated and detail\\-oriented Software Tester Intern to join our development team. This is a 3\\-month internship opportunity for candidates who are interested in building a career in software testing and quality assurance.\n\n\nDuring the internship, the candidate will work on real\\-time software projects and gain practical experience in manual testing, bug identification, test case preparation, and quality assurance processes.\n\n\nUpon successful completion of the internship, the candidate's performance, technical skills, work quality, learning ability, and overall contribution will be evaluated. Based on the performance evaluation, the candidate may be offered a permanent position with the company.\n\n\nCandidates who do not meet the required performance standards will receive an Internship Completion Certificate.\n\n\nKey Responsibilities\n\n\n* Perform manual testing of web and software applications.\n\n\n* Prepare and execute test cases and test scenarios.\n\n\n* Identify, document, and track bugs and issues.\n\n\n* Perform functional, regression, and usability testing.\n\n\n* Verify bug fixes and ensure expected functionality.\n\n\n* Collaborate with developers and other team members to resolve issues.\n\n\n* Maintain proper testing documentation and reports.\n\n\n* Understand project requirements and ensure software quality.\n\n\n* Participate in testing activities throughout the software development lifecycle.\n\n\nPreferred Candidate\n\n\n* Fresh graduates or candidates looking to start a career in Software Testing.\n\n\n* Basic knowledge of Software Testing concepts.\n\n\n* Good analytical and problem\\-solving skills.\n\n\n* Attention to detail and ability to identify issues.\n\n\n* Good communication and teamwork skills.\n\n\n* Willingness to learn new technologies and testing tools.\n\n\n* Candidates with basic knowledge of SQL, APIs, or automation testing will be an added advantage.\n\n\nWhat You Will Learn\n\n\n* Software Testing and Quality Assurance fundamentals.\n\n\n* Test case and test scenario preparation.\n\n\n* Bug identification and reporting.\n\n\n* Functional and regression testing.\n\n\n* Web application testing.\n\n\n* Basic API and database testing.\n\n\n* Real\\-time software testing practices.\n\n\n* Understanding of the Software Development Life Cycle (SDLC).\n\n\n* Working with development and project teams.\n\n\nInternship Benefits\n\n\n* 3\\-month practical internship in a software development environment.\n\n\n* Opportunity to work on real\\-time projects.\n\n\n* Hands\\-on experience in software testing and QA processes.\n\n\n* Guidance and learning support from experienced team members.\n\n\n* Internship Completion Certificate upon successful completion of the internship.\n\n\n* Opportunity for permanent employment based on performance evaluation after the internship.\n\n\nWorking Location\n\n\nCloudHouse Technologies Pvt. Ltd. Infopark Koratty, KSITIL SEZ, Indeevaram Building, Koratty, Thrissur, Kerala.\n\n\n#### **Requirements**\n\n\n* Educational qualification: B.Tech / B.E / BCA / MCA / B.Sc. Computer Science or related field.\n* Basic understanding of software testing concepts.\n* Good logical and analytical skills.\n* Good attention to detail.\n* Ability to work effectively in a team.\n* Willingness to learn and adapt.\n* Candidates available for a full\\-time 3\\-month internship are preferred.\nApply Now",
+      "id": "9e1291a36742686a6a4d",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=78242ffdd428a70e",
+      "location": "KL, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: KL, IN"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-78242ffdd428a70e",
+      "title": "Software Tester Intern Full Time Posted 5 days ago Open"
+    },
+    {
       "company": "Delta Endure Technologies",
       "date_posted": "2026-09-26",
       "description": "Build Real Products. Learn by Doing.\n\n**Deldure.com** is an early\\-stage AI\\-powered local discovery and marketplace platform connecting customers with businesses and service providers.\n\nWe are looking for motivated students and aspiring developers who want to gain **hands\\-on experience building a real\\-world technology product**.\n\nDeldure is currently being developed as an early\\-stage project and is not yet incorporated as a company.\n\nWhat You Will Learn\n\nDepending on your interests, you may get exposure to:\n\n* Java, Spring Boot and REST APIs\n* React / HTML / CSS / JavaScript\n* PostgreSQL and Redis\n* Apache Solr and search technology\n* AWS and cloud infrastructure\n* AI / Generative AI / LLM applications\n* Microservices and distributed systems\n* Software testing and automation\n* Git and collaborative development\n* Production\\-oriented software engineering\n* System design and architecture\n\nWhat You May Work On\n\nInterns will work on selected projects related to the Deldure platform, such as:\n\n* Developing new website features\n* Improving existing UI/UX\n* Building backend APIs\n* Developing AI\\-powered features\n* Improving search and discovery\n* Database and performance optimization\n* Automated testing\n* Technical research and experimentation\n* Developer tools and internal applications\n\nProjects will be selected based on your experience and learning objectives.\n\nInternship Structure\n\n**Type:** Project\\-based learning internship  \n**Mode:** Remote / flexible  \n**Duration:** 3 months  \n**Time commitment:** Approximately 40 hours per week\n\nThis is intended primarily as a **learning and practical experience opportunity**, rather than conventional employment.\n\nInterns will receive guidance and mentorship and will have the opportunity to work with technologies used in a real\\-world software platform.\n\nWho Should Apply?\n\nStudents or recent graduates interested in:\n\n* Computer Science\n* Software Engineering\n* AI/ML\n* Web Development\n* Cloud Computing\n* Backend Engineering\n* Data Engineering\n* DevOps\n* UI/UX\n\nYou don't need to know everything. **Curiosity, willingness to learn, and the ability to take ownership of a small project are more important.**\n\nWhat You Get\n\n* Hands\\-on experience with a real technology product\n* Mentorship and technical guidance\n* Opportunity to build portfolio\\-worthy projects\n* Experience working with modern software technologies\n* Internship/project completion certificate\n* Opportunity for a recommendation/reference based on performance\n* Potential consideration for future paid opportunities as Deldure grows\n\nImportant\n\nThis is currently an **project\\-based learning opportunity**. There is no guarantee of employment or future compensation.\n\nInterested candidates can share their **resume/GitHub/LinkedIn profile** along with a brief description of what they would like to learn or build.\n\n**Deldure**  \nAI\\-Powered Local Discovery \\& Marketplace\n\nPay: ₹3,000\\.00 per month\n\nWork Location: In person",
@@ -1695,6 +1755,35 @@
       "source": "indeed",
       "source_id": "in-81877a22b536b1ac",
       "title": "Application Developer Intern"
+    },
+    {
+      "company": "Kaleris",
+      "date_posted": null,
+      "description": "",
+      "id": "bfe3f6a875789127cc93",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471322071",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4471322071",
+      "title": "Associate Software Engineer Intern - YMS"
     },
     {
       "company": "Vigilant Forensic Research And Analytics Pvt. Ltd.",
