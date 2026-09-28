@@ -4,8 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102725">
-  <meta name="description" content="A personal radar for real entry-level software jobs and internships, sourced by JobSpy.">
+  <meta
+    name="description"
+    content="A personal radar for real entry-level software jobs and internships, sourced by JobSpy."
+  >
+
   <title>Mentor Surprise | Job Radar</title>
+
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
 </head>
@@ -14,27 +19,49 @@
 
   <a class="skip" href="#results">Skip to jobs</a>
 
-  <!-- TOP BAR -->
+  <!-- =====================================================
+       TOP BAR
+       ===================================================== -->
+
   <header class="topbar">
+
     <div class="shell brand">
+
       <span class="brand-mark" aria-hidden="true">◎</span>
+
       MENTOR SURPRISE
+
       <span class="slash">/</span>
+
       JOB RADAR
-      <span class="brand-note">A personal search desk</span>
+
+      <span class="brand-note">
+        A personal search desk
+      </span>
+
     </div>
+
   </header>
 
 
   <main class="shell">
 
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="heading">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section
+      class="hero"
+      aria-labelledby="heading"
+    >
 
       <div class="hero-copy">
 
         <span class="eyebrow">
-          PERSONAL JOB RADAR <span aria-hidden="true">·</span> INDIA
+          PERSONAL JOB RADAR
+          <span aria-hidden="true">·</span>
+          INDIA
         </span>
 
         <h1 id="heading">
@@ -48,22 +75,35 @@
         </p>
 
         <div class="hero-line">
-          <span class="pulse" aria-hidden="true"></span>
+
+          <span
+            class="pulse"
+            aria-hidden="true"
+          ></span>
+
           <span id="sourceStatus">
             Loading real job data…
           </span>
+
         </div>
 
       </div>
 
 
-      <div class="hero-aside" aria-label="How this radar works">
+      <div
+        class="hero-aside"
+        aria-label="How this radar works"
+      >
 
         <span class="aside-label">
           HOW THE SIGNAL WORKS
         </span>
 
-        <div class="radar-art" aria-hidden="true">
+        <div
+          class="radar-art"
+          aria-hidden="true"
+        >
+
           <span class="radar-circle one"></span>
           <span class="radar-circle two"></span>
           <span class="radar-circle three"></span>
@@ -72,12 +112,18 @@
           <span class="radar-point p2"></span>
           <span class="radar-point p3"></span>
 
-          <span class="radar-cross">+</span>
+          <span class="radar-cross">
+            +
+          </span>
+
         </div>
 
         <p>
-          Role <b>35</b> · Student level <b>20</b> ·
-          Skills <b>up to 20</b> · Location <b>15</b> · Remote <b>10</b>
+          Role <b>35</b> ·
+          Student level <b>20</b> ·
+          Skills <b>up to 20</b> ·
+          Location <b>15</b> ·
+          Remote <b>10</b>
         </p>
 
       </div>
@@ -85,36 +131,230 @@
     </section>
 
 
-    <!-- SUMMARY -->
-    <section class="summary" aria-label="Results summary">
+
+    <!-- =====================================================
+         SUMMARY
+         ===================================================== -->
+
+    <section
+      class="summary"
+      aria-label="Results summary"
+    >
 
       <div class="metric">
-        <span>RELEVANT LEADS</span>
-        <strong id="total">—</strong>
+
+        <span>
+          RELEVANT LEADS
+        </span>
+
+        <strong id="total">
+          —
+        </strong>
+
       </div>
 
-      <div class="metric">
-        <span>POSTED THIS WEEK</span>
-        <strong id="recent">—</strong>
-      </div>
 
       <div class="metric">
-        <span>SOURCES</span>
-        <strong id="sources">—</strong>
+
+        <span>
+          POSTED THIS WEEK
+        </span>
+
+        <strong id="recent">
+          —
+        </strong>
+
       </div>
+
+
+      <div class="metric">
+
+        <span>
+          SOURCES
+        </span>
+
+        <strong id="sources">
+          —
+        </strong>
+
+      </div>
+
 
       <div class="metric metric-note">
-        <span>A NOTE ON THE SCORE</span>
+
+        <span>
+          A NOTE ON THE SCORE
+        </span>
+
         <p>
-          Fit estimate, not a hiring prediction. Always read the live posting
-          before applying.
+          Fit estimate, not a hiring prediction.
+          Always read the live posting before applying.
         </p>
+
       </div>
 
     </section>
 
 
-    <!-- INSIGHTS -->
+
+    <!-- =====================================================
+         AI OPPORTUNITY AGENT
+         ===================================================== -->
+
+    <section
+      class="agent-panel"
+      id="agentPanel"
+      aria-labelledby="agent-title"
+    >
+
+      <div class="agent-header">
+
+        <div>
+
+          <span class="agent-kicker">
+            JOB RADAR AGENT
+          </span>
+
+          <h2 id="agent-title">
+            Your Next Opportunity
+          </h2>
+
+          <p>
+            Find a job, understand your match, and know your next step.
+          </p>
+
+        </div>
+
+
+        <span class="agent-status">
+          <span aria-hidden="true">●</span>
+          READY
+        </span>
+
+      </div>
+
+
+      <div
+        class="agent-card"
+        id="agentCard"
+      >
+
+        <div class="agent-card-top">
+
+          <div>
+
+            <span class="agent-label">
+              RECOMMENDED FOR YOU
+            </span>
+
+            <h3 id="agentJobTitle">
+              No recommendation yet
+            </h3>
+
+            <p id="agentCompany">
+              Analyze the available opportunities to get a recommendation.
+            </p>
+
+          </div>
+
+
+          <div class="agent-match">
+
+            <strong id="agentMatch">
+              --%
+            </strong>
+
+            <span>
+              Personal Match
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- MATCHING SKILLS -->
+
+        <div class="agent-skills">
+
+          <div class="agent-skill-column">
+
+            <span>
+              ✓ Matching skills
+            </span>
+
+            <div
+              id="agentMatchedSkills"
+              class="agent-tags"
+            >
+              <span class="agent-empty">
+                Waiting for analysis
+              </span>
+            </div>
+
+          </div>
+
+
+          <!-- MISSING SKILLS -->
+
+          <div class="agent-skill-column">
+
+            <span>
+              ⚠ Skills to explore
+            </span>
+
+            <div
+              id="agentMissingSkills"
+              class="agent-tags"
+            >
+              <span class="agent-empty">
+                Waiting for analysis
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- NEXT ACTION -->
+
+        <div class="agent-next">
+
+          <span>
+            NEXT ACTION
+          </span>
+
+          <p id="agentNextAction">
+            Analyze the available jobs to get your personalized next action.
+          </p>
+
+        </div>
+
+
+
+        <!-- ANALYZE BUTTON -->
+
+        <button
+          id="agentAnalyze"
+          class="agent-button"
+          type="button"
+        >
+          Analyze Best Opportunity
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INSIGHTS
+         ===================================================== -->
+
     <section
       class="insights"
       aria-labelledby="insights-title"
@@ -123,6 +363,7 @@
       <div class="section-heading">
 
         <div>
+
           <span class="eyebrow dark">
             RADAR INSIGHTS
           </span>
@@ -130,6 +371,7 @@
           <h2 id="insights-title">
             What the data says
           </h2>
+
         </div>
 
         <p>
@@ -139,9 +381,12 @@
       </div>
 
 
+
       <div class="insight-grid">
 
+
         <!-- SAVED -->
+
         <article class="insight-card">
 
           <span class="insight-label">
@@ -159,7 +404,9 @@
         </article>
 
 
+
         <!-- REMOTE -->
+
         <article class="insight-card">
 
           <span class="insight-label">
@@ -177,7 +424,9 @@
         </article>
 
 
+
         <!-- HIGH SCORE -->
+
         <article class="insight-card">
 
           <span class="insight-label">
@@ -195,7 +444,9 @@
         </article>
 
 
+
         <!-- ACTIVE APPLICATIONS -->
+
         <article class="insight-card">
 
           <span class="insight-label">
@@ -213,7 +464,9 @@
         </article>
 
 
+
         <!-- TOP SKILLS -->
+
         <article class="insight-card insight-wide">
 
           <span class="insight-label">
@@ -224,9 +477,11 @@
             id="topSkills"
             class="insight-tags"
           >
+
             <span class="insight-muted">
               Loading skills…
             </span>
+
           </div>
 
         </article>
@@ -236,7 +491,11 @@
     </section>
 
 
-    <!-- SEARCH WORKSPACE -->
+
+    <!-- =====================================================
+         SEARCH WORKSPACE
+         ===================================================== -->
+
     <section
       class="workspace"
       aria-labelledby="results-title"
@@ -266,13 +525,19 @@
       </div>
 
 
-      <!-- FILTER CONTROLS -->
+
+      <!-- ===================================================
+           FILTER CONTROLS
+           =================================================== -->
+
       <div
         class="controls"
         aria-label="Filter jobs"
       >
 
+
         <!-- SEARCH -->
+
         <label class="field search-field">
 
           SEARCH BY ROLE, COMPANY OR SKILL
@@ -287,7 +552,9 @@
         </label>
 
 
+
         <!-- LOCATION -->
+
         <label class="field">
 
           LOCATION
@@ -303,7 +570,9 @@
         </label>
 
 
+
         <!-- JOB TYPE -->
+
         <label class="field">
 
           JOB TYPE
@@ -319,7 +588,9 @@
         </label>
 
 
+
         <!-- WORK MODE -->
+
         <label class="field">
 
           WORK MODE
@@ -343,7 +614,9 @@
         </label>
 
 
+
         <!-- POSTED -->
+
         <label class="field">
 
           POSTED
@@ -379,7 +652,9 @@
         </label>
 
 
+
         <!-- SKILL -->
+
         <label class="field">
 
           SKILL
@@ -395,7 +670,9 @@
         </label>
 
 
+
         <!-- APPLICATION STATUS -->
+
         <label class="field">
 
           APPLICATION STATUS
@@ -431,7 +708,9 @@
         </label>
 
 
+
         <!-- MINIMUM SCORE -->
+
         <label class="field">
 
           MINIMUM SCORE
@@ -463,7 +742,9 @@
         </label>
 
 
+
         <!-- SORT -->
+
         <label class="field">
 
           SORT
@@ -487,7 +768,9 @@
         </label>
 
 
+
         <!-- SAVED TOGGLE -->
+
         <button
           class="saved-toggle"
           id="savedToggle"
@@ -504,7 +787,9 @@
         </button>
 
 
+
         <!-- EXPORT SAVED JOBS -->
+
         <button
           class="saved-toggle"
           id="exportSaved"
@@ -514,7 +799,9 @@
         </button>
 
 
+
         <!-- RESET -->
+
         <button
           class="reset"
           id="reset"
@@ -526,7 +813,11 @@
       </div>
 
 
-      <!-- NOTICE -->
+
+      <!-- ===================================================
+           NOTICE
+           =================================================== -->
+
       <div
         id="notice"
         class="notice"
@@ -535,7 +826,11 @@
       ></div>
 
 
-      <!-- RESULTS -->
+
+      <!-- ===================================================
+           RESULTS
+           =================================================== -->
+
       <div
         id="results"
         class="results"
@@ -548,7 +843,11 @@
   </main>
 
 
-  <!-- JOB DETAILS MODAL -->
+
+  <!-- =====================================================
+       JOB DETAILS MODAL
+       ===================================================== -->
+
   <div
     id="jobModal"
     class="modal"
@@ -580,7 +879,11 @@
   </div>
 
 
-  <!-- FOOTER -->
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+
   <footer class="footer">
 
     <div class="shell">
@@ -590,8 +893,9 @@
       </p>
 
       <p>
-        Listings from JobSpy. A posting may expire or change; the source link
-        is the authority for current terms. No jobs are invented.
+        Listings from JobSpy. A posting may expire or change;
+        the source link is the authority for current terms.
+        No jobs are invented.
       </p>
 
       <p>
@@ -609,6 +913,11 @@
     </div>
 
   </footer>
+
+
+  <noscript>
+    To use Job Radar, please enable JavaScript.
+  </noscript>
 
 </body>
 </html>
