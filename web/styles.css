@@ -4469,4 +4469,110 @@ body {
     transition-duration: 0.01ms !important;
   }
 
+}/* =========================================================
+   MOBILE UX IMPROVEMENT
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 28px 16px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.05;
+  }
+
+  .hero p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .radar {
+    min-height: 180px;
+    margin: 12px 0;
+  }
+
+  .summary,
+  .insights,
+  .agent-panel,
+  .filters-section {
+    margin-top: 16px;
+  }
+
+  .summary {
+    padding: 14px;
+  }
+
+  .agent-panel {
+    padding: 12px;
+  }
+
+  .agent-card {
+    padding: 14px;
+  }
+
+  .agent-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .agent-button {
+    width: 100%;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .filters select,
+  .filters input,
+  .filters button {
+    width: 100%;
+    min-height: 42px;
+  }
+
+  .results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .job {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .job-head {
+    gap: 10px;
+  }
+
+  .job-head h4 {
+    font-size: 1rem;
+  }
+
+  .job-description {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .job-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .job-actions button,
+  .job-actions a,
+  .application-status {
+    width: 100%;
+    min-height: 40px;
+  }
+
 }
