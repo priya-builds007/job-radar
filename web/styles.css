@@ -4575,4 +4575,52 @@ body {
     min-height: 40px;
   }
 
+}/* =========================================================
+   JOB CARD MOBILE ACTION FIX
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .job-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .job-actions button,
+  .job-actions a {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    width: 100%;
+    padding: 8px 10px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0.78rem;
+  }
+
+  .application-status {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
+
+  .job-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .job-reasons {
+    max-height: 70px;
+    overflow: hidden;
+  }
+
 }
