@@ -426,38 +426,73 @@ function updateAgent(job) {
 
 }
 
-
 function analyzeBestOpportunity() {
 
-  const bestJob =
-    getBestOpportunity();
+  const button =
+    $('agentAnalyze');
 
+  const nextAction =
+    $('agentNextAction');
 
-  if (!bestJob) {
+  const agentPanel =
+    $('agentPanel');
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Analyzing…';
+  }
+
+  if (!allJobs.length) {
 
     updateAgent(null);
 
-    const nextAction =
-      $('agentNextAction');
-
     if (nextAction) {
-
       nextAction.textContent =
-        'No job data is available yet. Please try again after the jobs are loaded.';
+        'No job data is loaded yet. Please refresh the page and try again.';
+    }
 
+    if (button) {
+      button.disabled = false;
+      button.textContent =
+        'Analyze Best Opportunity';
     }
 
     return;
   }
 
+  const bestJob =
+    getBestOpportunity();
 
-  updateAgent(
-    bestJob
-  );
+  if (!bestJob) {
 
+    if (nextAction) {
+      nextAction.textContent =
+        'No suitable opportunity was found in the loaded job data.';
+    }
 
-  const agentPanel =
-    $('agentPanel');
+    if (button) {
+      button.disabled = false;
+      button.textContent =
+        'Analyze Best Opportunity';
+    }
+
+    return;
+  }
+
+  updateAgent(bestJob);
+
+  const personal =
+    calculatePersonalMatch(bestJob);
+
+  if (nextAction) {
+
+    nextAction.textContent =
+      personal.score >= 80
+        ? 'Strong match found. Review the posting and consider applying.'
+        : personal.score >= 60
+          ? 'Good match found. Check the skill gap and review the posting.'
+          : 'Opportunity found. Review the skill gap before deciding on this role.';
+  }
 
   if (agentPanel) {
 
@@ -468,10 +503,17 @@ function analyzeBestOpportunity() {
 
   }
 
-}
+  window.setTimeout(() => {
 
+    if (button) {
+      button.disabled = false;
+      button.textContent =
+        'Analyze Best Opportunity';
+    }
 
-/* =========================================================
+  }, 500);
+
+} =========================================================
    SAFE LINK
    ========================================================= */
 
