@@ -2582,4 +2582,227 @@ a:focus-visible {
   .apply-button {
     width: 100%;
   }
+}/* =========================================================
+   JOB CARD — ACTUAL APP.JS CLASSES
+   ========================================================= */
+
+.job-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-left: 3px solid rgba(69,224,165,.55);
+  border-radius: 16px;
+  background: linear-gradient(
+    145deg,
+    rgba(11,34,27,.96),
+    rgba(7,23,19,.96)
+  );
+  box-shadow: 0 10px 30px rgba(0,0,0,.13);
+}
+
+.job-card:hover {
+  border-color: var(--green-line);
+}
+
+.job-card-top {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 90px;
+  gap: 18px;
+  align-items: start;
+}
+
+.job-source {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 5px 9px;
+  border: 1px solid var(--green-line);
+  border-radius: 20px;
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.job-company {
+  margin: 7px 0 0;
+  color: var(--green2);
+  font-size: 12px;
+}
+
+/* Match percentage */
+.job-score {
+  padding: 12px 8px;
+  border: 1px solid var(--green-line);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--green2);
+  background: rgba(69,224,165,.05);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Location / type / remote / freshness */
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 17px;
+}
+
+.job-meta span {
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--soft);
+  background: rgba(255,255,255,.025);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+/* Matched + Skill gap */
+.job-skill-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 17px;
+}
+
+.job-skill-group {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: rgba(0,0,0,.10);
+}
+
+.job-skill-label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.job-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.job-skills span {
+  display: inline-block;
+  padding: 5px 8px;
+  border: 1px solid var(--green-line);
+  border-radius: 7px;
+  color: var(--green2);
+  background: rgba(69,224,165,.05);
+  font-size: 10px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* Buttons */
+.job-card-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 9px;
+  margin-top: 18px;
+  align-items: stretch;
+}
+
+.job-button,
+.job-status-select,
+.apply-button {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.job-button {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+}
+
+.job-button:hover {
+  border-color: var(--green-line);
+  background: rgba(69,224,165,.08);
+}
+
+.job-status-select {
+  border: 1px solid var(--line);
+  background: #081b16;
+  color: var(--text);
+}
+
+.apply-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--green-line);
+  background: var(--green);
+  color: #03120d;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.apply-button:hover {
+  background: var(--green2);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card {
+    padding: 18px;
+  }
+
+  .job-card-top {
+    grid-template-columns: minmax(0,1fr) 78px;
+    gap: 12px;
+  }
+
+  .job-title {
+    font-size: 16px;
+  }
+
+  .job-company {
+    font-size: 11px;
+  }
+
+  .job-score {
+    font-size: 13px;
+  }
+
+  .job-skill-section {
+    grid-template-columns: 1fr;
+  }
+
+  .job-card-footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .job-button,
+  .job-status-select,
+  .apply-button {
+    min-height: 42px;
+  }
 }
