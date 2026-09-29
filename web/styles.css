@@ -1481,4 +1481,222 @@ button:active,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}/* ===== FINAL CLEAN UI ===== */
+
+.agent-panel {
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(69, 224, 165, 0.45);
+  background:
+    linear-gradient(145deg, #0d2921 0%, #081b16 100%);
+}
+
+.agent-panel h3 {
+  margin-bottom: 8px;
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.agent-panel > p {
+  margin: 0 0 22px;
+  line-height: 1.6;
+}
+
+.agent-job {
+  margin-top: 0;
+}
+
+.agent-job-title {
+  margin: 7px 0;
+  font-size: 23px;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.agent-company {
+  margin: 0 0 16px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Match badge */
+.agent-match {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 22px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  background: rgba(69, 224, 165, 0.12);
+  border: 1px solid rgba(69, 224, 165, 0.2);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* Agent text blocks */
+.agent-skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 0;
+}
+
+.agent-skill-box {
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.13);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.agent-skill-box h4 {
+  margin: 0 0 9px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+
+.agent-skill-box p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* Better skill text */
+.agent-skill-box p span {
+  display: inline-flex;
+  margin: 3px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: rgba(69,224,165,.08);
+  color: var(--green2);
+}
+
+/* Action section */
+.agent-next-action {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.agent-next-action h4 {
+  margin: 0 0 7px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+
+.agent-next-action p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Analyze button */
+#agentAnalyze {
+  margin-top: 20px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid var(--green);
+  border-radius: 9px;
+  background: var(--green);
+  color: #03120d;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+#agentAnalyze:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(69,224,165,.18);
+}
+
+#agentAnalyze:active {
+  transform: scale(.97);
+}
+
+/* Section headings */
+section h2,
+section h3 {
+  line-height: 1.3;
+}
+
+.results-header {
+  margin-top: 34px;
+}
+
+.notice {
+  line-height: 1.6;
+}@media (max-width: 700px) {
+
+  .agent-panel {
+    padding: 21px;
+    border-radius: 17px;
+  }
+
+  .agent-panel h3 {
+    font-size: 17px;
+  }
+
+  .agent-panel > p {
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+  .agent-job-title {
+    font-size: 21px;
+  }
+
+  .agent-company {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .agent-match {
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+
+  .agent-skills {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .agent-skill-box {
+    padding: 14px;
+  }
+
+  .agent-skill-box p {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  #agentAnalyze {
+    width: 100%;
+    margin-top: 18px;
+  }
+}
+
+
+/* Small phone */
+@media (max-width: 480px) {
+
+  .agent-panel {
+    padding: 18px;
+  }
+
+  .agent-job-title {
+    font-size: 20px;
+  }
+
+  .agent-match {
+    padding: 7px 10px;
+  }
+
+  .agent-skill-box {
+    padding: 13px;
+  }
 }
