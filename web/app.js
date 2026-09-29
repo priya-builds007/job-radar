@@ -204,10 +204,6 @@ function updateAgent(job) {
     $('agentCard');
 
 
-  /*
-   * No job available
-   */
-
   if (!job) {
 
     if (title) {
@@ -276,10 +272,6 @@ function updateAgent(job) {
     calculatePersonalMatch(job);
 
 
-  /*
-   * Job title
-   */
-
   if (title) {
 
     title.textContent =
@@ -288,10 +280,6 @@ function updateAgent(job) {
 
   }
 
-
-  /*
-   * Company
-   */
 
   if (company) {
 
@@ -302,10 +290,6 @@ function updateAgent(job) {
   }
 
 
-  /*
-   * Personal match
-   */
-
   if (match) {
 
     match.textContent =
@@ -313,10 +297,6 @@ function updateAgent(job) {
 
   }
 
-
-  /*
-   * Matching skills
-   */
 
   if (matchedSkills) {
 
@@ -357,10 +337,6 @@ function updateAgent(job) {
   }
 
 
-  /*
-   * Missing skills
-   */
-
   if (missingSkills) {
 
     missingSkills.replaceChildren();
@@ -399,10 +375,6 @@ function updateAgent(job) {
 
   }
 
-
-  /*
-   * Next action
-   */
 
   if (nextAction) {
 
@@ -444,10 +416,6 @@ function updateAgent(job) {
   }
 
 
-  /*
-   * Activate agent card
-   */
-
   if (card) {
 
     card.classList.add(
@@ -467,9 +435,7 @@ function analyzeBestOpportunity() {
 
   if (!bestJob) {
 
-    updateAgent(
-      null
-    );
+    updateAgent(null);
 
     const nextAction =
       $('agentNextAction');
@@ -489,11 +455,6 @@ function analyzeBestOpportunity() {
     bestJob
   );
 
-
-  /*
-   * Smoothly bring the recommendation
-   * into view on mobile.
-   */
 
   const agentPanel =
     $('agentPanel');
@@ -704,8 +665,6 @@ function updateSavedUI() {
 
 
 /* =========================================================
-   END OF PART 1
-   ========================================================= *//* =========================================================
    EXPORT SAVED JOBS
    ========================================================= */
 
@@ -1105,10 +1064,6 @@ function calculatePersonalMatch(
     );
 
 
-  /*
-   * Skill score
-   */
-
   let skillScore =
     0;
 
@@ -1127,10 +1082,6 @@ function calculatePersonalMatch(
 
   }
 
-
-  /*
-   * Role relevance
-   */
 
   const title =
     String(
@@ -1152,10 +1103,6 @@ function calculatePersonalMatch(
 
   }
 
-
-  /*
-   * Remote/location relevance
-   */
 
   let contextScore =
     0;
@@ -1223,12 +1170,7 @@ function extractSkillGap(
 
   return personal.missing;
 
-}
-
-
-/* =========================================================
-   END OF PART 2
-   ========================================================= *//* =========================================================
+}/* =========================================================
    DATE BUCKET
    ========================================================= */
 
@@ -1532,6 +1474,7 @@ function addOptions(
 
 /* =========================================================
    JOB DETAILS MODAL
+   FIXED VERSION
    ========================================================= */
 
 function openJobModal(
@@ -1541,104 +1484,335 @@ function openJobModal(
   const modal =
     $('jobModal');
 
+  const content =
+    $('modalContent');
 
-  if (!modal) {
+
+  if (
+    !modal ||
+    !content
+  ) {
+
     return;
+
   }
 
+
+  /*
+   * Clear previous modal content
+   */
+
+  content.replaceChildren();
+
+
+  /*
+   * TITLE
+   */
 
   const title =
-    $('modalTitle');
+    element(
+      'h2',
+      '',
+      job.title ||
+      'Job details'
+    );
+
+
+  /*
+   * COMPANY
+   */
 
   const company =
-    $('modalCompany');
+    element(
+      'p',
+      'modal-company',
+      job.company ||
+      'Company not provided'
+    );
+
+
+  /*
+   * META
+   */
+
+  const meta =
+    element(
+      'div',
+      'modal-meta'
+    );
+
+
+  if (
+    job.location
+  ) {
+
+    meta.append(
+      element(
+        'span',
+        '',
+        job.location
+      )
+    );
+
+  }
+
+
+  if (
+    job.job_type
+  ) {
+
+    meta.append(
+      element(
+        'span',
+        '',
+        job.job_type
+      )
+    );
+
+  }
+
+
+  meta.append(
+    element(
+      'span',
+      '',
+      job.is_remote
+        ? 'Remote'
+        : 'On-site'
+    )
+  );
+
+
+  /*
+   * JOB SCORE
+   */
+
+  const score =
+    element(
+      'p',
+      'modal-score',
+      `Job Match Score: ${
+        Number(
+          job.score || 0
+        )
+      }%`
+    );
+
+
+  /*
+   * PERSONAL MATCH
+   */
+
+  const personal =
+    calculatePersonalMatch(
+      job
+    );
+
+
+  const personalScore =
+    element(
+      'p',
+      'modal-personal',
+      `Personal Match: ${
+        personal.score
+      }%`
+    );
+
+
+  /*
+   * DESCRIPTION
+   */
 
   const description =
-    $('modalDescription');
+    element(
+      'p',
+      'modal-description',
+      job.description ||
+      'No description available.'
+    );
+
+
+  /*
+   * SKILLS TITLE
+   */
+
+  const skillsTitle =
+    element(
+      'h3',
+      '',
+      'Skills'
+    );
+
+
+  /*
+   * SKILLS
+   */
 
   const skills =
-    $('modalSkills');
-
-  const link =
-    $('modalApply');
-
-
-  if (title) {
-
-    title.textContent =
-      job.title ||
-      'Job details';
-
-  }
+    element(
+      'div',
+      'skills'
+    );
 
 
-  if (company) {
+  getJobSkills(job)
+    .slice(
+      0,
+      12
+    )
+    .forEach(
+      skill => {
 
-    company.textContent =
-      job.company ||
-      'Company not provided';
+        skills.append(
+          element(
+            'span',
+            'skill',
+            skill
+          )
+        );
 
-  }
-
-
-  if (description) {
-
-    description.textContent =
-      job.description ||
-      'No description available.';
-
-  }
-
-
-  if (skills) {
-
-    skills.replaceChildren();
+      }
+    );
 
 
-    getJobSkills(job)
-      .slice(0, 12)
+  /*
+   * REASONS
+   */
+
+  const reasonsTitle =
+    element(
+      'h3',
+      '',
+      'Why this matches'
+    );
+
+
+  const reasons =
+    element(
+      'div',
+      'modal-reasons'
+    );
+
+
+  if (
+    Array.isArray(
+      job.reasons
+    ) &&
+    job.reasons.length
+  ) {
+
+    job.reasons
+      .slice(
+        0,
+        6
+      )
       .forEach(
-        skill => {
+        reason => {
 
-          skills.append(
+          reasons.append(
             element(
-              'span',
-              'skill',
-              skill
+              'p',
+              '',
+              `✓ ${reason}`
             )
           );
 
         }
       );
 
+  } else {
+
+    reasons.append(
+      element(
+        'p',
+        '',
+        'This opportunity matches the selected job criteria.'
+      )
+    );
+
   }
 
 
-  if (link) {
+  /*
+   * ACTIONS
+   */
 
-    const url =
-      safeLink(
-        job.job_url
+  const actions =
+    element(
+      'div',
+      'modal-actions'
+    );
+
+
+  const url =
+    safeLink(
+      job.job_url
+    );
+
+
+  if (url) {
+
+    const apply =
+      element(
+        'a',
+        'apply-job',
+        'Apply Now'
       );
 
 
-    if (url) {
+    apply.href =
+      url;
 
-      link.href =
-        url;
 
-      link.hidden =
-        false;
+    apply.target =
+      '_blank';
 
-    } else {
 
-      link.hidden =
-        true;
+    apply.rel =
+      'noopener noreferrer';
 
-    }
+
+    actions.append(
+      apply
+    );
 
   }
 
+
+  /*
+   * BUILD MODAL
+   */
+
+  content.append(
+
+    title,
+
+    company,
+
+    meta,
+
+    score,
+
+    personalScore,
+
+    description,
+
+    skillsTitle,
+
+    skills,
+
+    reasonsTitle,
+
+    reasons,
+
+    actions
+
+  );
+
+
+  /*
+   * SHOW MODAL
+   */
 
   modal.hidden =
     false;
@@ -1647,12 +1821,12 @@ function openJobModal(
 
 
 /* =========================================================
-   END OF PART 3
-   ========================================================= *//* =========================================================
    JOB CARD
    ========================================================= */
 
-function jobCard(job) {
+function jobCard(
+  job
+) {
 
   const card =
     element(
@@ -1679,7 +1853,8 @@ function jobCard(job) {
       'span',
       'source',
       String(
-        job.source || 'JOB'
+        job.source ||
+        'JOB'
       ).toUpperCase()
     );
 
@@ -1720,7 +1895,9 @@ function jobCard(job) {
     element(
       'strong',
       '',
-      `${Number(job.score || 0)}`
+      `${Number(
+        job.score || 0
+      )}`
     );
 
 
@@ -1744,7 +1921,9 @@ function jobCard(job) {
   );
 
 
-  /* META */
+  /*
+   * META
+   */
 
   const meta =
     element(
@@ -1794,7 +1973,9 @@ function jobCard(job) {
   );
 
 
-  /* DESCRIPTION */
+  /*
+   * DESCRIPTION
+   */
 
   const description =
     element(
@@ -1805,7 +1986,8 @@ function jobCard(job) {
 
   const rawDescription =
     String(
-      job.description || ''
+      job.description ||
+      ''
     )
       .replace(
         /\s+/g,
@@ -1817,12 +1999,17 @@ function jobCard(job) {
   description.textContent =
     rawDescription
       ? rawDescription.length > 180
-        ? `${rawDescription.slice(0, 180)}…`
+        ? `${rawDescription.slice(
+            0,
+            180
+          )}…`
         : rawDescription
       : 'No description available.';
 
 
-  /* PERSONAL MATCH */
+  /*
+   * PERSONAL MATCH
+   */
 
   const personal =
     calculatePersonalMatch(
@@ -1859,7 +2046,9 @@ function jobCard(job) {
   );
 
 
-  /* FRESHNESS */
+  /*
+   * FRESHNESS
+   */
 
   const freshness =
     element(
@@ -1871,7 +2060,9 @@ function jobCard(job) {
     );
 
 
-  /* SKILLS */
+  /*
+   * SKILLS
+   */
 
   const skills =
     element(
@@ -1881,7 +2072,10 @@ function jobCard(job) {
 
 
   getJobSkills(job)
-    .slice(0, 8)
+    .slice(
+      0,
+      8
+    )
     .forEach(
       skill => {
 
@@ -1897,7 +2091,9 @@ function jobCard(job) {
     );
 
 
-  /* REASONS */
+  /*
+   * REASONS
+   */
 
   const reasons =
     element(
@@ -1913,7 +2109,10 @@ function jobCard(job) {
   ) {
 
     job.reasons
-      .slice(0, 3)
+      .slice(
+        0,
+        3
+      )
       .forEach(
         reason => {
 
@@ -1931,7 +2130,9 @@ function jobCard(job) {
   }
 
 
-  /* ACTIONS */
+  /*
+   * ACTIONS
+   */
 
   const actions =
     element(
@@ -1974,9 +2175,15 @@ function jobCard(job) {
   saveButton.addEventListener(
     'click',
     () =>
-      toggleSavedJob(job)
+      toggleSavedJob(
+        job
+      )
   );
 
+
+  /*
+   * VIEW DETAILS
+   */
 
   const detailsButton =
     element(
@@ -1993,9 +2200,15 @@ function jobCard(job) {
   detailsButton.addEventListener(
     'click',
     () =>
-      openJobModal(job)
+      openJobModal(
+        job
+      )
   );
 
+
+  /*
+   * APPLY
+   */
 
   const applyLink =
     element(
@@ -2016,8 +2229,10 @@ function jobCard(job) {
     applyLink.href =
       url;
 
+
     applyLink.target =
       '_blank';
+
 
     applyLink.rel =
       'noopener noreferrer';
@@ -2027,6 +2242,7 @@ function jobCard(job) {
     applyLink.textContent =
       'Link unavailable';
 
+
     applyLink.setAttribute(
       'aria-disabled',
       'true'
@@ -2035,7 +2251,9 @@ function jobCard(job) {
   }
 
 
-  /* STATUS */
+  /*
+   * STATUS
+   */
 
   const statusSelect =
     document.createElement(
@@ -2110,22 +2328,36 @@ function jobCard(job) {
 
 
   actions.append(
+
     saveButton,
+
     detailsButton,
+
     applyLink,
+
     statusSelect
+
   );
 
 
   card.append(
+
     head,
+
     meta,
+
     description,
+
     personalMatch,
+
     freshness,
+
     skills,
+
     reasons,
+
     actions
+
   );
 
 
@@ -2201,9 +2433,15 @@ function updateInsights() {
               job
             );
 
+
           return (
-            status === 'Applied' ||
-            status === 'Interview'
+
+            status ===
+              'Applied' ||
+
+            status ===
+              'Interview'
+
           );
 
         }
@@ -2228,7 +2466,9 @@ function updateInsights() {
               counts.set(
                 skill,
                 (
-                  counts.get(skill) ||
+                  counts.get(
+                    skill
+                  ) ||
                   0
                 ) + 1
               );
@@ -2241,10 +2481,13 @@ function updateInsights() {
 
 
     const top =
-      [...counts.entries()]
+      [
+        ...counts.entries()
+      ]
         .sort(
           (a, b) =>
-            b[1] - a[1]
+            b[1] -
+            a[1]
         )
         .slice(
           0,
@@ -2271,10 +2514,7 @@ function updateInsights() {
 
   }
 
-}
-
-
-/* =========================================================
+}/* =========================================================
    FILTERING
    ========================================================= */
 
@@ -2282,7 +2522,8 @@ function getFilteredJobs() {
 
   const search =
     String(
-      $('search')?.value || ''
+      $('search')?.value ||
+      ''
     )
       .trim()
       .toLowerCase();
@@ -2290,7 +2531,8 @@ function getFilteredJobs() {
 
   const location =
     String(
-      $('location')?.value || ''
+      $('location')?.value ||
+      ''
     )
       .trim()
       .toLowerCase();
@@ -2298,7 +2540,8 @@ function getFilteredJobs() {
 
   const jobType =
     String(
-      $('jobType')?.value || ''
+      $('jobType')?.value ||
+      ''
     )
       .trim()
       .toLowerCase();
@@ -2306,7 +2549,8 @@ function getFilteredJobs() {
 
   const remote =
     String(
-      $('remote')?.value || ''
+      $('remote')?.value ||
+      ''
     )
       .trim()
       .toLowerCase();
@@ -2314,14 +2558,16 @@ function getFilteredJobs() {
 
   const period =
     String(
-      $('period')?.value || ''
+      $('period')?.value ||
+      ''
     )
       .trim();
 
 
   const skill =
     String(
-      $('skill')?.value || ''
+      $('skill')?.value ||
+      ''
     )
       .trim()
       .toLowerCase();
@@ -2329,22 +2575,22 @@ function getFilteredJobs() {
 
   const status =
     String(
-      $('status')?.value || ''
+      $('status')?.value ||
+      ''
     )
       .trim();
 
 
   const minimum =
     Number(
-      $('minimum')?.value || 0
+      $('minimum')?.value ||
+      0
     );
 
 
   let jobs =
     [...allJobs];
 
-
-  /* SEARCH */
 
   if (search) {
 
@@ -2360,8 +2606,6 @@ function getFilteredJobs() {
   }
 
 
-  /* LOCATION */
-
   if (
     location &&
     location !== 'all'
@@ -2371,7 +2615,8 @@ function getFilteredJobs() {
       jobs.filter(
         job =>
           String(
-            job.location || ''
+            job.location ||
+            ''
           )
             .toLowerCase()
             .includes(
@@ -2382,8 +2627,6 @@ function getFilteredJobs() {
   }
 
 
-  /* JOB TYPE */
-
   if (
     jobType &&
     jobType !== 'all'
@@ -2393,7 +2636,8 @@ function getFilteredJobs() {
       jobs.filter(
         job =>
           String(
-            job.job_type || ''
+            job.job_type ||
+            ''
           )
             .toLowerCase()
             .includes(
@@ -2403,8 +2647,6 @@ function getFilteredJobs() {
 
   }
 
-
-  /* WORK MODE */
 
   if (
     remote === 'remote'
@@ -2436,8 +2678,6 @@ function getFilteredJobs() {
   }
 
 
-  /* POSTED */
-
   if (
     period &&
     period !== 'all'
@@ -2453,8 +2693,6 @@ function getFilteredJobs() {
 
   }
 
-
-  /* SKILL */
 
   if (
     skill &&
@@ -2478,8 +2716,6 @@ function getFilteredJobs() {
   }
 
 
-  /* STATUS */
-
   if (
     status &&
     status !== 'all'
@@ -2495,8 +2731,6 @@ function getFilteredJobs() {
 
   }
 
-
-  /* MINIMUM SCORE */
 
   if (
     Number.isFinite(
@@ -2516,8 +2750,6 @@ function getFilteredJobs() {
   }
 
 
-  /* SAVED ONLY */
-
   if (showSavedOnly) {
 
     jobs =
@@ -2530,8 +2762,6 @@ function getFilteredJobs() {
 
   }
 
-
-  /* SORT */
 
   const sort =
     $('sort')?.value ||
@@ -2546,10 +2776,12 @@ function getFilteredJobs() {
       ) {
 
         return String(
-          b.date_posted || ''
+          b.date_posted ||
+          ''
         ).localeCompare(
           String(
-            a.date_posted || ''
+            a.date_posted ||
+            ''
           )
         );
 
@@ -2561,10 +2793,12 @@ function getFilteredJobs() {
       ) {
 
         return String(
-          a.date_posted || ''
+          a.date_posted ||
+          ''
         ).localeCompare(
           String(
-            b.date_posted || ''
+            b.date_posted ||
+            ''
           )
         );
 
@@ -2576,12 +2810,15 @@ function getFilteredJobs() {
       ) {
 
         return (
+
           calculatePersonalMatch(
             b
           ).score -
+
           calculatePersonalMatch(
             a
           ).score
+
         );
 
       }
@@ -2592,10 +2829,12 @@ function getFilteredJobs() {
       ) {
 
         return String(
-          a.company || ''
+          a.company ||
+          ''
         ).localeCompare(
           String(
-            b.company || ''
+            b.company ||
+            ''
           )
         );
 
@@ -2603,12 +2842,17 @@ function getFilteredJobs() {
 
 
       return (
+
         Number(
-          b.score || 0
+          b.score ||
+          0
         ) -
+
         Number(
-          a.score || 0
+          a.score ||
+          0
         )
+
       );
 
     }
@@ -2645,10 +2889,6 @@ function render() {
   results.replaceChildren();
 
 
-  /*
-   * Result count
-   */
-
   const resultCount =
     $('resultCount');
 
@@ -2664,10 +2904,6 @@ function render() {
 
   }
 
-
-  /*
-   * Empty state
-   */
 
   if (!jobs.length) {
 
@@ -2695,7 +2931,9 @@ function render() {
     job => {
 
       results.append(
-        jobCard(job)
+        jobCard(
+          job
+        )
       );
 
     }
@@ -2767,8 +3005,6 @@ function resetFilters() {
 
 
 /* =========================================================
-   END OF PART 4
-   ========================================================= *//* =========================================================
    INITIALIZE
    ========================================================= */
 
@@ -2780,7 +3016,7 @@ async function init() {
 
 
   /*
-   * Filter listeners
+   * FILTER LISTENERS
    */
 
   controls.forEach(
@@ -2811,11 +3047,7 @@ async function init() {
 
 
   /*
-   * Clear filters
-   *
-   * Supports both IDs so the
-   * existing HTML will continue
-   * working.
+   * CLEAR FILTERS
    */
 
   const clearButton =
@@ -2834,7 +3066,7 @@ async function init() {
 
 
   /*
-   * Saved jobs
+   * SAVED JOBS
    */
 
   const savedButton =
@@ -2850,6 +3082,7 @@ async function init() {
         showSavedOnly =
           !showSavedOnly;
 
+
         updateSavedUI();
 
         render();
@@ -2861,7 +3094,7 @@ async function init() {
 
 
   /*
-   * Export
+   * EXPORT
    */
 
   const exportButton =
@@ -2879,7 +3112,7 @@ async function init() {
 
 
   /*
-   * Agent
+   * AGENT
    */
 
   const analyzeButton =
@@ -2897,7 +3130,7 @@ async function init() {
 
 
   /*
-   * Modal close
+   * MODAL CLOSE
    */
 
   const modalClose =
@@ -2928,7 +3161,7 @@ async function init() {
 
 
   /*
-   * Load real job data
+   * LOAD REAL JOB DATA
    */
 
   try {
@@ -2957,29 +3190,29 @@ async function init() {
 
 
     /*
-     * IMPORTANT:
-     *
-     * processed_jobs.json
-     * contains:
+     * Supports:
      *
      * {
      *   jobs: [...]
      * }
      *
-     * This also supports a direct
-     * array for compatibility.
+     * and:
+     *
+     * [...]
      */
 
     allJobs =
       Array.isArray(data)
         ? data
-        : Array.isArray(data.jobs)
+        : Array.isArray(
+            data.jobs
+          )
           ? data.jobs
           : [];
 
 
     /*
-     * Location options
+     * LOCATION
      */
 
     const locationSelect =
@@ -3000,7 +3233,7 @@ async function init() {
 
 
     /*
-     * Job type options
+     * JOB TYPE
      */
 
     const jobTypeSelect =
@@ -3021,7 +3254,7 @@ async function init() {
 
 
     /*
-     * Skill options
+     * SKILL
      */
 
     const skillSelect =
@@ -3039,7 +3272,7 @@ async function init() {
 
 
     /*
-     * Update dashboard
+     * DASHBOARD
      */
 
     updateSavedUI();
@@ -3048,8 +3281,7 @@ async function init() {
 
 
     /*
-     * Show initial recommendation
-     * only when data exists.
+     * AGENT
      */
 
     if (
@@ -3070,14 +3302,14 @@ async function init() {
 
 
     /*
-     * Render jobs
+     * RENDER
      */
 
     render();
 
 
     /*
-     * Update source status
+     * SOURCE STATUS
      */
 
     const sourceStatus =
@@ -3093,7 +3325,7 @@ async function init() {
 
 
     /*
-     * Update total
+     * TOTAL
      */
 
     const total =
@@ -3157,7 +3389,7 @@ async function init() {
 
 
 /* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
+   CLOSE MODAL OUTSIDE
    ========================================================= */
 
 document.addEventListener(
