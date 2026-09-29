@@ -2192,4 +2192,394 @@ a:focus-visible {
   .job-card-footer .apply-button {
     width: 100%;
   }
+}/* =========================================================
+   JOB RADAR — FINAL ALIGNMENT FIX
+   Paste at the VERY END of style.css
+   ========================================================= */
+
+/* ---------- GENERAL ---------- */
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+}
+
+
+/* ---------- SEARCH + FILTER AREA ---------- */
+
+.controls {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px;
+  align-items: end;
+}
+
+.field {
+  min-width: 0;
+  gap: 7px;
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+.field input,
+.field select {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.field input::placeholder {
+  font-size: 13px;
+}
+
+
+/* ---------- FILTER BUTTONS ---------- */
+
+.saved-toggle,
+.reset {
+  min-height: 44px;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+/* ---------- NOTICE ---------- */
+
+.notice {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ---------- JOB RESULTS ---------- */
+
+.results {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+
+/* ---------- JOB CARD ---------- */
+
+.job {
+  padding: 22px;
+  min-width: 0;
+}
+
+.job-head {
+  grid-template-columns: minmax(0, 1fr) 82px;
+  gap: 18px;
+}
+
+.source {
+  font-size: 9px;
+  padding: 5px 9px;
+}
+
+.job h4 {
+  font-size: 18px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.company {
+  margin-top: 7px;
+  font-size: 12px;
+}
+
+
+/* ---------- SCORE ---------- */
+
+.score {
+  padding: 11px 7px;
+}
+
+.score strong {
+  font-size: 26px;
+}
+
+.score small {
+  font-size: 8px;
+  margin-top: 6px;
+}
+
+
+/* ---------- META ---------- */
+
+.meta {
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.meta span {
+  padding: 6px 9px;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+
+/* ---------- DESCRIPTION ---------- */
+
+.job-description {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+
+/* ---------- PERSONAL MATCH ---------- */
+
+.personal-match {
+  padding: 13px 15px;
+}
+
+.personal-match-label {
+  font-size: 9px;
+}
+
+.personal-match strong {
+  font-size: 23px;
+}
+
+
+/* ---------- SKILLS ---------- */
+
+.skills {
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.skill {
+  padding: 6px 9px;
+  font-size: 9px;
+}
+
+
+/* ---------- JOB BUTTON AREA ---------- */
+
+.job-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.job-actions button,
+.job-actions a {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+
+/* ---------- APPLY BUTTON ---------- */
+
+.apply-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 16px;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+
+/* ---------- AGENT ---------- */
+
+.agent-card {
+  padding: 30px;
+}
+
+.agent-card h3 {
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+.agent-card-top p {
+  font-size: 12px;
+}
+
+.agent-label {
+  font-size: 9px;
+}
+
+.agent-skill-column > span {
+  font-size: 11px;
+}
+
+.agent-tags > span {
+  padding: 6px 9px;
+  font-size: 9px;
+}
+
+.agent-next p {
+  font-size: 12px;
+}
+
+
+/* ---------- INSIGHTS ---------- */
+
+.insight-card {
+  padding: 21px;
+}
+
+.insight-label {
+  font-size: 9px;
+}
+
+.insight-card p {
+  font-size: 11px;
+}
+
+.insight-tags > span {
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .controls .field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .shell {
+    width: min(100% - 24px, 560px);
+  }
+
+  .hero {
+    padding: 48px 0 45px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metric {
+    min-height: 105px;
+    padding: 17px;
+  }
+
+  .metric > strong {
+    font-size: 30px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .controls .field:first-child {
+    grid-column: auto;
+  }
+
+  .field input,
+  .field select,
+  .saved-toggle,
+  .reset {
+    min-height: 46px;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .job {
+    padding: 18px;
+  }
+
+  .job-head {
+    grid-template-columns: minmax(0, 1fr) 72px;
+    gap: 12px;
+  }
+
+  .job h4 {
+    font-size: 16px;
+  }
+
+  .company {
+    font-size: 11px;
+  }
+
+  .score strong {
+    font-size: 22px;
+  }
+
+  .meta span {
+    font-size: 9px;
+  }
+
+  .agent-card {
+    padding: 20px;
+  }
+
+  .agent-card-top {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-match {
+    width: 100%;
+  }
+
+  .agent-skills {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .apply-button {
+    width: 100%;
+  }
 }
