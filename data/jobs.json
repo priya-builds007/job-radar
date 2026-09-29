@@ -1,6 +1,175 @@
 {
   "jobs": [
     {
+      "company": "Kaleris",
+      "date_posted": "2026-09-28",
+      "description": "",
+      "id": "bfe3f6a875789127cc93",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471322071",
+      "location": "Chennai, Tamil Nadu, India",
+      "source": "linkedin",
+      "source_id": "li-4471322071",
+      "title": "Associate Software Engineer Intern - YMS"
+    },
+    {
+      "company": "Relinns Technologies",
+      "date_posted": "2026-09-28",
+      "description": "**About us:**\n\nAt Relinns Technologies, we are at the forefront of the digital transformation era, crafting innovative solutions in Generative AI\\-powered chatbots, software, and eCommerce platforms. From the early days of cassette tapes to the latest in nanotechnology, our trajectory mirrors the breathtaking pace of technological advancement.\n\nWith over 8 years of industry presence, we've partnered with top\\-tier clients like Apollo Tyres, Khatabook, and Manchester City Football Club, consistently pushing the boundaries of what's possible. Our cutting\\-edge projects like Store My Goods and Ockypocky showcase our expertise and commitment to redefining interactions with technology. At Relinns, we’re building tech products and shaping the global tech landscape with our vision.\n\n**About the Company Culture:**\n\nRelinns is dedicated to fostering a collaborative and innovative work environment, where creativity meets efficiency. We uphold core values such as Responsibility \\& Ownership, Integrity, Collaboration, Taking Initiatives, and Excellence. We support a healthy work\\-life balance with flexible working hours and engage our team with weekly fun activities aimed at team building. At Relinns, we prioritize a culture of learning and growth, focusing on continuous development across all areas. Our supportive environment fosters both personal and professional advancement, empowering our team members to excel in their roles.\n\n**About the role:**\n\nWe are seeking enthusiastic Web Development Interns with a focus on Java and Joget to join our team in Mohali. This role is ideal for individuals passionate about web development and eager to gain hands\\-on experience in building and enhancing enterprise applications using Java and the Joget Workflow platform. As a Web Development Intern, you will collaborate with our development team to create and maintain web applications that streamline business processes.\n\n**What You Need for this Position:**\n\n* Knowledge of Java and its core principles.\n* Familiarity with Joget Workflow or a strong willingness to learn.\n* Understanding of web technologies including HTML, CSS, and JavaScript.\n* Basic knowledge of database systems such as MySQL or PostgreSQL.\n* Familiarity with Git and version control.\n* Strong problem\\-solving skills and attention to detail.\n* Excellent communication skills and the ability to collaborate effectively with team members.\n* Ability to work methodically, manage priorities, and meet deadlines.\n* Eagerness to learn new technologies and improve skills continuously.\n* Previous internship or coursework in web development is a plus.\n\n**What You Will Be Doing:**\n\n* Assist in the development and maintenance of web applications using Java and Joget Workflow.\n* Write reusable, testable, and efficient code.\n* Collaborate with cross\\-functional teams to gather and analyze requirements.\n* Design and implement solutions to streamline business processes.\n* Integrate user\\-facing elements developed by front\\-end developers with server\\-side logic.\n* Participate in code reviews and provide constructive feedback to peers.\n* Debug and troubleshoot issues to ensure optimal performance.\n* Stay updated with the latest industry trends and best practices in web development.\n* Contribute to team efforts by delivering high\\-quality work within established timelines.\n\n**Top Reasons to Work with Us:**\n\n* We're a small, fast\\-paced growing team tackling huge new challenges every day.\n* Learning new concepts while working with an intellectual and exceptionally talented team\n* Friendly and high\\-growth work environment\n\nCompetitive compensation\n\nJob Type: Full\\-time\n\nPay: ₹600,000\\.00 \\- ₹1,000,227\\.00 per year\n\nBenefits:\n\n* Health insurance\n\nLocation Type:\n\n* In\\-person\n\nEducation:\n\n* Bachelor's (Required)\n\nExperience:\n\n* total work: 1 year (Required)\n* Java: 1 year (Required)\n* JSP: 1 year (Required)\n\nLicense/Certification:\n\n* Java (Required)\n\nWork Location: In person",
+      "id": "a8f5bcc984bf37782e2f",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=a23d1c4d2d9b6e5e",
+      "location": "PB, IN",
+      "source": "indeed",
+      "source_id": "in-a23d1c4d2d9b6e5e",
+      "title": "Java Developer"
+    },
+    {
+      "company": "Headstrong HR Consulting",
+      "date_posted": "2026-09-28",
+      "description": "### **Job Description: Weekday Testing Intern**\n\n\nWe are seeking a highly motivated and detail\\-oriented Weekday Testing Intern to join our Quality Assurance team. This internship offers a unique opportunity to gain hands\\-on experience in software testing and quality assurance within a dynamic development environment. The successful candidate will work closely with experienced QA engineers and developers, contributing to the delivery of high\\-quality software products.\n\n\n#### **Key Responsibilities:**\n\n\n* Execute detailed test cases across various software features and platforms, ensuring comprehensive coverage.\n* Identify, document, and track software defects and inconsistencies using established bug tracking systems, providing clear and concise reproduction steps.\n* Collaborate effectively with development, product, and other QA teams to understand project requirements, reproduce reported issues, and verify fixes.\n* Assist in the creation, review, and maintenance of test plans, test cases, and test data for new features and existing functionalities.\n* Perform regression testing to ensure that new code changes do not adversely affect existing functionalities and that bug fixes are successful.\n* Participate actively in daily stand\\-ups, team meetings, and sprint reviews, contributing to a collaborative team environment.\n* Learn and apply different testing methodologies and techniques, including functional, UI, usability, and performance testing basics.\n* Provide constructive feedback on software usability and user experience from an end\\-user perspective.\n* Contribute to the continuous improvement of testing processes, tools, and documentation.\n* Support the team in various ad\\-hoc testing tasks and special projects as needed.",
+      "id": "689e6e99ced08276f148",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=a38acf73aacfe2c2",
+      "location": "KA, IN",
+      "source": "indeed",
+      "source_id": "in-a38acf73aacfe2c2",
+      "title": "Weekday Testing Intern"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-28",
+      "description": "Java Developer Intern\n\n**Location:** Pune / Remote  \n**Duration:** 3–6 Months  \n**Mode:** Work From Home / Hybrid  \n**Stipend:** ₹10,000 per month\n\nAbout the Role\n\nWe are looking for a motivated **Java Developer Intern** who wants to gain practical experience in Java development and work on real\\-world projects. This internship provides an opportunity to learn, develop, test, and improve software applications while working with a development team.\n\nKey Responsibilities\n\n* Develop and maintain applications using **Java**\n* Write clean, efficient, and reusable code\n* Work on backend development and REST APIs\n* Assist in developing and integrating software features\n* Work with databases such as **MySQL/PostgreSQL**\n* Debug and troubleshoot application issues\n* Perform testing and resolve bugs\n* Collaborate with developers and team members\n* Participate in project discussions and code reviews\n* Document development work and project activities\n\nRequired Skills\n\n* Basic knowledge of **Java**\n* Understanding of **OOP concepts**\n* Knowledge of Java Collections and Exception Handling\n* Basic knowledge of **SQL and databases**\n* Understanding of REST APIs\n* Basic knowledge of **Git/GitHub**\n* Good logical and problem\\-solving skills\n* Willingness to learn and work on real\\-world projects\n\nGood to Have\n\n* Knowledge of **Spring / Spring Boot**\n* Basic knowledge of **Hibernate/JPA**\n* Familiarity with Maven or Gradle\n* Basic knowledge of HTML, CSS, or JavaScript\n* Experience with academic or personal Java projects\n\nEligibility\n\n* **Freshers and students are eligible to apply**\n* B.Tech/B.E./BCA/MCA students or graduates from a relevant technical background\n* No prior professional experience required\n* Candidates with basic Java knowledge are welcome\n* Students looking for practical industry experience can apply\n\nWhat You Will Gain\n\n* Hands\\-on experience in Java development\n* Real\\-world project experience\n* Exposure to backend development and REST APIs\n* Mentorship and guidance from the development team\n* Experience with Git/GitHub and collaborative development\n* Internship certificate\n* Project experience for your resume\n* Placement support based on performance\n\n**Start your journey as a Java Developer Intern and gain practical experience by working on real\\-world projects.**\n\nPay: ₹5,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: Hybrid remote in Bhubaneswar, Odisha 751016",
+      "id": "675590c6a8b23a9bd577",
+      "is_remote": true,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=d9752d90cffe0c48",
+      "location": "OR, IN",
+      "source": "indeed",
+      "source_id": "in-d9752d90cffe0c48",
+      "title": "Java Developer Intern"
+    },
+    {
+      "company": "STARTUP KHATA",
+      "date_posted": "2026-09-28",
+      "description": "An IoT Intern designs, builds, and connects smart devices, sensors, and embedded systems to wireless networks. They develop software pipelines to securely collect and transfer device data to cloud platforms. Additionally, they implement strong cybersecurity measures and perform remote software updates to ensure continuous, safe, and efficient device performance.\n\n**Tracking related knowledge are must**\n\nPay: ₹5,000\\.00 \\- ₹7,000\\.00 per month\n\nApplication Question(s):\n\n* Do you have knowledge or expereince of Tracking related product or equipement?\n\nWork Location: In person",
+      "id": "40fb509d3899a742caf7",
+      "is_remote": true,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=a8b9b6a6c83aa9fc",
+      "location": "DL, IN",
+      "source": "indeed",
+      "source_id": "in-a8b9b6a6c83aa9fc",
+      "title": "IoT Intern"
+    },
+    {
+      "company": "Kaleris",
+      "date_posted": "2026-09-28",
+      "description": "",
+      "id": "39be3ad673f6c5d081a8",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471313553",
+      "location": "Chennai, Tamil Nadu, India",
+      "source": "linkedin",
+      "source_id": "li-4471313553",
+      "title": "Engineering Intern – Transport Analytics"
+    },
+    {
+      "company": "Selfhost.dev",
+      "date_posted": "2026-09-28",
+      "description": "We are looking for a QA Intern who enjoys finding issues before customers do and has a strong eye for detail. The ideal candidate should be comfortable testing web applications, validating new features, and helping ensure a high\\-quality product experience while collaborating remotely with our team.\n\nOur platform helps customers create databases, monitor their health, manage backups, and operate infrastructure with confidence. As a QA intern, you'll help make sure every feature works as expected before it reaches customers. You'll test new releases, identify bugs, verify fixes, and help improve the overall quality of the product.\n\nEverything you find gets reviewed, and the bugs you catch help prevent real customer issues. You'll work closely with engineers, designers, and product teams to understand how features are built and how quality is maintained throughout the development process. It's a great opportunity to go from \"I can test software\" to \"I can help ship reliable products.\"\n\n**What you'll do:**\n\n* Test new features, enhancements, and bug fixes across the platform.\n* Create and execute test cases based on product requirements and user flows.\n* Identify, document, and track bugs with clear reproduction steps.\n* Perform regression testing before releases.\n* Validate UI, functionality, and usability across different devices and browsers.\n* Collaborate with developers to troubleshoot and verify fixes.\n* Participate in product discussions and provide quality\\-focused feedback.\n* Help improve testing processes, documentation, and quality standards.\n* Ensure the product delivers a smooth and reliable customer experience.\n\n**You will be a fit if:**\n\n* Strong attention to detail and curiosity about how software works.\n* Basic understanding of software testing concepts and QA processes.\n* Familiarity with web applications and modern SaaS products.\n* Ability to write clear bug reports and communicate issues effectively.\n* Understanding of test cases, test scenarios, and defect tracking.\n* Familiarity with tools like Jira, Linear, Trello, or similar platforms is a plus.\n* Basic knowledge of APIs and tools like Postman is a plus.\n* Ability to work independently and meet project deadlines.\n* Good communication skills and a willingness to learn.\n\n**Nice to have:**\n\n* Experience testing personal, academic, freelance, or open\\-source projects.\n* Familiarity with browser developer tools.\n* Understanding of responsive design and cross\\-browser testing.\n* Exposure to test automation tools such as Playwright, Cypress, or Selenium.\n* Basic understanding of databases and API testing.\n\n**Why join us:**\n\n* Flexible work\\-from\\-home environment.\n* Opportunity to work on a real product used by customers.\n* Learn directly from experienced engineers and product teams.\n* Long\\-term opportunity based on performance.\n* Collaborative and growth\\-oriented team.\n\n**Apply on with:**\n\n* Updated Resume\n* Any testing projects, case studies, or QA\\-related work (optional)\n* GitHub Profile (Optional)\n* Portfolio or documentation samples (Optional)\n\nBenefits:\n\n* Flexible schedule\n* Work from home\n\nWork Location: Remote",
+      "id": "304c973454b48130fd77",
+      "is_remote": true,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=d845134d9af3cb40",
+      "location": "Remote, IN",
+      "source": "indeed",
+      "source_id": "in-d845134d9af3cb40",
+      "title": "Quality Assurance (QA) Intern"
+    },
+    {
+      "company": "COMPUCARE",
+      "date_posted": "2026-09-28",
+      "description": "**Job Summary**\n\nWe are looking for a motivated **QA Intern** to support our software testing team in ensuring the quality, functionality, and reliability of our applications.\n\n**Key Responsibilities**\n\n* Perform **manual testing** of web and software applications.\n* Understand requirements and prepare **test cases and test scenarios**.\n* Identify, document, and track **bugs/issues** and follow up on their resolution.\n* Perform **functional, regression, and UI testing**.\n* Verify fixes and ensure issues are resolved as expected.\n* Collaborate with developers and the QA team to improve product quality.\n* Maintain basic testing documentation and reports.\n\n**Requirements**\n\n* Pursuing or completed **BCA, MCA, B.Sc. IT/Computer Science, B.E./B.Tech.** or related field.\n* Basic understanding of **Software Testing and SDLC**.\n* Good analytical and problem\\-solving skills.\n* Attention to detail and willingness to learn.\n* Basic knowledge of **SQL and API testing** will be an advantage.\n* Good communication and teamwork skills.\n\n**What You’ll Learn**\n\n* Practical exposure to **software testing and QA processes**.\n* Test case creation, bug reporting, and defect tracking.\n* Understanding of real\\-world software development and release cycles.\n* Hands\\-on experience with software products and testing tools.\n\nPay: ₹2,000\\.00 \\- ₹3,000\\.00 per month\n\nWork Location: In person",
+      "id": "2f9348c3bedf73d33817",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=f13c7492248f646d",
+      "location": "GJ, IN",
+      "source": "indeed",
+      "source_id": "in-f13c7492248f646d",
+      "title": "QA Intern"
+    },
+    {
+      "company": "Arema technologies",
+      "date_posted": "2026-09-28",
+      "description": "Flutter Development InternshipAbout the Internship\n\nArema Technologies is looking for a **Flutter Development Intern** to join our development team in Agra.\n\nThis internship is suitable for **freshers, students, and recent graduates** who have a basic understanding of Flutter and Dart and want to gain practical experience by working on real\\-world mobile application projects.\n\nThe selected intern will get an opportunity to work on application development, API integration, debugging, testing, and other aspects of mobile app development.\n\n**Internship Details**\n\n**Position:** Flutter Developer Intern  \n**Experience:** Freshers / 0–1 Year  \n**Job Type:** Internship  \n**Location:** Agra, Uttar Pradesh  \n**Stipend:** Based on skills and interview performance\n\n**Office Address:**  \nArema Technologies  \nFriends Tower, First Floor,  \nSanjay Palace, Agra, Uttar Pradesh\n\n**Key Responsibilities**\n\n* Develop and maintain mobile applications using Flutter and Dart.\n* Create responsive and user\\-friendly mobile interfaces.\n* Integrate REST APIs and work with JSON data.\n* Work with Firebase and other backend services.\n* Debug and fix application issues.\n* Test applications on different devices and screen sizes.\n* Understand and implement application features based on project requirements.\n* Work with Git and GitHub for version control.\n* Collaborate with the development team on real\\-world projects.\n* Learn and follow basic coding and development practices.\n\n**Skills RequiredMust Have**\n\n* Basic knowledge of Flutter.\n* Basic understanding of Dart.\n* Understanding of programming fundamentals.\n* Basic knowledge of Android application development.\n* Understanding of REST APIs and JSON.\n* Willingness to learn new technologies.\n* Good problem\\-solving and debugging skills.\n\n**Good to Have**\n\n* Firebase\n* Provider, GetX, Bloc, or Riverpod\n* Firebase Authentication / Firestore\n* Push Notifications\n* SQLite\n* Git / GitHub\n* Basic understanding of UI/UX\n* Previous Flutter projects or college projects\n\n**Who Can Apply?**\n\nCandidates who meet the following criteria can apply:\n\n* Freshers looking to start a career in mobile application development.\n* BCA, B.Tech, MCA, B.Sc. (CS/IT), or related graduates and students.\n* Candidates who have completed a Flutter course or are self\\-learning Flutter.\n* Candidates who have built personal, academic, or college projects using Flutter.\n* Candidates with good learning ability and an interest in mobile application development.\n\n**What You Will Gain**\n\n* Practical experience in Flutter and Dart development.\n* Exposure to real\\-world mobile application projects.\n* Experience working with REST APIs and Firebase.\n* Understanding of Git and collaborative development.\n* Hands\\-on experience in debugging and testing applications.\n* Opportunity to improve your technical and problem\\-solving skills.\n* Professional exposure to a software development environment.\n\nHow to Apply\n\nInterested candidates can send their updated resume to:\n\n**Email:** jyoti8859kumari@gmail.com\n\nWork Location: In person",
+      "id": "25fb0a74dbbe2be6e374",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=7d5f98355aadbe33",
+      "location": "UP, IN",
+      "source": "indeed",
+      "source_id": "in-7d5f98355aadbe33",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "HL Tech India Private Limited",
+      "date_posted": "2026-09-28",
+      "description": "MERN Stack Developer Intern\n\n**Company:** HL Tech India Private Limited  \n**Location:** Bhopal, Madhya Pradesh  \n**Work Mode:** On\\-site  \n**Position:** MERN Stack Developer Intern  \n**Experience:** Fresher / 0–1 Year  \n**Stipend:** ₹3,000 – ₹5,000 per month  \n**Joining:** Immediate\n\nAbout the Role\n\nHL Tech India Private Limited is looking for a **MERN Stack Developer Intern** who has practical, hands\\-on experience in web development and is ready to work on real\\-world projects.\n\nThe ideal candidate should have a good understanding of the **MERN Stack**, be comfortable writing and debugging code, and have experience building projects using **MongoDB, Express.js, React.js, and Node.js**.\n\nThis is an **immediate hiring opportunity**, so candidates who can join at the earliest will be preferred.\n\nKey Responsibilities\n\n* Develop and maintain web applications using the MERN Stack.\n* Build responsive and user\\-friendly interfaces using React.js.\n* Develop RESTful APIs and backend services using Node.js and Express.js.\n* Work with MongoDB for database design, queries, and data management.\n* Integrate frontend applications with backend APIs.\n* Debug, test, and optimize applications for performance and reliability.\n* Write clean, reusable, and maintainable code.\n* Collaborate with developers, UI/UX designers, and other team members.\n* Participate in code reviews and contribute to project development.\n* Work on real\\-world client and internal projects under the guidance of senior developers.\n\nRequired Skills\n\n* Hands\\-on experience with **React.js, Node.js, Express.js, and MongoDB**.\n* Good understanding of **JavaScript (ES6\\+)**.\n* Knowledge of HTML5 and CSS3\\.\n* Understanding of REST APIs and API integration.\n* Basic knowledge of Git and GitHub.\n* Understanding of database concepts.\n* Good problem\\-solving and debugging skills.\n* Ability to understand existing code and work on ongoing projects.\n* Good communication and willingness to learn.\n\nGood to Have\n\n* Experience with Redux / Redux Toolkit.\n* Knowledge of TypeScript.\n* Familiarity with JWT authentication and authorization.\n* Experience working with third\\-party APIs.\n* Basic understanding of deployment and hosting.\n* Experience working on live or academic projects using the MERN Stack.\n\nEligibility\n\n* B.Tech / B.E. / BCA / MCA / B.Sc. IT / CS or candidates with relevant technical skills.\n* Candidates with **hands\\-on project experience** in MERN Stack are preferred.\n* Freshers with strong practical knowledge and personal/academic projects can apply.\n* Candidates who are **available for immediate joining** are preferred.\n\nInternship Details\n\n**Duration:** 3–6 Months  \n**Stipend:** ₹3,000 – ₹5,000 per month  \n**Work Mode:** On\\-site  \n**Location:** Indrapuri, Bhopal  \n**Joining:** Immediate\n\nWhat You Will Get\n\n* Hands\\-on experience working on real\\-world projects.\n* Exposure to professional software development practices.\n* Opportunity to work with an experienced development team.\n* Practical experience in frontend and backend development.\n* Learning and exposure to client\\-based projects.\n* Potential opportunity for a full\\-time position based on performance and business requirements.\n\nHow to Apply\n\nInterested candidates can share their **updated resume along with GitHub / portfolio / project links**.\\[8538911038]\\[hr@hltechindia.com]\n\n**Immediate Joiners are encouraged to apply.**\n\nPay: ₹3,000\\.12 \\- ₹5,000\\.12 per month\n\nWork Location: In person",
+      "id": "221cc88aa03065713799",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=631dba12a1bde920",
+      "location": "MP, IN",
+      "source": "indeed",
+      "source_id": "in-631dba12a1bde920",
+      "title": "Full Stack Developer"
+    },
+    {
+      "company": "Aapthi Tech",
+      "date_posted": "2026-09-28",
+      "description": "Flutter Developer Intern\n\n**Company:** Yalavarthi Software Solutions Pvt. Ltd.  \n**Position:** Flutter Developer Intern  \n**Experience:** 0–6 Months (Freshers / Internship Experience)  \n**Location:** Hyderabad, Telangana – On\\-site  \n**Job Type:** Internship  \n**Stipend:** ₹10,000 per month  \n**Openings:** 2\n\nAbout the Role\n\nYalavarthi Software Solutions is looking for a motivated **Flutter Developer Intern** who is passionate about mobile app development and eager to build real\\-world applications.\n\nAs a Flutter Intern, you will work with our development team to create, test, debug, and improve cross\\-platform mobile applications using **Flutter and Dart**.\n\nKey Responsibilities\n\n* Develop and maintain mobile applications using **Flutter and Dart**.\n* Build responsive and user\\-friendly UI screens based on designs and requirements.\n* Integrate **REST APIs** and handle JSON data.\n* Work with navigation, forms, validation, and state management.\n* Debug application issues and fix UI and functional bugs.\n* Test applications across different screen sizes and devices.\n* Collaborate with developers, designers, QA, and other team members.\n* Follow coding standards and maintain clean, reusable code.\n* Learn and implement best practices for Flutter application development.\n\nRequired Skills\n\n* Basic knowledge of **Flutter and Dart**.\n* Understanding of **Flutter widgets and UI development**.\n* Knowledge of **Dart programming fundamentals**.\n* Basic understanding of **REST APIs and JSON**.\n* Familiarity with **Git/GitHub**.\n* Understanding of mobile application development concepts.\n* Good problem\\-solving and debugging skills.\n* Willingness to learn and work in a team environment.\n\nGood to Have\n\n* Knowledge of **State Management** such as Provider, Riverpod, Bloc, or GetX.\n* Basic experience with **Firebase**.\n* Understanding of **SQLite / local storage**.\n* Knowledge of Android Studio or VS Code.\n* Any academic, personal, or internship project built using Flutter.\n\nWho Can Apply?\n\n* Freshers with knowledge of Flutter and Dart.\n* Candidates with **0–6 months of internship or project experience**.\n* B.Tech / B.E / MCA / B.Sc / M.Sc or relevant graduates.\n* Candidates who are passionate about learning mobile application development.\n\nWhat You'll Gain\n\n* Hands\\-on experience working on real\\-world mobile applications.\n* Practical exposure to Flutter, Dart, APIs, Git, and debugging.\n* Experience working with developers, designers, and QA teams.\n* Opportunity to improve your mobile development skills in a professional environment.\n\n**Stipend:** ₹10,000/month  \n**Location:** Hyderabad, Telangana – On\\-site\n\nPay: From ₹10,000\\.00 per month\n\nWork Location: In person",
+      "id": "1736f1f786a67957b3b7",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=3900340faf7eccca",
+      "location": "TS, IN",
+      "source": "indeed",
+      "source_id": "in-3900340faf7eccca",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-28",
+      "description": "About Us\n\nCONVOSIS Technologies is a Software Development and Technology Consulting company focused on delivering innovative digital solutions. We are looking for enthusiastic and motivated candidates who are passionate about data engineering, data infrastructure, and modern data technologies.\n\nThis internship provides hands\\-on experience working with real\\-world data pipelines, databases, ETL processes, cloud\\-based data solutions, and data engineering projects.\n\nInternship Details\n\n* Position: Data Engineer Intern\n* Duration: 3 Months\n* Internship Fee: ₹15,000 (Payable to Company)\n* Stipend: Not Provided\n* Certificate: Internship / Experience Certificate Upon Successful Completion\n* Location: IT Park, Kottayam, Kerala\n\nKey Responsibilities\n\n* Develop and maintain data pipelines for data collection and processing.\n* Extract, transform, and load (ETL) data from multiple sources.\n* Work with SQL databases and data warehouses.\n* Perform data validation, cleansing, and quality assurance.\n* Optimize database queries and data workflows.\n* Support data integration and migration activities.\n* Assist in building scalable data infrastructure.\n* Collaborate with Data Analysts, Developers, and Project Teams.\n* Document data processes, workflows, and technical specifications.\n* Monitor and troubleshoot data\\-related issues.\n\nRequired Technical Skills\n\n* SQL\n* Database Fundamentals\n* Python Programming\n* Data Processing Concepts\n* Microsoft Excel\n\nPreferred Skills\n\n* Knowledge of ETL Processes\n* Understanding of Data Warehousing Concepts\n* Familiarity with PostgreSQL, MySQL, or SQL Server\n* Basic Knowledge of Cloud Platforms\n* Understanding of APIs and Data Integration\n* Strong Analytical and Problem\\-Solving Skills\n* Good Communication Skills\n\nNo prior industry experience is required.\n\nWhat You Will Gain\n\n* Real Project Experience\n* Industry Mentorship\n* Internship / Experience Certificate\n* Exposure to Professional Data Engineering Workflows\n* Portfolio Development Support\n* Experience with Data Pipelines and Databases\n* Opportunity to Work with Software Development Teams\n\nEducation\n\n* Any Degree / Diploma\n* Final Year Students, Freshers, and Graduates Can Apply\n\nApply Now\n\nInternship Application Form:\n\nhttps://docs.google.com/forms/d/e/1FAIpQLSfU\\-OHWHf02Mb6Bg8uMhHsD4r3kfBSv3TfTm6TGA6qhQpVeZA/viewform?usp\\=publish\\-editor\n\nLimited openings available. Shortlisted candidates will be contacted for the screening test and interview process.\n\nWork Location: In person",
+      "id": "037a88fb8225ff6ee028",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=bb3638fa207569b4",
+      "location": "KL, IN",
+      "source": "indeed",
+      "source_id": "in-bb3638fa207569b4",
+      "title": "DATA ENGINEER INTERNSHIP OPPORTUNITY (PAID INTERNSHIP – ₹15,000)"
+    },
+    {
+      "company": "WebRelier Software Solutions Pvt Ltd",
+      "date_posted": "2026-09-28",
+      "description": "**WebRelier Software Solutions Pvt. Ltd.** is offering internship opportunities for freshers (pass\\-out candidates) for the position of **.NET Full Stack Developer Intern**.\n\nThis internship is designed to provide hands\\-on experience in real\\-time projects and help candidates build strong technical skills in full stack development using modern technologies.\n\n**Required Experience, Skills and Qualifications:**\n\n* Strong problem\\-solving skills with the ability to resolve technical issues with minimal guidance.\n* Good understanding of **OOPs (Object\\-Oriented Programming Concepts)**.\n* Basic to intermediate knowledge of **Web Development technologies**.\n* Familiarity with **HTML, CSS, JavaScript, AJAX, Bootstrap**.\n* Knowledge of **Angular / React (any one framework preferred)**.\n* Understanding of **.NET Core / ASP.NET Core framework**.\n* Knowledge of **REST APIs, Web APIs, and API integration**.\n* Basic database knowledge: **SQL Server, Queries, Joins, Stored Procedures**.\n* Understanding of **version control systems (Git preferred)** is a plus.\n* Good communication and organizational skills.\n* Ability to work both independently and in a team environment.\n* Willingness to learn new tools and technologies.\n* Strong analytical and logical thinking abilities.\n\n**Responsibilities and Duties:**\n\n* Design, develop, and maintain web applications using **.NET Full Stack technologies**.\n* Work on both **frontend (UI)** and **backend (server\\-side logic)**.\n* Build and integrate **RESTful APIs**.\n* Collaborate with team members, mentors, and project managers.\n* Participate in debugging, testing, and improving application performance.\n* Write clean, scalable, and well\\-documented code.\n* Follow best practices of software development and SDLC.\n* Be flexible to work on different technologies as per project requirements.\n* Be ready to work on real\\-time projects and meet deadlines.\n\n**Benefits:**\n\n* Opportunity to work on **Live Projects**\n* Professional **Industrial Training \\& Mentorship**\n* Internship Certificate\n* Flexible timings and task\\-oriented work environment\n* Exposure to the complete **Software Development Life Cycle (SDLC)**\n* Practical experience with real\\-world applications\n\n**Address:**\n\n**WEBRELIER SOFTWARE SOLUTIONS PVT LTD**  \n43/3/A, Sakshi Niwas (Behind Global Punjab Lane No. 6\\)  \nNear Kharadi Bypass, Pathare \\- Thube Nagar  \nKharadi, Pune, Maharashtra – 411014\n\n**For More Information:**\n\nVisit Us: **www.webrelier.com**\n\n**Note:**\n\n* These openings are strictly for **Internship positions only**\n* Candidates should be available to **join immediately**\n* Candidates must be flexible to work on different technologies\n\nPay: ₹4,500\\.00 per month\n\nWork Location: In person",
+      "id": "00235743d80985c7d24a",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=e554d561e94d1318",
+      "location": "MH, IN",
+      "source": "indeed",
+      "source_id": "in-e554d561e94d1318",
+      "title": ".NET Full Stack Developer - Intern"
+    },
+    {
       "company": "Sofueled",
       "date_posted": "2026-09-27",
       "description": "Job Description\n\n\nWe are not looking for someone who only schedules posts or reposts trending content. We are looking for a Social Media \\& Content Creation Intern who is curious about technology, enjoys creating engaging content, and wants to learn how modern tech companies build their online presence.\n\n\nIn this role, you will work closely with our team to create social media content, produce short\\-form videos and reels, and help communicate technology\\-related topics in a way that is easy to understand and engaging.\n\n\n**What You'll Do**\n\n\n1\\. Create Short\\-Form Video Content\n\n\nPlan, shoot, edit, and publish reels, shorts, and other short\\-form content for platforms such as Instagram, LinkedIn, YouTube, and Facebook.\n\n\n2\\. Turn Technical Topics into Engaging Content\n\n\nWork with developers, designers, and company leadership to transform software, AI, startups, product development, and technology topics into compelling social media content.\n\n\n3\\. Content Research\n\n\nResearch industry trends, emerging technologies, AI tools, software development topics, and competitor content to identify content opportunities.\n\n\n4\\. Social Media Management\n\n\nAssist with content scheduling, publishing, community engagement, and maintaining content calendars.\n\n\n5\\. Graphic \\& Creative Support\n\n\nCreate basic graphics, thumbnails, carousels, and visual assets using modern design tools.\n\n\n6\\. Experiment \\& Learn\n\n\nTest new content formats, AI\\-powered content tools, editing techniques, and storytelling approaches to improve reach and engagement.\n\n  \n\n\n**Who You Are**\n\n\n1\\. Strong Interest in Technology\n\n\nYou enjoy learning about software, AI, startups, websites, mobile apps, and emerging technologies.\n\n\n2\\. Content Creation Skills\n\n\nYou can create engaging reels and short\\-form videos that capture attention within the first few seconds.\n\n\n3\\. Video Editing Ability\n\n\nComfortable using tools such as CapCut, Premiere Pro, Final Cut Pro, Canva, or similar editing software.\n\n\n4\\. Basic Technical Understanding\n\n\nYou do not need to be a developer, but you should be comfortable understanding and communicating technical concepts after research and guidance.\n\n\n5\\. Communication Skills\n\n\nStrong written and verbal communication skills with attention to detail.\n\n\n6\\. Self\\-Starter Mindset\n\n\nYou enjoy taking ownership, learning independently, and bringing fresh content ideas to the table.\n\n  \n\n\n**Bonus Points**\n\n\n* Experience managing social media pages.\n* Basic understanding of AI tools\n* Experience creating content around technology, startups, software, or entrepreneurship.\n* Graphic design skills.\n* Experience with photography or videography.\n\n  \n\n\n**Why Join Us?**\n\n\nThis is not a traditional social media internship where you only post content. You will gain exposure to software development, AI, startups, branding, digital marketing, and content strategy while working directly with experienced professionals.\n\n  \n\n\nIf you are passionate about technology and want to build a portfolio of meaningful content rather than generic social media posts, we'd love to hear from you.\n\n  \n\n\nPlease note that only shortlisted candidates will be contacted for the next round.",
@@ -1041,6 +1210,19 @@
       "title": "Jr. Onsite Product Support – Technical Associate"
     },
     {
+      "company": "TSk MARKETING MANAGEMENT",
+      "date_posted": "2026-09-15",
+      "description": "**Company:** Schoenen Dis LLP  \n**Location:** Court Road, Nagercoil\n\nSchoenen Dis LLP is looking for enthusiastic, motivated, and career\\-oriented **Full Stack Developer Interns** who are eager to gain hands\\-on experience in front\\-end, back\\-end, databases, and real\\-time web application development.\n\n**Key Responsibilities**\n\n* Assist in front\\-end development using HTML, CSS, and JavaScript.\n* Support back\\-end development and application development tasks.\n* Work with databases and perform basic SQL operations.\n* Assist in API integration and web application development.\n* Test, debug, and troubleshoot applications.\n* Maintain project documentation and update code.\n* Collaborate with the development team on live client projects.\n* Learn and follow software development best practices.\n\n**Required Skills**\n\n* Basic knowledge of programming concepts.\n* Understanding of HTML, CSS, and JavaScript.\n* Interest in front\\-end and back\\-end development.\n* Basic knowledge of databases and SQL.\n* Good logical thinking and problem\\-solving skills.\n* Positive attitude and willingness to learn.\n* Ability to work independently and in a team.\n\n**Eligibility**\n\n* Any Bachelor's Degree (B.E., B.Tech, BCA, MCA, B.Sc, M.Sc, or equivalent).\n* Freshers, students, and recent graduates are welcome to apply.\n* Candidates passionate about Full Stack Development are encouraged to apply.\n\n**What You'll Gain**\n\n* Hands\\-on experience with real\\-time client projects.\n* Practical training in front\\-end, back\\-end, APIs, and databases.\n* Exposure to the Software Development Life Cycle (SDLC).\n* Guidance and mentorship from experienced developers.\n* Opportunity to improve coding, debugging, and development skills.\n* Internship Completion Certificate.\n* Performance\\-based opportunity for full\\-time employment.\n\n**How to Apply**\n\nInterested candidates can apply through **Indeed** or send their resume via **WhatsApp** to:\n\n* **78454 57974**\n* **95971 91248**\n\nWork Location: In person",
+      "id": "94e2502bcffa2e0ba1d7",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=c97cf6b664dab6e7",
+      "location": "TN, IN",
+      "source": "indeed",
+      "source_id": "in-c97cf6b664dab6e7",
+      "title": "Python Developer Intern"
+    },
+    {
       "company": "Vidyalai",
       "date_posted": "2026-09-15",
       "description": "",
@@ -1119,6 +1301,19 @@
       "title": "Associate Software Engineer - Intern"
     },
     {
+      "company": "FATCAT WEALTHY",
+      "date_posted": "2026-09-11",
+      "description": "**Position:** AI Python Developer  \n**Experience:** 2\\+ Years  \n**Location:** Salem  \n**Work Mode:** Work From Office\n\n**Key Responsibilities:**\n\n* Develop AI/ML applications using **Python**.\n* Build and integrate **AI models, APIs, and automation solutions**.\n* Work with **Machine Learning, Generative AI, NLP, and LLMs**.\n* Develop backend services using **Django / Flask / FastAPI**.\n* Integrate third\\-party APIs and AI tools.\n* Work with databases, Git, and cloud platforms.\n* Test, debug, optimize, and maintain AI\\-based applications.\n\n**Required Skills:**\n\n* Strong Python programming.\n* Knowledge of **AI/ML and Generative AI**.\n* Experience with **OpenAI/LLM APIs, LangChain or similar frameworks**.\n* Knowledge of **REST APIs, SQL/NoSQL, Git**.\n* Good problem\\-solving and communication skills.\n\n**Eligibility: Experienced candidates only. Freshers and internship candidates are not eligible.**\n\nPay: ₹9,006\\.14 \\- ₹15,300\\.89 per month\n\nBenefits:\n\n* Paid sick time\n* Paid time off\n\nWork Location: On the road",
+      "id": "778a7f46e49b694bf74b",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=77d3abc36369280c",
+      "location": "TN, IN",
+      "source": "indeed",
+      "source_id": "in-77d3abc36369280c",
+      "title": "Artificial Intelligence and Machine Learning Intern"
+    },
+    {
       "company": "Beetloop Global Solutions Private Limited",
       "date_posted": "2026-09-11",
       "description": "**Position: Full Stack Developer Intern \\- Immediate Joiner** \n\n**Interview Process:** Online Technical Interview (Candidates will be invited for an in\\-person discussion only after clearing the online interview.)\n\n**Employment Type:** Internship\n\n**Duration:** 3 to 6 Months\n\n**Joining:** Immediate Joiners Preferred\n\n**Stipend:** Based on Interview Performance\n\n**Experience:** Freshers\n\n**About Beetloop**\n\nBeetloop is a regulatory\\-first, evidence\\-based B2B intelligence and execution platform incubated at **IIT Madras**, focused on transforming regulated product ecosystems through technology, compliance, and AI\\-driven solutions.\n\n**About the Role**\n\nWe are looking for a Full Stack Developer with strong frontend expertise to join our development team. The ideal candidate will have solid hands\\-on experience in React.js, Next.js, TypeScript, JavaScript, and Tailwind CSS, along with working knowledge of Java, Spring Boot, PostgreSQL, and AWS.\n\nThis role will primarily focus on building modern, scalable, responsive, and high\\-performance frontend applications, while also contributing to backend APIs and cloud\\-based solutions.\n\n**Key Responsibilities**\n\n* Develop and maintain scalable web applications using React.js and Next.js.\n* Build reusable, responsive, and high\\-quality UI components using TypeScript, JavaScript, and Tailwind CSS.\n* Integrate RESTful APIs and handle frontend\\-backend communication.\n* Implement form validation, authentication, authorization, and application\\-level business requirements.\n* Optimize frontend performance, page loading, and overall user experience.\n* Develop and maintain backend REST APIs using Java and Spring Boot.\n* Work with PostgreSQL for database queries and data management.\n* Collaborate with UI/UX designers, backend developers, and product teams.\n* Deploy and maintain applications on AWS.\n* Use Git/GitHub for version control, branching, pull requests, and collaborative development.\n* Troubleshoot, debug, and resolve application issues across frontend and backend.\n* Follow clean coding practices, code reviews, and Agile/Scrum methodologies.\n\n**Good to Have**\n\n* Experience with state management such as Redux / Redux Toolkit\n* Knowledge of authentication mechanisms such as JWT\n* Understanding of AWS deployment and cloud services\n* Experience with performance optimization and scalable frontend architecture\n* Familiarity with Agile/Scrum development\n* What We’re Looking For\n* Strong problem\\-solving and debugging skills.\n* Ability to write clean, reusable, and maintainable code.\n* Good communication and collaboration skills.\n* Ability to work independently as well as within a team.\n* Passion for learning and working with modern web technologies.\n\n**Eligibility**\n\n* Pursuing or completed **B.E./B.Tech, M.E./M.Tech, BCA, MCA, B.Sc. (Computer Science/IT), M.Sc. (Computer Science/IT)**, or equivalent.\n* Good understanding of Full Stack Development concepts.\n* Strong problem\\-solving and communication skills.\n* Immediate joiners will be given preference.\n\n**Work Location:** In Person (IIT Madras Incubation Cell, Tharamani)\n\n**Contact:** 87544 46692\n\nJob Type: Internship\n\nPay: ₹7,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: In person",
@@ -1156,6 +1351,19 @@
       "source": "linkedin",
       "source_id": "li-4464517094",
       "title": "SDE I Flutter"
+    },
+    {
+      "company": "Breakout",
+      "date_posted": "2026-09-10",
+      "description": "",
+      "id": "0bf06851dd75eca072ef",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4465367373",
+      "location": "Bengaluru South, Karnataka, India",
+      "source": "linkedin",
+      "source_id": "li-4465367373",
+      "title": "Electronics Project Development Internship in Koramangala"
     },
     {
       "company": "A TO Z COMPUTERS",
@@ -1808,19 +2016,6 @@
       "title": "Digital Marketing Intern"
     },
     {
-      "company": "Kaleris",
-      "date_posted": null,
-      "description": "",
-      "id": "bfe3f6a875789127cc93",
-      "is_remote": false,
-      "job_type": "",
-      "job_url": "https://www.linkedin.com/jobs/view/4471322071",
-      "location": "Chennai, Tamil Nadu, India",
-      "source": "linkedin",
-      "source_id": "li-4471322071",
-      "title": "Associate Software Engineer Intern - YMS"
-    },
-    {
       "company": "Chargebee",
       "date_posted": null,
       "description": "",
@@ -1832,6 +2027,19 @@
       "source": "linkedin",
       "source_id": "li-4470771517",
       "title": "Software Engineer"
+    },
+    {
+      "company": "Ucanly",
+      "date_posted": null,
+      "description": "",
+      "id": "a6e13facede74f9ac8c9",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470858733",
+      "location": "Bengaluru, Karnataka, India",
+      "source": "linkedin",
+      "source_id": "li-4470858733",
+      "title": "Full Stack Developer - Entry Level"
     },
     {
       "company": "Vigilant Forensic Research And Analytics Pvt. Ltd.",
@@ -1847,17 +2055,17 @@
       "title": "Full-Stack Developer Intern"
     },
     {
-      "company": "Kaleris",
+      "company": "Zudu AI",
       "date_posted": null,
       "description": "",
-      "id": "39be3ad673f6c5d081a8",
+      "id": "2f437e8258c6119fc833",
       "is_remote": false,
       "job_type": "",
-      "job_url": "https://www.linkedin.com/jobs/view/4471313553",
+      "job_url": "https://www.linkedin.com/jobs/view/4471349262",
       "location": "Chennai, Tamil Nadu, India",
       "source": "linkedin",
-      "source_id": "li-4471313553",
-      "title": "Engineering Intern – Transport Analytics"
+      "source_id": "li-4471349262",
+      "title": "Backend Engineering Intern, Voice AI Platform"
     }
   ],
   "schema_version": 1
