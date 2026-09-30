@@ -4,6 +4,14 @@
     {
       "source": "/",
       "destination": "/web/index.html"
+    },
+    {
+      "source": "/style.css",
+      "destination": "/web/style.css"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/web/app.js"
     }
   ]
 }
