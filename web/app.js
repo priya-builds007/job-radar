@@ -2643,7 +2643,6 @@ document.addEventListener(
     updateApplicationPipeline();
 
     console.log(
-      "Job Radar initialization complete."
-    );
-  }
+  "Job Radar initialization complete."
 );
+});
