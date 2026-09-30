@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -10,2434 +8,714 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="theme-color"
+    content="#0b1020"
+  >
+
   <title>Job Radar — Career Intelligence</title>
 
-  <meta
-    name="description"
-    content="Job Radar — Career Intelligence Platform"
-  >
-
+  <!-- IMPORTANT: CSS is loaded from root -->
   <link
     rel="stylesheet"
-    href="./style.css"
+    href="/style.css"
   >
-
 </head>
-
 
 <body>
 
-
-  <!-- ==================== PAGE LOADER ==================== -->
-
+  <!-- PAGE LOADER -->
   <div
-    class="page-loader"
     id="pageLoader"
+    class="page-loader"
   >
-
-    <div class="loader-mark">
-      JR
+    <div class="loader-logo">
+      JOB RADAR
     </div>
 
-    <div class="loader-line">
+    <div class="loader-bar">
       <span></span>
     </div>
 
     <p>
-      Initializing Career Intelligence
+      Loading career intelligence...
     </p>
-
   </div>
 
 
-  <!-- ==================== PAGE TRANSITION ==================== -->
-
+  <!-- PAGE TRANSITION -->
   <div
-    class="page-transition"
     id="pageTransition"
+    class="page-transition"
   ></div>
 
 
-  <!-- ==================== MOBILE OVERLAY ==================== -->
-
+  <!-- MOBILE OVERLAY -->
   <div
-    class="mobile-overlay"
     id="mobileOverlay"
+    class="mobile-overlay"
   ></div>
 
-
-  <!-- ==================== APP SHELL ==================== -->
 
   <div class="app-shell">
 
-
-    <!-- ==================== SIDEBAR ==================== -->
-
+    <!-- SIDEBAR -->
     <aside
-      class="sidebar"
       id="sidebar"
+      class="sidebar"
     >
 
-
-      <!-- BRAND -->
-
       <div class="brand">
-
         <div class="brand-mark">
           JR
         </div>
 
-        <div class="brand-text">
-
-          <strong>
-            Job Radar
-          </strong>
-
-          <span>
-            Career Intelligence
-          </span>
-
+        <div>
+          <strong>Job Radar</strong>
+          <span>Career Intelligence</span>
         </div>
-
       </div>
 
 
-      <!-- NAVIGATION -->
+      <nav class="main-nav">
 
-      <nav class="main-navigation">
-
-
-        <div class="nav-label">
+        <p class="nav-label">
           WORKSPACE
-        </div>
-
+        </p>
 
         <button
           class="nav-item active"
           data-page="command"
         >
-
-          <span class="nav-icon">
-            ◈
-          </span>
-
-          <span>
-            Command Center
-          </span>
-
+          <span>⌂</span>
+          <span>Command Center</span>
         </button>
-
 
         <button
           class="nav-item"
           data-page="opportunities"
         >
-
-          <span class="nav-icon">
-            ◇
-          </span>
-
-          <span>
-            Opportunities
-          </span>
-
+          <span>◈</span>
+          <span>Opportunities</span>
         </button>
-
 
         <button
           class="nav-item"
           data-page="career-agent"
         >
-
-          <span class="nav-icon">
-            ✦
-          </span>
-
-          <span>
-            Career Agent
-          </span>
-
+          <span>✦</span>
+          <span>Career Agent</span>
         </button>
-
-
-        <div class="nav-label">
-          INTELLIGENCE
-        </div>
-
 
         <button
           class="nav-item"
           data-page="resume"
         >
-
-          <span class="nav-icon">
-            ▤
-          </span>
-
-          <span>
-            Resume Intelligence
-          </span>
-
+          <span>▣</span>
+          <span>Resume Analyzer</span>
         </button>
-
 
         <button
           class="nav-item"
           data-page="skills"
         >
-
-          <span class="nav-icon">
-            ◎
-          </span>
-
-          <span>
-            Skill Lab
-          </span>
-
+          <span>◆</span>
+          <span>Skill Intelligence</span>
         </button>
-
 
         <button
           class="nav-item"
           data-page="career-twin"
         >
-
-          <span class="nav-icon">
-            ◉
-          </span>
-
-          <span>
-            Career Twin
-          </span>
-
+          <span>◎</span>
+          <span>Career Twin</span>
         </button>
 
 
-        <div class="nav-label">
-          TRACKING
-        </div>
-
+        <p class="nav-label">
+          TRACK
+        </p>
 
         <button
           class="nav-item"
           data-page="applications"
         >
-
-          <span class="nav-icon">
-            □
-          </span>
-
-          <span>
-            Applications
-          </span>
-
+          <span>✓</span>
+          <span>Applications</span>
         </button>
-
 
       </nav>
 
 
-      <!-- SIDEBAR BOTTOM -->
+      <div class="sidebar-footer">
 
-      <div class="sidebar-bottom">
-
-
-        <button
-          class="sidebar-mini-button"
-          data-open-demo
-        >
-
-          <span>
-            ▶
-          </span>
+        <div class="system-status">
+          <span class="status-dot"></span>
 
           <div>
-
-            <strong>
-              Demo Mode
-            </strong>
-
-            <small>
-              Guided walkthrough
-            </small>
-
+            <strong>System Online</strong>
+            <small>Job data connected</small>
           </div>
-
-        </button>
-
-
-        <div class="sidebar-profile">
-
-          <div class="profile-avatar">
-            PC
-          </div>
-
-          <div>
-
-            <strong>
-              Student Profile
-            </strong>
-
-            <span>
-              Career Explorer
-            </span>
-
-          </div>
-
         </div>
 
-
       </div>
-
 
     </aside>
 
 
-    <!-- ==================== MAIN CONTENT ==================== -->
-
+    <!-- MAIN CONTENT -->
     <main class="main-content">
 
-
       <!-- TOPBAR -->
-
       <header class="topbar">
 
-
         <button
-          class="mobile-menu-button"
           id="mobileMenuButton"
+          class="mobile-menu-button"
         >
           ☰
         </button>
 
+        <div class="topbar-title">
+          <span>Career Intelligence</span>
 
-        <div class="breadcrumb">
-
-          <span>
-            JOB RADAR
-          </span>
-
-          <b>
-            /
-          </b>
-
-          <strong id="currentPageName">
-            Command Center
-          </strong>
-
+          <h1 id="currentPageName">
+            Career Command Center
+          </h1>
         </div>
 
 
         <div class="topbar-actions">
 
-
           <button
-            class="topbar-search"
+            class="icon-button"
             data-open-search
+            title="Search"
           >
-
-            <span>
-              ⌕
-            </span>
-
-            <span>
-              Search
-            </span>
-
-            <kbd>
-              /
-            </kbd>
-
+            ⌕
           </button>
-
 
           <button
-            class="notification-button"
+            class="icon-button"
             data-open-notifications
+            title="Notifications"
           >
-
-            <span>
-              ◌
-            </span>
-
-            <i>
-              3
-            </i>
-
+            ♢
           </button>
-
 
         </div>
-
 
       </header>
 
 
-      <!-- ==================== PAGE CONTAINER ==================== -->
-
+      <!-- PAGE CONTAINER -->
       <div class="page-container">
 
-
-        <!-- ==================== COMMAND CENTER ==================== -->
-
+        <!-- COMMAND CENTER -->
         <section
-          class="page-section active"
           id="page-command"
+          class="page-section active"
+          data-section="command"
         >
-
-
-          <!-- HERO -->
 
           <div class="command-hero">
 
-
             <div class="hero-content">
 
-
               <span class="eyebrow">
-                CAREER INTELLIGENCE
+                YOUR CAREER RADAR
               </span>
 
-
-              <h1>
-                Your next opportunity starts here.
-              </h1>
-
+              <h2>
+                Find opportunities.
+                <span>Build your future.</span>
+              </h2>
 
               <p>
-                Discover relevant opportunities,
-                understand your skill gaps,
-                and turn job discovery into a clear
-                career action plan.
+                Job Radar scans opportunities, analyzes your skills,
+                and helps you understand what to do next.
               </p>
 
 
               <div class="hero-actions">
 
-
                 <button
-                  class="primary-btn"
-                  data-action-button="find"
+                  class="primary-button"
+                  data-action="find"
                 >
-
                   Find Opportunities
-
-                  <span>
-                    →
-                  </span>
-
+                  <span>→</span>
                 </button>
-
 
                 <button
-                  class="secondary-btn"
-                  data-open-demo
+                  class="secondary-button"
+                  data-action="agent"
                 >
-
-                  Explore Demo
-
+                  Open Career Agent
                 </button>
 
-
-              </div>
-
-
-            </div>
-
-
-            <!-- HERO INTELLIGENCE -->
-
-            <div class="hero-intelligence">
-
-
-              <div class="orbit orbit-a"></div>
-
-              <div class="orbit orbit-b"></div>
-
-              <div class="orbit orbit-c"></div>
-
-
-              <div class="intelligence-core">
-
-                <span>
-                  JR
-                </span>
-
-                <small>
-                  INTELLIGENCE
-                </small>
-
-              </div>
-
-
-              <div class="signal signal-one">
-
-                <span></span>
-
-                MATCH
-
-              </div>
-
-
-              <div class="signal signal-two">
-
-                <span></span>
-
-                SKILLS
-
-              </div>
-
-
-              <div class="signal signal-three">
-
-                <span></span>
-
-                ACTION
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== METRICS ==================== -->
-
-          <div class="metric-grid">
-
-
-            <div class="metric-card">
-
-
-              <div class="metric-top">
-
-                <span class="metric-label">
-                  OPPORTUNITIES
-                </span>
-
-                <span class="metric-icon">
-                  ◇
-                </span>
-
-              </div>
-
-
-              <strong id="totalOpportunities">
-                0
-              </strong>
-
-
-              <p>
-                Collected job opportunities
-              </p>
-
-
-            </div>
-
-
-            <div class="metric-card">
-
-
-              <div class="metric-top">
-
-                <span class="metric-label">
-                  STRONG MATCHES
-                </span>
-
-                <span class="metric-icon">
-                  ◎
-                </span>
-
-              </div>
-
-
-              <strong id="strongMatches">
-                0
-              </strong>
-
-
-              <p>
-                70%+ profile alignment
-              </p>
-
-
-            </div>
-
-
-            <div class="metric-card">
-
-
-              <div class="metric-top">
-
-                <span class="metric-label">
-                  INTERNSHIPS
-                </span>
-
-                <span class="metric-icon">
-                  ↗
-                </span>
-
-              </div>
-
-
-              <strong id="internshipCount">
-                0
-              </strong>
-
-
-              <p>
-                Early-career opportunities
-              </p>
-
-
-            </div>
-
-
-            <div class="metric-card">
-
-
-              <div class="metric-top">
-
-                <span class="metric-label">
-                  SKILL SIGNALS
-                </span>
-
-                <span class="metric-icon">
-                  +
-                </span>
-
-              </div>
-
-
-              <strong id="skillSignalCount">
-                0
-              </strong>
-
-
-              <p>
-                Skills detected in jobs
-              </p>
-
-
-            </div>
-
-
-          </div>          <!-- ==================== COMMAND GRID ==================== -->
-
-          <div class="section-block">
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  WORKSPACE
-                </span>
-
-                <h2>
-                  Career Command Center
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Your career workflow
-              </span>
-
-            </div>
-
-
-            <div class="command-grid">
-
-
-              <button
-                class="command-card command-primary"
-                data-action-button="find"
-              >
-
-                <div class="command-number">
-                  01
-                </div>
-
-                <div class="command-icon">
-                  ◇
-                </div>
-
-                <h3>
-                  Job Scout
-                </h3>
-
-                <p>
-                  Search and analyze opportunities
-                  collected from multiple sources.
-                </p>
-
-                <span class="command-arrow">
-                  →
-                </span>
-
-              </button>
-
-
-              <button
-                class="command-card"
-                data-action-button="agent"
-              >
-
-                <div class="command-number">
-                  02
-                </div>
-
-                <div class="command-icon">
-                  ✦
-                </div>
-
-                <h3>
-                  Opportunity Agent
-                </h3>
-
-                <p>
-                  Understand your matches and
-                  decide what to do next.
-                </p>
-
-                <span class="command-arrow">
-                  →
-                </span>
-
-              </button>
-
-
-              <button
-                class="command-card"
-                data-action-button="skills"
-              >
-
-                <div class="command-number">
-                  03
-                </div>
-
-                <div class="command-icon">
-                  ◎
-                </div>
-
-                <h3>
-                  Skill Coach
-                </h3>
-
-                <p>
-                  Discover skill gaps and identify
-                  useful next skills.
-                </p>
-
-                <span class="command-arrow">
-                  →
-                </span>
-
-              </button>
-
-
-              <button
-                class="command-card"
-                data-action-button="resume"
-              >
-
-                <div class="command-number">
-                  04
-                </div>
-
-                <div class="command-icon">
-                  ▤
-                </div>
-
-                <h3>
-                  Resume Intelligence
-                </h3>
-
-                <p>
-                  Connect your resume profile with
-                  relevant opportunities.
-                </p>
-
-                <span class="command-arrow">
-                  →
-                </span>
-
-              </button>
-
-
-            </div>
-
-          </div>
-
-
-          <!-- ==================== OPPORTUNITY AGENT ==================== -->
-
-          <div class="agent-preview section-block">
-
-
-            <div class="agent-preview-left">
-
-
-              <div class="agent-status-line">
-
-                <span class="live-dot"></span>
-
-                <span>
-                  OPPORTUNITY AGENT
-                </span>
-
-                <b>
-                  ACTIVE
-                </b>
-
-              </div>
-
-
-              <h2>
-                From job discovery
-                to your next action.
-              </h2>
-
-
-              <p>
-                Job Radar doesn't just show listings.
-                It connects your profile with opportunity
-                signals and explains what you can do next.
-              </p>
-
-
-              <div class="agent-flow">
-
-
-                <div class="flow-step">
-
-                  <span>
-                    01
-                  </span>
-
-                  <strong>
-                    Discover
-                  </strong>
-
-                </div>
-
-
-                <div class="flow-line"></div>
-
-
-                <div class="flow-step">
-
-                  <span>
-                    02
-                  </span>
-
-                  <strong>
-                    Match
-                  </strong>
-
-                </div>
-
-
-                <div class="flow-line"></div>
-
-
-                <div class="flow-step">
-
-                  <span>
-                    03
-                  </span>
-
-                  <strong>
-                    Explain
-                  </strong>
-
-                </div>
-
-
-                <div class="flow-line"></div>
-
-
-                <div class="flow-step">
-
-                  <span>
-                    04
-                  </span>
-
-                  <strong>
-                    Act
-                  </strong>
-
-                </div>
-
-
-              </div>
-
-
-            </div>
-
-
-            <div class="agent-preview-right">
-
-
-              <div class="agent-mini-card">
-
-
-                <div class="agent-mini-top">
-
-                  <span>
-                    NEXT OPPORTUNITY
-                  </span>
-
-                  <span class="agent-live">
-                    ● LIVE
-                  </span>
-
-                </div>
-
-
-                <h3>
-                  Personalized opportunity
-                </h3>
-
-
-                <p>
-                  Your strongest matches will appear here
-                  after the job dataset is loaded.
-                </p>
-
-
-                <div class="agent-mini-score">
-
-
-                  <div>
-
-                    <strong>
-                      <span id="agentOpportunityCount">
-                        0
-                      </span>
-                    </strong>
-
-                    <span>
-                      opportunities
-                    </span>
-
-                  </div>
-
-
-                  <div>
-
-                    <strong>
-                      <span id="agentStrongMatches">
-                        0
-                      </span>
-                    </strong>
-
-                    <span>
-                      strong matches
-                    </span>
-
-                  </div>
-
-
-                </div>
-
-
-                <button
-                  class="text-btn"
-                  data-action-button="agent"
-                >
-
-                  Open Career Agent →
-
-                </button>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== CAREER READINESS ==================== -->
-
-          <div class="dashboard-two-column section-block">
-
-
-            <div class="readiness-card">
-
-
-              <div class="section-title-row">
-
-
-                <div>
-
-                  <span class="eyebrow">
-                    CAREER READINESS
-                  </span>
-
-                  <h2>
-                    Your current position
-                  </h2>
-
-                </div>
-
-
-                <span
-                  class="readiness-score"
-                  id="careerReadinessScore"
-                >
-                  0%
-                </span>
-
-
-              </div>
-
-
-              <div class="readiness-progress">
-
-                <span
-                  id="careerReadinessProgress"
-                ></span>
-
-              </div>
-
-
-              <div class="readiness-items">
-
-
-                <div class="readiness-item">
-
-                  <span class="check-mark">
-                    ✓
-                  </span>
-
-                  <div>
-
-                    <strong>
-                      Career direction
-                    </strong>
-
-                    <p>
-                      Target role is defined.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div class="readiness-item">
-
-                  <span class="check-mark">
-                    ✓
-                  </span>
-
-                  <div>
-
-                    <strong>
-                      Skill foundation
-                    </strong>
-
-                    <p>
-                      Your current skills are being tracked.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div class="readiness-item">
-
-                  <span class="check-mark">
-                    ✓
-                  </span>
-
-                  <div>
-
-                    <strong>
-                      Opportunity discovery
-                    </strong>
-
-                    <p>
-                      Job Radar is connected to your dataset.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <div class="readiness-item">
-
-                  <span class="check-mark">
-                    →
-                  </span>
-
-                  <div>
-
-                    <strong>
-                      Application activity
-                    </strong>
-
-                    <p>
-                      Track applications to complete your workflow.
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-              </div>
-
-
-            </div>
-
-
-            <!-- ==================== QUICK ACTIONS ==================== -->
-
-            <div class="quick-actions-card">
-
-
-              <span class="eyebrow">
-                QUICK ACTIONS
-              </span>
-
-
-              <h2>
-                Continue your workflow
-              </h2>
-
-
-              <button
-                class="quick-action"
-                data-action-button="find"
-              >
-
-                <span>
-                  ◇
-                </span>
-
-                <div>
-
-                  <strong>
-                    Find opportunities
-                  </strong>
-
-                  <small>
-                    Explore current matches
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="quick-action"
-                data-action-button="skills"
-              >
-
-                <span>
-                  ◎
-                </span>
-
-                <div>
-
-                  <strong>
-                    Review skill gaps
-                  </strong>
-
-                  <small>
-                    See what jobs are asking for
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="quick-action"
-                data-action-button="resume"
-              >
-
-                <span>
-                  ▤
-                </span>
-
-                <div>
-
-                  <strong>
-                    Review resume intelligence
-                  </strong>
-
-                  <small>
-                    Connect profile and jobs
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="quick-action"
-                data-action-button="applications"
-              >
-
-                <span>
-                  □
-                </span>
-
-                <div>
-
-                  <strong>
-                    Track applications
-                  </strong>
-
-                  <small>
-                    Manage your pipeline
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-            </div>
-
-
-          </div>          <!-- ==================== OPPORTUNITY PULSE ==================== -->
-
-          <div class="section-block">
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  LIVE INTELLIGENCE
-                </span>
-
-                <h2>
-                  Opportunity Pulse
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Based on collected job data
-              </span>
-
-            </div>
-
-
-            <div
-              class="pulse-grid"
-              id="opportunityPulse"
-            >
-
-
-              <div class="pulse-stat">
-
-                <span class="pulse-number">
-                  0
-                </span>
-
-                <div>
-
-                  <strong>
-                    New today
-                  </strong>
-
-                  <p>
-                    Fresh opportunities detected
-                  </p>
-
-                </div>
-
-              </div>
-
-
-              <div class="pulse-stat">
-
-                <span class="pulse-number">
-                  0
-                </span>
-
-                <div>
-
-                  <strong>
-                    Recently added
-                  </strong>
-
-                  <p>
-                    Latest opportunity signals
-                  </p>
-
-                </div>
-
-              </div>
-
-
-              <div class="pulse-stat">
-
-                <span class="pulse-number">
-                  0
-                </span>
-
-                <div>
-
-                  <strong>
-                    Strong matches
-                  </strong>
-
-                  <p>
-                    High profile alignment
-                  </p>
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-          </div>
-
-
-          <!-- ==================== SOURCE INTELLIGENCE ==================== -->
-
-          <div class="section-block">
-
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  DATA SOURCES
-                </span>
-
-                <h2>
-                  Source Intelligence
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Where opportunities are coming from
-              </span>
-
-            </div>
-
-
-            <div
-              class="source-intelligence"
-              id="sourceIntelligence"
-            >
-
-              <div class="source-row">
-
-                <div class="source-name">
-
-                  <span class="source-dot"></span>
-
-                  <strong>
-                    Waiting for data
-                  </strong>
-
-                </div>
-
-                <div class="source-bar">
-
-                  <span style="width:0%"></span>
-
-                </div>
-
-                <strong class="source-count">
-                  0
-                </strong>
-
               </div>
 
             </div>
 
 
-          </div>
+            <div class="hero-visual">
 
+              <div class="radar-circle">
 
-        </section>
-
-
-        <!-- ================================================= -->
-        <!-- OPPORTUNITIES PAGE                                -->
-        <!-- ================================================= -->
-
-
-        <section
-          class="page-section"
-          id="page-opportunities"
-        >
-
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
-
-            <div>
-
-              <span class="eyebrow">
-                OPPORTUNITY DISCOVERY
-              </span>
-
-              <h1>
-                Opportunities
-              </h1>
-
-              <p>
-                Search, filter and understand the jobs
-                that match your career direction.
-              </p>
-
-            </div>
-
-
-            <div class="page-heading-actions">
-
-              <button
-                class="secondary-btn"
-                data-action-button="agent"
-              >
-
-                ✦ Career Agent
-
-              </button>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== SEARCH ==================== -->
-
-          <div class="opportunity-search">
-
-
-            <div class="main-search-box">
-
-              <span>
-                ⌕
-              </span>
-
-              <input
-                type="text"
-                id="jobSearch"
-                placeholder="Search job title, company, skill..."
-                autocomplete="off"
-              >
-
-              <kbd>
-                /
-              </kbd>
-
-            </div>
-
-
-            <select
-              id="sourceFilter"
-              class="filter-select"
-            >
-
-              <option value="all">
-                All sources
-              </option>
-
-              <option value="Indeed">
-                Indeed
-              </option>
-
-              <option value="LinkedIn">
-                LinkedIn
-              </option>
-
-              <option value="Naukri">
-                Naukri
-              </option>
-
-              <option value="Glassdoor">
-                Glassdoor
-              </option>
-
-            </select>
-
-
-            <select
-              id="sortJobs"
-              class="filter-select"
-            >
-
-              <option value="match">
-                Best match
-              </option>
-
-              <option value="fresh">
-                Freshest
-              </option>
-
-              <option value="title">
-                Job title
-              </option>
-
-            </select>
-
-
-          </div>
-
-
-          <!-- ==================== FILTERS ==================== -->
-
-          <div class="filter-row">
-
-
-            <button
-              class="filter-chip active"
-              data-filter="all"
-            >
-              All
-            </button>
-
-
-            <button
-              class="filter-chip"
-              data-filter="strong"
-            >
-              Strong matches
-            </button>
-
-
-            <button
-              class="filter-chip"
-              data-filter="internship"
-            >
-              Internships
-            </button>
-
-
-            <button
-              class="filter-chip"
-              data-filter="remote"
-            >
-              Remote
-            </button>
-
-
-            <button
-              class="filter-chip"
-              data-filter="fresh"
-            >
-              Fresh
-            </button>
-
-
-            <button
-              class="filter-chip"
-              data-filter="saved"
-            >
-              Saved
-            </button>
-
-
-          </div>
-
-
-          <!-- ==================== RESULTS TOOLBAR ==================== -->
-
-          <div class="results-toolbar">
-
-
-            <div>
-
-              <strong>
-
-                <span id="resultCount">
-                  0
-                </span>
-
-                opportunities
-
-              </strong>
-
-              <span>
-                analyzed by Job Radar
-              </span>
-
-            </div>
-
-
-            <div class="results-toolbar-right">
-
-              <span>
-                Personal matching enabled
-              </span>
-
-              <span class="live-dot"></span>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== JOB RESULTS ==================== -->
-
-          <div
-            class="job-results"
-            id="jobResults"
-          >
-
-            <div class="loading-state">
-
-              <div class="loading-spinner"></div>
-
-              <p>
-                Loading opportunities...
-              </p>
-
-            </div>
-
-          </div>
-
-
-        </section>
-
-
-        <!-- ================================================= -->
-        <!-- CAREER AGENT PAGE                                 -->
-        <!-- ================================================= -->
-
-
-        <section
-          class="page-section"
-          id="page-career-agent"
-        >
-
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
-            <div>
-
-              <span class="eyebrow">
-                OPPORTUNITY AGENT
-              </span>
-
-              <h1>
-                Career Agent
-              </h1>
-
-              <p>
-                Analyze opportunities and turn them
-                into clear next actions.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <!-- ==================== AGENT MAIN ==================== -->
-
-          <div class="career-agent-main">
-
-
-            <div class="agent-main-left">
-
-
-              <div class="agent-status-line">
-
-                <span class="live-dot"></span>
-
-                <span>
-                  AGENT STATUS
-                </span>
-
-                <b id="agentStatus">
-                  ACTIVE
-                </b>
-
-              </div>
-
-
-              <h2>
-                Your opportunity
-                intelligence layer.
-              </h2>
-
-
-              <p>
-                The Career Agent connects your profile,
-                job signals and skill requirements to
-                help you understand what deserves attention.
-              </p>
-
-
-              <div class="agent-main-actions">
-
-
-                <button
-                  class="primary-btn"
-                  data-agent-action="scan"
-                >
-
-                  Scan Opportunities
-                  →
-
-                </button>
-
-
-                <button
-                  class="secondary-btn"
-                  data-agent-action="match"
-                >
-
-                  Find Strong Matches
-
-                </button>
-
-
-              </div>
-
-
-            </div>
-
-
-            <!-- ==================== AGENT RADAR ==================== -->
-
-            <div class="agent-main-right">
-
-
-              <div class="agent-radar">
-
-                <div class="radar-circle circle-one"></div>
-
-                <div class="radar-circle circle-two"></div>
-
-                <div class="radar-circle circle-three"></div>
-
-                <div class="radar-sweep"></div>
+                <div class="radar-ring ring-one"></div>
+                <div class="radar-ring ring-two"></div>
+                <div class="radar-ring ring-three"></div>
 
                 <div class="radar-center">
                   JR
                 </div>
 
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== AGENT DASHBOARD ==================== -->
-
-          <div class="agent-dashboard-grid">
-
-
-            <!-- AGENT ACTIVITY -->
-
-            <div class="agent-activity-card">
-
-
-              <div class="section-title-row">
-
-                <div>
-
-                  <span class="eyebrow">
-                    ACTIVITY
-                  </span>
-
-                  <h2>
-                    Agent Activity
-                  </h2>
-
-                </div>
+                <span class="radar-point point-one"></span>
+                <span class="radar-point point-two"></span>
+                <span class="radar-point point-three"></span>
 
               </div>
-
-
-              <div class="activity-list">
-
-
-                <div class="activity-item">
-
-
-                  <span class="activity-number">
-                    01
-                  </span>
-
-
-                  <div>
-
-                    <strong>
-                      Opportunities analyzed
-                    </strong>
-
-                    <p>
-
-                      <span id="agentOpportunityCount">
-                        0
-                      </span>
-
-                      listings available for analysis.
-
-                    </p>
-
-                  </div>
-
-
-                </div>
-
-
-                <div class="activity-item">
-
-
-                  <span class="activity-number">
-                    02
-                  </span>
-
-
-                  <div>
-
-                    <strong>
-                      Strong matches detected
-                    </strong>
-
-                    <p>
-
-                      <span id="agentStrongMatches">
-                        0
-                      </span>
-
-                      opportunities currently meet
-                      the strong-match threshold.
-
-                    </p>
-
-                  </div>
-
-
-                </div>
-
-
-                <div class="activity-item">
-
-
-                  <span class="activity-number">
-                    03
-                  </span>
-
-
-                  <div>
-
-                    <strong>
-                      Profile skills
-                    </strong>
-
-                    <p>
-
-                      <span id="agentSkillCount">
-                        0
-                      </span>
-
-                      skills are currently in your profile.
-
-                    </p>
-
-                  </div>
-
-
-                </div>
-
-
-                <div class="activity-item">
-
-
-                  <span class="activity-number">
-                    04
-                  </span>
-
-
-                  <div>
-
-                    <strong>
-                      Saved opportunities
-                    </strong>
-
-                    <p>
-
-                      <span id="agentSavedCount">
-                        0
-                      </span>
-
-                      opportunities are saved for review.
-
-                    </p>
-
-                  </div>
-
-
-                </div>
-
-
-              </div>
-
-
-            </div>
-
-
-            <!-- ==================== AGENT TOOLS ==================== -->
-
-            <div class="agent-tools-card">
-
-
-              <span class="eyebrow">
-                AGENT TOOLS
-              </span>
-
-
-              <h2>
-                What should we do next?
-              </h2>
-
-
-              <button
-                class="agent-tool"
-                data-agent-action="scan"
-              >
-
-                <span>
-                  ◇
-                </span>
-
-                <div>
-
-                  <strong>
-                    Scan new opportunities
-                  </strong>
-
-                  <small>
-                    Refresh the opportunity intelligence layer
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="agent-tool"
-                data-agent-action="match"
-              >
-
-                <span>
-                  ◎
-                </span>
-
-                <div>
-
-                  <strong>
-                    Find my strongest matches
-                  </strong>
-
-                  <small>
-                    Filter opportunities using your profile
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="agent-tool"
-                data-agent-action="skills"
-              >
-
-                <span>
-                  +
-                </span>
-
-                <div>
-
-                  <strong>
-                    Analyze skill gaps
-                  </strong>
-
-                  <small>
-                    See skills frequently requested by jobs
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-              <button
-                class="agent-tool"
-                data-agent-action="resume"
-              >
-
-                <span>
-                  ▤
-                </span>
-
-                <div>
-
-                  <strong>
-                    Check resume alignment
-                  </strong>
-
-                  <small>
-                    Compare your profile with opportunities
-                  </small>
-
-                </div>
-
-                <b>
-                  →
-                </b>
-
-              </button>
-
-
-            </div>
-
-
-          </div>
-
-
-        </section>        <!-- ================================================= -->
-        <!-- RESUME INTELLIGENCE PAGE                          -->
-        <!-- ================================================= -->
-
-        <section
-          class="page-section"
-          id="page-resume"
-        >
-
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
-            <div>
-
-              <span class="eyebrow">
-                RESUME INTELLIGENCE
-              </span>
-
-              <h1>
-                Resume Intelligence
-              </h1>
-
-              <p>
-                Analyze your resume profile and connect
-                your skills with relevant opportunities.
-              </p>
-
-            </div>
-
-
-            <div class="page-heading-actions">
-
-              <button
-                class="secondary-btn"
-                data-action-button="opportunities"
-              >
-                View Opportunities
-              </button>
 
             </div>
 
           </div>
 
 
-          <!-- ==================== RESUME UPLOAD ==================== -->
+          <!-- METRICS -->
+          <div class="metric-grid">
 
-          <div class="resume-layout">
-
-
-            <div class="resume-upload-card">
-
-
-              <div class="resume-upload-header">
-
-                <div>
-
-                  <span class="eyebrow">
-                    PROFILE INPUT
-                  </span>
-
-                  <h2>
-                    Upload your resume
-                  </h2>
-
-                  <p>
-                    Add a PDF or DOCX resume to build
-                    your career intelligence profile.
-                  </p>
-
-                </div>
-
-
-                <div class="resume-file-icon">
-                  ▤
-                </div>
-
-              </div>
-
-
-              <input
-                type="file"
-                id="resumeFile"
-                accept=".pdf,.doc,.docx"
-                hidden
-              >
-
-
-              <label
-                for="resumeFile"
-                class="resume-dropzone"
-                id="resumeUploadButton"
-              >
-
-                <div class="upload-icon">
-                  ↑
-                </div>
-
-                <strong>
-                  Choose your resume
-                </strong>
-
-                <span>
-                  PDF or DOCX
-                </span>
-
-                <small id="resumeFileName">
-                  No file selected
-                </small>
-
-              </label>
-
-
-              <div class="resume-upload-note">
-
-                <span>
-                  i
-                </span>
-
-                <p>
-                  Resume analysis is used to identify
-                  skills and compare them with available jobs.
-                </p>
-
-              </div>
-
-
+            <div class="metric-card">
+              <span>Opportunities</span>
+              <strong id="totalOpportunities">0</strong>
+              <small>Available jobs</small>
             </div>
 
+            <div class="metric-card">
+              <span>Strong Matches</span>
+              <strong id="strongMatches">0</strong>
+              <small>High-fit roles</small>
+            </div>
 
-            <!-- ==================== RESUME PROFILE ==================== -->
+            <div class="metric-card">
+              <span>Internships</span>
+              <strong id="internshipCount">0</strong>
+              <small>Student-friendly</small>
+            </div>
 
-            <div class="resume-profile-card">
+            <div class="metric-card">
+              <span>Skill Signals</span>
+              <strong id="skillSignalCount">0</strong>
+              <small>Skills in demand</small>
+            </div>
+
+          </div>
 
 
-              <div class="section-title-row">
+          <!-- COMMAND GRID -->
+          <div class="dashboard-grid">
 
+            <div class="dashboard-card">
+
+              <div class="section-heading">
                 <div>
-
                   <span class="eyebrow">
-                    PROFILE SIGNALS
+                    OPPORTUNITY PULSE
                   </span>
 
-                  <h2>
-                    Detected skills
-                  </h2>
-
+                  <h3>
+                    Your current market signal
+                  </h3>
                 </div>
-
               </div>
-
 
               <div
-                class="resume-skill-list"
-                id="resumeSkillList"
-              >
+                id="opportunityPulse"
+                class="opportunity-pulse"
+              ></div>
 
-                <div class="empty-state">
+            </div>
 
-                  <span>
-                    ◎
+
+            <div class="dashboard-card">
+
+              <div class="section-heading">
+                <div>
+                  <span class="eyebrow">
+                    SOURCE INTELLIGENCE
                   </span>
 
-                  <p>
-                    Upload a resume to detect skills.
-                  </p>
-
+                  <h3>
+                    Where opportunities come from
+                  </h3>
                 </div>
-
               </div>
 
+              <div
+                id="sourceIntelligence"
+                class="source-intelligence"
+              ></div>
 
             </div>
-
 
           </div>
 
 
-          <!-- ==================== RESUME SCORES ==================== -->
+          <!-- CAREER READINESS -->
+          <div class="dashboard-card readiness-card">
 
-          <div class="resume-score-grid">
+            <div class="readiness-info">
 
-
-            <div class="resume-score-card">
-
-
-              <div class="score-card-top">
-
-                <span>
-                  RESUME MATCH
-                </span>
-
-                <span>
-                  ◎
-                </span>
-
-              </div>
-
-
-              <strong id="resumeMatchScore">
-                0%
-              </strong>
-
-
-              <p>
-                Alignment with current opportunities
-              </p>
-
-
-              <div class="mini-progress">
-
-                <span
-                  id="resumeMatchProgress"
-                ></span>
-
-              </div>
-
-
-            </div>
-
-
-            <div class="resume-score-card">
-
-
-              <div class="score-card-top">
-
-                <span>
-                  READINESS
-                </span>
-
-                <span>
-                  ◈
-                </span>
-
-              </div>
-
-
-              <strong id="resumeReadinessScore">
-                0%
-              </strong>
-
-
-              <p>
-                Current profile completeness
-              </p>
-
-
-              <div class="mini-progress">
-
-                <span
-                  id="resumeReadinessProgress"
-                ></span>
-
-              </div>
-
-
-            </div>
-
-
-            <div class="resume-score-card">
-
-
-              <div class="score-card-top">
-
-                <span>
-                  MATCHED JOBS
-                </span>
-
-                <span>
-                  ◇
-                </span>
-
-              </div>
-
-
-              <strong id="resumeMatchCount">
-                0
-              </strong>
-
-
-              <p>
-                Opportunities connected to your profile
-              </p>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== RESUME MATCHES ==================== -->
-
-          <div class="section-block">
-
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  RESUME → OPPORTUNITY
-                </span>
-
-                <h2>
-                  Relevant opportunities
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Based on detected profile signals
+              <span class="eyebrow">
+                CAREER READINESS
               </span>
 
+              <h3>
+                Your current profile signal
+              </h3>
+
+              <p>
+                Based on your skills, target role and
+                available opportunities.
+              </p>
+
             </div>
 
 
-            <div
-              class="resume-matches"
-              id="resumeMatches"
-            >
+            <div class="readiness-score">
 
-              <div class="empty-state">
+              <strong id="careerReadinessScore">
+                0%
+              </strong>
 
-                <span>
-                  ◇
-                </span>
-
-                <p>
-                  Upload your resume to see matching opportunities.
-                </p>
-
+              <div class="progress-track">
+                <div
+                  id="careerReadinessProgress"
+                  class="progress-fill"
+                ></div>
               </div>
 
             </div>
 
+          </div>
+
+        </section>        <!-- OPPORTUNITIES PAGE -->
+        <section
+          id="page-opportunities"
+          class="page-section"
+          data-section="opportunities"
+        >
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                OPPORTUNITY RADAR
+              </span>
+
+              <h2>
+                Find your next opportunity
+              </h2>
+
+              <p>
+                Search and filter opportunities based on your career profile.
+              </p>
+            </div>
 
           </div>
 
+
+          <!-- JOB TOOLBAR -->
+          <div class="job-toolbar">
+
+            <div class="job-search">
+
+              <span>⌕</span>
+
+              <input
+                id="jobSearch"
+                type="search"
+                placeholder="Search jobs, skills or companies..."
+              >
+
+            </div>
+
+
+            <select id="sourceFilter">
+              <option value="all">All Sources</option>
+              <option value="indeed">Indeed</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="naukri">Naukri</option>
+              <option value="glassdoor">Glassdoor</option>
+            </select>
+
+
+            <select id="sortJobs">
+              <option value="match">Best Match</option>
+              <option value="fresh">Newest</option>
+              <option value="title">Job Title</option>
+              <option value="company">Company</option>
+            </select>
+
+          </div>
+
+
+          <!-- FILTERS -->
+          <div class="filter-row">
+
+            <button
+              class="filter-button active"
+              data-filter="all"
+            >
+              All
+            </button>
+
+            <button
+              class="filter-button"
+              data-filter="strong"
+            >
+              Strong Matches
+            </button>
+
+            <button
+              class="filter-button"
+              data-filter="internship"
+            >
+              Internships
+            </button>
+
+            <button
+              class="filter-button"
+              data-filter="remote"
+            >
+              Remote
+            </button>
+
+            <button
+              class="filter-button"
+              data-filter="saved"
+            >
+              Saved
+            </button>
+
+          </div>
+
+
+          <!-- RESULT HEADER -->
+          <div class="result-header">
+
+            <div>
+              <strong id="resultCount">
+                0 opportunities
+              </strong>
+
+              <span>
+                matched to your profile
+              </span>
+            </div>
+
+            <button
+              class="secondary-button"
+              data-agent-action="refresh"
+            >
+              Refresh Radar
+            </button>
+
+          </div>
+
+
+          <!-- JOB RESULTS -->
+          <div
+            id="jobResults"
+            class="job-results"
+          ></div>
+
+
+          <!-- EMPTY STATE -->
+          <div
+            id="emptyState"
+            class="empty-state"
+            hidden
+          >
+
+            <div class="empty-icon">
+              ◇
+            </div>
+
+            <h3>
+              No opportunities found
+            </h3>
+
+            <p>
+              Try changing your search or filters.
+            </p>
+
+          </div>
 
         </section>
 
 
-        <!-- ================================================= -->
-        <!-- SKILL LAB PAGE                                    -->
-        <!-- ================================================= -->
-
+        <!-- CAREER AGENT PAGE -->
         <section
+          id="page-career-agent"
           class="page-section"
-          id="page-skills"
+          data-section="career-agent"
         >
 
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
+          <div class="section-heading">
 
             <div>
-
               <span class="eyebrow">
-                SKILL INTELLIGENCE
+                OPPORTUNITY AGENT
               </span>
 
-              <h1>
-                Skill Lab
-              </h1>
+              <h2>
+                Your career navigator
+              </h2>
 
               <p>
-                Understand which skills matter in the
-                opportunities currently available.
+                Analyze opportunities, skills and next actions from one place.
               </p>
+            </div>
+
+          </div>
+
+
+          <!-- AGENT HERO -->
+          <div class="agent-hero">
+
+            <div class="agent-hero-content">
+
+              <div class="agent-status">
+                <span class="status-dot"></span>
+                <span id="agentStatus">
+                  Agent online
+                </span>
+              </div>
+
+              <h3>
+                Let your opportunities
+                <span>come to you.</span>
+              </h3>
+
+              <p>
+                Job Radar analyzes your profile and available jobs
+                to surface useful opportunities and explain why they matter.
+              </p>
+
+              <button
+                class="primary-button"
+                data-agent-action="refresh"
+              >
+                Run Opportunity Analysis
+                <span>→</span>
+              </button>
 
             </div>
 
 
-            <div class="page-heading-actions">
+            <div class="agent-visual">
+
+              <div class="agent-orbit">
+
+                <div class="orbit-ring"></div>
+
+                <div class="agent-core">
+                  AI
+                </div>
+
+                <span class="orbit-dot dot-a"></span>
+                <span class="orbit-dot dot-b"></span>
+                <span class="orbit-dot dot-c"></span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- AGENT METRICS -->
+          <div class="metric-grid agent-metrics">
+
+            <div class="metric-card">
+              <span>Opportunities</span>
+              <strong id="agentOpportunityCount">
+                0
+              </strong>
+              <small>Analyzed</small>
+            </div>
+
+            <div class="metric-card">
+              <span>Strong Matches</span>
+              <strong id="agentStrongMatches">
+                0
+              </strong>
+              <small>High-fit roles</small>
+            </div>
+
+            <div class="metric-card">
+              <span>Skill Signals</span>
+              <strong id="agentSkillCount">
+                0
+              </strong>
+              <small>Detected</small>
+            </div>
+
+            <div class="metric-card">
+              <span>Saved</span>
+              <strong id="agentSavedCount">
+                0
+              </strong>
+              <small>Opportunities</small>
+            </div>
+
+          </div>
+
+
+          <!-- AGENT ACTIONS -->
+          <div class="feature-grid">
+
+            <div class="feature-card">
+
+              <div class="feature-icon">
+                ◈
+              </div>
+
+              <h3>
+                Find Opportunities
+              </h3>
+
+              <p>
+                Explore jobs matching your current profile.
+              </p>
 
               <button
-                class="primary-btn"
+                class="text-button"
+                data-agent-action="find"
+              >
+                Explore →
+              </button>
+
+            </div>
+
+
+            <div class="feature-card">
+
+              <div class="feature-icon">
+                ◆
+              </div>
+
+              <h3>
+                Understand Skill Gaps
+              </h3>
+
+              <p>
+                See which skills can improve your opportunity matches.
+              </p>
+
+              <button
+                class="text-button"
                 data-agent-action="skills"
               >
                 Analyze Skills →
@@ -2446,366 +724,25 @@
             </div>
 
 
-          </div>
+            <div class="feature-card">
 
+              <div class="feature-icon">
+                ▣
+              </div>
 
-          <!-- ==================== SKILL OVERVIEW ==================== -->
-
-          <div class="skill-overview-grid">
-
-
-            <div class="skill-overview-card">
-
-              <span class="eyebrow">
-                YOUR PROFILE
-              </span>
-
-              <strong id="profileSkillCount">
-                0
-              </strong>
+              <h3>
+                Analyze Your Resume
+              </h3>
 
               <p>
-                Skills currently tracked
+                Compare your resume skills against available opportunities.
               </p>
-
-            </div>
-
-
-            <div class="skill-overview-card">
-
-              <span class="eyebrow">
-                JOB DEMAND
-              </span>
-
-              <strong id="demandSkillCount">
-                0
-              </strong>
-
-              <p>
-                Skills detected across jobs
-              </p>
-
-            </div>
-
-
-            <div class="skill-overview-card">
-
-              <span class="eyebrow">
-                SKILL GAPS
-              </span>
-
-              <strong id="skillGapCount">
-                0
-              </strong>
-
-              <p>
-                Skills worth exploring
-              </p>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== SKILL ANALYSIS ==================== -->
-
-          <div class="skill-analysis-grid">
-
-
-            <!-- SKILL GAP -->
-
-            <div class="skill-panel">
-
-
-              <div class="section-title-row">
-
-                <div>
-
-                  <span class="eyebrow">
-                    GAP ANALYSIS
-                  </span>
-
-                  <h2>
-                    Skill Gap
-                  </h2>
-
-                </div>
-
-              </div>
-
-
-              <div
-                class="skill-list"
-                id="skillGapList"
-              >
-
-                <div class="empty-state">
-
-                  <span>
-                    ◎
-                  </span>
-
-                  <p>
-                    Skill gap analysis will appear here.
-                  </p>
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-            <!-- SKILL DEMAND -->
-
-            <div class="skill-panel">
-
-
-              <div class="section-title-row">
-
-                <div>
-
-                  <span class="eyebrow">
-                    MARKET SIGNAL
-                  </span>
-
-                  <h2>
-                    Skill Demand
-                  </h2>
-
-                </div>
-
-              </div>
-
-
-              <div
-                class="skill-list"
-                id="skillDemandList"
-              >
-
-                <div class="empty-state">
-
-                  <span>
-                    ◈
-                  </span>
-
-                  <p>
-                    Skill demand will appear here.
-                  </p>
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== SKILL RELATIONSHIP ==================== -->
-
-          <div class="section-block">
-
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  SKILL NETWORK
-                </span>
-
-                <h2>
-                  Skill Relationships
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Connected skills in your opportunity dataset
-              </span>
-
-            </div>
-
-
-            <div
-              class="skill-relationship"
-              id="skillRelationship"
-            >
-
-              <div class="relationship-center">
-                Your Skills
-              </div>
-
-              <div class="relationship-node node-one">
-                Python
-              </div>
-
-              <div class="relationship-node node-two">
-                Java
-              </div>
-
-              <div class="relationship-node node-three">
-                SQL
-              </div>
-
-              <div class="relationship-node node-four">
-                Git
-              </div>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== CAREER SIMULATOR ==================== -->
-
-          <div class="simulator-card">
-
-
-            <div class="simulator-content">
-
-
-              <span class="eyebrow">
-                CAREER SIMULATOR
-              </span>
-
-
-              <h2>
-                What if you add one more skill?
-              </h2>
-
-
-              <p>
-                Select a skill and compare the opportunities
-                associated with that skill in the current dataset.
-              </p>
-
-
-              <div class="simulator-controls">
-
-
-                <select
-                  id="simulatorSkill"
-                  class="filter-select"
-                >
-
-                  <option value="">
-                    Select a skill
-                  </option>
-
-                  <option value="Python">
-                    Python
-                  </option>
-
-                  <option value="Java">
-                    Java
-                  </option>
-
-                  <option value="JavaScript">
-                    JavaScript
-                  </option>
-
-                  <option value="SQL">
-                    SQL
-                  </option>
-
-                  <option value="HTML">
-                    HTML
-                  </option>
-
-                  <option value="CSS">
-                    CSS
-                  </option>
-
-                  <option value="C++">
-                    C++
-                  </option>
-
-                  <option value="Firebase">
-                    Firebase
-                  </option>
-
-                </select>
-
-
-                <button
-                  class="primary-btn"
-                  data-agent-action="simulate"
-                >
-                  Simulate →
-                </button>
-
-
-              </div>
-
-
-            </div>
-
-
-            <div
-              class="simulator-output"
-              id="simulatorOutput"
-            >
-
-              <strong>
-                —
-              </strong>
-
-              <span>
-                Select a skill to explore the dataset.
-              </span>
-
-            </div>
-
-
-          </div>
-
-
-        </section>        <!-- ================================================= -->
-        <!-- CAREER TWIN PAGE                                  -->
-        <!-- ================================================= -->
-
-        <section
-          class="page-section"
-          id="page-career-twin"
-        >
-
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
-            <div>
-
-              <span class="eyebrow">
-                CAREER SIMULATION
-              </span>
-
-              <h1>
-                Career Twin
-              </h1>
-
-              <p>
-                Create a simple career profile and see
-                how it connects with your opportunity dataset.
-              </p>
-
-            </div>
-
-
-            <div class="page-heading-actions">
 
               <button
-                class="primary-btn"
-                data-agent-action="twin"
+                class="text-button"
+                data-agent-action="resume"
               >
-                Analyze Career Twin →
+                Analyze Resume →
               </button>
 
             </div>
@@ -2813,59 +750,676 @@
           </div>
 
 
-          <!-- ==================== TWIN PROFILE ==================== -->
+          <!-- WHY THIS JOB -->
+          <div class="dashboard-card">
 
-          <div class="twin-layout">
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  EXPLAINABLE MATCHING
+                </span>
+
+                <h3>
+                  Why am I seeing this?
+                </h3>
+              </div>
+
+            </div>
 
 
-            <div class="twin-profile-card">
+            <div class="why-grid">
+
+              <div class="why-item">
+                <strong>
+                  Target role
+                </strong>
+
+                <span>
+                  Your selected career direction
+                </span>
+              </div>
 
 
-              <div class="twin-profile-header">
+              <div class="why-item">
+                <strong>
+                  Skill match
+                </strong>
 
-                <div class="twin-avatar">
-                  PC
+                <span>
+                  Skills found in the opportunity
+                </span>
+              </div>
+
+
+              <div class="why-item">
+                <strong>
+                  Student fit
+                </strong>
+
+                <span>
+                  Early-career opportunities are prioritized
+                </span>
+              </div>
+
+
+              <div class="why-item">
+                <strong>
+                  Location
+                </strong>
+
+                <span>
+                  Opportunities relevant to your profile
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- RESUME PAGE -->
+        <section
+          id="page-resume"
+          class="page-section"
+          data-section="resume"
+        >
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                RESUME INTELLIGENCE
+              </span>
+
+              <h2>
+                Turn your resume into a career signal
+              </h2>
+
+              <p>
+                Upload your resume and compare its skills with available jobs.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="resume-layout">
+
+            <!-- UPLOAD -->
+            <div class="dashboard-card resume-upload-card">
+
+              <div class="upload-zone">
+
+                <div class="upload-icon">
+                  ↑
                 </div>
 
-                <div>
+                <h3>
+                  Upload your resume
+                </h3>
 
+                <p>
+                  PDF or DOCX
+                </p>
+
+                <input
+                  id="resumeFile"
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  hidden
+                >
+
+                <button
+                  id="resumeUploadButton"
+                  class="primary-button"
+                  type="button"
+                >
+                  Choose Resume
+                </button>
+
+                <div
+                  id="resumeFileName"
+                  class="file-name"
+                >
+                  No file selected
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RESUME SCORE -->
+            <div class="dashboard-card resume-score-card">
+
+              <span class="eyebrow">
+                RESUME MATCH
+              </span>
+
+              <div class="big-score">
+                <strong id="resumeMatchScore">
+                  0%
+                </strong>
+              </div>
+
+              <div class="progress-track">
+
+                <div
+                  id="resumeMatchProgress"
+                  class="progress-fill"
+                ></div>
+
+              </div>
+
+              <p>
+                Match against your current opportunity pool.
+              </p>
+
+            </div>
+
+
+            <!-- READINESS -->
+            <div class="dashboard-card resume-readiness-card">
+
+              <span class="eyebrow">
+                RESUME READINESS
+              </span>
+
+              <div class="big-score">
+                <strong id="resumeReadinessScore">
+                  0%
+                </strong>
+              </div>
+
+              <div class="progress-track">
+
+                <div
+                  id="resumeReadinessProgress"
+                  class="progress-fill"
+                ></div>
+
+              </div>
+
+              <p>
+                Based on available profile information.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- RESUME SKILLS -->
+          <div class="dashboard-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  EXTRACTED SKILLS
+                </span>
+
+                <h3>
+                  Skills detected from your resume
+                </h3>
+              </div>
+
+            </div>
+
+            <div
+              id="resumeSkillList"
+              class="skill-list"
+            ></div>
+
+          </div>
+
+
+          <!-- RESUME MATCHES -->
+          <div class="dashboard-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  MATCHED OPPORTUNITIES
+                </span>
+
+                <h3>
+                  Jobs that fit your resume
+                </h3>
+              </div>
+
+              <span id="resumeMatchCount">
+                0 matches
+              </span>
+
+            </div>
+
+            <div
+              id="resumeMatches"
+              class="job-results"
+            ></div>
+
+          </div>
+
+        </section>        <!-- SKILL INTELLIGENCE PAGE -->
+        <section
+          id="page-skills"
+          class="page-section"
+          data-section="skills"
+        >
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                SKILL INTELLIGENCE
+              </span>
+
+              <h2>
+                Understand the skills behind opportunities
+              </h2>
+
+              <p>
+                Discover your skill gaps and the skills appearing across the job market.
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- SKILL METRICS -->
+          <div class="metric-grid">
+
+            <div class="metric-card">
+              <span>Your Skills</span>
+
+              <strong id="profileSkillCount">
+                0
+              </strong>
+
+              <small>
+                Profile skills
+              </small>
+            </div>
+
+
+            <div class="metric-card">
+              <span>Demand Signals</span>
+
+              <strong id="demandSkillCount">
+                0
+              </strong>
+
+              <small>
+                Skills found in jobs
+              </small>
+            </div>
+
+
+            <div class="metric-card">
+              <span>Skill Gaps</span>
+
+              <strong id="skillGapCount">
+                0
+              </strong>
+
+              <small>
+                Skills to explore
+              </small>
+            </div>
+
+          </div>
+
+
+          <!-- SKILL GRID -->
+          <div class="skill-layout">
+
+            <!-- SKILL GAPS -->
+            <div class="dashboard-card">
+
+              <div class="section-heading">
+
+                <div>
                   <span class="eyebrow">
-                    DIGITAL CAREER PROFILE
+                    SKILL GAP
                   </span>
 
-                  <h2>
-                    Your Career Twin
-                  </h2>
-
-                  <p>
-                    A lightweight profile based on your
-                    target role, experience and skills.
-                  </p>
-
+                  <h3>
+                    Skills worth exploring
+                  </h3>
                 </div>
 
               </div>
 
 
-              <!-- TARGET ROLE -->
+              <div
+                id="skillGapList"
+                class="skill-gap-list"
+              ></div>
 
-              <div class="twin-field">
+            </div>
+
+
+            <!-- SKILL DEMAND -->
+            <div class="dashboard-card">
+
+              <div class="section-heading">
+
+                <div>
+                  <span class="eyebrow">
+                    MARKET DEMAND
+                  </span>
+
+                  <h3>
+                    Skills appearing in jobs
+                  </h3>
+                </div>
+
+              </div>
+
+
+              <div
+                id="skillDemandList"
+                class="skill-demand-list"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <!-- SKILL RELATIONSHIP -->
+          <div class="dashboard-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  SKILL RELATIONSHIP
+                </span>
+
+                <h3>
+                  How skills connect with opportunities
+                </h3>
+              </div>
+
+            </div>
+
+
+            <div
+              id="skillRelationship"
+              class="skill-relationship"
+            >
+
+              <div class="skill-node">
+                Programming
+              </div>
+
+              <div class="skill-line"></div>
+
+              <div class="skill-node">
+                Development
+              </div>
+
+              <div class="skill-line"></div>
+
+              <div class="skill-node">
+                Opportunities
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- CAREER SIMULATOR -->
+          <div class="dashboard-card simulator-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  CAREER SIMULATOR
+                </span>
+
+                <h3>
+                  What if you learn one more skill?
+                </h3>
+
+                <p>
+                  Select a skill and see how the current opportunity dataset responds.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="simulator-controls">
+
+              <select id="simulatorSkill">
+
+                <option value="">
+                  Select a skill
+                </option>
+
+                <option value="Python">
+                  Python
+                </option>
+
+                <option value="Java">
+                  Java
+                </option>
+
+                <option value="JavaScript">
+                  JavaScript
+                </option>
+
+                <option value="React">
+                  React
+                </option>
+
+                <option value="SQL">
+                  SQL
+                </option>
+
+                <option value="Firebase">
+                  Firebase
+                </option>
+
+                <option value="IoT">
+                  IoT
+                </option>
+
+                <option value="Embedded Systems">
+                  Embedded Systems
+                </option>
+
+                <option value="AWS">
+                  AWS
+                </option>
+
+                <option value="Machine Learning">
+                  Machine Learning
+                </option>
+
+              </select>
+
+
+              <div
+                id="simulatorOutput"
+                class="simulator-output"
+              >
+                Choose a skill to explore the effect.
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- CAREER TWIN PAGE -->
+        <section
+          id="page-career-twin"
+          class="page-section"
+          data-section="career-twin"
+        >
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                CAREER TWIN
+              </span>
+
+              <h2>
+                Build your career profile
+              </h2>
+
+              <p>
+                Create a simple profile and see how it connects with the opportunity dataset.
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- CAREER TWIN HERO -->
+          <div class="twin-hero">
+
+            <div class="twin-visual">
+
+              <div class="twin-circle">
+
+                <div class="twin-core">
+                  YOU
+                </div>
+
+                <span class="twin-orbit orbit-1">
+                  SKILLS
+                </span>
+
+                <span class="twin-orbit orbit-2">
+                  JOBS
+                </span>
+
+                <span class="twin-orbit orbit-3">
+                  GOALS
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="twin-info">
+
+              <span class="eyebrow">
+                YOUR DIGITAL CAREER PROFILE
+              </span>
+
+              <h3>
+                <span id="twinRoleDisplay">
+                  Software Developer
+                </span>
+              </h3>
+
+              <p>
+                Your Career Twin connects your target role,
+                experience, location and skills with available opportunities.
+              </p>
+
+
+              <div class="twin-summary">
+
+                <div>
+                  <span>
+                    Experience
+                  </span>
+
+                  <strong id="twinExperienceDisplay">
+                    Student
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Location
+                  </span>
+
+                  <strong id="twinLocationDisplay">
+                    India
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Skills
+                  </span>
+
+                  <strong id="twinSkillCount">
+                    0
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    Opportunities
+                  </span>
+
+                  <strong id="twinOpportunityCount">
+                    0
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- CAREER PROFILE FORM -->
+          <div class="dashboard-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  PROFILE SETTINGS
+                </span>
+
+                <h3>
+                  Update your career direction
+                </h3>
+              </div>
+
+            </div>
+
+
+            <form
+              id="twinForm"
+              class="twin-form"
+            >
+
+              <div class="form-group">
 
                 <label for="twinTargetRole">
                   Target role
                 </label>
 
-                <select
-                  id="twinTargetRole"
-                  class="twin-input"
-                >
+                <select id="twinTargetRole">
 
                   <option value="Software Developer">
                     Software Developer
-                  </option>
-
-                  <option value="Software Engineer">
-                    Software Engineer
                   </option>
 
                   <option value="Python Developer">
@@ -2876,16 +1430,24 @@
                     Java Developer
                   </option>
 
-                  <option value="Full Stack Developer">
-                    Full Stack Developer
-                  </option>
-
                   <option value="Web Developer">
                     Web Developer
                   </option>
 
+                  <option value="Full Stack Developer">
+                    Full Stack Developer
+                  </option>
+
                   <option value="IoT Developer">
                     IoT Developer
+                  </option>
+
+                  <option value="Embedded Systems Engineer">
+                    Embedded Systems Engineer
+                  </option>
+
+                  <option value="Software Engineer">
+                    Software Engineer
                   </option>
 
                 </select>
@@ -2893,18 +1455,13 @@
               </div>
 
 
-              <!-- EXPERIENCE -->
-
-              <div class="twin-field">
+              <div class="form-group">
 
                 <label for="twinExperience">
-                  Experience level
+                  Experience
                 </label>
 
-                <select
-                  id="twinExperience"
-                  class="twin-input"
-                >
+                <select id="twinExperience">
 
                   <option value="Student">
                     Student
@@ -2918,8 +1475,8 @@
                     Entry Level
                   </option>
 
-                  <option value="Intern">
-                    Intern
+                  <option value="1–2 Years">
+                    1–2 Years
                   </option>
 
                 </select>
@@ -2927,25 +1484,16 @@
               </div>
 
 
-              <!-- LOCATION -->
-
-              <div class="twin-field">
+              <div class="form-group">
 
                 <label for="twinLocation">
                   Preferred location
                 </label>
 
-                <select
-                  id="twinLocation"
-                  class="twin-input"
-                >
+                <select id="twinLocation">
 
                   <option value="India">
                     India
-                  </option>
-
-                  <option value="Tamil Nadu">
-                    Tamil Nadu
                   </option>
 
                   <option value="Coimbatore">
@@ -2956,8 +1504,8 @@
                     Chennai
                   </option>
 
-                  <option value="Bangalore">
-                    Bangalore
+                  <option value="Bengaluru">
+                    Bengaluru
                   </option>
 
                   <option value="Remote">
@@ -2969,648 +1517,510 @@
               </div>
 
 
-              <button
-                class="primary-btn twin-analyze-btn"
-                data-agent-action="twin"
-              >
+              <div class="form-group form-submit">
 
-                Update Career Twin
-                →
-
-              </button>
-
-
-            </div>
-
-
-            <!-- ==================== TWIN INTELLIGENCE ==================== -->
-
-            <div class="twin-intelligence-card">
-
-
-              <div class="section-title-row">
-
-                <div>
-
-                  <span class="eyebrow">
-                    PROFILE INTELLIGENCE
-                  </span>
-
-                  <h2>
-                    Career Twin Signals
-                  </h2>
-
-                </div>
-
-                <span class="twin-status">
-                  ACTIVE
-                </span>
-
-              </div>
-
-
-              <div class="twin-signal-grid">
-
-
-                <div class="twin-signal">
-
-                  <span>
-                    TARGET ROLE
-                  </span>
-
-                  <strong id="twinRoleDisplay">
-                    Software Developer
-                  </strong>
-
-                </div>
-
-
-                <div class="twin-signal">
-
-                  <span>
-                    EXPERIENCE
-                  </span>
-
-                  <strong id="twinExperienceDisplay">
-                    Student
-                  </strong>
-
-                </div>
-
-
-                <div class="twin-signal">
-
-                  <span>
-                    LOCATION
-                  </span>
-
-                  <strong id="twinLocationDisplay">
-                    India
-                  </strong>
-
-                </div>
-
-
-                <div class="twin-signal">
-
-                  <span>
-                    PROFILE SKILLS
-                  </span>
-
-                  <strong id="twinSkillCount">
-                    0
-                  </strong>
-
-                </div>
-
-
-              </div>
-
-
-              <!-- OPPORTUNITY COUNT -->
-
-              <div class="twin-opportunity">
-
-                <div>
-
-                  <span class="eyebrow">
-                    DATASET ALIGNMENT
-                  </span>
-
-                  <h3>
-                    Relevant opportunities
-                  </h3>
-
-                </div>
-
-
-                <strong id="twinOpportunityCount">
-                  0
-                </strong>
-
-              </div>
-
-
-              <!-- CAREER PATH -->
-
-              <div class="career-path-box">
-
-
-                <span class="eyebrow">
-                  SUGGESTED PATH
-                </span>
-
-
-                <div
-                  class="career-path"
-                  id="careerPath"
+                <button
+                  type="submit"
+                  class="primary-button"
                 >
-
-                  <div class="path-step">
-
-                    <span>
-                      01
-                    </span>
-
-                    <strong>
-                      Build skills
-                    </strong>
-
-                  </div>
-
-
-                  <div class="path-connector"></div>
-
-
-                  <div class="path-step">
-
-                    <span>
-                      02
-                    </span>
-
-                    <strong>
-                      Build projects
-                    </strong>
-
-                  </div>
-
-
-                  <div class="path-connector"></div>
-
-
-                  <div class="path-step">
-
-                    <span>
-                      03
-                    </span>
-
-                    <strong>
-                      Apply
-                    </strong>
-
-                  </div>
-
-
-                  <div class="path-connector"></div>
-
-
-                  <div class="path-step">
-
-                    <span>
-                      04
-                    </span>
-
-                    <strong>
-                      Track progress
-                    </strong>
-
-                  </div>
-
-                </div>
-
+                  Update Career Twin
+                  <span>→</span>
+                </button>
 
               </div>
 
-
-            </div>
-
+            </form>
 
           </div>
 
 
-          <!-- ==================== CAREER PATH INFO ==================== -->
+          <!-- CAREER PATH -->
+          <div class="dashboard-card">
 
-          <div class="section-block">
-
-
-            <div class="section-title-row">
+            <div class="section-heading">
 
               <div>
-
                 <span class="eyebrow">
-                  CAREER ROADMAP
-                </span>
-
-                <h2>
-                  From profile to opportunity
-                </h2>
-
-              </div>
-
-            </div>
-
-
-            <div class="roadmap-grid">
-
-
-              <div class="roadmap-card">
-
-                <span class="roadmap-number">
-                  01
+                  CAREER PATH
                 </span>
 
                 <h3>
-                  Know your target
+                  Your next steps
                 </h3>
 
                 <p>
-                  Define the role and environment
-                  you want to explore.
+                  A simple path based on your current profile and job data.
                 </p>
-
               </div>
-
-
-              <div class="roadmap-card">
-
-                <span class="roadmap-number">
-                  02
-                </span>
-
-                <h3>
-                  Understand the market
-                </h3>
-
-                <p>
-                  Compare your profile with
-                  collected opportunity signals.
-                </p>
-
-              </div>
-
-
-              <div class="roadmap-card">
-
-                <span class="roadmap-number">
-                  03
-                </span>
-
-                <h3>
-                  Close skill gaps
-                </h3>
-
-                <p>
-                  Identify useful skills from
-                  the available job dataset.
-                </p>
-
-              </div>
-
-
-              <div class="roadmap-card">
-
-                <span class="roadmap-number">
-                  04
-                </span>
-
-                <h3>
-                  Take action
-                </h3>
-
-                <p>
-                  Save, apply and track opportunities
-                  through the application pipeline.
-                </p>
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-        </section>
-
-
-        <!-- ================================================= -->
-        <!-- APPLICATIONS PAGE                                 -->
-        <!-- ================================================= -->
-
-        <section
-          class="page-section"
-          id="page-applications"
-        >
-
-
-          <!-- PAGE HEADER -->
-
-          <div class="page-heading">
-
-
-            <div>
-
-              <span class="eyebrow">
-                APPLICATION TRACKING
-              </span>
-
-              <h1>
-                Applications
-              </h1>
-
-              <p>
-                Keep your opportunities organized from
-                discovery to application and follow-up.
-              </p>
-
-            </div>
-
-
-            <div class="page-heading-actions">
-
-              <button
-                class="secondary-btn"
-                data-action-button="find"
-              >
-                Find More Jobs
-              </button>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== PIPELINE COUNTERS ==================== -->
-
-          <div class="application-stats">
-
-
-            <div class="application-stat">
-
-              <span>
-                SAVED
-              </span>
-
-              <strong id="pipelineSavedCount">
-                0
-              </strong>
-
-              <small>
-                Opportunities saved
-              </small>
-
-            </div>
-
-
-            <div class="application-stat">
-
-              <span>
-                APPLIED
-              </span>
-
-              <strong id="pipelineAppliedCount">
-                0
-              </strong>
-
-              <small>
-                Applications submitted
-              </small>
-
-            </div>
-
-
-            <div class="application-stat">
-
-              <span>
-                INTERVIEW
-              </span>
-
-              <strong id="pipelineInterviewCount">
-                0
-              </strong>
-
-              <small>
-                Interview stage
-              </small>
-
-            </div>
-
-
-            <div class="application-stat">
-
-              <span>
-                CLOSED
-              </span>
-
-              <strong id="pipelineClosedCount">
-                0
-              </strong>
-
-              <small>
-                Completed opportunities
-              </small>
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== APPLICATION PIPELINE ==================== -->
-
-          <div class="application-pipeline">
-
-
-            <!-- SAVED -->
-
-            <div class="pipeline-column">
-
-
-              <div class="pipeline-header">
-
-                <div>
-
-                  <span class="pipeline-dot saved"></span>
-
-                  <strong>
-                    Saved
-                  </strong>
-
-                </div>
-
-                <span id="savedApplications">
-                  0
-                </span>
-
-              </div>
-
-
-              <div
-                class="pipeline-list"
-                id="pipelineSaved"
-              >
-
-                <div class="pipeline-empty">
-                  No saved opportunities yet.
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-            <!-- APPLIED -->
-
-            <div class="pipeline-column">
-
-
-              <div class="pipeline-header">
-
-                <div>
-
-                  <span class="pipeline-dot applied"></span>
-
-                  <strong>
-                    Applied
-                  </strong>
-
-                </div>
-
-                <span id="appliedApplications">
-                  0
-                </span>
-
-              </div>
-
-
-              <div
-                class="pipeline-list"
-                id="pipelineApplied"
-              >
-
-                <div class="pipeline-empty">
-                  No applications yet.
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-            <!-- INTERVIEW -->
-
-            <div class="pipeline-column">
-
-
-              <div class="pipeline-header">
-
-                <div>
-
-                  <span class="pipeline-dot interview"></span>
-
-                  <strong>
-                    Interview
-                  </strong>
-
-                </div>
-
-                <span id="interviewApplications">
-                  0
-                </span>
-
-              </div>
-
-
-              <div
-                class="pipeline-list"
-                id="pipelineInterview"
-              >
-
-                <div class="pipeline-empty">
-                  No interviews yet.
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-            <!-- CLOSED -->
-
-            <div class="pipeline-column">
-
-
-              <div class="pipeline-header">
-
-                <div>
-
-                  <span class="pipeline-dot closed"></span>
-
-                  <strong>
-                    Closed
-                  </strong>
-
-                </div>
-
-                <span id="closedApplications">
-                  0
-                </span>
-
-              </div>
-
-
-              <div
-                class="pipeline-list"
-                id="pipelineClosed"
-              >
-
-                <div class="pipeline-empty">
-                  No closed applications.
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================== FOLLOW UP ==================== -->
-
-          <div class="section-block">
-
-
-            <div class="section-title-row">
-
-              <div>
-
-                <span class="eyebrow">
-                  FOLLOW-UP
-                </span>
-
-                <h2>
-                  Follow-up reminders
-                </h2>
-
-              </div>
-
-              <span class="section-note">
-                Keep your application activity organized
-              </span>
 
             </div>
 
 
             <div
-              class="followup-list"
-              id="followupList"
-            >
+              id="careerPath"
+              class="career-path"
+            ></div>
 
-              <div class="empty-state">
+          </div>
 
-                <span>
-                  □
+        </section>
+
+
+        <!-- APPLICATIONS PAGE -->
+        <section
+          id="page-applications"
+          class="page-section"
+          data-section="applications"
+        >
+
+          <div class="section-heading">
+
+            <div>
+              <span class="eyebrow">
+                APPLICATION TRACKER
+              </span>
+
+              <h2>
+                Track your opportunities
+              </h2>
+
+              <p>
+                Keep saved jobs and application progress organized.
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- APPLICATION METRICS -->
+          <div class="metric-grid">
+
+            <div class="metric-card">
+              <span>Saved</span>
+
+              <strong id="savedApplications">
+                0
+              </strong>
+
+              <small>
+                Opportunities
+              </small>
+            </div>
+
+
+            <div class="metric-card">
+              <span>Applied</span>
+
+              <strong id="appliedApplications">
+                0
+              </strong>
+
+              <small>
+                Applications
+              </small>
+            </div>
+
+
+            <div class="metric-card">
+              <span>Interview</span>
+
+              <strong id="interviewApplications">
+                0
+              </strong>
+
+              <small>
+                Active
+              </small>
+            </div>
+
+
+            <div class="metric-card">
+              <span>Closed</span>
+
+              <strong id="closedApplications">
+                0
+              </strong>
+
+              <small>
+                Completed
+              </small>
+            </div>
+
+          </div>
+
+
+          <!-- PIPELINE -->
+          <div class="application-pipeline">
+
+            <div class="pipeline-column">
+
+              <div class="pipeline-header">
+                <span>Saved</span>
+
+                <strong id="pipelineSavedCount">
+                  0
+                </strong>
+              </div>
+
+              <div
+                id="pipelineSaved"
+                class="pipeline-list"
+              ></div>
+
+            </div>
+
+
+            <div class="pipeline-column">
+
+              <div class="pipeline-header">
+                <span>Applied</span>
+
+                <strong id="pipelineAppliedCount">
+                  0
+                </strong>
+              </div>
+
+              <div
+                id="pipelineApplied"
+                class="pipeline-list"
+              ></div>
+
+            </div>
+
+
+            <div class="pipeline-column">
+
+              <div class="pipeline-header">
+                <span>Interview</span>
+
+                <strong id="pipelineInterviewCount">
+                  0
+                </strong>
+              </div>
+
+              <div
+                id="pipelineInterview"
+                class="pipeline-list"
+              ></div>
+
+            </div>
+
+
+            <div class="pipeline-column">
+
+              <div class="pipeline-header">
+                <span>Closed</span>
+
+                <strong id="pipelineClosedCount">
+                  0
+                </strong>
+              </div>
+
+              <div
+                id="pipelineClosed"
+                class="pipeline-list"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <!-- FOLLOW UP -->
+          <div class="dashboard-card">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="eyebrow">
+                  FOLLOW-UP
                 </span>
 
+                <h3>
+                  Upcoming actions
+                </h3>
+              </div>
+
+            </div>
+
+            <div
+              id="followupList"
+              class="followup-list"
+            ></div>
+
+          </div>
+
+        </section>        <!-- JOB DETAILS MODAL -->
+        <div
+          id="jobModal"
+          class="modal"
+          aria-hidden="true"
+        >
+
+          <div class="modal-content">
+
+            <button
+              id="modalClose"
+              class="modal-close"
+              type="button"
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+
+            <div class="modal-header">
+
+              <div>
+
+                <span
+                  id="modalSource"
+                  class="modal-source"
+                >
+                  Job Board
+                </span>
+
+                <h2 id="modalJobTitle">
+                  Job Title
+                </h2>
+
+                <p id="modalCompany">
+                  Company
+                </p>
+
+              </div>
+
+
+              <div class="modal-match">
+
+                <strong id="modalMatch">
+                  0%
+                </strong>
+
+                <span>
+                  Match
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- JOB META -->
+            <div class="modal-meta">
+
+              <div>
+                <span>Location</span>
+                <strong id="modalLocation">India</strong>
+              </div>
+
+              <div>
+                <span>Type</span>
+                <strong id="modalType">Opportunity</strong>
+              </div>
+
+              <div>
+                <span>Freshness</span>
+                <strong id="modalFreshness">Recently posted</strong>
+              </div>
+
+            </div>
+
+
+            <!-- WHY THIS JOB -->
+            <div class="modal-section">
+
+              <div class="modal-section-title">
+                <span class="eyebrow">
+                  WHY THIS JOB?
+                </span>
+
+                <h3>
+                  Why it matches your profile
+                </h3>
+              </div>
+
+
+              <div
+                id="modalWhy"
+                class="modal-why"
+              ></div>
+
+            </div>
+
+
+            <!-- SKILLS -->
+            <div class="modal-section">
+
+              <div class="modal-section-title">
+
+                <span class="eyebrow">
+                  SKILLS
+                </span>
+
+                <h3>
+                  Skills detected
+                </h3>
+
+              </div>
+
+
+              <div
+                id="modalSkills"
+                class="skill-list"
+              ></div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="modal-section">
+
+              <div class="modal-section-title">
+
+                <span class="eyebrow">
+                  DESCRIPTION
+                </span>
+
+                <h3>
+                  Opportunity details
+                </h3>
+
+              </div>
+
+
+              <div
+                id="modalDescription"
+                class="modal-description"
+              >
+                No description available.
+              </div>
+
+            </div>
+
+
+            <!-- MODAL ACTIONS -->
+            <div class="modal-actions">
+
+              <button
+                id="modalSave"
+                class="secondary-button"
+                type="button"
+              >
+                Save Job
+              </button>
+
+
+              <button
+                id="modalOpenJob"
+                class="primary-button"
+                type="button"
+              >
+                Open Job
+                <span>↗</span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- WHY JOB MODAL -->
+        <div
+          id="whyModal"
+          class="modal"
+          aria-hidden="true"
+        >
+
+          <div class="modal-content small-modal">
+
+            <button
+              id="whyModalClose"
+              class="modal-close"
+              type="button"
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+
+            <div class="modal-section-title">
+
+              <span class="eyebrow">
+                MATCH EXPLANATION
+              </span>
+
+              <h2>
+                Why am I seeing this?
+              </h2>
+
+            </div>
+
+
+            <div
+              id="whyJobContent"
+              class="why-job-content"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- NOTIFICATION PANEL -->
+        <aside
+          id="notificationPanel"
+          class="notification-panel"
+          aria-hidden="true"
+        >
+
+          <div class="panel-header">
+
+            <div>
+
+              <span class="eyebrow">
+                UPDATES
+              </span>
+
+              <h3>
+                Notifications
+              </h3>
+
+            </div>
+
+
+            <button
+              id="closeNotifications"
+              class="icon-button"
+              type="button"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <div
+            id="notificationList"
+            class="notification-list"
+          >
+
+            <div class="notification-item">
+
+              <div class="notification-icon">
+                ✦
+              </div>
+
+              <div>
+
+                <strong>
+                  Career Radar ready
+                </strong>
+
                 <p>
-                  Follow-up items will appear here.
+                  Your opportunity data is available.
                 </p>
 
               </div>
@@ -3618,692 +2028,283 @@
             </div>
 
 
+            <div class="notification-item">
+
+              <div class="notification-icon">
+                ◆
+              </div>
+
+              <div>
+
+                <strong>
+                  Skill intelligence updated
+                </strong>
+
+                <p>
+                  Review your current skill signals.
+                </p>
+
+              </div>
+
+            </div>
+
           </div>
 
+        </aside>
 
-        </section>        <!-- ================================================= -->
-        <!-- FOOTER                                            -->
-        <!-- ================================================= -->
 
-        <footer class="app-footer">
+        <!-- GLOBAL SEARCH -->
+        <div
+          id="searchOverlay"
+          class="search-overlay"
+          aria-hidden="true"
+        >
 
-          <div class="footer-brand">
+          <div class="search-dialog">
 
-            <div class="brand-mark">
+            <div class="search-dialog-header">
+
+              <div>
+
+                <span class="eyebrow">
+                  GLOBAL SEARCH
+                </span>
+
+                <h3>
+                  Search Job Radar
+                </h3>
+
+              </div>
+
+
+              <button
+                id="closeGlobalSearch"
+                class="icon-button"
+                type="button"
+              >
+                ×
+              </button>
+
+            </div>
+
+
+            <div class="global-search-box">
+
+              <span>
+                ⌕
+              </span>
+
+              <input
+                id="globalSearchInput"
+                type="search"
+                placeholder="Search jobs, companies or skills..."
+                autocomplete="off"
+              >
+
+            </div>
+
+
+            <div
+              id="globalSearchResults"
+              class="global-search-results"
+            >
+
+              <div class="search-empty">
+                Start typing to search opportunities.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- DEMO MODE -->
+        <div
+          id="demoOverlay"
+          class="demo-overlay"
+          aria-hidden="true"
+        >
+
+          <div class="demo-dialog">
+
+            <div class="demo-progress">
+
+              <div
+                id="demoProgress"
+                class="demo-progress-fill"
+              ></div>
+
+            </div>
+
+
+            <div
+              id="demoVisual"
+              class="demo-visual"
+            >
               JR
             </div>
 
-            <div>
 
-              <strong>
-                Job Radar
-              </strong>
+            <span
+              id="demoStep"
+              class="eyebrow"
+            >
+              STEP 1
+            </span>
 
-              <span>
-                Career Intelligence Platform
-              </span>
+
+            <h2 id="demoTitle">
+              Career Intelligence
+            </h2>
+
+
+            <p id="demoDescription">
+              Discover how Job Radar helps you navigate opportunities.
+            </p>
+
+
+            <div class="demo-actions">
+
+              <button
+                id="demoPrevious"
+                class="secondary-button"
+                type="button"
+              >
+                Previous
+              </button>
+
+              <button
+                id="demoNext"
+                class="primary-button"
+                type="button"
+              >
+                Next
+                <span>→</span>
+              </button>
 
             </div>
 
-          </div>
 
-
-          <div class="footer-info">
-
-            <span>
-              Evidence-based opportunity discovery
-            </span>
-
-            <span>
-              •
-            </span>
-
-            <span>
-              Student Career Intelligence
-            </span>
+            <button
+              id="closeDemo"
+              class="demo-close"
+              type="button"
+            >
+              Exit Demo
+            </button>
 
           </div>
 
+        </div>
 
-          <div class="footer-version">
-            v2.0
+
+        <!-- TOAST -->
+        <div
+          id="toast"
+          class="toast"
+          role="status"
+          aria-live="polite"
+        >
+
+          <div
+            id="toastIcon"
+            class="toast-icon"
+          >
+            ✓
           </div>
 
-        </footer>
+          <div
+            id="toastMessage"
+            class="toast-message"
+          >
+            Done
+          </div>
 
+        </div>
+
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div
+          id="mobileOverlay"
+          class="mobile-overlay"
+        ></div>
 
       </div>
 
     </main>
 
-  </div>
-
-
-  <!-- ===================================================== -->
-  <!-- JOB DETAILS MODAL                                     -->
-  <!-- ===================================================== -->
-
-  <div
-    class="modal-overlay"
-    id="jobModal"
-  >
-
-    <div class="modal-card job-modal-card">
-
-
-      <button
-        class="modal-close"
-        id="modalClose"
-        type="button"
-      >
-        ×
-      </button>
-
-
-      <div class="modal-header">
-
-
-        <div>
-
-          <span
-            class="modal-source"
-            id="modalSource"
-          >
-            SOURCE
-          </span>
-
-          <h2 id="modalJobTitle">
-            Job Title
-          </h2>
-
-          <p id="modalCompany">
-            Company
-          </p>
-
-        </div>
-
-
-        <div
-          class="modal-match"
-          id="modalMatch"
-        >
-          0%
-        </div>
-
-
-      </div>
-
-
-      <!-- JOB META -->
-
-      <div class="modal-meta">
-
-
-        <div class="modal-meta-item">
-
-          <span>
-            LOCATION
-          </span>
-
-          <strong id="modalLocation">
-            —
-          </strong>
-
-        </div>
-
-
-        <div class="modal-meta-item">
-
-          <span>
-            TYPE
-          </span>
-
-          <strong id="modalType">
-            —
-          </strong>
-
-        </div>
-
-
-        <div class="modal-meta-item">
-
-          <span>
-            FRESHNESS
-          </span>
-
-          <strong id="modalFreshness">
-            —
-          </strong>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- WHY THIS JOB -->
-
-      <div class="modal-section">
-
-
-        <span class="eyebrow">
-          WHY THIS JOB
-        </span>
-
-
-        <div
-          class="modal-why"
-          id="modalWhy"
-        >
-
-          Matching signals will appear here.
-
-        </div>
-
-
-      </div>
-
-
-      <!-- SKILLS -->
-
-      <div class="modal-section">
-
-
-        <span class="eyebrow">
-          SKILL SIGNALS
-        </span>
-
-
-        <div
-          class="modal-skills"
-          id="modalSkills"
-        >
-
-        </div>
-
-
-      </div>
-
-
-      <!-- DESCRIPTION -->
-
-      <div class="modal-section">
-
-
-        <span class="eyebrow">
-          DESCRIPTION
-        </span>
-
-
-        <div
-          class="modal-description"
-          id="modalDescription"
-        >
-
-          Job description will appear here.
-
-        </div>
-
-
-      </div>
-
-
-      <!-- ACTIONS -->
-
-      <div class="modal-actions">
-
-
-        <button
-          class="secondary-btn"
-          id="modalSave"
-          type="button"
-        >
-          Save Job
-        </button>
-
-
-        <button
-          class="primary-btn"
-          id="modalOpenJob"
-          type="button"
-        >
-          Open Job →
-        </button>
-
-
-      </div>
-
-
+  </div><!-- FOOTER -->
+<footer class="site-footer">
+
+  <div class="footer-brand">
+
+    <div class="footer-logo">
+      JR
+    </div>
+
+    <div>
+      <strong>Job Radar</strong>
+      <p>
+        Career intelligence for the next opportunity.
+      </p>
     </div>
 
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- WHY THIS JOB MODAL                                    -->
-  <!-- ===================================================== -->
+  <div class="footer-links">
 
-  <div
-    class="modal-overlay"
-    id="whyModal"
-  >
-
-    <div class="modal-card why-modal-card">
-
-
-      <button
-        class="modal-close"
-        id="whyModalClose"
-        type="button"
-      >
-        ×
-      </button>
-
-
-      <div class="why-modal-header">
-
-        <span class="eyebrow">
-          EXPLAINABLE MATCH
-        </span>
-
-        <h2>
-          Why am I seeing this job?
-        </h2>
-
-        <p>
-          Job Radar explains the signals behind
-          your opportunity match.
-        </p>
-
-      </div>
-
-
-      <div
-        id="whyJobContent"
-        class="why-job-content"
-      >
-
-        <div class="empty-state">
-
-          <span>
-            ◎
-          </span>
-
-          <p>
-            Matching explanation will appear here.
-          </p>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>  <!-- ===================================================== -->
-  <!-- NOTIFICATION PANEL                                    -->
-  <!-- ===================================================== -->
-
-  <div
-    class="notification-panel"
-    id="notificationPanel"
-  >
-
-
-    <div class="notification-header">
-
-
-      <div>
-
-        <span class="eyebrow">
-          ALERT CENTER
-        </span>
-
-        <h3>
-          Notifications
-        </h3>
-
-      </div>
-
-
-      <button
-        id="closeNotifications"
-        class="panel-close"
-        type="button"
-      >
-        ×
-      </button>
-
-
-    </div>
-
-
-    <div
-      class="notification-list"
-      id="notificationList"
-    >
-
-
-      <div class="notification-item">
-
-        <span class="notification-icon">
-          ◇
-        </span>
-
-        <div>
-
-          <strong>
-            Opportunity intelligence
-          </strong>
-
-          <p>
-            Your job dataset is ready to explore.
-          </p>
-
-          <small>
-            Job Radar
-          </small>
-
-        </div>
-
-      </div>
-
-
-      <div class="notification-item">
-
-        <span class="notification-icon">
-          ◎
-        </span>
-
-        <div>
-
-          <strong>
-            Skill analysis available
-          </strong>
-
-          <p>
-            Review skills detected across opportunities.
-          </p>
-
-          <small>
-            Skill Lab
-          </small>
-
-        </div>
-
-      </div>
-
-
-      <div class="notification-item">
-
-        <span class="notification-icon">
-          ✦
-        </span>
-
-        <div>
-
-          <strong>
-            Career Agent ready
-          </strong>
-
-          <p>
-            Explore your strongest opportunity matches.
-          </p>
-
-          <small>
-            Career Agent
-          </small>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ===================================================== -->
-  <!-- GLOBAL SEARCH OVERLAY                                 -->
-  <!-- ===================================================== -->
-
-  <div
-    class="search-overlay"
-    id="searchOverlay"
-  >
-
-
-    <div class="global-search-card">
-
-
-      <div class="global-search-header">
-
-
-        <div>
-
-          <span class="eyebrow">
-            GLOBAL SEARCH
-          </span>
-
-          <h2>
-            Search Job Radar
-          </h2>
-
-        </div>
-
-
-        <button
-          id="closeGlobalSearch"
-          class="panel-close"
-          type="button"
-        >
-          ×
-        </button>
-
-
-      </div>
-
-
-      <div class="global-search-input">
-
-
-        <span>
-          ⌕
-        </span>
-
-
-        <input
-          type="text"
-          id="globalSearchInput"
-          placeholder="Search jobs, skills, companies..."
-          autocomplete="off"
-        >
-
-
-        <kbd>
-          ESC
-        </kbd>
-
-
-      </div>
-
-
-      <div
-        class="global-search-results"
-        id="globalSearchResults"
-      >
-
-        <div class="search-empty">
-
-          <span>
-            ⌕
-          </span>
-
-          <p>
-            Start typing to search opportunities.
-          </p>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ===================================================== -->
-  <!-- DEMO MODE                                             -->
-  <!-- ===================================================== -->
-
-  <div
-    class="demo-overlay"
-    id="demoOverlay"
-  >
-
-
-    <div class="demo-card">
-
-
-      <button
-        class="modal-close"
-        id="closeDemo"
-        type="button"
-      >
-        ×
-      </button>
-
-
-      <div class="demo-header">
-
-
-        <span class="eyebrow">
-          GUIDED WALKTHROUGH
-        </span>
-
-
-        <div class="demo-progress">
-
-          <span
-            id="demoProgress"
-          ></span>
-
-        </div>
-
-
-        <div class="demo-step">
-
-          Step
-          <strong id="demoStep">
-            1
-          </strong>
-
-        </div>
-
-
-      </div>
-
-
-      <div
-        class="demo-visual"
-        id="demoVisual"
-      >
-
-        <div class="demo-visual-core">
-          JR
-        </div>
-
-      </div>
-
-
-      <div class="demo-content">
-
-
-        <h2 id="demoTitle">
-          Welcome to Job Radar
-        </h2>
-
-
-        <p id="demoDescription">
-          Explore how Job Radar connects
-          opportunity discovery, skill intelligence
-          and career action.
-        </p>
-
-
-      </div>
-
-
-      <div class="demo-actions">
-
-
-        <button
-          class="secondary-btn"
-          id="demoPrevious"
-          type="button"
-        >
-          ← Previous
-        </button>
-
-
-        <button
-          class="primary-btn"
-          id="demoNext"
-          type="button"
-        >
-          Next →
-        </button>
-
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ===================================================== -->
-  <!-- TOAST                                                  -->
-  <!-- ===================================================== -->
-
-  <div
-    class="toast"
-    id="toast"
-  >
-
-
-    <span
-      class="toast-icon"
-      id="toastIcon"
-    >
-      ✓
+    <span>
+      Real-time opportunity tracking
     </span>
 
-
-    <span
-      class="toast-message"
-      id="toastMessage"
-    >
-      Done
+    <span>
+      Skill intelligence
     </span>
 
+    <span>
+      Career readiness
+    </span>
 
   </div>
 
 
-  <!-- ===================================================== -->
-  <!-- JAVASCRIPT                                             -->
-  <!-- ===================================================== -->
+  <div class="footer-bottom">
 
-  <script src="./app.js"></script>
+    <span>
+      Job Radar
+    </span>
+
+    <span>
+      Built for students & early-career professionals
+    </span>
+
+  </div>
+
+</footer>
 
 
-</body>
+<!-- GLOBAL BACKDROP -->
+<div
+  id="globalBackdrop"
+  class="global-backdrop"
+></div>
 
+
+<!-- ACCESSIBILITY / SCREEN READER STATUS -->
+<div
+  id="ariaStatus"
+  class="sr-only"
+  aria-live="polite"
+></div>
+
+
+<!-- END PAGE CONTENT -->
+      <!-- JOB RADAR JAVASCRIPT -->
+      <script src="/app.js"></script>
+
+    </div>
+  </body>
 </html>
