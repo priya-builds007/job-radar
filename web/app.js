@@ -2645,4 +2645,155 @@ document.addEventListener(
     console.log(
   "Job Radar initialization complete."
 );
-});
+});/* ---------- Missing modal functions ---------- */
+
+function getJobById(id) {
+  return allJobs.find((job) => String(job.id) === String(id));
+}
+
+function openJobModal(job) {
+  if (!job) return;
+
+  state.currentJob = job;
+
+  const modal = $("#jobModal");
+  if (!modal) return;
+
+  const source = $("#modalSource");
+  const title = $("#modalJobTitle");
+  const company = $("#modalCompany");
+  const match = $("#modalMatch");
+  const location = $("#modalLocation");
+  const type = $("#modalType");
+  const freshness = $("#modalFreshness");
+  const why = $("#modalWhy");
+  const skills = $("#modalSkills");
+  const description = $("#modalDescription");
+  const saveButton = $("#modalSave");
+
+  if (source) source.textContent = job.source || "Job Board";
+  if (title) title.textContent = job.title || "Untitled Job";
+  if (company) company.textContent = job.company || "Company not listed";
+  if (match) match.textContent = `${job.match || 0}%`;
+  if (location) location.textContent = job.location || "India";
+  if (type) type.textContent = job.jobType || "Opportunity";
+  if (freshness) freshness.textContent = formatFreshness(
+    Number(job.freshness) || calculateFreshness(job.datePosted)
+  );
+
+  if (why) {
+    why.innerHTML = (job.reasons || [])
+      .map((reason) => `<div>${escapeHTML(reason)}</div>`)
+      .join("");
+  }
+
+  if (skills) {
+    skills.innerHTML = (job.skills || [])
+      .map((skill) => `<span class="skill-tag">${escapeHTML(skill)}</span>`)
+      .join("");
+  }
+
+  if (description) {
+    description.textContent =
+      job.description || "No job description available.";
+  }
+
+  if (saveButton) {
+    saveButton.textContent = isJobSaved(job.id)
+      ? "Saved"
+      : "Save Job";
+  }
+
+  modal.classList.add("active");
+}
+
+function closeJobModal() {
+  const modal = $("#jobModal");
+  if (modal) modal.classList.remove("active");
+  state.currentJob = null;
+}
+
+function openWhyModal(job) {
+  if (!job) return;
+
+  const modal = $("#whyModal");
+  const content = $("#whyJobContent");
+
+  if (!modal || !content) return;
+
+  content.innerHTML = `
+    <h3>${escapeHTML(job.title || "This opportunity")}</h3>
+    <p><strong>Match:</strong> ${job.match || 0}%</p>
+    <div class="why-list">
+      ${(job.reasons || [])
+        .map((reason) => `<div>${escapeHTML(reason)}</div>`)
+        .join("")}
+    </div>
+    ${
+      job.missingSkills?.length
+        ? `<p><strong>Skills to improve:</strong> ${job.missingSkills
+            .map(escapeHTML)
+            .join(", ")}</p>`
+        : ""
+    }
+  `;
+
+  modal.classList.add("active");
+}
+
+function closeWhyModal() {
+  const modal = $("#whyModal");
+  if (modal) modal.classList.remove("active");
+}
+
+function closeModals() {
+  closeJobModal();
+  closeWhyModal();
+}
+
+function setupModalEvents() {
+  const closeButton = $("#modalClose");
+  const whyCloseButton = $("#whyModalClose");
+  const saveButton = $("#modalSave");
+  const openButton = $("#modalOpenJob");
+
+  closeButton?.addEventListener("click", closeJobModal);
+  whyCloseButton?.addEventListener("click", closeWhyModal);
+
+  saveButton?.addEventListener("click", () => {
+    if (!state.currentJob) return;
+
+    toggleSavedJob(state.currentJob);
+
+    saveButton.textContent = isJobSaved(state.currentJob.id)
+      ? "Saved"
+      : "Save Job";
+
+    updateDashboard();
+  });
+
+  openButton?.addEventListener("click", () => {
+    if (!state.currentJob?.url) {
+      showToast("Job link is not available.", "!");
+      return;
+    }
+
+    window.open(
+      state.currentJob.url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  });
+
+  $("#jobModal")?.addEventListener("click", (event) => {
+    if (event.target.id === "jobModal") {
+      closeJobModal();
+    }
+  });
+
+  $("#whyModal")?.addEventListener("click", (event) => {
+    if (event.target.id === "whyModal") {
+      closeWhyModal();
+    }
+  });
+}
