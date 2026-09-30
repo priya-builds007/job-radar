@@ -2,6 +2,159 @@
   "jobs": [
     {
       "company": "",
+      "date_posted": "2026-09-29",
+      "description": "**Position:** Software Development Intern  \n**Openings:** 3  \n**Duration:** 30 Days  \n**Work Mode:** Remote  \n**Internship Type:** Unpaid, Project\\-Based  \n**Organization:** BuildGPT  \n**Founder \\& Operator:** Saivignesh Koturi\n\nAbout BuildGPT\n\nBuildGPT is an independent AI studio focused on building practical AI\\-powered tools for students, freelancers, job seekers, and first\\-time founders.\n\nBuildGPT is being developed around four core experiences:\n\n**Chat \\| MVP Studio \\| Portfolio \\| ATS Resume**\n\nOur goal is to make AI a practical working partner that helps people turn real ideas and experience into finished work.\n\nAbout the Role\n\nWe are looking for **Software Development Interns** who want hands\\-on experience building a real AI\\-powered web product.\n\nYou will work with the early BuildGPT team on frontend, backend, integrations, testing, and product functionality.\n\nResponsibilities\n\n* Develop and improve BuildGPT web application features.\n* Work on frontend and backend components.\n* Build and integrate APIs.\n* Connect AI functionality with application workflows.\n* Work with databases and user data where required.\n* Implement authentication and basic application security.\n* Fix bugs and improve application performance.\n* Test features before deployment.\n* Collaborate with AI, UI/UX, Product, and HR interns.\n* Document technical work and development decisions.\n* Participate in code reviews and feedback sessions.\n* Help improve the overall usability and reliability of BuildGPT.\n\nSkills Required\n\n* Basic knowledge of **HTML, CSS and JavaScript**\n* Knowledge of at least one programming language.\n* Basic understanding of frontend or backend development.\n* Understanding of APIs and web applications.\n* Basic Git/GitHub knowledge.\n* Problem\\-solving ability.\n* Willingness to learn new technologies.\n* Good communication and teamwork.\n\nPreferred Skills\n\nKnowledge of any of the following is useful:\n\n* React / Next.js\n* Node.js / Express\n* Python\n* REST APIs\n* SQL / PostgreSQL / MySQL\n* Firebase / Supabase\n* Git \\& GitHub\n* AI API integration\n* Authentication systems\n* Responsive web design\n\n**You do not need to know everything.** Strong fundamentals, willingness to learn, and the ability to build are more important.\n\nWhat You Will Work On\n\nDuring the internship, you may contribute to:\n\n* BuildGPT Chat\n* MVP Studio\n* Portfolio Builder\n* ATS Resume Builder\n* User authentication\n* Database systems\n* AI/API integrations\n* Dashboard and UI functionality\n* Testing and bug fixing\n* Deployment and product improvements\n\nInternship Structure\n\n**Week 1 — Understand \\& Setup**\n\n* Introduction to BuildGPT\n* Development environment setup\n* Understand the product architecture\n* Git/GitHub workflow\n* Receive initial development task\n\n**Week 2 — Development**\n\n* Build assigned features\n* API/database integration\n* Regular testing and feedback\n\n**Week 3 — Product Integration**\n\n* Connect features with the main application\n* Fix bugs\n* Improve performance and usability\n\n**Week 4 — Finalization**\n\n* Testing\n* Documentation\n* Bug fixing\n* Final feature delivery\n* Internship evaluation\n\nWhat You Will Get\n\n* Hands\\-on experience working on a real AI product\n* Practical software development experience\n* Mentorship and feedback\n* Team collaboration experience\n* Opportunity to contribute to BuildGPT\n* Internship completion certificate based on successful completion\n* Experience/Completion Letter where applicable\n* Performance\\-based recommendation/reference where appropriate\n* Opportunity to showcase eligible work in your portfolio\n\nImportant Terms\n\n* This is a **30\\-day unpaid, project\\-based internship**.\n* There is **no application, registration, training, certificate, or placement fee**.\n* This internship does not guarantee employment after completion.\n* Interns must provide truthful information about their skills and experience.\n* Confidential BuildGPT information, credentials, source code, and internal materials must not be shared without authorization.\n* Work must follow BuildGPT's confidentiality, security, IP, and code\\-of\\-conduct requirements.\n\nWho Can Apply?\n\n* B.Tech / B.E. students\n* BCA / MCA students\n* B.Sc. Computer Science / IT students\n* Diploma students with relevant development skills\n* Self\\-taught developers\n* Recent graduates\n* Developers building their first professional portfolio\n\n**Students with strong projects are encouraged to apply even without prior internship experience.**\n\nSelection Process\n\n**Application → Resume/Portfolio Screening → Technical Discussion → Selection → Onboarding**\n\nApply\n\n**Organization:** BuildGPT  \n**Role:** Software Development Intern  \n**Openings:** 3  \n**Work Mode:** Remote  \n**Duration:** 30 Days\n\n**Build the small thing. Tell the story. Pass the screen.**\n\nBenefits:\n\n* Flexible schedule\n* Work from home\n\nWork Location: Remote",
+      "id": "9442182d3a352d8e7609",
+      "is_remote": true,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=6be6c59837f8c869",
+      "location": "Remote, IN",
+      "matched_skills": [
+        "Python",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Firebase"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, HTML, CSS, JavaScript, Firebase",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 100,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-6be6c59837f8c869",
+      "title": "Software Developer"
+    },
+    {
+      "company": "VALUEMORE TEC LLP",
+      "date_posted": "2026-09-29",
+      "description": "\\*\\*Internship Opportunity: Java Backend Developer (12 Months) – Remote\n\nCompany: ValueMore Tec LLP  \nPreferred Location: Hyderabad\\*\\*\n\n**About ValueMore Tec LLP**\n\n**ValueMore Tec LLP** delivers modern, scalable technology solutions across **Custom Software Development, Web Applications, Mobile Apps, AI/ML, Cloud, and Automation**.  \nWe focus on nurturing young talent and providing real\\-world project exposure through structured internship programs.\n\nWe are inviting applications for the role of **Java Backend Developer Intern** for a 12**\\-month internship**. This is a **remote** position, with preference for candidates from **Hyderabad**.\n\n**Eligibility**\n\nWe are looking for **freshers who have passed out between 2021 and 2025**.  \nCandidates should have strong interest and basic knowledge in Java backend development.\n\n**Role Overview**\n\nAs a **Java Backend Intern**, you will collaborate with senior developers to build backend services, APIs, and core modules. This internship offers practical exposure to industry standards, modern development tools, and real project workflows.\n\nUpon successful completion and **based on performance**, interns may be offered a **full\\-time position**. The **CTC will be decided at that time**.\n\n**Responsibilities**\n\n* Assist in developing backend services using **Java \\& Spring Boot**\n* Support in building and integrating **REST APIs**\n* Work on database operations with **MySQL/PostgreSQL**\n* Write clean, maintainable, and testable code under guidance\n* Help in debugging, testing, and issue resolution\n* Participate in requirement discussions with the team\n* Follow Git workflows, coding guidelines, and CI/CD best practices\n\n**Required Skills**\n\n* Good understanding of **Core Java**, OOP concepts, and data structures\n* Familiarity with **Spring Boot** (preferred but not mandatory)\n* Basic understanding of REST APIs\n* Foundational knowledge of SQL\n* Quick learner with a passion for backend development\n* Good communication and problem\\-solving skills\n\n**Good to Have**\n\n* Knowledge of Hibernate/JPA\n* Familiarity with Git/GitHub\n* Understanding of microservices architecture\n* Basic awareness of cloud services (AWS/Azure/GCP)\n\n**Internship Details**\n\n* **Duration:** 12 Months\n* **Mode:** Remote\n* **Preferred Location:** Hyderabad\n* **Full\\-Time Opportunity:** Based strictly on performance\n* If selected, **CTC will be decided at the time of offer**\n\n**Important Note:** During the 12\\-month internship, performance will be continuously evaluated. If the intern’s performance does not meet the expected standards, ValueMore Tec LLP reserves the right to discontinue the internship at any point.**Why Join ValueMore Tec LLP?**\n\n* Hands\\-on project experience\n* Work with experienced developers and mentors\n* Exposure to real\\-world system design and architecture\n* Opportunity for full\\-time employment\n* Flexible remote work environment\n\n**How to Apply**\n\nInterested candidates can send their resume to: **Contactus@valuemoretec.com**\n\nJob Types: Full\\-time, Fresher, Internship\n\nPay: ₹5,000\\.00 per month\n\nWork Location: Remote",
+      "id": "6a5e39e1290d2d120eec",
+      "is_remote": true,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=81769fe4a5f69cb4",
+      "location": "TS, IN",
+      "matched_skills": [
+        "Java"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-81769fe4a5f69cb4",
+      "title": "Java Backend Developer"
+    },
+    {
+      "company": "",
+      "date_posted": "2026-09-29",
+      "description": "Position: Flutter Developer InternExperience: Fresher / InternshipLocation: \\[Your Location / Remote]Stipend: ₹4,000/month\n\nJob Description\n\nWe are looking for a motivated Flutter Developer Intern who has basic knowledge of Flutter and wants to gain practical experience by building a real\\-world mobile application.\n\nRequirements\n\n* Basic knowledge of Flutter \\& Dart\n* Understanding of GetX State Management\n* Able to build at least 1 basic Flutter project\n* Basic understanding of UI development and responsive layouts\n* Familiarity with API integration is a plus\n* Good problem\\-solving and learning skills\n* Willingness to learn and work on real\\-world projects\n\nResponsibilities\n\n* Develop and maintain Flutter mobile applications\n* Build UI screens using Flutter\n* Implement state management using GetX\n* Fix bugs and improve existing features\n* Work with the development team on real\\-world projects\n* Learn and follow proper Flutter development practices\n\nWho Can Apply?\n\n* Freshers\n* Students learning Flutter\n* Candidates who have built at least one Flutter project\n* Candidates looking to gain practical experience in mobile app development\n\nIf you are interested in Flutter development and want to work on real projects, we would love to hear from you.\n\nPay: ₹4,000\\.00 \\- ₹7,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n* Work from home\n\nWork Location: Remote",
+      "id": "448ade6a28d92e80e8f7",
+      "is_remote": true,
+      "job_type": "parttime, fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=0e6930be2bfb3d2e",
+      "location": "Remote, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-0e6930be2bfb3d2e",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "GREEN TREE SOFT TECH SOLUTIONS",
+      "date_posted": "2026-09-29",
+      "description": "Python Developer – Project Centre\n\nWe provide Python\\-based project development and technical support for students, graduates, and organizations. Our Python development services focus on building practical software applications, automation solutions, data analysis systems, and AI/ML\\-based projects.\n\n**Services include:**\n\n* Python application development\n* AI \\& Machine Learning projects\n* Data analysis and visualization\n* Flask\\-based web applications\n* Automation and scripting\n* Database integration\n* API development and integration\n* Project debugging and error fixing\n* Project documentation, PPT, and technical guidance\n* Final\\-year and academic project development\n\nProjects are developed with a focus on **practical implementation, clear documentation, working demonstrations, and student understanding**, rather than only providing ready\\-made code.\n\nPay: ₹4,000\\.00 \\- ₹5,000\\.00 per month\n\nWork Location: In person",
+      "id": "78eec4b4edfdc2551726",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=1ce7093b9e762f4b",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-1ce7093b9e762f4b",
+      "title": "Python Developer Intern"
+    },
+    {
+      "company": "Defenzelite private limited",
+      "date_posted": "2026-09-29",
+      "description": "**Responsibilities:**  \n\\- Collaborate with managers, designers, and backend developers to gather requirements and create a Flow and strategy for mobile applications.  \n\\- Integrate mobile applications with Laravel\\-based APIs, handling data exchange and ensuring data security.  \n\\- Write clean, efficient, and scalable code following industry best practices and coding standards.  \n\\- Build responsive and visually appealing user interfaces based on design specifications and UX guidelines.  \n\\- Make responsive mobile applications  \n\\- Conduct thorough testing of applications to identify and address any issues before deployment.\n\n**Qualifications:**  \n\\- Bachelor's degree in Computer Science, Software Engineering, or a related field, or equivalent work experience.  \n\\- Strong proficiency in the Flutter framework for developing cross\\-platform mobile applications.  \n\\- Extensive experience in the Laravel framework for building robust and scalable APIs.  \n\\- Familiar with RESTful API integration and data handling in mobile applications.\n\nJob Types: Full\\-time, Internship\n\nPay: Up to ₹5,000\\.00 per month\n\nWork Location: In person",
+      "id": "57eb921b5ab0f7822729",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=6af02af35faffbce",
+      "location": "MP, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: MP, IN"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-6af02af35faffbce",
+      "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "",
       "date_posted": "2026-09-28",
       "description": "Java Developer Intern\n\n**Location:** Pune / Remote  \n**Duration:** 3–6 Months  \n**Mode:** Work From Home / Hybrid  \n**Stipend:** ₹10,000 per month\n\nAbout the Role\n\nWe are looking for a motivated **Java Developer Intern** who wants to gain practical experience in Java development and work on real\\-world projects. This internship provides an opportunity to learn, develop, test, and improve software applications while working with a development team.\n\nKey Responsibilities\n\n* Develop and maintain applications using **Java**\n* Write clean, efficient, and reusable code\n* Work on backend development and REST APIs\n* Assist in developing and integrating software features\n* Work with databases such as **MySQL/PostgreSQL**\n* Debug and troubleshoot application issues\n* Perform testing and resolve bugs\n* Collaborate with developers and team members\n* Participate in project discussions and code reviews\n* Document development work and project activities\n\nRequired Skills\n\n* Basic knowledge of **Java**\n* Understanding of **OOP concepts**\n* Knowledge of Java Collections and Exception Handling\n* Basic knowledge of **SQL and databases**\n* Understanding of REST APIs\n* Basic knowledge of **Git/GitHub**\n* Good logical and problem\\-solving skills\n* Willingness to learn and work on real\\-world projects\n\nGood to Have\n\n* Knowledge of **Spring / Spring Boot**\n* Basic knowledge of **Hibernate/JPA**\n* Familiarity with Maven or Gradle\n* Basic knowledge of HTML, CSS, or JavaScript\n* Experience with academic or personal Java projects\n\nEligibility\n\n* **Freshers and students are eligible to apply**\n* B.Tech/B.E./BCA/MCA students or graduates from a relevant technical background\n* No prior professional experience required\n* Candidates with basic Java knowledge are welcome\n* Students looking for practical industry experience can apply\n\nWhat You Will Gain\n\n* Hands\\-on experience in Java development\n* Real\\-world project experience\n* Exposure to backend development and REST APIs\n* Mentorship and guidance from the development team\n* Experience with Git/GitHub and collaborative development\n* Internship certificate\n* Project experience for your resume\n* Placement support based on performance\n\n**Start your journey as a Java Developer Intern and gain practical experience by working on real\\-world projects.**\n\nPay: ₹5,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: Hybrid remote in Bhubaneswar, Odisha 751016",
       "id": "675590c6a8b23a9bd577",
@@ -189,6 +342,64 @@
       "source": "linkedin",
       "source_id": "li-4471322071",
       "title": "Associate Software Engineer Intern - YMS"
+    },
+    {
+      "company": "Ucanly",
+      "date_posted": "2026-09-28",
+      "description": "",
+      "id": "a6e13facede74f9ac8c9",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4470858733",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4470858733",
+      "title": "Full Stack Developer - Entry Level"
+    },
+    {
+      "company": "Zudu AI",
+      "date_posted": "2026-09-28",
+      "description": "",
+      "id": "2f437e8258c6119fc833",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471349262",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4471349262",
+      "title": "Backend Engineering Intern, Voice AI Platform"
     },
     {
       "company": "",
@@ -1950,22 +2161,23 @@
       "title": "Web Developer Intern"
     },
     {
-      "company": "ARK Canton Enterprises",
-      "date_posted": "2026-07-01",
-      "description": "Hiring: Application Developer Internship\n\nCompany: Ark Codux Digital\n\nRequired: Fresher\n\nLocation: work from office only Chennai\n\nWorking hours: 9\\.30Am\\-5\\.30pm\n\nQualification: Any degree\n\nPreferred Skills\n\n Experience in Android (Java/Kotlin) or iOS (Swift) development\n\n Knowledge of cross\\-platform frameworks (Flutter / React Native)\n\n Understanding of APIs, databases, and app security\n\n Problem\\-solving and debugging skills Roles \\& Responsibilities\n\n Design, develop, and maintain mobile applications\n\n Write clean, scalable, and efficient code\n\n Collaborate with designers and backend teams\n\n Test, debug, and improve app performance\n\n Publish and update apps on app stores\n\nHR Contact Details:8925532074\n\nPay: ₹1,000\\.00 \\- ₹1,500\\.00 per month\n\nWork Location: In person",
-      "id": "88a5e350668f8e6a7f69",
+      "company": "Revin Krishi",
+      "date_posted": null,
+      "description": "",
+      "id": "e15607b0601a8485525a",
       "is_remote": false,
       "job_type": "",
-      "job_url": "https://in.indeed.com/viewjob?jk=81877a22b536b1ac",
-      "location": "TN, IN",
+      "job_url": "https://www.linkedin.com/jobs/view/4471703492",
+      "location": "Palghat, Kerala, India",
       "matched_skills": [
-        "Java"
+        "Embedded Systems"
       ],
       "reasons": [
         "Target role detected in title",
         "Internship, fresher or entry-level cue detected",
-        "Skills in title/description: Java",
-        "Preferred geography from source location: TN, IN"
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Palghat, Kerala, India",
+        "Description unavailable; skill evidence may be incomplete"
       ],
       "relevant": true,
       "score": 75,
@@ -1976,38 +2188,41 @@
         "student_level": 20,
         "target_role": 35
       },
-      "source": "indeed",
-      "source_id": "in-81877a22b536b1ac",
-      "title": "Application Developer Intern"
+      "source": "linkedin",
+      "source_id": "li-4471703492",
+      "title": "Embedded Software Engineer - Intern"
     },
     {
-      "company": "Ucanly",
+      "company": "CLUIX Pvt Ltd",
       "date_posted": null,
       "description": "",
-      "id": "a6e13facede74f9ac8c9",
+      "id": "9994fcc4e04ea8381f2e",
       "is_remote": false,
       "job_type": "",
-      "job_url": "https://www.linkedin.com/jobs/view/4470858733",
-      "location": "Bengaluru, Karnataka, India",
-      "matched_skills": [],
+      "job_url": "https://www.linkedin.com/jobs/view/4473073889",
+      "location": "Civil Lines, Delhi, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
       "reasons": [
         "Target role detected in title",
         "Internship, fresher or entry-level cue detected",
-        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Civil Lines, Delhi, India",
         "Description unavailable; skill evidence may be incomplete"
       ],
       "relevant": true,
-      "score": 70,
+      "score": 75,
       "score_breakdown": {
         "preferred_location": 15,
         "remote": 0,
-        "skills": 0,
+        "skills": 5,
         "student_level": 20,
         "target_role": 35
       },
       "source": "linkedin",
-      "source_id": "li-4470858733",
-      "title": "Full Stack Developer - Entry Level"
+      "source_id": "li-4473073889",
+      "title": "Embedded Intern"
     },
     {
       "company": "Vigilant Forensic Research And Analytics Pvt. Ltd.",
@@ -2037,35 +2252,6 @@
       "source": "linkedin",
       "source_id": "li-4471008694",
       "title": "Full-Stack Developer Intern"
-    },
-    {
-      "company": "Zudu AI",
-      "date_posted": null,
-      "description": "",
-      "id": "2f437e8258c6119fc833",
-      "is_remote": false,
-      "job_type": "",
-      "job_url": "https://www.linkedin.com/jobs/view/4471349262",
-      "location": "Chennai, Tamil Nadu, India",
-      "matched_skills": [],
-      "reasons": [
-        "Target role detected in title",
-        "Internship, fresher or entry-level cue detected",
-        "Preferred geography from source location: Chennai, Tamil Nadu, India",
-        "Description unavailable; skill evidence may be incomplete"
-      ],
-      "relevant": true,
-      "score": 70,
-      "score_breakdown": {
-        "preferred_location": 15,
-        "remote": 0,
-        "skills": 0,
-        "student_level": 20,
-        "target_role": 35
-      },
-      "source": "linkedin",
-      "source_id": "li-4471349262",
-      "title": "Backend Engineering Intern, Voice AI Platform"
     }
   ],
   "schema_version": 1
