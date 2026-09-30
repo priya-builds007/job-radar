@@ -73,15 +73,18 @@ function escapeHTML(value) {
 function unique(values) {
   return [...new Set(
     values.filter(
-      value => value !== null &&
-               value !== undefined &&
-               value !== ''
+      value =>
+        value !== null &&
+        value !== undefined &&
+        value !== ''
     )
   )];
 }
 
 function asArray(value) {
-  if (Array.isArray(value)) return value;
+  if (Array.isArray(value)) {
+    return value;
+  }
 
   if (
     value === null ||
@@ -95,7 +98,8 @@ function asArray(value) {
 }
 
 function compact(value) {
-  return normalize(value).replace(/[^a-z0-9+#.]+/g, '');
+  return normalize(value)
+    .replace(/[^a-z0-9+#.]+/g, '');
 }
 
 function jobId(job) {
@@ -125,11 +129,15 @@ function safeLink(url) {
 function loadLocalState() {
   try {
     const saved = JSON.parse(
-      localStorage.getItem(STORAGE_KEYS.savedJobs) || '[]'
+      localStorage.getItem(
+        STORAGE_KEYS.savedJobs
+      ) || '[]'
     );
 
     savedJobs = new Set(
-      Array.isArray(saved) ? saved : []
+      Array.isArray(saved)
+        ? saved
+        : []
     );
   } catch {
     savedJobs = new Set();
@@ -155,12 +163,16 @@ function loadLocalState() {
 function saveLocalState() {
   localStorage.setItem(
     STORAGE_KEYS.savedJobs,
-    JSON.stringify([...savedJobs])
+    JSON.stringify([
+      ...savedJobs
+    ])
   );
 
   localStorage.setItem(
     STORAGE_KEYS.applicationStatus,
-    JSON.stringify(applicationStatus)
+    JSON.stringify(
+      applicationStatus
+    )
   );
 }
 
@@ -295,21 +307,29 @@ function getJobSkills(job) {
 
   return skills.filter(skill => {
     if (skill === 'c') {
-      return /\bc\b/.test(haystack);
+      return /\bc\b/.test(
+        haystack
+      );
     }
 
     if (skill === 'c++') {
-      return haystack.includes('c++');
+      return haystack.includes(
+        'c++'
+      );
     }
 
     if (skill === 'iot') {
       return (
         haystack.includes('iot') ||
-        haystack.includes('internet of things')
+        haystack.includes(
+          'internet of things'
+        )
       );
     }
 
-    return haystack.includes(skill);
+    return haystack.includes(
+      skill
+    );
   });
 }
 
@@ -319,19 +339,23 @@ function getJobSkills(job) {
    ========================================================= */
 
 function calculatePersonalMatch(job) {
-  const skills = getJobSkills(job);
+  const skills =
+    getJobSkills(job);
 
-  const title = normalize(
-    getJobTitle(job)
-  );
+  const title =
+    normalize(
+      getJobTitle(job)
+    );
 
-  const description = normalize(
-    getDescription(job)
-  );
+  const description =
+    normalize(
+      getDescription(job)
+    );
 
-  const location = normalize(
-    getLocation(job)
-  );
+  const location =
+    normalize(
+      getLocation(job)
+    );
 
   let score = 0;
 
@@ -339,10 +363,9 @@ function calculatePersonalMatch(job) {
   const missingSkills = [];
   const reasons = [];
 
-  const fullText = `${title} ${description}`;
+  const fullText =
+    `${title} ${description}`;
 
-
-  /* Early-career fit */
 
   const earlyLevel =
     /intern|internship|trainee|fresher|entry[\s-]?level|graduate|student/
@@ -357,8 +380,6 @@ function calculatePersonalMatch(job) {
   }
 
 
-  /* Technical role */
-
   const technicalRole =
     /developer|software|engineer|programmer|python|java|frontend|backend|full[\s-]?stack|iot|embedded|tester|testing|data|ai|ml/
       .test(title);
@@ -372,31 +393,36 @@ function calculatePersonalMatch(job) {
   }
 
 
-  /* Matching skills */
-
-  PROFILE_SKILLS.forEach(skill => {
-    if (skills.includes(skill)) {
-      matchedSkills.push(skill);
+  PROFILE_SKILLS.forEach(
+    skill => {
+      if (
+        skills.includes(skill)
+      ) {
+        matchedSkills.push(
+          skill
+        );
+      }
     }
-  });
-
-  const skillPoints = Math.min(
-    30,
-    matchedSkills.length * 6
   );
+
+  const skillPoints =
+    Math.min(
+      30,
+      matchedSkills.length * 6
+    );
 
   score += skillPoints;
 
   if (matchedSkills.length) {
     reasons.push(
       `${matchedSkills.length} relevant skill${
-        matchedSkills.length > 1 ? 's' : ''
+        matchedSkills.length > 1
+          ? 's'
+          : ''
       } matched`
     );
   }
 
-
-  /* Location */
 
   const local =
     /coimbatore|tamil nadu|chennai|bengaluru|bangalore|india/
@@ -411,8 +437,6 @@ function calculatePersonalMatch(job) {
   }
 
 
-  /* Remote */
-
   if (isRemote(job)) {
     score += 10;
 
@@ -422,8 +446,6 @@ function calculatePersonalMatch(job) {
   }
 
 
-  /* Student wording */
-
   if (
     /student|intern|fresher|graduate/
       .test(description)
@@ -431,8 +453,6 @@ function calculatePersonalMatch(job) {
     score += 5;
   }
 
-
-  /* Skill gaps */
 
   const possibleGaps = [
     'python',
@@ -449,32 +469,47 @@ function calculatePersonalMatch(job) {
     'flutter'
   ];
 
-  possibleGaps.forEach(skill => {
-    if (
-      fullText.includes(skill) &&
-      !matchedSkills.includes(skill)
-    ) {
-      missingSkills.push(skill);
+  possibleGaps.forEach(
+    skill => {
+      if (
+        fullText.includes(skill) &&
+        !matchedSkills.includes(skill)
+      ) {
+        missingSkills.push(
+          skill
+        );
+      }
     }
-  });
+  );
 
 
   return {
-    score: Math.min(100, score),
-    matchedSkills: unique(matchedSkills),
-    missingSkills: unique(missingSkills),
-    reasons: unique(reasons)
+    score: Math.min(
+      100,
+      score
+    ),
+    matchedSkills:
+      unique(matchedSkills),
+    missingSkills:
+      unique(missingSkills),
+    reasons:
+      unique(reasons)
   };
 }
 
 function calculateScore(job) {
-  const value = Number(job.score);
+  const value =
+    Number(job.score);
 
-  if (Number.isFinite(value)) {
+  if (
+    Number.isFinite(value)
+  ) {
     return value;
   }
 
-  return calculatePersonalMatch(job).score;
+  return calculatePersonalMatch(
+    job
+  ).score;
 }
 
 
@@ -483,47 +518,69 @@ function calculateScore(job) {
    ========================================================= */
 
 function dateBucket(job) {
-  const raw = getDate(job);
+  const raw =
+    getDate(job);
 
   if (!raw) {
     return 'unknown';
   }
 
-  const date = new Date(raw);
+  const date =
+    new Date(raw);
 
-  if (Number.isNaN(date.getTime())) {
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
     return 'unknown';
   }
 
-  const today = new Date();
+  const today =
+    new Date();
 
-  const todayStart = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
+  const todayStart =
+    new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
 
-  const jobStart = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
+  const jobStart =
+    new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
-  const diffDays = Math.floor(
-    (todayStart - jobStart) /
-    86400000
-  );
+  const diffDays =
+    Math.floor(
+      (todayStart - jobStart) /
+      86400000
+    );
 
-  if (diffDays < 0) return 'unknown';
-  if (diffDays === 0) return 'today';
-  if (diffDays <= 7) return 'week';
-  if (diffDays <= 30) return 'month';
+  if (diffDays < 0) {
+    return 'unknown';
+  }
+
+  if (diffDays === 0) {
+    return 'today';
+  }
+
+  if (diffDays <= 7) {
+    return 'week';
+  }
+
+  if (diffDays <= 30) {
+    return 'month';
+  }
 
   return 'older';
 }
 
 function getFreshness(job) {
-  const bucket = dateBucket(job);
+  const bucket =
+    dateBucket(job);
 
   if (bucket === 'today') {
     return 'Today';
@@ -580,56 +637,80 @@ function selectedFilter(id) {
     return '';
   }
 
-  return normalize(element.value);
+  return normalize(
+    element.value
+  );
 }
 
 function searchTokens(value) {
   return normalize(value)
     .split(/\s+/)
-    .map(token => token.trim())
+    .map(token =>
+      token.trim()
+    )
     .filter(
       token =>
         token &&
-        !SEARCH_STOP_WORDS.has(token)
+        !SEARCH_STOP_WORDS.has(
+          token
+        )
     );
 }
 
-function searchMatchesToken(haystack, token) {
-  if (haystack.includes(token)) {
+function searchMatchesToken(
+  haystack,
+  token
+) {
+  if (
+    haystack.includes(token)
+  ) {
     return true;
   }
 
-  const aliases = SEARCH_ALIASES[token];
+  const aliases =
+    SEARCH_ALIASES[token];
 
   if (!aliases) {
     return false;
   }
 
-  return aliases.some(alias =>
-    haystack.includes(alias)
+  return aliases.some(
+    alias =>
+      haystack.includes(alias)
   );
 }
 
-function matchesSearch(job, query) {
-  const tokens = searchTokens(query);
+function matchesSearch(
+  job,
+  query
+) {
+  const tokens =
+    searchTokens(query);
 
   if (!tokens.length) {
     return true;
   }
 
-  const haystack = normalize([
-    getJobTitle(job),
-    getCompany(job),
-    getLocation(job),
-    getDescription(job),
-    getSource(job),
-    getJobType(job),
-    asArray(job.skills).join(' '),
-    asArray(job.matched_skills).join(' ')
-  ].join(' '));
+  const haystack =
+    normalize([
+      getJobTitle(job),
+      getCompany(job),
+      getLocation(job),
+      getDescription(job),
+      getSource(job),
+      getJobType(job),
+      asArray(job.skills).join(' '),
+      asArray(
+        job.matched_skills
+      ).join(' ')
+    ].join(' '));
 
-  return tokens.every(token =>
-    searchMatchesToken(haystack, token)
+  return tokens.every(
+    token =>
+      searchMatchesToken(
+        haystack,
+        token
+      )
   );
 }
 
@@ -638,11 +719,22 @@ function matchesSearch(job, query) {
    LOCATION FILTER
    ========================================================= */
 
-function normalizeLocation(value) {
+function normalizeLocation(
+  value
+) {
   return normalize(value)
-    .replace(/\btn\b/g, 'tamil nadu')
-    .replace(/\bin\b/g, 'india')
-    .replace(/\bbengaluru\b/g, 'bangalore');
+    .replace(
+      /\btn\b/g,
+      'tamil nadu'
+    )
+    .replace(
+      /\bin\b/g,
+      'india'
+    )
+    .replace(
+      /\bbengaluru\b/g,
+      'bangalore'
+    );
 }
 
 function locationMatches(
@@ -657,15 +749,23 @@ function locationMatches(
   }
 
   const jobValue =
-    normalizeLocation(jobLocation);
+    normalizeLocation(
+      jobLocation
+    );
 
   const selectedValue =
-    normalizeLocation(selectedLocation);
+    normalizeLocation(
+      selectedLocation
+    );
 
   return (
     jobValue === selectedValue ||
-    jobValue.includes(selectedValue) ||
-    selectedValue.includes(jobValue)
+    jobValue.includes(
+      selectedValue
+    ) ||
+    selectedValue.includes(
+      jobValue
+    )
   );
 }
 
@@ -674,8 +774,11 @@ function locationMatches(
    JOB TYPE FILTER
    ========================================================= */
 
-function normalizeJobType(value) {
-  const type = normalize(value);
+function normalizeJobType(
+  value
+) {
+  const type =
+    normalize(value);
 
   if (
     type.includes('full-time') ||
@@ -693,11 +796,15 @@ function normalizeJobType(value) {
     return 'parttime';
   }
 
-  if (type.includes('intern')) {
+  if (
+    type.includes('intern')
+  ) {
     return 'internship';
   }
 
-  if (type.includes('contract')) {
+  if (
+    type.includes('contract')
+  ) {
     return 'contract';
   }
 
@@ -737,13 +844,18 @@ function remoteMatches(
     return true;
   }
 
-  const remote = isRemote(job);
+  const remote =
+    isRemote(job);
 
-  if (selectedRemote === 'remote') {
+  if (
+    selectedRemote === 'remote'
+  ) {
     return remote;
   }
 
-  if (selectedRemote === 'onsite') {
+  if (
+    selectedRemote === 'onsite'
+  ) {
     return !remote;
   }
 
@@ -766,21 +878,30 @@ function postedMatches(
     return true;
   }
 
-  const bucket = dateBucket(job);
+  const bucket =
+    dateBucket(job);
 
-  if (selectedPeriod === 'today') {
+  if (
+    selectedPeriod === 'today'
+  ) {
     return bucket === 'today';
   }
 
-  if (selectedPeriod === 'this week') {
+  if (
+    selectedPeriod === 'this week'
+  ) {
     return bucket === 'week';
   }
 
-  if (selectedPeriod === 'this month') {
+  if (
+    selectedPeriod === 'this month'
+  ) {
     return bucket === 'month';
   }
 
-  if (selectedPeriod === 'older') {
+  if (
+    selectedPeriod === 'older'
+  ) {
     return bucket === 'older';
   }
 
@@ -810,7 +931,8 @@ function skillMatches(
     return true;
   }
 
-  const skills = getJobSkills(job);
+  const skills =
+    getJobSkills(job);
 
   return skills.includes(
     normalize(selectedSkill)
@@ -826,7 +948,8 @@ function minimumScoreMatches(
   job,
   minimum
 ) {
-  const value = Number(minimum);
+  const value =
+    Number(minimum);
 
   if (
     !Number.isFinite(value) ||
@@ -835,7 +958,10 @@ function minimumScoreMatches(
     return true;
   }
 
-  return calculateScore(job) >= value;
+  return (
+    calculateScore(job) >=
+    value
+  );
 }
 
 
@@ -843,8 +969,14 @@ function minimumScoreMatches(
    APPLICATION STATUS FILTER
    ========================================================= */
 
-function getApplicationStatus(job) {
-  return applicationStatus[jobId(job)] || '';
+function getApplicationStatus(
+  job
+) {
+  return (
+    applicationStatus[
+      jobId(job)
+    ] || ''
+  );
 }
 
 function statusMatches(
@@ -858,19 +990,28 @@ function statusMatches(
     return true;
   }
 
-  const id = jobId(job);
-  const status = getApplicationStatus(job);
+  const status =
+    getApplicationStatus(job);
 
-  if (selectedStatus === 'not-tracked') {
+  if (
+    selectedStatus ===
+    'not-tracked'
+  ) {
     return !status;
   }
 
-  if (selectedStatus === 'saved') {
-    return savedJobs.has(id);
+  if (
+    selectedStatus === 'saved'
+  ) {
+    return savedJobs.has(
+      jobId(job)
+    );
   }
 
-  return normalize(status) ===
-    normalize(selectedStatus);
+  return (
+    normalize(status) ===
+    normalize(selectedStatus)
+  );
 }
 
 
@@ -894,117 +1035,130 @@ function savedMatches(job) {
    ========================================================= */
 
 function getFilteredJobs() {
-  const search = $('search')
-    ? $('search').value
-    : '';
+  const search =
+    $('search')
+      ? $('search').value
+      : '';
 
-  const location = selectedFilter(
-    'location'
+  const location =
+    selectedFilter(
+      'location'
+    );
+
+  const jobType =
+    selectedFilter(
+      'jobType'
+    );
+
+  const remote =
+    selectedFilter(
+      'remote'
+    );
+
+  const period =
+    selectedFilter(
+      'period'
+    );
+
+  const skill =
+    selectedFilter(
+      'skill'
+    );
+
+  const status =
+    selectedFilter(
+      'status'
+    );
+
+  const minimum =
+    selectedFilter(
+      'minimum'
+    );
+
+  return allJobs.filter(
+    job => {
+
+      if (
+        !matchesSearch(
+          job,
+          search
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !locationMatches(
+          getLocation(job),
+          location
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !jobTypeMatches(
+          getJobType(job),
+          jobType
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !remoteMatches(
+          job,
+          remote
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !postedMatches(
+          job,
+          period
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !skillMatches(
+          job,
+          skill
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !minimumScoreMatches(
+          job,
+          minimum
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !statusMatches(
+          job,
+          status
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        !savedMatches(job)
+      ) {
+        return false;
+      }
+
+      return true;
+    }
   );
-
-  const jobType = selectedFilter(
-    'jobType'
-  );
-
-  const remote = selectedFilter(
-    'remote'
-  );
-
-  const period = selectedFilter(
-    'period'
-  );
-
-  const skill = selectedFilter(
-    'skill'
-  );
-
-  const status = selectedFilter(
-    'status'
-  );
-
-  const minimum = selectedFilter(
-    'minimum'
-  );
-
-  return allJobs.filter(job => {
-
-    if (
-      !matchesSearch(job, search)
-    ) {
-      return false;
-    }
-
-    if (
-      !locationMatches(
-        getLocation(job),
-        location
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !jobTypeMatches(
-        getJobType(job),
-        jobType
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !remoteMatches(
-        job,
-        remote
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !postedMatches(
-        job,
-        period
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !skillMatches(
-        job,
-        skill
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !minimumScoreMatches(
-        job,
-        minimum
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !statusMatches(
-        job,
-        status
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      !savedMatches(job)
-    ) {
-      return false;
-    }
-
-    return true;
-  });
 }
 
 
@@ -1013,7 +1167,8 @@ function getFilteredJobs() {
    ========================================================= */
 
 function dateValue(job) {
-  const raw = getDate(job);
+  const raw =
+    getDate(job);
 
   if (!raw) {
     return 0;
@@ -1070,9 +1225,12 @@ function sortJobs(jobs) {
    ========================================================= */
 
 function toggleSaved(job) {
-  const id = jobId(job);
+  const id =
+    jobId(job);
 
-  if (savedJobs.has(id)) {
+  if (
+    savedJobs.has(id)
+  ) {
     savedJobs.delete(id);
   } else {
     savedJobs.add(id);
@@ -1117,7 +1275,8 @@ function setApplicationStatus(
   job,
   status
 ) {
-  const id = jobId(job);
+  const id =
+    jobId(job);
 
   if (!status) {
     delete applicationStatus[id];
@@ -1155,23 +1314,27 @@ function updateInsights() {
 
   if (remote) {
     remote.textContent =
-      allJobs.filter(isRemote).length;
+      allJobs.filter(
+        isRemote
+      ).length;
   }
 
   if (highScore) {
     highScore.textContent =
       allJobs.filter(
-        job => calculateScore(job) >= 80
+        job =>
+          calculateScore(job) >= 80
       ).length;
   }
 
   if (applications) {
     applications.textContent =
-      Object.keys(applicationStatus)
-        .filter(
-          id =>
-            applicationStatus[id]
-        ).length;
+      Object.keys(
+        applicationStatus
+      ).filter(
+        id =>
+          applicationStatus[id]
+      ).length;
   }
 
   updateTopSkills();
@@ -1183,136 +1346,152 @@ function updateInsights() {
    ========================================================= */
 
 function updateTopSkills() {
-  const container =
+  const element =
     $('topSkills');
 
-  if (!container) {
+  if (!element) {
     return;
   }
 
   const counts = {};
 
-  allJobs.forEach(job => {
-    getJobSkills(job).forEach(skill => {
-      counts[skill] =
-        (counts[skill] || 0) + 1;
-    });
-  });
+  allJobs.forEach(
+    job => {
+      getJobSkills(job).forEach(
+        skill => {
+          counts[skill] =
+            (counts[skill] || 0) + 1;
+        }
+      );
+    }
+  );
 
-  const skills =
+  const top =
     Object.entries(counts)
       .sort(
-        (a, b) => b[1] - a[1]
+        (a, b) =>
+          b[1] - a[1]
       )
-      .slice(0, 8);
+      .slice(0, 6);
 
-  if (!skills.length) {
-    container.innerHTML =
-      '<span>No skill data yet</span>';
+  if (!top.length) {
+    element.innerHTML =
+      '<span class="muted">No skill data available</span>';
     return;
   }
 
-  container.innerHTML =
-    skills.map(
-      ([skill, count]) => `
-        <span>
-          ${escapeHTML(skill)}
-          · ${count}
-        </span>
-      `
-    ).join('');
+  element.innerHTML =
+    top
+      .map(
+        ([skill, count]) =>
+          `<span class="skill-chip">
+            ${escapeHTML(skill)} · ${count}
+          </span>`
+      )
+      .join('');
 }
 
 
 /* =========================================================
-   OPPORTUNITY AGENT
+   BEST OPPORTUNITY
    ========================================================= */
 
 function getBestOpportunity() {
-  const jobs =
-    getFilteredJobs();
-
-  if (!jobs.length) {
+  if (!allJobs.length) {
     return null;
   }
 
-  return [...jobs].sort(
-    (a, b) => {
-
-      const scoreDifference =
-        calculateScore(b) -
-        calculateScore(a);
-
-      if (scoreDifference !== 0) {
-        return scoreDifference;
-      }
-
-      return (
-        dateValue(b) -
-        dateValue(a)
-      );
-    }
-  )[0];
+  return [...allJobs]
+    .sort(
+      (a, b) =>
+        calculatePersonalMatch(b).score -
+        calculatePersonalMatch(a).score
+    )[0];
 }
 
 
 /* =========================================================
-   AGENT TEXT
+   AGENT NEXT ACTION
    ========================================================= */
 
 function getAgentNextAction(
   job,
-  match
+  analysis
 ) {
   const status =
     getApplicationStatus(job);
 
   if (status === 'Applied') {
-    return 'Application already tracked. Keep checking for updates.';
+    return 'Track the application and prepare for the next stage.';
   }
 
   if (status === 'Interview') {
-    return 'Prepare for the interview and review the required skills.';
+    return 'Prepare interview questions based on the role and required skills.';
   }
 
-  if (match.missingSkills.length) {
-    return `Review the missing skill${
-      match.missingSkills.length > 1
-        ? 's'
-        : ''
-    } and then consider applying.`;
+  if (
+    analysis.missingSkills.length
+  ) {
+    return `Apply if the role fits, then spend 30 minutes learning ${analysis.missingSkills[0]}.`;
   }
 
-  return 'Review the job requirements and consider applying.';
+  if (
+    analysis.score >= 80
+  ) {
+    return 'Review the job details and consider applying.';
+  }
+
+  return 'Review the missing requirements before applying.';
 }
 
-function getAgentSkillText(skills) {
+
+/* =========================================================
+   AGENT SKILL TEXT
+   ========================================================= */
+
+function getAgentSkillText(
+  skills
+) {
   if (!skills.length) {
-    return 'No strong skill match detected yet.';
+    return 'No direct skill match detected';
   }
 
   return skills
-    .map(skill => escapeHTML(skill))
-    .join(' • ');
-}
-
-function getAgentGapText(skills) {
-  if (!skills.length) {
-    return 'No major skill gap identified.';
-  }
-
-  return skills
-    .slice(0, 4)
-    .map(skill => escapeHTML(skill))
+    .slice(0, 5)
+    .map(
+      skill =>
+        escapeHTML(skill)
+    )
     .join(' • ');
 }
 
 
 /* =========================================================
-   UPDATE AGENT
+   AGENT GAP TEXT
    ========================================================= */
 
-function updateAgent(job) {
+function getAgentGapText(
+  skills
+) {
+  if (!skills.length) {
+    return 'No major skill gap detected';
+  }
+
+  return skills
+    .slice(0, 4)
+    .map(
+      skill =>
+        escapeHTML(skill)
+    )
+    .join(' • ');
+}
+
+
+/* =========================================================
+   UPDATE OPPORTUNITY AGENT
+   ========================================================= */
+
+function updateAgent() {
   const panel =
     $('agentPanel');
 
@@ -1320,23 +1499,33 @@ function updateAgent(job) {
     return;
   }
 
+  const job =
+    getBestOpportunity();
+
   if (!job) {
     panel.innerHTML = `
-      <div class="agent-empty">
-        <h3>No matching opportunity</h3>
-        <p>
-          Try changing your filters to discover
-          more opportunities.
-        </p>
+      <div class="agent-header">
+        <div>
+          <div class="agent-label">
+            JOB RADAR AGENT
+          </div>
+
+          <h3>Your Next Opportunity</h3>
+
+          <p>
+            No opportunities are available yet.
+          </p>
+        </div>
       </div>
     `;
 
-    lastAnalyzedJobId = null;
     return;
   }
 
-  const match =
-    calculatePersonalMatch(job);
+  const analysis =
+    calculatePersonalMatch(
+      job
+    );
 
   lastAnalyzedJobId =
     jobId(job);
@@ -1377,15 +1566,24 @@ function updateAgent(job) {
           ${escapeHTML(
             getLocation(job)
           )}
+          ·
+          ${escapeHTML(
+            getSource(job)
+          )}
         </div>
 
       </div>
 
       <div class="agent-score-card">
-        <span>Personal Match</span>
+
+        <span>
+          Personal Match
+        </span>
+
         <strong>
-          ${match.score}%
+          ${analysis.score}%
         </strong>
+
       </div>
 
     </div>
@@ -1393,32 +1591,37 @@ function updateAgent(job) {
     <div class="agent-grid">
 
       <div class="agent-info-card">
+
         <div class="agent-info-title">
           Matching skills
         </div>
 
         <div class="agent-info-value">
           ${getAgentSkillText(
-            match.matchedSkills
+            analysis.matchedSkills
           )}
         </div>
+
       </div>
 
       <div class="agent-info-card">
+
         <div class="agent-info-title">
           Skills to explore
         </div>
 
         <div class="agent-info-value">
           ${getAgentGapText(
-            match.missingSkills
+            analysis.missingSkills
           )}
         </div>
+
       </div>
 
     </div>
 
     <div class="agent-next">
+
       <div class="agent-info-title">
         Next step
       </div>
@@ -1427,10 +1630,11 @@ function updateAgent(job) {
         ${escapeHTML(
           getAgentNextAction(
             job,
-            match
+            analysis
           )
         )}
       </div>
+
     </div>
 
     <button
@@ -1438,17 +1642,18 @@ function updateAgent(job) {
       type="button"
       data-agent-id="${escapeHTML(
         jobId(job)
-      )}">
+      )}"
+    >
       Analyze Opportunity
     </button>
   `;
 }
 
 
-/* PART 3 END *//* =========================================================
+/* PART 3 END */ /* =========================================================
    JOB RADAR
    PART 4 / 5
-   JOB CARDS + MODAL
+   JOB CARDS + MODAL + RENDER
    ========================================================= */
 
 
@@ -1457,226 +1662,285 @@ function updateAgent(job) {
    ========================================================= */
 
 function jobCard(job) {
-  const id = jobId(job);
-  const score = calculateScore(job);
-  const match = calculatePersonalMatch(job);
+  const id =
+    jobId(job);
 
-  const saved = savedJobs.has(id);
-  const status = getApplicationStatus(job);
+  const score =
+    calculateScore(job);
 
-  const skills = match.matchedSkills;
-  const gaps = match.missingSkills;
+  const analysis =
+    calculatePersonalMatch(job);
+
+  const saved =
+    savedJobs.has(id);
+
+  const status =
+    getApplicationStatus(job);
+
+  const freshness =
+    getFreshness(job);
+
+  const title =
+    getJobTitle(job);
+
+  const company =
+    getCompany(job);
+
+  const location =
+    getLocation(job);
+
+  const source =
+    getSource(job);
+
+  const type =
+    getJobType(job);
 
   const description =
     getDescription(job);
 
+  const url =
+    getJobURL(job);
+
+  const matchedSkills =
+    analysis.matchedSkills
+      .slice(0, 5);
+
+  const missingSkills =
+    analysis.missingSkills
+      .slice(0, 4);
+
   const shortDescription =
-    description.length > 240
-      ? `${description.slice(0, 240)}...`
+    description.length > 260
+      ? `${description.slice(0, 260)}...`
       : description;
 
   return `
-    <article class="job-card" data-job-id="${escapeHTML(id)}">
+    <article
+      class="job-card"
+      data-job-id="${escapeHTML(id)}"
+    >
 
       <div class="job-card-top">
 
         <div>
-          <div class="job-source">
-            ${escapeHTML(getSource(job))}
-          </div>
+          <span class="job-source">
+            ${escapeHTML(source)}
+          </span>
 
-          <h4 class="job-title">
-            ${escapeHTML(getJobTitle(job))}
-          </h4>
-
-          <div class="job-company">
-            ${escapeHTML(getCompany(job))}
-          </div>
+          <span class="freshness-badge">
+            ${escapeHTML(freshness)}
+          </span>
         </div>
 
         <div class="job-score">
-          <strong>${score}%</strong>
-          <span>Match score</span>
+          ${score}%
         </div>
 
+      </div>
+
+
+      <h3 class="job-title">
+        ${escapeHTML(title)}
+      </h3>
+
+
+      <div class="job-company">
+        ${escapeHTML(company)}
       </div>
 
 
       <div class="job-meta">
 
         <span>
-          ${escapeHTML(getLocation(job))}
+          ${escapeHTML(location)}
         </span>
 
         <span>
-          ${escapeHTML(getJobType(job))}
-        </span>
-
-        <span>
-          ${isRemote(job) ? 'Remote' : 'On-site'}
-        </span>
-
-        <span>
-          ${escapeHTML(getFreshness(job))}
+          ${escapeHTML(type)}
         </span>
 
       </div>
 
 
+      <p class="job-description">
+        ${escapeHTML(
+          shortDescription ||
+          'No description available.'
+        )}
+      </p>
+
+
       ${
-        shortDescription
+        matchedSkills.length
           ? `
-            <p class="job-description">
-              ${escapeHTML(shortDescription)}
-            </p>
+            <div class="job-skill-section">
+
+              <div class="job-skill-group">
+
+                <span class="job-skill-label">
+                  Matching skills
+                </span>
+
+                <div class="job-skills">
+                  ${matchedSkills
+                    .map(
+                      skill =>
+                        `<span class="skill-chip">
+                          ${escapeHTML(skill)}
+                        </span>`
+                    )
+                    .join('')}
+                </div>
+
+              </div>
+
+            </div>
+          `
+          : ''
+      }
+
+
+      ${
+        missingSkills.length
+          ? `
+            <div class="job-skill-section">
+
+              <div class="job-skill-group">
+
+                <span class="job-skill-label">
+                  Skills to explore
+                </span>
+
+                <div class="job-skills">
+                  ${missingSkills
+                    .map(
+                      skill =>
+                        `<span class="skill-chip missing">
+                          ${escapeHTML(skill)}
+                        </span>`
+                    )
+                    .join('')}
+                </div>
+
+              </div>
+
+            </div>
           `
           : ''
       }
 
 
       <div class="personal-match">
-        <strong>${match.score}%</strong>
-        Personal Match
-      </div>
 
+        <strong>
+          ${analysis.score}% personal match
+        </strong>
 
-      <div class="job-skill-section">
-
-        <div class="job-skill-group">
-
-          <h5>Matching skills</h5>
-
-          <div class="job-skills">
-
-            ${
-              skills.length
-                ? skills
-                    .slice(0, 7)
-                    .map(
-                      skill => `
-                        <span>
-                          ${escapeHTML(skill)}
-                        </span>
-                      `
-                    )
-                    .join('')
-                : `
-                    <span>
-                      No direct match
-                    </span>
-                  `
-            }
-
-          </div>
-
-        </div>
-
-
-        <div class="job-skill-group">
-
-          <h5>Skills to explore</h5>
-
-          <div class="job-skills">
-
-            ${
-              gaps.length
-                ? gaps
-                    .slice(0, 5)
-                    .map(
-                      skill => `
-                        <span>
-                          ${escapeHTML(skill)}
-                        </span>
-                      `
-                    )
-                    .join('')
-                : `
-                    <span>
-                      No major gap
-                    </span>
-                  `
-            }
-
-          </div>
-
-        </div>
+        <span>
+          ${escapeHTML(
+            analysis.reasons[0] ||
+            'Based on your profile'
+          )}
+        </span>
 
       </div>
 
 
       <div class="job-card-footer">
 
-        <button
-          class="job-button"
-          data-action="details"
-          data-id="${escapeHTML(id)}"
-          type="button">
-          Details
-        </button>
+        <div class="job-card-actions">
+
+          <button
+            type="button"
+            class="job-button"
+            data-action="details"
+            data-id="${escapeHTML(id)}"
+          >
+            Details
+          </button>
 
 
-        <button
-          class="job-button why-button"
-          data-action="why"
-          data-id="${escapeHTML(id)}"
-          type="button">
-          Why this job?
-        </button>
+          <button
+            type="button"
+            class="job-button"
+            data-action="why"
+            data-id="${escapeHTML(id)}"
+          >
+            Why this job?
+          </button>
 
 
-        <button
-          class="job-button"
-          data-action="save"
-          data-id="${escapeHTML(id)}"
-          type="button">
-          ${saved ? 'Saved ✓' : 'Save'}
-        </button>
+          <button
+            type="button"
+            class="job-button"
+            data-action="save"
+            data-id="${escapeHTML(id)}"
+          >
+            ${saved ? 'Unsave' : 'Save'}
+          </button>
+
+
+          ${
+            url !== '#'
+              ? `
+                <a
+                  class="job-button apply-button"
+                  href="${escapeHTML(url)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Job
+                </a>
+              `
+              : ''
+          }
+
+        </div>
 
 
         <select
           class="job-status-select"
           data-action="status"
           data-id="${escapeHTML(id)}"
-          aria-label="Application status">
+          aria-label="Application status"
+        >
 
-          <option value="">
+          <option
+            value=""
+            ${!status ? 'selected' : ''}
+          >
             Not tracked
           </option>
 
           <option
             value="Saved"
-            ${status === 'Saved' ? 'selected' : ''}>
+            ${status === 'Saved' ? 'selected' : ''}
+          >
             Saved
           </option>
 
           <option
             value="Applied"
-            ${status === 'Applied' ? 'selected' : ''}>
+            ${status === 'Applied' ? 'selected' : ''}
+          >
             Applied
           </option>
 
           <option
             value="Interview"
-            ${status === 'Interview' ? 'selected' : ''}>
+            ${status === 'Interview' ? 'selected' : ''}
+          >
             Interview
           </option>
 
           <option
             value="Closed"
-            ${status === 'Closed' ? 'selected' : ''}>
+            ${status === 'Closed' ? 'selected' : ''}
+          >
             Closed
           </option>
 
         </select>
-
-
-        <a
-          class="apply-button"
-          href="${escapeHTML(getJobURL(job))}"
-          target="_blank"
-          rel="noopener noreferrer">
-          Open Job
-        </a>
 
       </div>
 
@@ -1686,43 +1950,48 @@ function jobCard(job) {
 
 
 /* =========================================================
-   RENDER JOBS
+   FIND JOB BY ID
+   ========================================================= */
+
+function findJobById(id) {
+  return allJobs.find(
+    job =>
+      jobId(job) === id
+  );
+}
+
+
+/* =========================================================
+   RENDER RESULTS
    ========================================================= */
 
 function render() {
-  const container = $('results');
+  const results =
+    $('results');
 
-  if (!container) {
+  if (!results) {
     return;
   }
 
   const filtered =
-    getFilteredJobs();
-
-  const sorted =
-    sortJobs(filtered);
-
-
-  /* Result count */
+    sortJobs(
+      getFilteredJobs()
+    );
 
   const resultCount =
     $('resultCount');
 
   if (resultCount) {
     resultCount.textContent =
-      `${sorted.length} ${
-        sorted.length === 1
-          ? 'job'
-          : 'jobs'
+      `${filtered.length} ${
+        filtered.length === 1
+          ? 'opportunity'
+          : 'opportunities'
       }`;
   }
 
-
-  /* Empty state */
-
-  if (!sorted.length) {
-
-    container.innerHTML = `
+  if (!filtered.length) {
+    results.innerHTML = `
       <div class="empty-state">
 
         <h3>
@@ -1736,30 +2005,29 @@ function render() {
       </div>
     `;
 
-  } else {
+    updateSavedUI();
+    updateInsights();
+    updateAgent();
 
-    container.innerHTML =
-      sorted
-        .map(jobCard)
-        .join('');
+    return;
   }
 
+  results.innerHTML =
+    filtered
+      .map(jobCard)
+      .join('');
 
-  updateSummary();
-  updateInsights();
-  updateAgent(
-    getBestOpportunity()
-  );
   updateSavedUI();
+  updateInsights();
+  updateAgent();
 }
 
 
 /* =========================================================
-   SUMMARY
+   SUMMARY METRICS
    ========================================================= */
 
 function updateSummary() {
-
   const total =
     $('total');
 
@@ -1769,12 +2037,10 @@ function updateSummary() {
   const sources =
     $('sources');
 
-
   if (total) {
     total.textContent =
       allJobs.length;
   }
-
 
   if (recent) {
     recent.textContent =
@@ -1785,19 +2051,19 @@ function updateSummary() {
 
           return (
             bucket === 'today' ||
-            bucket === 'week'
+            bucket === 'week' ||
+            bucket === 'month'
           );
         }
       ).length;
   }
 
-
   if (sources) {
-
     const sourceCount =
       new Set(
         allJobs.map(
-          getSource
+          job =>
+            getSource(job)
         )
       ).size;
 
@@ -1808,22 +2074,13 @@ function updateSummary() {
 
 
 /* =========================================================
-   FIND JOB BY ID
+   JOB DETAILS MODAL
    ========================================================= */
 
-function findJobById(id) {
-  return allJobs.find(
-    job => jobId(job) === id
-  );
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-function openJobModal(job) {
-
+function openJobModal(
+  job,
+  mode = 'details'
+) {
   const modal =
     $('jobModal');
 
@@ -1834,154 +2091,114 @@ function openJobModal(job) {
     return;
   }
 
-  const match =
+  const analysis =
     calculatePersonalMatch(job);
+
+  const url =
+    getJobURL(job);
+
+  let extraContent = '';
+
+  if (mode === 'why') {
+    extraContent = `
+      <div class="modal-section">
+
+        <h4>
+          Why this job?
+        </h4>
+
+        <ul>
+          ${
+            analysis.reasons.length
+              ? analysis.reasons
+                  .map(
+                    reason =>
+                      `<li>
+                        ${escapeHTML(reason)}
+                      </li>`
+                  )
+                  .join('')
+              : `
+                <li>
+                  This opportunity matches
+                  your profile based on the
+                  available job information.
+                </li>
+              `
+          }
+        </ul>
+
+      </div>
+
+
+      <div class="modal-section">
+
+        <h4>
+          Personal match
+        </h4>
+
+        <p>
+          ${analysis.score}% match based on
+          role level, technical skills,
+          location and work mode.
+        </p>
+
+      </div>
+    `;
+  }
 
   content.innerHTML = `
 
-    <div class="modal-job-header">
+    <div class="modal-header">
 
-      <div class="job-source">
-        ${escapeHTML(getSource(job))}
+      <div>
+
+        <span class="job-source">
+          ${escapeHTML(
+            getSource(job)
+          )}
+        </span>
+
+        <h2>
+          ${escapeHTML(
+            getJobTitle(job)
+          )}
+        </h2>
+
+        <p>
+          ${escapeHTML(
+            getCompany(job)
+          )}
+        </p>
+
       </div>
 
-      <h2>
-        ${escapeHTML(getJobTitle(job))}
-      </h2>
-
-      <h3>
-        ${escapeHTML(getCompany(job))}
-      </h3>
-
-      <div class="modal-tags">
-
-        <span>
-          ${escapeHTML(getLocation(job))}
-        </span>
-
-        <span>
-          ${escapeHTML(getJobType(job))}
-        </span>
-
-        <span>
-          ${isRemote(job)
-            ? 'Remote'
-            : 'On-site'}
-        </span>
-
-        <span>
-          ${escapeHTML(getFreshness(job))}
-        </span>
-
+      <div class="job-score">
+        ${calculateScore(job)}%
       </div>
 
     </div>
 
 
-    <div class="modal-section">
+    <div class="modal-meta">
 
-      <h4>
-        Personal match
-      </h4>
+      <span>
+        ${escapeHTML(
+          getLocation(job)
+        )}
+      </span>
 
-      <p>
-        ${match.score}% match based on
-        your current profile and the
-        job requirements.
-      </p>
+      <span>
+        ${escapeHTML(
+          getJobType(job)
+        )}
+      </span>
 
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Matching skills
-      </h4>
-
-      <div class="modal-tags">
-
-        ${
-          match.matchedSkills.length
-            ? match.matchedSkills
-                .map(
-                  skill => `
-                    <span>
-                      ${escapeHTML(skill)}
-                    </span>
-                  `
-                )
-                .join('')
-            : `
-                <span>
-                  No direct match detected
-                </span>
-              `
-        }
-
-      </div>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Skills to explore
-      </h4>
-
-      <div class="modal-tags">
-
-        ${
-          match.missingSkills.length
-            ? match.missingSkills
-                .map(
-                  skill => `
-                    <span>
-                      ${escapeHTML(skill)}
-                    </span>
-                  `
-                )
-                .join('')
-            : `
-                <span>
-                  No major skill gap
-                </span>
-              `
-        }
-
-      </div>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Why it matches
-      </h4>
-
-      <ul>
-
-        ${
-          match.reasons.length
-            ? match.reasons
-                .map(
-                  reason => `
-                    <li>
-                      ${escapeHTML(reason)}
-                    </li>
-                  `
-                )
-                .join('')
-            : `
-                <li>
-                  Limited matching evidence available.
-                </li>
-              `
-        }
-
-      </ul>
+      <span>
+        ${escapeHTML(
+          getFreshness(job)
+        )}
+      </span>
 
     </div>
 
@@ -1992,7 +2209,7 @@ function openJobModal(job) {
         Job description
       </h4>
 
-      <p>
+      <p class="modal-description">
         ${escapeHTML(
           getDescription(job) ||
           'No description available.'
@@ -2002,22 +2219,87 @@ function openJobModal(job) {
     </div>
 
 
-    <div class="modal-section">
+    ${
+      analysis.matchedSkills.length
+        ? `
+          <div class="modal-section">
 
-      <a
-        class="apply-button"
-        href="${escapeHTML(getJobURL(job))}"
-        target="_blank"
-        rel="noopener noreferrer">
-        Open Job
-      </a>
+            <h4>
+              Matching skills
+            </h4>
+
+            <div class="job-skills">
+              ${analysis.matchedSkills
+                .map(
+                  skill =>
+                    `<span class="skill-chip">
+                      ${escapeHTML(skill)}
+                    </span>`
+                )
+                .join('')}
+            </div>
+
+          </div>
+        `
+        : ''
+    }
+
+
+    ${
+      analysis.missingSkills.length
+        ? `
+          <div class="modal-section">
+
+            <h4>
+              Skills to explore
+            </h4>
+
+            <div class="job-skills">
+              ${analysis.missingSkills
+                .map(
+                  skill =>
+                    `<span class="skill-chip missing">
+                      ${escapeHTML(skill)}
+                    </span>`
+                )
+                .join('')}
+            </div>
+
+          </div>
+        `
+        : ''
+    }
+
+
+    ${extraContent}
+
+
+    <div class="modal-actions">
+
+      ${
+        url !== '#'
+          ? `
+            <a
+              class="job-button apply-button"
+              href="${escapeHTML(url)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open Job
+            </a>
+          `
+          : ''
+      }
 
     </div>
 
   `;
 
   modal.hidden = false;
-  document.body.style.overflow = 'hidden';
+
+  document.body.classList.add(
+    'modal-open'
+  );
 }
 
 
@@ -2026,172 +2308,17 @@ function openJobModal(job) {
    ========================================================= */
 
 function showWhyThisJob(job) {
-
-  const modal =
-    $('jobModal');
-
-  const content =
-    $('modalContent');
-
-  if (!modal || !content) {
+  if (!job) {
     return;
   }
 
-  const match =
-    calculatePersonalMatch(job);
+  lastAnalyzedJobId =
+    jobId(job);
 
-  content.innerHTML = `
-
-    <div class="modal-job-header">
-
-      <div class="job-source">
-        JOB RADAR EXPLANATION
-      </div>
-
-      <h2>
-        Why this job?
-      </h2>
-
-      <h3>
-        ${escapeHTML(getJobTitle(job))}
-      </h3>
-
-      <p>
-        ${escapeHTML(getCompany(job))}
-      </p>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Personal match
-      </h4>
-
-      <p>
-        This opportunity currently has a
-        <strong>${match.score}%</strong>
-        personal match.
-      </p>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        What matches
-      </h4>
-
-      <ul>
-
-        ${
-          match.reasons.length
-            ? match.reasons
-                .map(
-                  reason => `
-                    <li>
-                      ${escapeHTML(reason)}
-                    </li>
-                  `
-                )
-                .join('')
-            : `
-                <li>
-                  No strong matching evidence found.
-                </li>
-              `
-        }
-
-      </ul>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Matching skills
-      </h4>
-
-      <div class="modal-tags">
-
-        ${
-          match.matchedSkills.length
-            ? match.matchedSkills
-                .map(
-                  skill => `
-                    <span>
-                      ${escapeHTML(skill)}
-                    </span>
-                  `
-                )
-                .join('')
-            : `
-                <span>
-                  No direct skill match
-                </span>
-              `
-        }
-
-      </div>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Skills to explore
-      </h4>
-
-      <div class="modal-tags">
-
-        ${
-          match.missingSkills.length
-            ? match.missingSkills
-                .map(
-                  skill => `
-                    <span>
-                      ${escapeHTML(skill)}
-                    </span>
-                  `
-                )
-                .join('')
-            : `
-                <span>
-                  No major skill gap
-                </span>
-              `
-        }
-
-      </div>
-
-    </div>
-
-
-    <div class="modal-section">
-
-      <h4>
-        Suggested next step
-      </h4>
-
-      <p>
-        ${escapeHTML(
-          getAgentNextAction(
-            job,
-            match
-          )
-        )}
-      </p>
-
-    </div>
-
-  `;
-
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
+  openJobModal(
+    job,
+    'why'
+  );
 }
 
 
@@ -2200,7 +2327,6 @@ function showWhyThisJob(job) {
    ========================================================= */
 
 function closeModal() {
-
   const modal =
     $('jobModal');
 
@@ -2209,14 +2335,17 @@ function closeModal() {
   }
 
   modal.hidden = true;
-  document.body.style.overflow = '';
+
+  document.body.classList.remove(
+    'modal-open'
+  );
 }
 
 
 /* PART 4 END *//* =========================================================
    JOB RADAR
    PART 5 / 5
-   EVENTS + DATA LOADING + INIT
+   CONTROLS + LOAD + INITIALIZATION
    ========================================================= */
 
 
@@ -2225,6 +2354,33 @@ function closeModal() {
    ========================================================= */
 
 function resetFilters() {
+  const ids = [
+    'search',
+    'location',
+    'jobType',
+    'remote',
+    'period',
+    'skill',
+    'status',
+    'minimum',
+    'sort'
+  ];
+
+  ids.forEach(id => {
+    const element = $(id);
+
+    if (!element) {
+      return;
+    }
+
+    if (id === 'sort') {
+      element.value =
+        'newest';
+    } else {
+      element.value =
+        'all';
+    }
+  });
 
   const search =
     $('search');
@@ -2232,34 +2388,6 @@ function resetFilters() {
   if (search) {
     search.value = '';
   }
-
-
-  [
-    'location',
-    'jobType',
-    'remote',
-    'period',
-    'skill',
-    'status',
-    'minimum'
-  ].forEach(id => {
-
-    const element = $(id);
-
-    if (element) {
-      element.value = 'all';
-    }
-
-  });
-
-
-  const sort =
-    $('sort');
-
-  if (sort) {
-    sort.value = 'newest';
-  }
-
 
   showSavedOnly = false;
 
@@ -2273,8 +2401,7 @@ function resetFilters() {
    ========================================================= */
 
 function exportSavedJobs() {
-
-  const jobs =
+  const saved =
     allJobs.filter(
       job =>
         savedJobs.has(
@@ -2282,57 +2409,60 @@ function exportSavedJobs() {
         )
     );
 
-  if (!jobs.length) {
+  if (!saved.length) {
+    const notice =
+      $('notice');
 
-    alert(
-      'No saved jobs to export.'
-    );
+    if (notice) {
+      notice.textContent =
+        'No saved jobs to export.';
+    }
 
     return;
   }
 
-
-  const headers = [
+  const header = [
     'Title',
     'Company',
     'Location',
-    'Job Type',
+    'Source',
+    'Type',
     'Score',
     'Status',
-    'Source',
     'Job URL'
   ];
 
-
   const rows =
-    jobs.map(job => {
+    saved.map(job => [
+      getJobTitle(job),
+      getCompany(job),
+      getLocation(job),
+      getSource(job),
+      getJobType(job),
+      calculateScore(job),
+      getApplicationStatus(job) ||
+        'Not tracked',
+      getJobURL(job)
+    ]);
 
-      const values = [
-        getJobTitle(job),
-        getCompany(job),
-        getLocation(job),
-        getJobType(job),
-        calculateScore(job),
-        getApplicationStatus(job) ||
-          'Saved',
-        getSource(job),
-        getJobURL(job)
-      ];
-
-      return values.map(
-        value =>
-          `"${text(value)
-            .replace(/"/g, '""')}"`
-      ).join(',');
-    });
-
-
-  const csv =
-    [
-      headers.join(','),
-      ...rows
-    ].join('\n');
-
+  const csv = [
+    header,
+    ...rows
+  ]
+    .map(
+      row =>
+        row
+          .map(
+            value =>
+              `"${text(value)
+                .replace(
+                  /"/g,
+                  '""'
+                )}"`
+          )
+          .join(',')
+    )
+    .join('\n');
 
   const blob =
     new Blob(
@@ -2343,26 +2473,42 @@ function exportSavedJobs() {
       }
     );
 
-
   const url =
     URL.createObjectURL(blob);
 
-
   const link =
-    document.createElement('a');
+    document.createElement(
+      'a'
+    );
 
   link.href = url;
 
   link.download =
     'job-radar-saved-jobs.csv';
 
-  document.body.appendChild(link);
+  document.body.appendChild(
+    link
+  );
 
   link.click();
 
   link.remove();
 
-  URL.revokeObjectURL(url);
+  URL.revokeObjectURL(
+    url
+  );
+
+  const notice =
+    $('notice');
+
+  if (notice) {
+    notice.textContent =
+      `${saved.length} saved job${
+        saved.length > 1
+          ? 's'
+          : ''
+      } exported successfully.`;
+  }
 }
 
 
@@ -2375,56 +2521,79 @@ function populateSelect(
   values,
   allLabel
 ) {
-
-  const select = $(id);
+  const select =
+    $(id);
 
   if (!select) {
     return;
   }
 
-  const current =
+  const previous =
     select.value;
 
+  const uniqueValues =
+    unique(
+      values
+        .map(value =>
+          text(value).trim()
+        )
+        .filter(Boolean)
+    )
+      .sort(
+        (a, b) =>
+          a.localeCompare(
+            b
+          )
+      );
 
-  select.innerHTML = `
-    <option value="all">
-      ${escapeHTML(allLabel)}
-    </option>
-  `;
+  select.innerHTML = '';
 
+  const allOption =
+    document.createElement(
+      'option'
+    );
 
-  values.forEach(value => {
+  allOption.value = 'all';
 
-    if (
-      value === null ||
-      value === undefined ||
-      value === ''
-    ) {
-      return;
+  allOption.textContent =
+    allLabel;
+
+  select.appendChild(
+    allOption
+  );
+
+  uniqueValues.forEach(
+    value => {
+
+      const option =
+        document.createElement(
+          'option'
+        );
+
+      option.value =
+        value;
+
+      option.textContent =
+        value;
+
+      select.appendChild(
+        option
+      );
     }
+  );
 
-    const option =
-      document.createElement('option');
-
-    option.value =
-      text(value);
-
-    option.textContent =
-      text(value);
-
-    select.appendChild(option);
-  });
-
-
-  if (
+  const stillExists =
     [...select.options]
       .some(
         option =>
-          option.value === current
-      )
-  ) {
-    select.value = current;
-  }
+          option.value ===
+          previous
+      );
+
+  select.value =
+    stillExists
+      ? previous
+      : 'all';
 }
 
 
@@ -2433,51 +2602,29 @@ function populateSelect(
    ========================================================= */
 
 function populateFilters() {
-
-  const locations =
-    unique(
-      allJobs.map(
-        getLocation
-      )
-    ).sort(
-      (a, b) =>
-        a.localeCompare(b)
-    );
-
-
-  const jobTypes =
-    unique(
-      allJobs.map(
-        getJobType
-      )
-    ).sort(
-      (a, b) =>
-        a.localeCompare(b)
-    );
-
-
-  const skills =
-    unique(
-      allJobs.flatMap(
-        getJobSkills
-      )
-    ).sort(
-      (a, b) =>
-        a.localeCompare(b)
-    );
-
-
   populateSelect(
     'location',
-    locations,
+    allJobs.map(
+      getLocation
+    ),
     'All locations'
   );
 
   populateSelect(
     'jobType',
-    jobTypes,
+    allJobs.map(
+      getJobType
+    ),
     'All types'
   );
+
+  const skills =
+    unique(
+      allJobs.flatMap(
+        job =>
+          getJobSkills(job)
+      )
+    );
 
   populateSelect(
     'skill',
@@ -2493,8 +2640,6 @@ function populateFilters() {
 
 function bindEvents() {
 
-  /* Search */
-
   const search =
     $('search');
 
@@ -2505,8 +2650,6 @@ function bindEvents() {
     );
   }
 
-
-  /* Select filters */
 
   [
     'location',
@@ -2519,7 +2662,8 @@ function bindEvents() {
     'sort'
   ].forEach(id => {
 
-    const element = $(id);
+    const element =
+      $(id);
 
     if (element) {
       element.addEventListener(
@@ -2530,8 +2674,6 @@ function bindEvents() {
 
   });
 
-
-  /* Saved toggle */
 
   const savedToggle =
     $('savedToggle');
@@ -2547,28 +2689,25 @@ function bindEvents() {
 
         updateSavedUI();
         render();
+
       }
     );
 
   }
 
 
-  /* Export */
-
-  const exportButton =
+  const exportSaved =
     $('exportSaved');
 
-  if (exportButton) {
+  if (exportSaved) {
 
-    exportButton.addEventListener(
+    exportSaved.addEventListener(
       'click',
       exportSavedJobs
     );
 
   }
 
-
-  /* Reset */
 
   const reset =
     $('reset');
@@ -2583,8 +2722,6 @@ function bindEvents() {
   }
 
 
-  /* Result buttons */
-
   const results =
     $('results');
 
@@ -2594,21 +2731,20 @@ function bindEvents() {
       'click',
       event => {
 
-        const button =
+        const target =
           event.target.closest(
             '[data-action]'
           );
 
-        if (!button) {
+        if (!target) {
           return;
         }
 
-
         const action =
-          button.dataset.action;
+          target.dataset.action;
 
         const id =
-          button.dataset.id;
+          target.dataset.id;
 
         const job =
           findJobById(id);
@@ -2619,19 +2755,28 @@ function bindEvents() {
 
 
         if (action === 'save') {
+
           toggleSaved(job);
+
           return;
         }
 
 
         if (action === 'details') {
-          openJobModal(job);
+
+          openJobModal(
+            job,
+            'details'
+          );
+
           return;
         }
 
 
         if (action === 'why') {
+
           showWhyThisJob(job);
+
           return;
         }
 
@@ -2643,17 +2788,17 @@ function bindEvents() {
       'change',
       event => {
 
-        const select =
+        const target =
           event.target.closest(
             '[data-action="status"]'
           );
 
-        if (!select) {
+        if (!target) {
           return;
         }
 
         const id =
-          select.dataset.id;
+          target.dataset.id;
 
         const job =
           findJobById(id);
@@ -2664,44 +2809,14 @@ function bindEvents() {
 
         setApplicationStatus(
           job,
-          select.value
+          target.value
         );
+
       }
     );
 
   }
 
-
-  /* Agent button */
-
-  document.addEventListener(
-    'click',
-    event => {
-
-      const button =
-        event.target.closest(
-          '#agentAnalyze'
-        );
-
-      if (!button) {
-        return;
-      }
-
-      const id =
-        button.dataset.agentId;
-
-      const job =
-        findJobById(id);
-
-      if (job) {
-        openJobModal(job);
-      }
-
-    }
-  );
-
-
-  /* Modal close */
 
   const modalClose =
     $('modalClose');
@@ -2726,7 +2841,8 @@ function bindEvents() {
       event => {
 
         if (
-          event.target === modal
+          event.target ===
+          modal
         ) {
           closeModal();
         }
@@ -2742,9 +2858,37 @@ function bindEvents() {
     event => {
 
       if (
-        event.key === 'Escape'
+        event.key ===
+        'Escape'
       ) {
         closeModal();
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    'click',
+    event => {
+
+      const button =
+        event.target.closest(
+          '#agentAnalyze'
+        );
+
+      if (!button) {
+        return;
+      }
+
+      const id =
+        button.dataset.agentId;
+
+      const job =
+        findJobById(id);
+
+      if (job) {
+        showWhyThisJob(job);
       }
 
     }
@@ -2765,9 +2909,8 @@ async function loadJobs() {
 
     if (notice) {
       notice.textContent =
-        'Loading real job data...';
+        'Loading job opportunities...';
     }
-
 
     const response =
       await fetch(
@@ -2777,85 +2920,73 @@ async function loadJobs() {
         }
       );
 
-
     if (!response.ok) {
       throw new Error(
         `HTTP ${response.status}`
       );
     }
 
-
     const data =
       await response.json();
 
-
-    const jobs =
-      Array.isArray(data)
-        ? data
-        : Array.isArray(data.jobs)
-          ? data.jobs
-          : [];
-
-
-    allJobs =
-      jobs.filter(
-        job =>
-          job &&
-          typeof job === 'object'
-      );
-
+    if (Array.isArray(data)) {
+      allJobs = data;
+    } else if (
+      data &&
+      Array.isArray(data.jobs)
+    ) {
+      allJobs =
+        data.jobs;
+    } else {
+      allJobs = [];
+    }
 
     if (notice) {
-
       notice.textContent =
-        `${allJobs.length} real job opportunities loaded.`;
-
+        `${allJobs.length} job opportunities loaded.`;
     }
 
   } catch (error) {
 
     console.error(
-      'Job Radar data loading failed:',
+      'Job Radar data loading error:',
       error
     );
 
-
     allJobs = [];
 
-
     if (notice) {
-
       notice.textContent =
-        'Unable to load job data. Please refresh the page.';
-
+        'Unable to load job data. Please try again later.';
     }
 
   }
+
+  updateSummary();
+  populateFilters();
+  updateInsights();
+  updateAgent();
+  render();
 }
 
 
 /* =========================================================
-   INITIALIZE
+   INITIALIZE APPLICATION
    ========================================================= */
 
 async function init() {
 
   loadLocalState();
 
-  await loadJobs();
-
-  populateFilters();
-
-  bindEvents();
-
   updateSavedUI();
 
-  render();
+  await loadJobs();
+
 }
 
 
 /* =========================================================
-   START APP
+   START APPLICATION
    ========================================================= */
 
 if (
