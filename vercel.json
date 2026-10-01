@@ -6,12 +6,16 @@
       "destination": "/web/index.html"
     },
     {
-      "source": "/style.css",
-      "destination": "/web/style.css"
+      "source": "/styles.css",
+      "destination": "/web/styles.css"
     },
     {
       "source": "/app.js",
       "destination": "/web/app.js"
+    },
+    {
+      "source": "/data/:path*",
+      "destination": "/data/:path*"
     }
   ]
 }
