@@ -1,1812 +1,1311 @@
-/* =========================================
-   JOB RADAR — APP.JS
-   PART 17 — CORE STATE + HELPERS
-========================================= */
+/* =========================================================
+   JOB RADAR
+   APP.JS — PART 1
+   Core setup + data loading
+   ========================================================= */
 
-"use strict";
+'use strict';
 
 
-/* =========================================
+/* =========================================================
+   DATA SOURCE
+   ========================================================= */
+
+const DATA_URL = '/data/processed_jobs.json';
+
+
+/* =========================================================
+   LOCAL STORAGE KEYS
+   ========================================================= */
+
+const STORAGE_KEYS = {
+  savedJobs: 'jobRadarSavedJobs',
+  applicationStatus: 'jobRadarApplicationStatus',
+  avoidedJobs: 'jobRadarAvoidedJobs',
+  resumeProfile: 'jobRadarResumeProfile'
+};
+
+
+/* =========================================================
    GLOBAL STATE
-========================================= */
+   ========================================================= */
 
 const state = {
 
   jobs: [],
 
-  filtered: [],
+  filteredJobs: [],
 
-  saved: JSON.parse(
-    localStorage.getItem("jobRadarSaved") || "[]"
-  ),
+  savedJobs: new Set(),
 
-  apps: JSON.parse(
-    localStorage.getItem("jobRadarApplications") || "{}"
-  ),
+  avoidedJobs: new Set(),
 
-  avoid: JSON.parse(
-    localStorage.getItem("jobRadarAvoid") || "[]"
-  ),
+  applicationStatus: {},
 
-  current: null,
+  resumeProfile: {
 
-  selectedSkill:
-    localStorage.getItem("jobRadarSkill") || ""
+    name: '',
+    email: '',
+    role: '',
+    location: '',
+    skills: '',
+    projects: ''
+
+  },
+
+  currentJob: null,
+
+  showSavedOnly: false,
+
+  selectedSkill: '',
+
+  isLoading: false
+
 };
 
 
-/* =========================================
-   DOM HELPERS
-========================================= */
+/* =========================================================
+   SHORT DOM HELPER
+   ========================================================= */
 
-const $ = (selector) =>
-  document.querySelector(selector);
-
-
-const $$ = (selector) =>
-  [...document.querySelectorAll(selector)];
+const $ = (id) => document.getElementById(id);
 
 
-/* =========================================
-   LOCAL STORAGE
-========================================= */
-
-function saveLocalData() {
-
-  localStorage.setItem(
-    "jobRadarSaved",
-    JSON.stringify(state.saved)
-  );
-
-  localStorage.setItem(
-    "jobRadarApplications",
-    JSON.stringify(state.apps)
-  );
-
-  localStorage.setItem(
-    "jobRadarAvoid",
-    JSON.stringify(state.avoid)
-  );
-
-  localStorage.setItem(
-    "jobRadarSkill",
-    state.selectedSkill
-  );
-}
-
-
-/* =========================================
-   BASIC HELPERS
-========================================= */
+/* =========================================================
+   TEXT HELPER
+   ========================================================= */
 
 function text(value) {
 
-  if (
-    value === null ||
-    value === undefined
-  ) {
-    return "";
+  if (value === null || value === undefined) {
+    return '';
   }
 
   return String(value);
+
 }
 
 
-function lower(value) {
+/* =========================================================
+   LOWERCASE / NORMALIZE
+   ========================================================= */
+
+function normalize(value) {
 
   return text(value)
     .toLowerCase()
     .trim();
+
 }
 
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
 
 function escapeHTML(value) {
 
   return text(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
 }
 
 
-/* =========================================
+/* =========================================================
+   ARRAY HELPER
+   ========================================================= */
+
+function asArray(value) {
+
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return [];
+  }
+
+  return [value];
+
+}
+
+
+/* =========================================================
+   UNIQUE VALUES
+   ========================================================= */
+
+function unique(values) {
+
+  return [
+    ...new Set(
+      values
+        .filter(Boolean)
+        .map(value => text(value).trim())
+        .filter(Boolean)
+    )
+  ];
+
+}
+
+
+/* =========================================================
    JOB ID
-========================================= */
+   ========================================================= */
 
 function getId(job) {
 
   return text(
     job.id ||
     job.job_id ||
-    job.url ||
     job.job_url ||
-    job.link ||
-    `${job.title}-${job.company}`
+    `${job.title}-${job.company}-${job.location}`
   )
-    .trim();
+    .replace(/\s+/g, '-')
+    .slice(0, 220);
+
 }
 
 
-/* =========================================
-   SAVED / STATUS
-========================================= */
+/* =========================================================
+   JOB TITLE
+   ========================================================= */
 
-function isSaved(job) {
+function getJobTitle(job) {
 
-  return state.saved.includes(
-    getId(job)
+  return text(
+    job.title ||
+    job.job_title ||
+    'Untitled opportunity'
   );
+
 }
 
 
-function getStatus(job) {
+/* =========================================================
+   COMPANY
+   ========================================================= */
 
-  return (
-    state.apps[getId(job)] ||
-    (isSaved(job) ? "saved" : "")
+function getCompany(job) {
+
+  return text(
+    job.company ||
+    job.company_name ||
+    'Company not listed'
   );
+
 }
 
 
-/* =========================================
-   JOB TEXT
-========================================= */
+/* =========================================================
+   LOCATION
+   ========================================================= */
+
+function getLocation(job) {
+
+  return text(
+    job.location ||
+    job.city ||
+    'Location not listed'
+  );
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+function getDescription(job) {
+
+  return text(
+    job.description ||
+    job.job_description ||
+    ''
+  );
+
+}
+
+
+/* =========================================================
+   JOB TYPE
+   ========================================================= */
+
+function getJobType(job) {
+
+  return text(
+    job.job_type ||
+    job.type ||
+    'Not specified'
+  );
+
+}
+
+
+/* =========================================================
+   WORK MODE
+   ========================================================= */
+
+function getWorkMode(job) {
+
+  if (job.work_mode) {
+    return text(job.work_mode);
+  }
+
+  if (job.is_remote === true) {
+    return 'Remote';
+  }
+
+  const location = normalize(
+    `${job.location || ''} ${job.description || ''}`
+  );
+
+  if (
+    location.includes('remote') ||
+    location.includes('work from home')
+  ) {
+    return 'Remote';
+  }
+
+  return 'On-site';
+
+}
+
+
+/* =========================================================
+   SOURCE
+   ========================================================= */
+
+function getSource(job) {
+
+  return text(
+    job.source ||
+    job.site ||
+    'Job board'
+  );
+
+}
+
+
+/* =========================================================
+   JOB URL
+   ========================================================= */
+
+function getJobURL(job) {
+
+  const url = text(
+    job.job_url ||
+    job.url ||
+    job.link ||
+    ''
+  ).trim();
+
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  return '#';
+
+}
+
+
+/* =========================================================
+   JOB SKILLS
+   ========================================================= */
+
+function getJobSkills(job) {
+
+  const values = [
+
+    ...asArray(job.matched_skills),
+
+    ...asArray(job.skills),
+
+    ...asArray(job.required_skills)
+
+  ];
+
+  return unique(values);
+
+}
+
+
+/* =========================================================
+   JOB SEARCH TEXT
+   ========================================================= */
 
 function getJobText(job) {
 
-  return [
+  return normalize([
+
     job.title,
+
     job.company,
+
     job.location,
+
     job.description,
+
     job.skills,
-    job.requirements,
+
+    job.matched_skills,
+
+    job.required_skills,
+
     job.category,
+
     job.job_type,
-    job.work_mode
-  ]
-    .map(text)
-    .join(" ")
-    .toLowerCase();
+
+    job.work_mode,
+
+    job.source
+
+  ].join(' '));
+
 }
 
 
-/* =========================================
-   SKILL KEYWORDS
-========================================= */
+/* =========================================================
+   REMOTE CHECK
+   ========================================================= */
 
-const skillKeywords = {
+function isRemote(job) {
 
-  iot: [
-    "iot",
-    "internet of things",
-    "embedded",
-    "sensor",
-    "esp32",
-    "arduino",
-    "mqtt",
-    "raspberry pi",
-    "firmware"
-  ],
-
-  embedded: [
-    "embedded",
-    "firmware",
-    "microcontroller",
-    "microprocessor",
-    "esp32",
-    "stm32",
-    "arduino",
-    "rtos"
-  ],
-
-  python: [
-    "python",
-    "django",
-    "flask",
-    "pandas",
-    "numpy"
-  ],
-
-  java: [
-    "java",
-    "spring",
-    "spring boot",
-    "j2ee"
-  ],
-
-  "c++": [
-    "c++",
-    "cpp",
-    "embedded c",
-    "stl"
-  ],
-
-  sql: [
-    "sql",
-    "mysql",
-    "postgresql",
-    "database",
-    "dbms"
-  ],
-
-  vlsi: [
-    "vlsi",
-    "verilog",
-    "systemverilog",
-    "rtl",
-    "asic",
-    "fpga",
-    "cadence"
-  ],
-
-  electronics: [
-    "electronics",
-    "circuit",
-    "pcb",
-    "hardware",
-    "embedded",
-    "microcontroller"
-  ]
-};
-
-
-/* =========================================
-   SKILL MATCH
-========================================= */
-
-function skillMatchesJob(job, skill) {
-
-  if (!skill) {
-    return false;
+  if (job.is_remote === true) {
+    return true;
   }
 
-  const keywords =
-    skillKeywords[skill] || [];
-
-  const jobText =
-    getJobText(job);
-
-  return keywords.some(
-    keyword =>
-      jobText.includes(
-        keyword.toLowerCase()
-      )
+  const value = normalize(
+    `${job.work_mode || ''} ${job.location || ''}`
   );
-}
 
-
-/* =========================================
-   GET MATCH SCORE
-========================================= */
-
-function getMatchScore(
-  job,
-  selectedSkill = ""
-) {
-
-  const rawScore =
-    Number(
-      job.match_score ??
-      job.score ??
-      job.match ??
-      0
-    );
-
-  const baseScore =
-    Number.isFinite(rawScore)
-      ? rawScore
-      : 0;
-
-  if (!selectedSkill) {
-
-    return Math.max(
-      0,
-      Math.min(100, baseScore)
-    );
-  }
-
-  if (
-    skillMatchesJob(
-      job,
-      selectedSkill
-    )
-  ) {
-
-    return Math.max(
-      60,
-      Math.min(
-        100,
-        baseScore + 15
-      )
-    );
-  }
-
-  return Math.max(
-    0,
-    Math.min(100, baseScore)
+  return (
+    value.includes('remote') ||
+    value.includes('work from home')
   );
+
 }
 
 
-/* =========================================
-   TOAST
-========================================= */
+/* =========================================================
+   SAVE STATE
+   ========================================================= */
 
-let toastTimer = null;
-
-
-function showToast(message) {
-
-  const toast = $("#toast");
-
-  if (!toast) {
-    return;
-  }
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  }, 2200);
-}/* =========================================
-   PART 18 — LOAD JOB DATA
-========================================= */
-
-async function loadJobs() {
+function saveLocalState() {
 
   try {
 
-    updateLiveStatus("SYNCING");
+    localStorage.setItem(
+      STORAGE_KEYS.savedJobs,
+      JSON.stringify([...state.savedJobs])
+    );
+
+    localStorage.setItem(
+      STORAGE_KEYS.applicationStatus,
+      JSON.stringify(state.applicationStatus)
+    );
+
+    localStorage.setItem(
+      STORAGE_KEYS.avoidedJobs,
+      JSON.stringify([...state.avoidedJobs])
+    );
+
+    localStorage.setItem(
+      STORAGE_KEYS.resumeProfile,
+      JSON.stringify(state.resumeProfile)
+    );
+
+  } catch (error) {
+
+    console.warn(
+      'Could not save Job Radar data:',
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD LOCAL STATE
+   ========================================================= */
+
+function loadLocalState() {
+
+  try {
+
+    const saved = JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEYS.savedJobs
+      ) || '[]'
+    );
+
+    if (Array.isArray(saved)) {
+      state.savedJobs = new Set(saved);
+    }
+
+  } catch {
+
+    state.savedJobs = new Set();
+
+  }
+
+
+  try {
+
+    const statuses = JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEYS.applicationStatus
+      ) || '{}'
+    );
+
+    if (
+      statuses &&
+      typeof statuses === 'object' &&
+      !Array.isArray(statuses)
+    ) {
+
+      state.applicationStatus = statuses;
+
+    }
+
+  } catch {
+
+    state.applicationStatus = {};
+
+  }
+
+
+  try {
+
+    const avoided = JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEYS.avoidedJobs
+      ) || '[]'
+    );
+
+    if (Array.isArray(avoided)) {
+      state.avoidedJobs = new Set(avoided);
+    }
+
+  } catch {
+
+    state.avoidedJobs = new Set();
+
+  }
+
+
+  try {
+
+    const profile = JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEYS.resumeProfile
+      ) || '{}'
+    );
+
+    if (
+      profile &&
+      typeof profile === 'object'
+    ) {
+
+      state.resumeProfile = {
+        ...state.resumeProfile,
+        ...profile
+      };
+
+    }
+
+  } catch {
+
+    // Keep empty profile.
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD JOB DATA
+   ========================================================= */
+
+async function loadJobs() {
+
+  state.isLoading = true;
+
+  const liveStatus = $('liveStatus');
+
+  if (liveStatus) {
+    liveStatus.textContent =
+      'Loading latest job opportunities...';
+  }
+
+
+  try {
 
     const response = await fetch(
-      "../data/processed_jobs.json",
+      `${DATA_URL}?t=${Date.now()}`,
       {
-        cache: "no-store"
+        cache: 'no-store'
       }
     );
+
 
     if (!response.ok) {
 
       throw new Error(
         `HTTP ${response.status}`
       );
-    }
 
-    const data =
-      await response.json();
-
-
-    /* -----------------------------------------
-       SUPPORT BOTH JSON FORMATS
-    ----------------------------------------- */
-
-    let jobs = [];
-
-    if (Array.isArray(data)) {
-
-      jobs = data;
-
-    } else if (
-      data &&
-      Array.isArray(data.jobs)
-    ) {
-
-      jobs = data.jobs;
     }
 
 
-    /* -----------------------------------------
-       CLEAN JOB DATA
-    ----------------------------------------- */
+    const data = await response.json();
+
+
+    const jobs = Array.isArray(data)
+      ? data
+      : data.jobs;
+
+
+    if (!Array.isArray(jobs)) {
+
+      throw new Error(
+        'Invalid processed_jobs.json format'
+      );
+
+    }
+
 
     state.jobs = jobs
       .filter(Boolean)
-      .map((job, index) => ({
-
+      .map(job => ({
         ...job,
-
-        id:
-          job.id ||
-          job.job_id ||
-          job.url ||
-          job.job_url ||
-          `job-${index}`
-
-      }));
-
-
-    /* -----------------------------------------
-       REMOVE AVOIDED JOBS
-    ----------------------------------------- */
-
-    state.jobs =
-      state.jobs.filter(
-        job =>
-          !state.avoid.includes(
-            getId(job)
-          )
+        id: getId(job)
+      }))
+      .filter(
+        job => !state.avoidedJobs.has(job.id)
       );
 
 
-    /* -----------------------------------------
-       UPDATE UI
-    ----------------------------------------- */
+    state.filteredJobs = [...state.jobs];
 
-    updateLiveStatus("LIVE");
 
-    updateDashboard();
+    if (liveStatus) {
 
-    applyFilters();
+      liveStatus.textContent =
+        `${state.jobs.length} jobs loaded`;
 
-    renderTracker();
+    }
 
-    renderAvoidJobs();
 
-    updateBestOpportunity(
-      state.selectedSkill
+    console.log(
+      `Job Radar: ${state.jobs.length} jobs loaded.`
     );
 
 
   } catch (error) {
 
     console.error(
-      "Job Radar data error:",
+      'Job Radar data loading error:',
       error
     );
 
-    updateLiveStatus("OFFLINE");
 
     state.jobs = [];
 
-    state.filtered = [];
+    state.filteredJobs = [];
 
-    const results =
-      $("#results");
 
-    if (results) {
+    if (liveStatus) {
 
-      results.innerHTML = "";
+      liveStatus.textContent =
+        'Unable to load job data';
+
     }
 
-    const empty =
-      $("#emptyState");
+  } finally {
 
-    if (empty) {
+    state.isLoading = false;
 
-      empty.style.display = "block";
-
-      const title =
-        empty.querySelector("h3");
-
-      const message =
-        empty.querySelector("p");
-
-      if (title) {
-
-        title.textContent =
-          "Unable to load jobs";
-      }
-
-      if (message) {
-
-        message.textContent =
-          "Check processed_jobs.json and refresh the page.";
-      }
-    }
   }
+
+}/* =========================================================
+   APP.JS — PART 2
+   Search + Filters
+   ========================================================= */
+
+
+/* =========================================================
+   SEARCH NORMALIZATION
+   ========================================================= */
+
+function normalizeSearchText(value) {
+
+  return text(value)
+    .toLowerCase()
+    .replace(/[^\w\s+#.-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
 }
 
 
-/* =========================================
-   LIVE STATUS
-========================================= */
+/* =========================================================
+   SEARCH MATCH
+   ========================================================= */
 
-function updateLiveStatus(status = "LIVE") {
+function matchesSearch(job, searchValue) {
+
+  const query = normalizeSearchText(searchValue);
+
+  if (!query) {
+    return true;
+  }
+
+  const jobText = normalizeSearchText(
+    getJobText(job)
+  );
+
+  const words = query
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return words.every(word =>
+    jobText.includes(word)
+  );
+
+}
+
+
+/* =========================================================
+   LOCATION MATCH
+   ========================================================= */
+
+function matchesLocation(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const location = normalize(
+    getLocation(job)
+  );
+
+  const query = normalize(value);
+
+  return location.includes(query);
+
+}
+
+
+/* =========================================================
+   JOB TYPE MATCH
+   ========================================================= */
+
+function matchesJobType(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const type = normalize(
+    getJobType(job)
+  );
+
+  return type.includes(
+    normalize(value)
+  );
+
+}
+
+
+/* =========================================================
+   WORK MODE MATCH
+   ========================================================= */
+
+function matchesWorkMode(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const mode = normalize(
+    getWorkMode(job)
+  );
+
+  const query = normalize(value);
+
+  if (query === 'remote') {
+    return isRemote(job);
+  }
+
+  if (
+    query === 'onsite' ||
+    query === 'on-site'
+  ) {
+
+    return !isRemote(job);
+
+  }
+
+  if (query === 'hybrid') {
+    return mode.includes('hybrid');
+  }
+
+  return mode.includes(query);
+
+}
+
+
+/* =========================================================
+   SKILL MATCH
+   ========================================================= */
+
+function matchesSkill(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const jobText = normalize(
+    getJobText(job)
+  );
+
+  return jobText.includes(
+    normalize(value)
+  );
+
+}
+
+
+/* =========================================================
+   APPLICATION STATUS MATCH
+   ========================================================= */
+
+function matchesApplicationStatus(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const id = getId(job);
+
+  const status =
+    state.applicationStatus[id] || '';
+
+  return normalize(status) === normalize(value);
+
+}
+
+
+/* =========================================================
+   MINIMUM SCORE MATCH
+   ========================================================= */
+
+function matchesMinimumScore(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const minimum = Number(value);
+
+  if (Number.isNaN(minimum)) {
+    return true;
+  }
+
+  const score = Number(
+    job.score || 0
+  );
+
+  return score >= minimum;
+
+}
+
+
+/* =========================================================
+   POSTED DATE MATCH
+   ========================================================= */
+
+function matchesPostedDate(job, value) {
+
+  if (!value) {
+    return true;
+  }
+
+  const posted = text(
+    job.date_posted ||
+    job.posted_date ||
+    job.datePosted ||
+    ''
+  );
+
+  if (!posted) {
+    return true;
+  }
+
+  const postedDate = new Date(posted);
+
+  if (Number.isNaN(postedDate.getTime())) {
+    return true;
+  }
+
+  const now = new Date();
+
+  const difference =
+    now.getTime() -
+    postedDate.getTime();
+
+  const days =
+    difference /
+    (1000 * 60 * 60 * 24);
+
+
+  if (value === '1') {
+    return days <= 1;
+  }
+
+  if (value === '3') {
+    return days <= 3;
+  }
+
+  if (value === '7') {
+    return days <= 7;
+  }
+
+  if (value === '14') {
+    return days <= 14;
+  }
+
+  if (value === '30') {
+    return days <= 30;
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   FILTER JOBS
+   ========================================================= */
+
+function applyFilters() {
+
+  const search =
+    $('search')?.value || '';
+
+  const location =
+    $('location')?.value || '';
+
+  const jobType =
+    $('jobType')?.value || '';
+
+  const workMode =
+    $('workMode')?.value || '';
+
+  const posted =
+    $('posted')?.value || '';
+
+  const skill =
+    $('skill')?.value || '';
+
+  const appStatus =
+    $('appStatus')?.value || '';
+
+  const minimum =
+    $('minimum')?.value || '';
+
+  const sort =
+    $('sort')?.value || 'score';
+
+
+  let jobs = state.jobs.filter(job => {
+
+    if (
+      !matchesSearch(job, search)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesLocation(job, location)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesJobType(job, jobType)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesWorkMode(job, workMode)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesPostedDate(job, posted)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesSkill(job, skill)
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesApplicationStatus(
+        job,
+        appStatus
+      )
+    ) {
+      return false;
+    }
+
+    if (
+      !matchesMinimumScore(
+        job,
+        minimum
+      )
+    ) {
+      return false;
+    }
+
+    if (
+      state.showSavedOnly &&
+      !state.savedJobs.has(getId(job))
+    ) {
+      return false;
+    }
+
+    return true;
+
+  });
+
+
+  /* =======================================================
+     SORTING
+     ======================================================= */
+
+  if (sort === 'score') {
+
+    jobs.sort(
+      (a, b) =>
+        Number(b.score || 0) -
+        Number(a.score || 0)
+    );
+
+  }
+
+
+  else if (sort === 'newest') {
+
+    jobs.sort((a, b) => {
+
+      const dateA =
+        new Date(
+          a.date_posted || 0
+        ).getTime();
+
+      const dateB =
+        new Date(
+          b.date_posted || 0
+        ).getTime();
+
+      return dateB - dateA;
+
+    });
+
+  }
+
+
+  else if (sort === 'oldest') {
+
+    jobs.sort((a, b) => {
+
+      const dateA =
+        new Date(
+          a.date_posted || 0
+        ).getTime();
+
+      const dateB =
+        new Date(
+          b.date_posted || 0
+        ).getTime();
+
+      return dateA - dateB;
+
+    });
+
+  }
+
+
+  else if (sort === 'company') {
+
+    jobs.sort((a, b) =>
+      getCompany(a).localeCompare(
+        getCompany(b)
+      )
+    );
+
+  }
+
+
+  state.filteredJobs = jobs;
+
+
+  updateResultCount();
+
+  renderJobs();
+
+}
+
+
+/* =========================================================
+   RESULT COUNT
+   ========================================================= */
+
+function updateResultCount() {
 
   const element =
-    $("#liveStatus");
+    $('resultCount');
 
   if (!element) {
     return;
   }
 
-  element.textContent =
-    status;
-
-
-  element.classList.remove(
-    "online",
-    "offline",
-    "syncing"
-  );
-
-
-  if (status === "LIVE") {
-
-    element.classList.add(
-      "online"
-    );
-
-  } else if (status === "SYNCING") {
-
-    element.classList.add(
-      "syncing"
-    );
-
-  } else {
-
-    element.classList.add(
-      "offline"
-    );
-  }
-}
-
-
-/* =========================================
-   JOB DATE HELPER
-========================================= */
-
-function getJobDate(job) {
-
-  const value =
-    job.date_posted ||
-    job.posted_date ||
-    job.posted ||
-    job.created_at ||
-    job.date ||
-    "";
-
-  if (!value) {
-
-    return null;
-  }
-
-  const date =
-    new Date(value);
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-
-    return null;
-  }
-
-  return date;
-}
-
-
-/* =========================================
-   RECENT JOB CHECK
-========================================= */
-
-function isRecentJob(
-  job,
-  days = 7
-) {
-
-  const date =
-    getJobDate(job);
-
-  if (!date) {
-
-    return false;
-  }
-
-  const now =
-    new Date();
-
-  const difference =
-    now.getTime() -
-    date.getTime();
-
-  const maxAge =
-    days *
-    24 *
-    60 *
-    60 *
-    1000;
-
-  return (
-    difference >= 0 &&
-    difference <= maxAge
-  );
-}
-
-
-/* =========================================
-   FORMAT JOB DATE
-========================================= */
-
-function formatJobDate(job) {
-
-  const date =
-    getJobDate(job);
-
-  if (!date) {
-
-    return "Date not available";
-  }
-
-  return date.toLocaleDateString(
-    "en-IN",
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    }
-  );
-}/* =========================================
-   PART 19 — DASHBOARD + TOP SKILLS
-========================================= */
-
-
-/* =========================================
-   EXTRACT SKILLS FROM JOB
-========================================= */
-
-function extractSkills(job) {
-
-  const jobText =
-    getJobText(job);
-
-  const found = [];
-
-  Object.keys(skillKeywords)
-    .forEach(skill => {
-
-      const keywords =
-        skillKeywords[skill];
-
-      const matched =
-        keywords.some(keyword =>
-          jobText.includes(
-            keyword.toLowerCase()
-          )
-        );
-
-      if (matched) {
-
-        found.push(skill);
-      }
-    });
-
-  return found;
-}
-
-
-/* =========================================
-   UPDATE DASHBOARD
-========================================= */
-
-function updateDashboard() {
-
-  const jobs =
-    state.jobs || [];
-
-
-  /* -----------------------------------------
-     TOTAL JOBS
-  ----------------------------------------- */
-
-  const total =
-    $("#totalJobs");
-
-  if (total) {
-
-    total.textContent =
-      jobs.length;
-  }
-
-
-  /* -----------------------------------------
-     RECENT JOBS
-  ----------------------------------------- */
-
-  const recentCount =
-    jobs.filter(job =>
-      isRecentJob(job, 7)
-    ).length;
-
-  const recent =
-    $("#recentJobs");
-
-  if (recent) {
-
-    recent.textContent =
-      recentCount;
-  }
-
-
-  /* -----------------------------------------
-     SAVED JOBS
-  ----------------------------------------- */
-
-  const savedCount =
-    jobs.filter(job =>
-      isSaved(job)
-    ).length;
-
-  const saved =
-    $("#savedJobs");
-
-  if (saved) {
-
-    saved.textContent =
-      savedCount;
-  }
-
-
-  /* -----------------------------------------
-     STRONG MATCHES
-  ----------------------------------------- */
-
-  const strongCount =
-    jobs.filter(job =>
-      getMatchScore(
-        job,
-        state.selectedSkill
-      ) >= 80
-    ).length;
-
-  const strong =
-    $("#strongMatches");
-
-  if (strong) {
-
-    strong.textContent =
-      strongCount;
-  }
-
-
-  /* -----------------------------------------
-     TOP SKILLS
-  ----------------------------------------- */
-
-  renderTopSkills();
-}
-
-
-/* =========================================
-   RENDER TOP SKILLS
-========================================= */
-
-function renderTopSkills() {
-
-  const container =
-    $("#topSkills");
-
-  if (!container) {
-
-    return;
-  }
-
-
-  const counts = {};
-
-
-  /* -----------------------------------------
-     COUNT SKILLS
-  ----------------------------------------- */
-
-  state.jobs.forEach(job => {
-
-    const skills =
-      extractSkills(job);
-
-    skills.forEach(skill => {
-
-      counts[skill] =
-        (counts[skill] || 0) + 1;
-    });
-  });
-
-
-  const sorted =
-    Object.entries(counts)
-      .sort(
-        (a, b) =>
-          b[1] - a[1]
-      )
-      .slice(0, 6);
-
-
-  /* -----------------------------------------
-     EMPTY STATE
-  ----------------------------------------- */
-
-  if (!sorted.length) {
-
-    container.innerHTML = `
-      <div class="skill-chip">
-        No skill data yet
-      </div>
-    `;
-
-    return;
-  }
-
-
-  /* -----------------------------------------
-     DISPLAY SKILLS
-  ----------------------------------------- */
-
-  container.innerHTML =
-    sorted
-      .map(
-        ([skill, count]) => `
-          <span
-            class="skill-chip"
-            title="${escapeHTML(
-              count + " matching jobs"
-            )}"
-          >
-            ${escapeHTML(
-              skill.toUpperCase()
-            )}
-            · ${count}
-          </span>
-        `
-      )
-      .join("");
-}
-
-
-/* =========================================
-   SAVE JOB
-========================================= */
-
-function saveJob(job) {
-
-  const id =
-    getId(job);
-
-  if (!id) {
-
-    return;
-  }
-
-
-  if (
-    state.saved.includes(id)
-  ) {
-
-    state.saved =
-      state.saved.filter(
-        savedId =>
-          savedId !== id
-      );
-
-    showToast(
-      "Job removed from saved list"
-    );
-
-  } else {
-
-    state.saved.push(id);
-
-    showToast(
-      "Job saved"
-    );
-  }
-
-
-  saveLocalData();
-
-  updateDashboard();
-
-  renderJobs(
-    state.filtered
-  );
-
-  renderTracker();
-}
-
-
-/* =========================================
-   CHANGE APPLICATION STATUS
-========================================= */
-
-function setJobStatus(
-  job,
-  status
-) {
-
-  const id =
-    getId(job);
-
-  if (!id) {
-
-    return;
-  }
-
-
-  if (status === "saved") {
-
-    if (
-      !state.saved.includes(id)
-    ) {
-
-      state.saved.push(id);
-    }
-
-    delete state.apps[id];
-
-  } else if (
-    ["applied", "interview", "closed"]
-      .includes(status)
-  ) {
-
-    state.apps[id] =
-      status;
-
-    if (
-      !state.saved.includes(id)
-    ) {
-
-      state.saved.push(id);
-    }
-
-  } else {
-
-    delete state.apps[id];
-
-    state.saved =
-      state.saved.filter(
-        savedId =>
-          savedId !== id
-      );
-  }
-
-
-  saveLocalData();
-
-  updateDashboard();
-
-  renderJobs(
-    state.filtered
-  );
-
-  renderTracker();
-
-  showToast(
-    `Status updated: ${status}`
-  );
-}/* =========================================
-   PART 20 — BEST OPPORTUNITY / SKILL MATCH
-========================================= */
-
-
-/* =========================================
-   SKILL CHANGE
-========================================= */
-
-function handleSkillChange(skill) {
-
-  state.selectedSkill =
-    lower(skill);
-
-  saveLocalData();
-
-  updateBestOpportunity(
-    state.selectedSkill
-  );
-
-  updateDashboard();
-
-  applyFilters();
-}
-
-
-/* =========================================
-   FIND BEST OPPORTUNITY
-========================================= */
-
-function updateBestOpportunity(
-  skill = ""
-) {
-
-  const container =
-    $("#nextJob");
-
-  if (!container) {
-
-    return;
-  }
-
-
-  let candidates =
-    [...state.jobs];
-
-
-  /* -----------------------------------------
-     REMOVE AVOIDED JOBS
-  ----------------------------------------- */
-
-  candidates =
-    candidates.filter(job =>
-      !state.avoid.includes(
-        getId(job)
-      )
-    );
-
-
-  /* -----------------------------------------
-     IF SKILL SELECTED,
-     SHOW MATCHING JOBS FIRST
-  ----------------------------------------- */
-
-  if (skill) {
-
-    const matching =
-      candidates.filter(job =>
-        skillMatchesJob(
-          job,
-          skill
-        )
-      );
-
-
-    /*
-      If matching jobs exist,
-      use ONLY those jobs.
-
-      This prevents selecting IoT
-      and getting an unrelated
-      Software Developer job.
-    */
-
-    if (matching.length) {
-
-      candidates =
-        matching;
-    }
-  }
-
-
-  /* -----------------------------------------
-     SORT BY SKILL-AWARE SCORE
-  ----------------------------------------- */
-
-  candidates.sort(
-    (a, b) =>
-      getMatchScore(b, skill) -
-      getMatchScore(a, skill)
-  );
-
-
-  const best =
-    candidates[0];
-
-
-  /* -----------------------------------------
-     EMPTY STATE
-  ----------------------------------------- */
-
-  if (!best) {
-
-    container.innerHTML = `
-      <div class="agent-placeholder">
-        <strong>No matching opportunity</strong>
-        <p>
-          Try another skill or remove some filters.
-        </p>
-      </div>
-    `;
-
-    return;
-  }
-
-
-  /* -----------------------------------------
-     DATA
-  ----------------------------------------- */
-
-  const score =
-    getMatchScore(
-      best,
-      skill
-    );
-
-  const title =
-    text(
-      best.title ||
-      "Untitled role"
-    );
-
-  const company =
-    text(
-      best.company ||
-      "Company not listed"
-    );
-
-  const location =
-    text(
-      best.location ||
-      "Location not listed"
-    );
-
-  const description =
-    text(
-      best.description ||
-      "No description available."
-    );
-
-
-  /* -----------------------------------------
-     WHY THIS JOB?
-  ----------------------------------------- */
-
-  let reason =
-    "Strong overall match.";
-
-  if (
-    skill &&
-    skillMatchesJob(
-      best,
-      skill
-    )
-  ) {
-
-    reason =
-      `Matches your ${skill.toUpperCase()} skill.`;
-  }
-
-
-  /* -----------------------------------------
-     RENDER
-  ----------------------------------------- */
-
-  container.innerHTML = `
-
-    <div class="agent-job">
-
-      <div class="agent-job-top">
-
-        <div>
-
-          <span class="eyebrow">
-            BEST MATCH
-          </span>
-
-          <h3>
-            ${escapeHTML(title)}
-          </h3>
-
-          <p>
-            ${escapeHTML(company)}
-          </p>
-
-        </div>
-
-        <strong class="agent-score">
-          ${score}%
-        </strong>
-
-      </div>
-
-
-      <div class="job-meta">
-
-        <span>
-          ${escapeHTML(location)}
-        </span>
-
-        <span>
-          ${escapeHTML(
-            best.job_type ||
-            best.jobType ||
-            "Role"
-          )}
-        </span>
-
-      </div>
-
-
-      <div class="match-box">
-
-        <div class="match-top">
-
-          <span>
-            SKILL MATCH
-          </span>
-
-          <strong>
-            ${score}%
-          </strong>
-
-        </div>
-
-        <div class="progress">
-
-          <div
-            class="progress-bar"
-            style="width:${score}%"
-          ></div>
-
-        </div>
-
-      </div>
-
-
-      <p class="job-description">
-        ${escapeHTML(
-          description.slice(0, 180)
-        )}${description.length > 180 ? "..." : ""}
-      </p>
-
-
-      <div class="agent-reason">
-
-        ${escapeHTML(reason)}
-
-      </div>
-
-
-      <button
-        class="primary agent-open"
-        type="button"
-        data-id="${escapeHTML(
-          getId(best)
-        )}"
-      >
-        Analyze opportunity
-      </button>
-
-    </div>
-  `;
-}
-
-
-/* =========================================
-   ANALYZE BEST OPPORTUNITY
-========================================= */
-
-function analyzeBestOpportunity() {
-
-  const skill =
-    state.selectedSkill;
-
-  let candidates =
-    [...state.jobs];
-
-
-  if (skill) {
-
-    const matching =
-      candidates.filter(job =>
-        skillMatchesJob(
-          job,
-          skill
-        )
-      );
-
-    if (matching.length) {
-
-      candidates =
-        matching;
-    }
-  }
-
-
-  candidates.sort(
-    (a, b) =>
-      getMatchScore(b, skill) -
-      getMatchScore(a, skill)
-  );
-
-
-  const best =
-    candidates[0];
-
-
-  if (!best) {
-
-    showToast(
-      "No matching job found"
-    );
-
-    return;
-  }
-
-
-  openJobModal(best);
-}
-
-
-/* =========================================
-   AGENT BUTTON
-========================================= */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        ".agent-open"
-      );
-
-    if (!button) {
-
-      return;
-    }
-
-
-    const id =
-      button.dataset.id;
-
-
-    const job =
-      state.jobs.find(
-        item =>
-          getId(item) === id
-      );
-
-
-    if (job) {
-
-      openJobModal(job);
-    }
-  }
-);/* =========================================
-   PART 21 — FILTERS
-========================================= */
-
-
-/* =========================================
-   APPLY FILTERS
-========================================= */
-
-function applyFilters() {
-
-  const search =
-    lower($("#search")?.value);
-
-  const location =
-    lower($("#location")?.value);
-
-  const jobType =
-    lower($("#jobType")?.value);
-
-  const workMode =
-    lower($("#workMode")?.value);
-
-  const posted =
-    lower($("#posted")?.value);
-
-  const skill =
-    lower(
-      $("#skill")?.value ||
-      state.selectedSkill
-    );
-
-  const appStatus =
-    lower($("#appStatus")?.value);
-
-  const minimum =
-    Number(
-      $("#minimum")?.value || 0
-    );
-
-  const sort =
-    lower(
-      $("#sort")?.value ||
-      "recent"
-    );
-
-
-  /* -----------------------------------------
-     FILTER JOBS
-  ----------------------------------------- */
-
-  let filtered =
-    state.jobs.filter(job => {
-
-      const jobText =
-        getJobText(job);
-
-      /* SEARCH */
-
-      if (
-        search &&
-        !jobText.includes(search)
-      ) {
-
-        return false;
-      }
-
-
-      /* LOCATION */
-
-      if (location) {
-
-        const jobLocation =
-          lower(
-            job.location
-          );
-
-        if (
-          !jobLocation.includes(
-            location
-          )
-        ) {
-
-          return false;
-        }
-      }
-
-
-      /* JOB TYPE */
-
-      if (jobType) {
-
-        const type =
-          lower(
-            job.job_type ||
-            job.jobType ||
-            job.type
-          );
-
-        if (
-          !type.includes(jobType)
-        ) {
-
-          return false;
-        }
-      }
-
-
-      /* WORK MODE */
-
-      if (workMode) {
-
-        const mode =
-          lower(
-            job.work_mode ||
-            job.workMode ||
-            job.mode
-          );
-
-        if (
-          !mode.includes(workMode)
-        ) {
-
-          return false;
-        }
-      }
-
-
-      /* POSTED DATE */
-
-      if (posted) {
-
-        const days = {
-
-          today: 1,
-
-          last3: 3,
-
-          last7: 7,
-
-          last30: 30
-
-        }[posted];
-
-
-        if (
-          days &&
-          !isRecentJob(
-            job,
-            days
-          )
-        ) {
-
-          return false;
-        }
-      }
-
-
-      /* SKILL */
-
-      if (
-        skill &&
-        !skillMatchesJob(
-          job,
-          skill
-        )
-      ) {
-
-        return false;
-      }
-
-
-      /* APPLICATION STATUS */
-
-      if (appStatus) {
-
-        const status =
-          getStatus(job);
-
-        if (
-          status !== appStatus
-        ) {
-
-          return false;
-        }
-      }
-
-
-      /* MINIMUM SCORE */
-
-      if (minimum) {
-
-        const score =
-          getMatchScore(
-            job,
-            skill
-          );
-
-        if (
-          score < minimum
-        ) {
-
-          return false;
-        }
-      }
-
-
-      return true;
-    });
-
-
-  /* -----------------------------------------
-     SORT
-  ----------------------------------------- */
-
-  if (sort === "best") {
-
-    filtered.sort(
-      (a, b) =>
-        getMatchScore(b, skill) -
-        getMatchScore(a, skill)
-    );
-
-  } else if (
-    sort === "company"
-  ) {
-
-    filtered.sort(
-      (a, b) =>
-        text(a.company)
-          .localeCompare(
-            text(b.company)
-          )
-    );
-
-  } else {
-
-    filtered.sort(
-      (a, b) => {
-
-        const dateA =
-          getJobDate(a)?.getTime() || 0;
-
-        const dateB =
-          getJobDate(b)?.getTime() || 0;
-
-        return dateB - dateA;
-      }
-    );
-  }
-
-
-  state.filtered =
-    filtered;
-
-
-  /* -----------------------------------------
-     RENDER
-  ----------------------------------------- */
-
-  renderJobs(
-    state.filtered
-  );
-
-
   const count =
-    $("#resultCount");
+    state.filteredJobs.length;
 
-  if (count) {
+  element.textContent =
+    `${count} job${count === 1 ? '' : 's'} found`;
 
-    count.textContent =
-      `${state.filtered.length} jobs found`;
-  }
 }
 
 
-/* =========================================
+/* =========================================================
    CLEAR FILTERS
-========================================= */
+   ========================================================= */
 
 function clearFilters() {
 
-  [
-    "#search",
-    "#location",
-    "#jobType",
-    "#workMode",
-    "#posted",
-    "#skill",
-    "#appStatus",
-    "#minimum"
-  ]
-    .forEach(selector => {
+  const ids = [
 
-      const element =
-        $(selector);
+    'search',
+    'location',
+    'jobType',
+    'workMode',
+    'posted',
+    'skill',
+    'appStatus',
+    'minimum'
 
-      if (element) {
+  ];
 
-        element.value = "";
-      }
-    });
+
+  ids.forEach(id => {
+
+    const element = $(id);
+
+    if (element) {
+      element.value = '';
+    }
+
+  });
 
 
   const sort =
-    $("#sort");
+    $('sort');
 
   if (sort) {
-
-    sort.value = "recent";
+    sort.value = 'score';
   }
 
 
-  state.selectedSkill = "";
+  state.showSavedOnly = false;
 
-  saveLocalData();
 
-  updateBestOpportunity("");
+  const savedButton =
+    $('showSaved');
+
+  if (savedButton) {
+    savedButton.textContent =
+      'Show Saved';
+  }
+
 
   applyFilters();
 
-  updateDashboard();
-
-  showToast(
-    "Filters cleared"
-  );
 }
 
 
-/* =========================================
-   SHOW SAVED JOBS
-========================================= */
+/* =========================================================
+   TOGGLE SAVED FILTER
+   ========================================================= */
 
-function showSavedJobs() {
+function toggleSavedFilter() {
 
-  const status =
-    $("#appStatus");
+  state.showSavedOnly =
+    !state.showSavedOnly;
 
-  if (status) {
 
-    status.value = "saved";
+  const button =
+    $('showSaved');
+
+  if (button) {
+
+    button.textContent =
+      state.showSavedOnly
+        ? 'Show All'
+        : 'Show Saved';
+
   }
+
 
   applyFilters();
 
-  showToast(
-    "Showing saved jobs"
+}/* =========================================================
+   APP.JS — PART 3
+   Job rendering
+   ========================================================= */
+
+
+/* =========================================================
+   CHECK SAVED JOB
+   ========================================================= */
+
+function isSaved(job) {
+
+  return state.savedJobs.has(
+    getId(job)
   );
-}/* =========================================
-   PART 22 — RENDER JOB CARDS
-========================================= */
+
+}
 
 
-/* =========================================
-   RENDER JOBS
-========================================= */
+/* =========================================================
+   GET APPLICATION STATUS
+   ========================================================= */
 
-function renderJobs(jobs) {
+function getStatus(job) {
 
-  const container =
-    $("#results");
+  return (
+    state.applicationStatus[getId(job)] ||
+    ''
+  );
 
-  const emptyState =
-    $("#emptyState");
+}
 
 
-  if (!container) {
+/* =========================================================
+   FORMAT DATE
+   ========================================================= */
 
-    return;
+function formatDate(value) {
+
+  if (!value) {
+    return 'Date not listed';
   }
 
+  const date = new Date(value);
 
-  /* -----------------------------------------
-     EMPTY STATE
-  ----------------------------------------- */
+  if (Number.isNaN(date.getTime())) {
+    return text(value);
+  }
 
-  if (!jobs.length) {
-
-    container.innerHTML = "";
-
-    if (emptyState) {
-
-      emptyState.style.display =
-        "block";
+  return date.toLocaleDateString(
+    'en-IN',
+    {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
     }
+  );
 
-    return;
-  }
-
-
-  if (emptyState) {
-
-    emptyState.style.display =
-      "none";
-  }
-
-
-  /* -----------------------------------------
-     JOB CARDS
-  ----------------------------------------- */
-
-  container.innerHTML =
-    jobs
-      .map(job =>
-        createJobCard(job)
-      )
-      .join("");
 }
 
 
-/* =========================================
-   CREATE JOB CARD
-========================================= */
+/* =========================================================
+   SCORE LABEL
+   ========================================================= */
 
-function createJobCard(job) {
+function getScoreLabel(score) {
+
+  const value = Number(score || 0);
+
+  if (value >= 80) {
+    return 'Strong match';
+  }
+
+  if (value >= 60) {
+    return 'Good match';
+  }
+
+  if (value >= 40) {
+    return 'Possible match';
+  }
+
+  return 'Low match';
+
+}
+
+
+/* =========================================================
+   SKILL BADGES
+   ========================================================= */
+
+function renderSkillBadges(job) {
+
+  const skills =
+    getJobSkills(job);
+
+  if (!skills.length) {
+
+    return `
+      <span class="skill-badge">
+        Skills not listed
+      </span>
+    `;
+
+  }
+
+
+  return skills
+    .slice(0, 6)
+    .map(skill => `
+      <span class="skill-badge">
+        ${escapeHTML(skill)}
+      </span>
+    `)
+    .join('');
+
+}
+
+
+/* =========================================================
+   JOB CARD
+   ========================================================= */
+
+function renderJobCard(job) {
 
   const id =
     getId(job);
 
-  const title =
-    text(
-      job.title ||
-      "Untitled role"
-    );
-
-  const company =
-    text(
-      job.company ||
-      "Company not listed"
-    );
-
-  const location =
-    text(
-      job.location ||
-      "Location not listed"
-    );
-
-  const description =
-    text(
-      job.description ||
-      "No description available."
-    );
-
   const score =
-    getMatchScore(
-      job,
-      state.selectedSkill
-    );
+    Number(job.score || 0);
 
   const saved =
     isSaved(job);
@@ -1814,1444 +1313,960 @@ function createJobCard(job) {
   const status =
     getStatus(job);
 
+  const remote =
+    isRemote(job);
 
-  /* -----------------------------------------
-     SKILLS
-  ----------------------------------------- */
-
-  let skills = [];
-
-  if (
-    Array.isArray(job.skills)
-  ) {
-
-    skills =
-      job.skills
-        .map(text)
-        .filter(Boolean)
-        .slice(0, 6);
-
-  } else if (
-    typeof job.skills === "string"
-  ) {
-
-    skills =
-      job.skills
-        .split(/[,|]/)
-        .map(item =>
-          item.trim()
-        )
-        .filter(Boolean)
-        .slice(0, 6);
-  }
-
-
-  /* -----------------------------------------
-     FALLBACK SKILLS
-  ----------------------------------------- */
-
-  if (!skills.length) {
-
-    skills =
-      extractSkills(job)
-        .slice(0, 6);
-  }
-
-
-  const skillHTML =
-    skills.length
-      ? skills
-          .map(
-            skill => `
-              <span class="skill-chip">
-                ${escapeHTML(skill)}
-              </span>
-            `
-          )
-          .join("")
-      : `
-          <span class="skill-chip">
-            General
-          </span>
-        `;
-
-
-  /* -----------------------------------------
-     STATUS BADGE
-  ----------------------------------------- */
-
-  const statusHTML =
-    status
-      ? `
-        <span class="status-badge">
-          ${escapeHTML(status)}
-        </span>
-      `
-      : "";
-
-
-  /* -----------------------------------------
-     SAVE BUTTON
-  ----------------------------------------- */
-
-  const saveLabel =
-    saved
-      ? "Saved"
-      : "Save";
-
-
-  /* -----------------------------------------
-     RETURN CARD
-  ----------------------------------------- */
 
   return `
+
     <article
-      class="job-card ${saved ? "saved" : ""}"
-      data-id="${escapeHTML(id)}"
+      class="job-card"
+      data-job-id="${escapeHTML(id)}"
     >
 
-      <div class="job-card-header">
+      <div class="job-card-top">
 
-        <div>
+        <div class="job-company">
 
-          <h3>
-            ${escapeHTML(title)}
-          </h3>
-
-          <div class="job-company">
-            ${escapeHTML(company)}
-          </div>
-
-        </div>
-
-        <div class="job-score">
-          ${score}%
-        </div>
-
-      </div>
-
-
-      ${statusHTML}
-
-
-      <div class="job-meta">
-
-        <span>
-          ${escapeHTML(location)}
-        </span>
-
-        <span>
-          ${escapeHTML(
-            job.job_type ||
-            job.jobType ||
-            "Role"
-          )}
-        </span>
-
-        <span>
-          ${escapeHTML(
-            formatJobDate(job)
-          )}
-        </span>
-
-      </div>
-
-
-      <p class="job-description">
-
-        ${escapeHTML(
-          description.length > 180
-            ? description.slice(0, 180) + "..."
-            : description
-        )}
-
-      </p>
-
-
-      <div class="match-box">
-
-        <div class="match-top">
+          <span class="company-dot"></span>
 
           <span>
-            MATCH SCORE
+            ${escapeHTML(
+              getCompany(job)
+            )}
           </span>
 
+        </div>
+
+
+        <div class="job-score">
+
           <strong>
-            ${score}%
+            ${score}
           </strong>
 
-        </div>
-
-        <div class="progress">
-
-          <div
-            class="progress-bar"
-            style="width:${score}%"
-          ></div>
+          <span>
+            ${escapeHTML(
+              getScoreLabel(score)
+            )}
+          </span>
 
         </div>
 
       </div>
 
 
-      <div class="job-skills">
+      <div class="job-card-body">
 
-        ${skillHTML}
+        <h3 class="job-title">
+
+          ${escapeHTML(
+            getJobTitle(job)
+          )}
+
+        </h3>
+
+
+        <div class="job-meta">
+
+          <span>
+            ${escapeHTML(
+              getLocation(job)
+            )}
+          </span>
+
+          <span>•</span>
+
+          <span>
+            ${escapeHTML(
+              getJobType(job)
+            )}
+          </span>
+
+          ${
+            remote
+              ? `
+                <span>•</span>
+                <span>Remote</span>
+              `
+              : ''
+          }
+
+        </div>
+
+
+        <p class="job-description-preview">
+
+          ${escapeHTML(
+            getDescription(job)
+              .replace(/\s+/g, ' ')
+              .slice(0, 180)
+          )}
+
+          ${
+            getDescription(job).length > 180
+              ? '...'
+              : ''
+          }
+
+        </p>
+
+
+        <div class="job-skills">
+
+          ${renderSkillBadges(job)}
+
+        </div>
 
       </div>
 
 
-      <div class="job-actions">
+      <div class="job-card-footer">
 
-        <button
-          class="secondary job-view"
-          type="button"
-          data-id="${escapeHTML(id)}"
-        >
-          View
-        </button>
 
-        <button
-          class="primary job-save"
-          type="button"
-          data-id="${escapeHTML(id)}"
-        >
-          ${saveLabel}
-        </button>
+        <div class="job-source">
+
+          <span>
+            ${escapeHTML(
+              getSource(job)
+            )}
+          </span>
+
+          <span>•</span>
+
+          <span>
+            ${escapeHTML(
+              formatDate(
+                job.date_posted
+              )
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="job-actions">
+
+          <button
+            type="button"
+            class="job-action secondary-btn"
+            data-action="details"
+            data-id="${escapeHTML(id)}"
+          >
+            View
+          </button>
+
+
+          <button
+            type="button"
+            class="job-action ${
+              saved
+                ? 'saved'
+                : ''
+            }"
+            data-action="save"
+            data-id="${escapeHTML(id)}"
+          >
+
+            ${
+              saved
+                ? 'Saved'
+                : 'Save'
+            }
+
+          </button>
+
+
+          <select
+            class="job-status"
+            data-action="status"
+            data-id="${escapeHTML(id)}"
+            aria-label="Application status"
+          >
+
+            <option value="">
+              Status
+            </option>
+
+            <option
+              value="saved"
+              ${status === 'saved' ? 'selected' : ''}
+            >
+              Saved
+            </option>
+
+            <option
+              value="applied"
+              ${status === 'applied' ? 'selected' : ''}
+            >
+              Applied
+            </option>
+
+            <option
+              value="interview"
+              ${status === 'interview' ? 'selected' : ''}
+            >
+              Interview
+            </option>
+
+            <option
+              value="closed"
+              ${status === 'closed' ? 'selected' : ''}
+            >
+              Closed
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
     </article>
+
   `;
-}/* =========================================
-   PART 23 — JOB CARD EVENTS
-========================================= */
 
-
-/* =========================================
-   FIND JOB BY ID
-========================================= */
-
-function findJobById(id) {
-
-  return state.jobs.find(
-    job =>
-      getId(job) === id
-  );
 }
 
 
-/* =========================================
-   BIND JOB EVENTS
-========================================= */
+/* =========================================================
+   RENDER JOBS
+   ========================================================= */
 
-function bindJobEvents() {
+function renderJobs() {
 
-  const results =
-    $("#results");
+  const container =
+    $('results');
 
-  if (!results) {
+  const emptyState =
+    $('emptyState');
 
+
+  if (!container) {
     return;
   }
 
 
-  /* -----------------------------------------
-     VIEW / SAVE BUTTONS
-     Event delegation keeps this working
-     after every filter/render.
-  ----------------------------------------- */
+  if (!state.filteredJobs.length) {
 
-  results.addEventListener(
-    "click",
-    event => {
+    container.innerHTML = '';
 
-      const viewButton =
-        event.target.closest(
-          ".job-view"
-        );
-
-      const saveButton =
-        event.target.closest(
-          ".job-save"
-        );
-
-
-      /* ---------------------------------------
-         VIEW JOB
-      --------------------------------------- */
-
-      if (viewButton) {
-
-        const id =
-          viewButton.dataset.id;
-
-        const job =
-          findJobById(id);
-
-        if (job) {
-
-          openJobModal(job);
-        }
-
-        return;
-      }
-
-
-      /* ---------------------------------------
-         SAVE JOB
-      --------------------------------------- */
-
-      if (saveButton) {
-
-        const id =
-          saveButton.dataset.id;
-
-        const job =
-          findJobById(id);
-
-        if (job) {
-
-          saveJob(job);
-        }
-      }
+    if (emptyState) {
+      emptyState.hidden = false;
     }
-  );
-}
-
-
-/* =========================================
-   OPEN EXTERNAL JOB LINK
-========================================= */
-
-function openJobLink(job) {
-
-  const url =
-    job.job_url ||
-    job.url ||
-    job.link ||
-    job.apply_url ||
-    "";
-
-
-  if (!url) {
-
-    showToast(
-      "Job link not available"
-    );
 
     return;
+
   }
 
 
-  window.open(
-    url,
-    "_blank",
-    "noopener,noreferrer"
-  );
+  if (emptyState) {
+    emptyState.hidden = true;
+  }
+
+
+  container.innerHTML =
+    state.filteredJobs
+      .map(renderJobCard)
+      .join('');
+
 }
 
 
-/* =========================================
-   GET DISPLAYED JOB URL
-========================================= */
+/* =========================================================
+   INITIAL FILTER RENDER
+   ========================================================= */
 
-function getJobURL(job) {
-
-  return (
-    job.job_url ||
-    job.url ||
-    job.link ||
-    job.apply_url ||
-    ""
-  );
-}
-
-
-/* =========================================
-   AVOID JOB
-========================================= */
-
-function avoidJob(job) {
-
-  const id =
-    getId(job);
-
-  if (!id) {
-
-    return;
-  }
-
-
-  /* -----------------------------------------
-     ADD TO AVOID LIST
-  ----------------------------------------- */
-
-  if (
-    !state.avoid.includes(id)
-  ) {
-
-    state.avoid.push(id);
-  }
-
-
-  /* -----------------------------------------
-     REMOVE FROM SAVED
-  ----------------------------------------- */
-
-  state.saved =
-    state.saved.filter(
-      savedId =>
-        savedId !== id
-    );
-
-
-  /* -----------------------------------------
-     REMOVE APPLICATION
-  ----------------------------------------- */
-
-  delete state.apps[id];
-
-
-  saveLocalData();
-
-
-  /* -----------------------------------------
-     CLOSE MODAL
-  ----------------------------------------- */
-
-  closeJobModal();
-
-
-  /* -----------------------------------------
-     REFRESH UI
-  ----------------------------------------- */
-
-  state.jobs =
-    state.jobs.filter(
-      item =>
-        getId(item) !== id
-    );
-
-
-  updateDashboard();
+function renderAll() {
 
   applyFilters();
 
-  renderTracker();
+}
 
-  renderAvoidJobs();
 
+/* =========================================================
+   RESULT CONTAINER CLICK HANDLER
+   ========================================================= */
+
+function handleJobAction(event) {
+
+  const button =
+    event.target.closest(
+      '[data-action]'
+    );
+
+  if (!button) {
+    return;
+  }
+
+
+  const action =
+    button.dataset.action;
+
+  const id =
+    button.dataset.id;
+
+
+  const job =
+    state.jobs.find(
+      item => getId(item) === id
+    );
+
+
+  if (!job) {
+    return;
+  }
+
+
+  if (action === 'details') {
+
+    openJobModal(job);
+
+    return;
+
+  }
+
+
+  if (action === 'save') {
+
+    toggleSaved(job);
+
+    return;
+
+  }
+
+}
+
+
+/* =========================================================
+   STATUS CHANGE HANDLER
+   ========================================================= */
+
+function handleJobStatusChange(event) {
+
+  const select =
+    event.target.closest(
+      '[data-action="status"]'
+    );
+
+  if (!select) {
+    return;
+  }
+
+
+  const id =
+    select.dataset.id;
+
+  const status =
+    select.value;
+
+
+  if (!id) {
+    return;
+  }
+
+
+  if (status) {
+
+    state.applicationStatus[id] =
+      status;
+
+  } else {
+
+    delete state.applicationStatus[id];
+
+  }
+
+
+  saveLocalState();
+
+  applyFilters();
+
+  updateTracker();
 
   showToast(
-    "Job moved to Avoid Jobs"
+    status
+      ? `Application marked as ${status}.`
+      : 'Application status cleared.'
   );
-}/* =========================================
-   PART 24 — JOB DETAILS MODAL
-========================================= */
+
+}/* =========================================================
+   APP.JS — PART 4
+   Job Details Modal
+   ========================================================= */
 
 
-/* =========================================
+/* =========================================================
    OPEN JOB MODAL
-========================================= */
+   ========================================================= */
 
 function openJobModal(job) {
 
+  state.currentJob = job;
+
   const modal =
-    $("#modal");
+    $('modal');
 
   if (!modal) {
     return;
   }
 
 
-  state.current =
-    job;
-
-
-  /* -----------------------------------------
-     BASIC DETAILS
-  ----------------------------------------- */
+  /* -------------------------------------------------------
+     BASIC JOB DETAILS
+     ------------------------------------------------------- */
 
   const title =
-    $("#mTitle");
+    $('mTitle');
 
   const company =
-    $("#mCompany");
+    $('mCompany');
 
   const meta =
-    $("#mMeta");
+    $('mMeta');
 
   const score =
-    $("#mScore");
+    $('mScore');
 
   const bar =
-    $("#mBar");
+    $('mBar');
 
   const description =
-    $("#mDescription");
-
-  const reasons =
-    $("#mReasons");
+    $('mDescription');
 
   const skills =
-    $("#mSkills");
+    $('mSkills');
+
+  const reasons =
+    $('mReasons');
 
   const status =
-    $("#mStatus");
-
-
-  const jobScore =
-    getMatchScore(
-      job,
-      state.selectedSkill
-    );
+    $('mStatus');
 
 
   if (title) {
 
     title.textContent =
-      job.title ||
-      "Untitled role";
+      getJobTitle(job);
+
   }
 
 
   if (company) {
 
     company.textContent =
-      job.company ||
-      "Company not listed";
+      getCompany(job);
+
   }
 
 
   if (meta) {
 
-    meta.innerHTML = `
+    const location =
+      getLocation(job);
 
-      <span>
-        ${escapeHTML(
-          job.location ||
-          "Location not listed"
-        )}
-      </span>
+    const type =
+      getJobType(job);
 
-      <span>
-        ${escapeHTML(
-          job.job_type ||
-          job.jobType ||
-          "Role"
-        )}
-      </span>
+    const mode =
+      getWorkMode(job);
 
-      <span>
-        ${escapeHTML(
-          formatJobDate(job)
-        )}
-      </span>
+    meta.textContent =
+      `${location} · ${type} · ${mode}`;
 
-    `;
   }
+
+
+  /* -------------------------------------------------------
+     SCORE
+     ------------------------------------------------------- */
+
+  const scoreValue =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(job.score || 0)
+      )
+    );
 
 
   if (score) {
 
     score.textContent =
-      `${jobScore}%`;
+      `${scoreValue}%`;
+
   }
 
 
   if (bar) {
 
     bar.style.width =
-      `${jobScore}%`;
+      `${scoreValue}%`;
+
   }
 
+
+  /* -------------------------------------------------------
+     DESCRIPTION
+     ------------------------------------------------------- */
 
   if (description) {
 
     description.textContent =
-      job.description ||
-      "No description available.";
+      getDescription(job) ||
+      'No description available.';
+
   }
 
 
-  /* -----------------------------------------
-     MATCH REASONS
-  ----------------------------------------- */
-
-  if (reasons) {
-
-    const reasonList = [];
-
-
-    if (
-      state.selectedSkill &&
-      skillMatchesJob(
-        job,
-        state.selectedSkill
-      )
-    ) {
-
-      reasonList.push(
-        `Matches your ${state.selectedSkill.toUpperCase()} skill`
-      );
-    }
-
-
-    if (jobScore >= 80) {
-
-      reasonList.push(
-        "Strong overall job match"
-      );
-    }
-
-
-    if (
-      job.location
-    ) {
-
-      reasonList.push(
-        `Location: ${job.location}`
-      );
-    }
-
-
-    if (!reasonList.length) {
-
-      reasonList.push(
-        "Review the job requirements before applying"
-      );
-    }
-
-
-    reasons.innerHTML =
-      reasonList
-        .map(
-          reason => `
-            <li>
-              ${escapeHTML(reason)}
-            </li>
-          `
-        )
-        .join("");
-  }
-
-
-  /* -----------------------------------------
+  /* -------------------------------------------------------
      SKILLS
-  ----------------------------------------- */
+     ------------------------------------------------------- */
 
   if (skills) {
 
-    let jobSkills = [];
-
-
-    if (
-      Array.isArray(job.skills)
-    ) {
-
-      jobSkills =
-        job.skills
-          .map(text)
-          .filter(Boolean)
-          .slice(0, 10);
-
-    } else if (
-      typeof job.skills === "string"
-    ) {
-
-      jobSkills =
-        job.skills
-          .split(/[,|]/)
-          .map(
-            item => item.trim()
-          )
-          .filter(Boolean)
-          .slice(0, 10);
-    }
+    const jobSkills =
+      getJobSkills(job);
 
 
     if (!jobSkills.length) {
 
-      jobSkills =
-        extractSkills(job)
-          .slice(0, 10);
+      skills.innerHTML =
+        '<span class="muted">No skills listed.</span>';
+
+    } else {
+
+      skills.innerHTML =
+        jobSkills
+          .map(skill => `
+            <span class="skill-badge">
+              ${escapeHTML(skill)}
+            </span>
+          `)
+          .join('');
+
     }
 
-
-    skills.innerHTML =
-      jobSkills.length
-        ? jobSkills
-            .map(
-              skill => `
-                <span class="skill-chip">
-                  ${escapeHTML(skill)}
-                </span>
-              `
-            )
-            .join("")
-        : `
-            <span class="skill-chip">
-              General role
-            </span>
-          `;
   }
 
 
-  /* -----------------------------------------
-     STATUS
-  ----------------------------------------- */
+  /* -------------------------------------------------------
+     MATCH REASONS
+     ------------------------------------------------------- */
+
+  if (reasons) {
+
+    const matched =
+      asArray(job.matched_skills);
+
+
+    if (matched.length) {
+
+      reasons.innerHTML = `
+
+        <ul class="reason-list">
+
+          ${matched
+            .slice(0, 8)
+            .map(skill => `
+              <li>
+                Your profile matches
+                <strong>
+                  ${escapeHTML(skill)}
+                </strong>
+              </li>
+            `)
+            .join('')}
+
+        </ul>
+
+      `;
+
+    } else if (scoreValue >= 70) {
+
+      reasons.innerHTML = `
+
+        <ul class="reason-list">
+
+          <li>
+            Strong relevance based on the job data.
+          </li>
+
+          <li>
+            This opportunity matches your selected job criteria.
+          </li>
+
+        </ul>
+
+      `;
+
+    } else {
+
+      reasons.innerHTML = `
+
+        <p class="muted">
+          No specific match reasons are available.
+        </p>
+
+      `;
+
+    }
+
+  }
+
+
+  /* -------------------------------------------------------
+     APPLICATION STATUS
+     ------------------------------------------------------- */
 
   if (status) {
 
     status.value =
-      getStatus(job) ||
-      "";
+      getStatus(job);
+
   }
 
 
-  /* -----------------------------------------
-     SHOW MODAL
-  ----------------------------------------- */
-
-  modal.classList.add(
-    "show"
-  );
+  /* -------------------------------------------------------
+     MODAL STATE
+     ------------------------------------------------------- */
 
   modal.setAttribute(
-    "aria-hidden",
-    "false"
+    'aria-hidden',
+    'false'
   );
 
+  modal.classList.add('open');
 
-  document.body.style.overflow =
-    "hidden";
+  document.body.classList.add(
+    'modal-open'
+  );
+
 }
 
 
-/* =========================================
+/* =========================================================
    CLOSE JOB MODAL
-========================================= */
+   ========================================================= */
 
 function closeJobModal() {
 
   const modal =
-    $("#modal");
+    $('modal');
 
   if (!modal) {
     return;
   }
 
 
-  modal.classList.remove(
-    "show"
-  );
-
   modal.setAttribute(
-    "aria-hidden",
-    "true"
+    'aria-hidden',
+    'true'
+  );
+
+  modal.classList.remove(
+    'open'
+  );
+
+  document.body.classList.remove(
+    'modal-open'
   );
 
 
-  document.body.style.overflow =
-    "";
+  state.currentJob = null;
 
-
-  state.current =
-    null;
 }
 
 
-/* =========================================
-   BIND MODAL EVENTS
-========================================= */
+/* =========================================================
+   SAVE / UPDATE MODAL STATUS
+   ========================================================= */
 
-function bindModalEvents() {
+function updateCurrentJobStatus() {
 
-  const modal =
-    $("#modal");
+  const job =
+    state.currentJob;
 
-  const closeButton =
-    $("#closeModal");
-
-
-  /* -----------------------------------------
-     CLOSE BUTTON
-  ----------------------------------------- */
-
-  if (closeButton) {
-
-    closeButton.addEventListener(
-      "click",
-      closeJobModal
-    );
+  if (!job) {
+    return;
   }
 
 
-  /* -----------------------------------------
-     CLICK OUTSIDE MODAL
-  ----------------------------------------- */
+  const statusElement =
+    $('mStatus');
 
-  if (modal) {
-
-    modal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target === modal
-        ) {
-
-          closeJobModal();
-        }
-      }
-    );
+  if (!statusElement) {
+    return;
   }
 
-
-  /* -----------------------------------------
-     STATUS CHANGE
-  ----------------------------------------- */
 
   const status =
-    $("#mStatus");
+    statusElement.value;
+
 
   if (status) {
 
-    status.addEventListener(
-      "change",
-      () => {
+    state.applicationStatus[
+      getId(job)
+    ] = status;
 
-        if (
-          state.current &&
-          status.value
-        ) {
+  } else {
 
-          setJobStatus(
-            state.current,
-            status.value
-          );
-        }
-      }
-    );
+    delete state.applicationStatus[
+      getId(job)
+    ];
+
   }
 
 
-  /* -----------------------------------------
-     SAVE
-  ----------------------------------------- */
+  saveLocalState();
 
-  const saveButton =
-    $("#mSave");
+  updateTracker();
 
-  if (saveButton) {
-
-    saveButton.addEventListener(
-      "click",
-      () => {
-
-        if (
-          state.current
-        ) {
-
-          saveJob(
-            state.current
-          );
-
-          openJobModal(
-            state.current
-          );
-        }
-      }
-    );
-  }
+  applyFilters();
 
 
-  /* -----------------------------------------
-     AVOID
-  ----------------------------------------- */
-
-  const avoidButton =
-    $("#mAvoid");
-
-  if (avoidButton) {
-
-    avoidButton.addEventListener(
-      "click",
-      () => {
-
-        if (
-          state.current
-        ) {
-
-          avoidJob(
-            state.current
-          );
-        }
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     OPEN ORIGINAL JOB
-  ----------------------------------------- */
-
-  const openButton =
-    $("#mOpen");
-
-  if (openButton) {
-
-    openButton.addEventListener(
-      "click",
-      () => {
-
-        if (
-          state.current
-        ) {
-
-          openJobLink(
-            state.current
-          );
-        }
-      }
-    );
-  }
-}/* =========================================
-   PART 25 — RESUME + CAREER ROADMAP
-========================================= */
-
-
-/* =========================================
-   RESUME FILE
-========================================= */
-
-function handleResumeUpload(file) {
-
-  if (!file) {
-    return;
-  }
-
-  const name =
-    $("#resumeName");
-
-  if (name) {
-
-    name.textContent =
-      file.name;
-  }
-
-
-  /*
-    This browser-only version does not
-    pretend to read PDF contents.
-
-    It records that a resume was uploaded
-    and gives a simple profile estimate.
-  */
-
-  const extension =
-    file.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-
-  let score = 45;
-
-
-  if (
-    extension === "pdf" ||
-    extension === "doc" ||
-    extension === "docx"
-  ) {
-
-    score += 15;
-  }
-
-
-  if (
-    state.jobs.length > 0
-  ) {
-
-    score += 10;
-  }
-
-
-  score =
-    Math.min(
-      100,
-      score
-    );
-
-
-  updateProfileScore(
-    score
+  showToast(
+    status
+      ? `Application marked as ${status}.`
+      : 'Application status cleared.'
   );
 
-  updateRoadmap();
 }
 
 
-/* =========================================
-   PROFILE SCORE
-========================================= */
+/* =========================================================
+   SAVE BUTTON FROM MODAL
+   ========================================================= */
 
-function updateProfileScore(
-  score = 0
-) {
+function saveCurrentJob() {
 
-  const scoreElement =
-    $("#profileScore");
+  const job =
+    state.currentJob;
 
-  const bar =
-    $("#profileBar");
-
-  const message =
-    $("#profileMessage");
-
-
-  if (scoreElement) {
-
-    scoreElement.textContent =
-      `${score}%`;
-  }
-
-
-  if (bar) {
-
-    bar.style.width =
-      `${score}%`;
-  }
-
-
-  if (message) {
-
-    if (score >= 80) {
-
-      message.textContent =
-        "Your profile has a strong foundation. Focus on projects and interview preparation.";
-
-    } else if (score >= 60) {
-
-      message.textContent =
-        "Good start. Add stronger projects, technical skills and measurable achievements.";
-
-    } else {
-
-      message.textContent =
-        "Upload your resume and build your technical profile step by step.";
-    }
-  }
-}
-
-
-/* =========================================
-   CAREER ROADMAP
-========================================= */
-
-function updateRoadmap() {
-
-  const container =
-    $("#roadmapList");
-
-  if (!container) {
+  if (!job) {
     return;
   }
 
 
-  const skill =
-    state.selectedSkill;
-
-
-  let roadmap = [
-    {
-      title: "Core Programming",
-      text: "Strengthen C++, Java or Python fundamentals."
-    },
-
-    {
-      title: "Data & SQL",
-      text: "Practice SQL, DBMS and basic data handling."
-    },
-
-    {
-      title: "Build Projects",
-      text: "Create practical projects and keep them on GitHub."
-    },
-
-    {
-      title: "Interview Preparation",
-      text: "Practice DSA, technical questions and project explanation."
-    }
-  ];
-
-
-  /* -----------------------------------------
-     SKILL-SPECIFIC ROADMAP
-  ----------------------------------------- */
-
-  if (skill === "iot") {
-
-    roadmap = [
-      {
-        title: "IoT Fundamentals",
-        text: "Learn sensors, communication protocols and IoT architecture."
-      },
-
-      {
-        title: "Embedded Systems",
-        text: "Practice ESP32, microcontrollers, GPIO and firmware basics."
-      },
-
-      {
-        title: "Build IoT Projects",
-        text: "Create connected hardware projects with real sensor data."
-      },
-
-      {
-        title: "Cloud & Dashboard",
-        text: "Connect devices to Firebase or another backend and visualize data."
-      }
-    ];
-
-  } else if (skill === "embedded") {
-
-    roadmap = [
-      {
-        title: "Embedded C",
-        text: "Strengthen C, pointers, memory and microcontroller concepts."
-      },
-
-      {
-        title: "Microcontrollers",
-        text: "Practice GPIO, timers, UART, I2C and SPI."
-      },
-
-      {
-        title: "Firmware Projects",
-        text: "Build and test a practical embedded system."
-      },
-
-      {
-        title: "Embedded Interview Prep",
-        text: "Practice debugging, electronics and firmware questions."
-      }
-    ];
-
-  } else if (skill === "python") {
-
-    roadmap = [
-      {
-        title: "Python Core",
-        text: "Strengthen functions, OOP, collections and file handling."
-      },
-
-      {
-        title: "Data Tools",
-        text: "Practice Pandas, NumPy and data processing."
-      },
-
-      {
-        title: "Build Projects",
-        text: "Create useful Python projects and publish them on GitHub."
-      },
-
-      {
-        title: "Interview Preparation",
-        text: "Practice Python, SQL and DSA questions."
-      }
-    ];
-  }
-
-
-  /* -----------------------------------------
-     RENDER ROADMAP
-  ----------------------------------------- */
-
-  container.innerHTML =
-    roadmap
-      .map(
-        (item, index) => `
-          <div class="roadmap-item">
-
-            <div class="roadmap-number">
-              ${index + 1}
-            </div>
-
-            <div>
-
-              <strong>
-                ${escapeHTML(
-                  item.title
-                )}
-              </strong>
-
-              <p>
-                ${escapeHTML(
-                  item.text
-                )}
-              </p>
-
-            </div>
-
-          </div>
-        `
-      )
-      .join("");
-}
-
-
-/* =========================================
-   RESUME EVENTS
-========================================= */
-
-function bindResumeEvents() {
-
-  const fileInput =
-    $("#resumeFile");
-
-  if (!fileInput) {
-    return;
-  }
-
-
-  fileInput.addEventListener(
-    "change",
-    event => {
-
-      const file =
-        event.target.files?.[0];
-
-      handleResumeUpload(
-        file
-      );
-    }
+  toggleSaved(
+    job,
+    false
   );
 
-
-  updateRoadmap();
-}/* =========================================
-   PART 26 — APPLICATION TRACKER
-========================================= */
-
-
-/* =========================================
-   GET TRACKER JOBS
-========================================= */
-
-function getTrackerJobs(status) {
-
-  return state.jobs.filter(job => {
-
-    const jobStatus =
-      getStatus(job);
-
-    if (status === "saved") {
-
-      return (
-        isSaved(job) &&
-        !["applied", "interview", "closed"]
-          .includes(jobStatus)
-      );
-    }
-
-    return jobStatus === status;
-  });
 }
 
 
-/* =========================================
-   CREATE TRACKER CARD
-========================================= */
+/* =========================================================
+   AVOID CURRENT JOB
+   ========================================================= */
 
-function createTrackerItem(job) {
+function avoidCurrentJob() {
+
+  const job =
+    state.currentJob;
+
+  if (!job) {
+    return;
+  }
+
 
   const id =
     getId(job);
 
-  const title =
-    text(
-      job.title ||
-      "Untitled role"
-    );
 
-  const company =
-    text(
-      job.company ||
-      "Company not listed"
-    );
+  state.avoidedJobs.add(id);
 
-  const score =
-    getMatchScore(
-      job,
-      state.selectedSkill
-    );
+  state.savedJobs.delete(id);
+
+  delete state.applicationStatus[id];
 
 
-  return `
-    <div
-      class="tracker-item"
-      data-id="${escapeHTML(id)}"
-    >
+  saveLocalState();
 
-      <strong>
-        ${escapeHTML(title)}
-      </strong>
 
-      <span>
-        ${escapeHTML(company)}
-      </span>
+  closeJobModal();
 
-      <span class="tracker-score">
-        Match ${score}%
-      </span>
+  applyFilters();
 
-    </div>
-  `;
+  updateDashboard();
+
+  updateTracker();
+
+
+  showToast(
+    'Job removed from your radar.'
+  );
+
 }
 
 
-/* =========================================
-   RENDER TRACKER
-========================================= */
+/* =========================================================
+   OPEN ORIGINAL JOB
+   ========================================================= */
 
-function renderTracker() {
+function openCurrentJob() {
 
-  const columns = {
+  const job =
+    state.currentJob;
 
-    saved: {
-      list: "#colSaved",
-      count: "#cSaved"
-    },
-
-    applied: {
-      list: "#colApplied",
-      count: "#cApplied"
-    },
-
-    interview: {
-      list: "#colInterview",
-      count: "#cInterview"
-    },
-
-    closed: {
-      list: "#colClosed",
-      count: "#cClosed"
-    }
-
-  };
-
-
-  Object.entries(columns)
-    .forEach(
-      ([status, selectors]) => {
-
-        const jobs =
-          getTrackerJobs(status);
-
-
-        const list =
-          $(selectors.list);
-
-        const count =
-          $(selectors.count);
-
-
-        /* -------------------------------------
-           COUNT
-        ------------------------------------- */
-
-        if (count) {
-
-          count.textContent =
-            jobs.length;
-        }
-
-
-        /* -------------------------------------
-           LIST
-        ------------------------------------- */
-
-        if (!list) {
-          return;
-        }
-
-
-        if (!jobs.length) {
-
-          list.innerHTML = `
-            <div class="tracker-empty">
-              No jobs here yet
-            </div>
-          `;
-
-          return;
-        }
-
-
-        list.innerHTML =
-          jobs
-            .map(
-              job =>
-                createTrackerItem(job)
-            )
-            .join("");
-      }
-    );
-}
-
-
-/* =========================================
-   TRACKER CARD CLICK
-========================================= */
-
-function bindTrackerEvents() {
-
-  const tracker =
-    $("#page-tracker");
-
-  if (!tracker) {
+  if (!job) {
     return;
   }
 
 
-  tracker.addEventListener(
-    "click",
-    event => {
-
-      const item =
-        event.target.closest(
-          ".tracker-item"
-        );
-
-      if (!item) {
-        return;
-      }
+  const url =
+    getJobURL(job);
 
 
-      const id =
-        item.dataset.id;
+  if (url === '#') {
+
+    showToast(
+      'Original job link is not available.'
+    );
+
+    return;
+
+  }
 
 
-      const job =
-        findJobById(id);
-
-
-      if (job) {
-
-        openJobModal(job);
-      }
-    }
+  window.open(
+    url,
+    '_blank',
+    'noopener,noreferrer'
   );
+
 }
 
 
-/* =========================================
-   REMOVE FROM TRACKER
-========================================= */
+/* =========================================================
+   MODAL EVENT BINDING
+   ========================================================= */
 
-function removeFromTracker(job) {
+function bindModalEvents() {
+
+  const closeButton =
+    $('closeModal');
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      'click',
+      closeJobModal
+    );
+
+  }
+
+
+  const modal =
+    $('modal');
+
+  if (modal) {
+
+    modal.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target === modal ||
+          event.target.matches(
+            '[data-close-modal]'
+          )
+        ) {
+
+          closeJobModal();
+
+        }
+
+      }
+    );
+
+  }
+
+
+  const saveButton =
+    $('mSave');
+
+  if (saveButton) {
+
+    saveButton.addEventListener(
+      'click',
+      saveCurrentJob
+    );
+
+  }
+
+
+  const avoidButton =
+    $('mAvoid');
+
+  if (avoidButton) {
+
+    avoidButton.addEventListener(
+      'click',
+      avoidCurrentJob
+    );
+
+  }
+
+
+  const openButton =
+    $('mOpen');
+
+  if (openButton) {
+
+    openButton.addEventListener(
+      'click',
+      openCurrentJob
+    );
+
+  }
+
+
+  const status =
+    $('mStatus');
+
+  if (status) {
+
+    status.addEventListener(
+      'change',
+      updateCurrentJobStatus
+    );
+
+  }
+
+
+  document.addEventListener(
+    'keydown',
+    event => {
+
+      if (
+        event.key === 'Escape'
+      ) {
+
+        closeJobModal();
+
+      }
+
+    }
+  );
+
+}/* =========================================================
+   APP.JS — PART 5
+   Save / Avoid / Toast
+   ========================================================= */
+
+
+/* =========================================================
+   TOGGLE SAVED JOB
+   ========================================================= */
+
+function toggleSaved(job, notify = true) {
+
+  if (!job) {
+    return;
+  }
 
   const id =
     getId(job);
@@ -3261,484 +2276,3239 @@ function removeFromTracker(job) {
   }
 
 
-  state.saved =
-    state.saved.filter(
-      savedId =>
-        savedId !== id
-    );
+  /* -------------------------------------------------------
+     REMOVE FROM SAVED
+     ------------------------------------------------------- */
+
+  if (state.savedJobs.has(id)) {
+
+    state.savedJobs.delete(id);
+
+    if (notify) {
+
+      showToast(
+        'Job removed from saved jobs.'
+      );
+
+    }
+
+  }
+
+  /* -------------------------------------------------------
+     ADD TO SAVED
+     ------------------------------------------------------- */
+
+  else {
+
+    state.savedJobs.add(id);
+
+    if (notify) {
+
+      showToast(
+        'Job saved.'
+      );
+
+    }
+
+  }
 
 
-  delete state.apps[id];
+  /* -------------------------------------------------------
+     SAVE TO LOCAL STORAGE
+     ------------------------------------------------------- */
+
+  saveLocalState();
 
 
-  saveLocalData();
+  /* -------------------------------------------------------
+     REFRESH UI
+     ------------------------------------------------------- */
+
+  renderJobs();
 
   updateDashboard();
 
-  renderTracker();
+  updateTracker();
 
-  renderJobs(
-    state.filtered
+
+  /* -------------------------------------------------------
+     UPDATE MODAL BUTTON
+     ------------------------------------------------------- */
+
+  if (
+    state.currentJob &&
+    getId(state.currentJob) === id
+  ) {
+
+    const button =
+      $('mSave');
+
+    if (button) {
+
+      button.textContent =
+        state.savedJobs.has(id)
+          ? 'Saved'
+          : 'Save Job';
+
+      button.classList.toggle(
+        'saved',
+        state.savedJobs.has(id)
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE SAVE BUTTON TEXT
+   ========================================================= */
+
+function updateSaveButton(job) {
+
+  const button =
+    $('mSave');
+
+  if (!button || !job) {
+    return;
+  }
+
+
+  const saved =
+    isSaved(job);
+
+
+  button.textContent =
+    saved
+      ? 'Saved'
+      : 'Save Job';
+
+
+  button.classList.toggle(
+    'saved',
+    saved
   );
+
+}
+
+
+/* =========================================================
+   SHOW TOAST MESSAGE
+   ========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(message) {
+
+  const toast =
+    $('toast');
+
+  if (!toast) {
+    return;
+  }
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    'show'
+  );
+
+
+  if (toastTimer) {
+
+    clearTimeout(
+      toastTimer
+    );
+
+  }
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          'show'
+        );
+
+      },
+      2200
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE JOB FROM SAVED
+   ========================================================= */
+
+function removeSavedJob(job) {
+
+  if (!job) {
+    return;
+  }
+
+
+  const id =
+    getId(job);
+
+
+  state.savedJobs.delete(id);
+
+  saveLocalState();
+
+  renderJobs();
+
+  updateDashboard();
+
+  updateTracker();
 
 
   showToast(
-    "Job removed from tracker"
+    'Removed from saved jobs.'
   );
-}/* =========================================
-   PART 27 — AVOID JOBS + NAVIGATION
-========================================= */
+
+}
 
 
-/* =========================================
-   RENDER AVOID JOBS
-========================================= */
+/* =========================================================
+   AVOID JOB
+   ========================================================= */
 
-function renderAvoidJobs() {
+function avoidJob(job) {
+
+  if (!job) {
+    return;
+  }
+
+
+  const id =
+    getId(job);
+
+
+  state.avoidedJobs.add(id);
+
+  state.savedJobs.delete(id);
+
+  delete state.applicationStatus[id];
+
+
+  saveLocalState();
+
+
+  applyFilters();
+
+  updateDashboard();
+
+  updateTracker();
+
+
+  if (
+    state.currentJob &&
+    getId(state.currentJob) === id
+  ) {
+
+    closeJobModal();
+
+  }
+
+
+  showToast(
+    'Job avoided.'
+  );
+
+}
+
+
+/* =========================================================
+   CHECK WHETHER JOB IS AVOIDED
+   ========================================================= */
+
+function isAvoided(job) {
+
+  if (!job) {
+    return false;
+  }
+
+
+  return state.avoidedJobs.has(
+    getId(job)
+  );
+
+}
+
+
+/* =========================================================
+   CLEAR AVOIDED JOB
+   ========================================================= */
+
+function restoreAvoidedJob(job) {
+
+  if (!job) {
+    return;
+  }
+
+
+  const id =
+    getId(job);
+
+
+  state.avoidedJobs.delete(
+    id
+  );
+
+
+  saveLocalState();
+
+  applyFilters();
+
+  updateDashboard();
+
+  updateTracker();
+
+
+  showToast(
+    'Job added back to radar.'
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE MODAL SAVE BUTTON
+   ========================================================= */
+
+function refreshModalState() {
+
+  const job =
+    state.currentJob;
+
+  if (!job) {
+    return;
+  }
+
+
+  updateSaveButton(job);
+
+
+  const status =
+    $('mStatus');
+
+
+  if (status) {
+
+    status.value =
+      getStatus(job);
+
+  }
+
+}/* =========================================================
+   APP.JS — PART 6
+   Application Tracker
+   ========================================================= */
+
+
+/* =========================================================
+   TRACKER STATUS LIST
+   ========================================================= */
+
+const TRACKER_STATUSES = [
+  'Saved',
+  'Applied',
+  'Interview',
+  'Closed'
+];
+
+
+/* =========================================================
+   GET JOBS BY STATUS
+   ========================================================= */
+
+function getJobsByStatus(status) {
+
+  return state.jobs.filter(job => {
+
+    const jobStatus =
+      getStatus(job);
+
+    return jobStatus === status;
+
+  });
+
+}
+
+
+/* =========================================================
+   UPDATE TRACKER COUNTS + LISTS
+   ========================================================= */
+
+function updateTracker() {
+
+  const savedJobs =
+    getJobsByStatus('Saved');
+
+  const appliedJobs =
+    getJobsByStatus('Applied');
+
+  const interviewJobs =
+    getJobsByStatus('Interview');
+
+  const closedJobs =
+    getJobsByStatus('Closed');
+
+
+  /* -------------------------------------------------------
+     SUMMARY COUNTS
+     ------------------------------------------------------- */
+
+  setText(
+    'cSaved',
+    savedJobs.length
+  );
+
+  setText(
+    'cApplied',
+    appliedJobs.length
+  );
+
+  setText(
+    'cInterview',
+    interviewJobs.length
+  );
+
+  setText(
+    'cClosed',
+    closedJobs.length
+  );
+
+
+  /* -------------------------------------------------------
+     BOARD COUNTS
+     ------------------------------------------------------- */
+
+  setText(
+    'colSaved',
+    savedJobs.length
+  );
+
+  setText(
+    'colApplied',
+    appliedJobs.length
+  );
+
+  setText(
+    'colInterview',
+    interviewJobs.length
+  );
+
+  setText(
+    'colClosed',
+    closedJobs.length
+  );
+
+
+  /* -------------------------------------------------------
+     RENDER TRACKER COLUMNS
+     ------------------------------------------------------- */
+
+  renderTrackerColumn(
+    'trackerSaved',
+    savedJobs
+  );
+
+  renderTrackerColumn(
+    'trackerApplied',
+    appliedJobs
+  );
+
+  renderTrackerColumn(
+    'trackerInterview',
+    interviewJobs
+  );
+
+  renderTrackerColumn(
+    'trackerClosed',
+    closedJobs
+  );
+
+}
+
+
+/* =========================================================
+   SET TEXT HELPER
+   ========================================================= */
+
+function setText(id, value) {
+
+  const element =
+    $(id);
+
+  if (!element) {
+    return;
+  }
+
+
+  element.textContent =
+    value;
+
+}
+
+
+/* =========================================================
+   RENDER ONE TRACKER COLUMN
+   ========================================================= */
+
+function renderTrackerColumn(
+  containerId,
+  jobs
+) {
 
   const container =
-    $("#avoidList");
+    $(containerId);
 
   if (!container) {
     return;
   }
 
 
-  /* -----------------------------------------
-     GET AVOIDED JOBS FROM CURRENT DATA
-  ----------------------------------------- */
-
-  const avoided =
-    state.jobs.filter(job =>
-      state.avoid.includes(
-        getId(job)
-      )
-    );
-
-
-  /* -----------------------------------------
-     EMPTY STATE
-  ----------------------------------------- */
-
-  if (!avoided.length) {
+  if (!jobs.length) {
 
     container.innerHTML = `
-      <div class="skill-chip">
-        No avoided jobs
+
+      <div class="tracker-empty">
+        No jobs here yet.
       </div>
+
     `;
 
     return;
+
   }
 
 
-  /* -----------------------------------------
-     RENDER AVOIDED JOBS
-  ----------------------------------------- */
-
   container.innerHTML =
-    avoided
-      .slice(0, 6)
+    jobs
       .map(job => {
 
+        const id =
+          getId(job);
+
         const title =
-          text(
-            job.title ||
-            "Untitled role"
+          escapeHTML(
+            getJobTitle(job)
           );
 
         const company =
-          text(
-            job.company ||
-            "Company not listed"
+          escapeHTML(
+            getCompany(job)
           );
 
+        const location =
+          escapeHTML(
+            getLocation(job)
+          );
+
+        const score =
+          Number(job.score || 0);
+
+
         return `
-          <div class="avoid-item">
 
-            <strong>
-              ${escapeHTML(title)}
-            </strong>
+          <article
+            class="tracker-card"
+            data-job-id="${escapeHTML(id)}"
+          >
 
-            <span>
-              ${escapeHTML(company)}
-            </span>
+            <div class="tracker-card-top">
 
-          </div>
+              <span class="tracker-score">
+                ${score}%
+              </span>
+
+            </div>
+
+
+            <h4>
+              ${title}
+            </h4>
+
+
+            <p class="tracker-company">
+              ${company}
+            </p>
+
+
+            <p class="tracker-location">
+              ${location}
+            </p>
+
+
+            <div class="tracker-actions">
+
+              <button
+                type="button"
+                class="small-btn"
+                data-tracker-action="details"
+                data-job-id="${escapeHTML(id)}"
+              >
+                View
+              </button>
+
+              <button
+                type="button"
+                class="small-btn danger"
+                data-tracker-action="remove"
+                data-job-id="${escapeHTML(id)}"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </article>
+
         `;
+
       })
-      .join("");
+      .join('');
+
 }
 
 
-/* =========================================
-   REMOVE FROM AVOID LIST
-========================================= */
+/* =========================================================
+   CHANGE APPLICATION STATUS
+   ========================================================= */
 
-function restoreAvoidedJob(job) {
+function setJobStatus(
+  job,
+  status
+) {
+
+  if (!job) {
+    return;
+  }
+
 
   const id =
     getId(job);
 
-  state.avoid =
-    state.avoid.filter(
-      avoidedId =>
-        avoidedId !== id
-    );
+
+  if (!status) {
+
+    delete state.applicationStatus[id];
+
+  } else {
+
+    state.applicationStatus[id] =
+      status;
+
+  }
 
 
-  saveLocalData();
+  saveLocalState();
 
-  renderAvoidJobs();
+
+  /* -------------------------------------------------------
+     REFRESH JOB DATA
+     ------------------------------------------------------- */
+
+  applyFilters();
+
+  updateTracker();
+
+  updateDashboard();
+
+
+  /* -------------------------------------------------------
+     REFRESH MODAL IF OPEN
+     ------------------------------------------------------- */
+
+  if (
+    state.currentJob &&
+    getId(state.currentJob) === id
+  ) {
+
+    const statusElement =
+      $('mStatus');
+
+    if (statusElement) {
+
+      statusElement.value =
+        status || '';
+
+    }
+
+  }
+
 
   showToast(
-    "Job restored"
+    status
+      ? `Moved to ${status}.`
+      : 'Application status cleared.'
   );
+
 }
 
 
-/* =========================================
-   NAVIGATION
-========================================= */
+/* =========================================================
+   HANDLE TRACKER ACTIONS
+   ========================================================= */
 
-function bindNavigation() {
+function handleTrackerAction(event) {
 
-  const buttons =
-    $$(".nav-btn");
-
-
-  buttons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        const pageName =
-          button.dataset.page;
-
-
-        if (!pageName) {
-          return;
-        }
-
-
-        /* -------------------------------------
-           UPDATE ACTIVE BUTTON
-        ------------------------------------- */
-
-        buttons.forEach(btn => {
-
-          btn.classList.toggle(
-            "active",
-            btn === button
-          );
-        });
-
-
-        /* -------------------------------------
-           SHOW SELECTED PAGE
-        ------------------------------------- */
-
-        $$(".page")
-          .forEach(page => {
-
-            page.classList.toggle(
-              "active",
-              page.id ===
-                `page-${pageName}`
-            );
-          });
-
-
-        /* -------------------------------------
-           PAGE-SPECIFIC REFRESH
-        ------------------------------------- */
-
-        if (
-          pageName === "tracker"
-        ) {
-
-          renderTracker();
-        }
-
-
-        if (
-          pageName === "resume"
-        ) {
-
-          updateRoadmap();
-        }
-
-
-        if (
-          pageName === "home"
-        ) {
-
-          updateDashboard();
-
-          updateBestOpportunity(
-            state.selectedSkill
-          );
-        }
-
-
-        /* -------------------------------------
-           SCROLL TOP
-        ------------------------------------- */
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
+  const button =
+    event.target.closest(
+      '[data-tracker-action]'
     );
-  });
-}
 
 
-/* =========================================
-   SKILL SELECT EVENT
-========================================= */
-
-function bindSkillEvent() {
-
-  const skill =
-    $("#skill");
-
-  if (!skill) {
+  if (!button) {
     return;
   }
 
 
-  /* -----------------------------------------
-     RESTORE SAVED SKILL
-  ----------------------------------------- */
+  const action =
+    button.dataset.trackerAction;
 
-  if (
-    state.selectedSkill &&
-    [
-      ...skill.options
-    ].some(
-      option =>
-        option.value ===
-        state.selectedSkill
-    )
-  ) {
+  const id =
+    button.dataset.jobId;
 
-    skill.value =
-      state.selectedSkill;
+
+  const job =
+    state.jobs.find(
+      item =>
+        getId(item) === id
+    );
+
+
+  if (!job) {
+    return;
   }
 
 
-  /* -----------------------------------------
-     CHANGE EVENT
-  ----------------------------------------- */
+  /* -------------------------------------------------------
+     VIEW JOB
+     ------------------------------------------------------- */
 
-  skill.addEventListener(
-    "change",
-    () => {
+  if (action === 'details') {
 
-      handleSkillChange(
-        skill.value
-      );
-    }
+    openJobModal(job);
+
+    return;
+
+  }
+
+
+  /* -------------------------------------------------------
+     REMOVE FROM TRACKER
+     ------------------------------------------------------- */
+
+  if (action === 'remove') {
+
+    delete state.applicationStatus[id];
+
+    state.savedJobs.delete(id);
+
+    saveLocalState();
+
+    updateTracker();
+
+    renderJobs();
+
+    updateDashboard();
+
+
+    showToast(
+      'Removed from tracker.'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR ALL TRACKER DATA
+   ========================================================= */
+
+function clearTracker() {
+
+  state.applicationStatus = {};
+
+  saveLocalState();
+
+  updateTracker();
+
+  renderJobs();
+
+  updateDashboard();
+
+
+  showToast(
+    'Application tracker cleared.'
   );
-}/* =========================================
-   PART 28 — FILTER EVENTS
-========================================= */
+
+}/* =========================================================
+   APP.JS — PART 7
+   Resume Profile
+   ========================================================= */
 
 
-/* =========================================
-   BIND FILTER EVENTS
-========================================= */
+/* =========================================================
+   LOAD RESUME PROFILE INTO FORM
+   ========================================================= */
 
-function bindFilterEvents() {
+function loadResumeProfile() {
 
-  const filterIds = [
-    "search",
-    "location",
-    "jobType",
-    "workMode",
-    "posted",
-    "skill",
-    "appStatus",
-    "minimum",
-    "sort"
-  ];
+  const profile =
+    state.resumeProfile;
 
 
-  /* -----------------------------------------
-     INPUT / SELECT EVENTS
-  ----------------------------------------- */
+  if (!profile) {
+    return;
+  }
 
-  filterIds.forEach(id => {
 
-    const element =
-      $(`#${id}`);
+  setInputValue(
+    'resumeName',
+    profile.name
+  );
 
-    if (!element) {
-      return;
+  setInputValue(
+    'resumeEmail',
+    profile.email
+  );
+
+  setInputValue(
+    'resumeRole',
+    profile.role
+  );
+
+  setInputValue(
+    'resumeLocation',
+    profile.location
+  );
+
+  setInputValue(
+    'resumeSkills',
+    profile.skills
+  );
+
+  setInputValue(
+    'resumeProjects',
+    profile.projects
+  );
+
+
+  updateResumeStatus();
+
+}
+
+
+/* =========================================================
+   INPUT VALUE HELPER
+   ========================================================= */
+
+function setInputValue(
+  id,
+  value
+) {
+
+  const element =
+    $(id);
+
+  if (!element) {
+    return;
+  }
+
+
+  element.value =
+    value || '';
+
+}
+
+
+/* =========================================================
+   GET RESUME FORM DATA
+   ========================================================= */
+
+function getResumeFormData() {
+
+  return {
+
+    name:
+      text(
+        $('resumeName')?.value
+      ),
+
+    email:
+      text(
+        $('resumeEmail')?.value
+      ),
+
+    role:
+      text(
+        $('resumeRole')?.value
+      ),
+
+    location:
+      text(
+        $('resumeLocation')?.value
+      ),
+
+    skills:
+      text(
+        $('resumeSkills')?.value
+      ),
+
+    projects:
+      text(
+        $('resumeProjects')?.value
+      )
+
+  };
+
+}
+
+
+/* =========================================================
+   SAVE RESUME PROFILE
+   ========================================================= */
+
+function saveResumeProfile() {
+
+  const profile =
+    getResumeFormData();
+
+
+  state.resumeProfile =
+    profile;
+
+
+  saveLocalState();
+
+
+  updateResumeStatus();
+
+  updateResumeMatch();
+
+  updateCareerInsights();
+
+  updateDashboard();
+
+
+  showToast(
+    'Resume profile saved.'
+  );
+
+}
+
+
+/* =========================================================
+   CLEAR RESUME PROFILE
+   ========================================================= */
+
+function clearResumeProfile() {
+
+  state.resumeProfile = {
+
+    name: '',
+    email: '',
+    role: '',
+    location: '',
+    skills: '',
+    projects: ''
+
+  };
+
+
+  saveLocalState();
+
+
+  loadResumeProfile();
+
+  updateResumeMatch();
+
+  updateCareerInsights();
+
+  updateDashboard();
+
+
+  showToast(
+    'Resume profile cleared.'
+  );
+
+}
+
+
+/* =========================================================
+   RESUME STATUS MESSAGE
+   ========================================================= */
+
+function updateResumeStatus() {
+
+  const status =
+    $('resumeStatus');
+
+  if (!status) {
+    return;
+  }
+
+
+  const profile =
+    state.resumeProfile;
+
+
+  const completed = [
+
+    profile.name,
+    profile.email,
+    profile.role,
+    profile.location,
+    profile.skills,
+    profile.projects
+
+  ].filter(
+    value =>
+      text(value).length > 0
+  ).length;
+
+
+  if (completed === 0) {
+
+    status.textContent =
+      'Resume profile is empty.';
+
+    return;
+
+  }
+
+
+  if (completed < 4) {
+
+    status.textContent =
+      'Resume profile is partially completed.';
+
+    return;
+
+  }
+
+
+  status.textContent =
+    'Resume profile is ready.';
+
+}
+
+
+/* =========================================================
+   GET RESUME SKILLS
+   ========================================================= */
+
+function getResumeSkills() {
+
+  const skills =
+    text(
+      state.resumeProfile.skills
+    );
+
+
+  if (!skills) {
+    return [];
+  }
+
+
+  return unique(
+
+    skills
+      .split(/[,;\n|]+/)
+      .map(skill =>
+        skill.trim()
+      )
+      .filter(Boolean)
+
+  );
+
+}
+
+
+/* =========================================================
+   GET RESUME PROJECTS
+   ========================================================= */
+
+function getResumeProjects() {
+
+  const projects =
+    text(
+      state.resumeProfile.projects
+    );
+
+
+  if (!projects) {
+    return [];
+  }
+
+
+  return projects
+    .split(/\n+/)
+    .map(project =>
+      project.trim()
+    )
+    .filter(Boolean);
+
+}
+
+
+/* =========================================================
+   CALCULATE PROFILE STRENGTH
+   ========================================================= */
+
+function calculateProfileStrength() {
+
+  const profile =
+    state.resumeProfile;
+
+
+  let points = 0;
+
+
+  if (text(profile.name)) {
+    points += 15;
+  }
+
+  if (text(profile.email)) {
+    points += 10;
+  }
+
+  if (text(profile.role)) {
+    points += 15;
+  }
+
+  if (text(profile.location)) {
+    points += 10;
+  }
+
+  if (
+    getResumeSkills().length >= 3
+  ) {
+    points += 25;
+
+  } else if (
+    getResumeSkills().length > 0
+  ) {
+
+    points += 15;
+
+  }
+
+  if (
+    getResumeProjects().length >= 1
+  ) {
+
+    points += 15;
+
+  }
+
+
+  return Math.min(
+    100,
+    points
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE PROFILE STRENGTH
+   ========================================================= */
+
+function updateProfileStrength() {
+
+  const element =
+    $('profileStrength');
+
+  if (!element) {
+    return;
+  }
+
+
+  const strength =
+    calculateProfileStrength();
+
+
+  element.textContent =
+    `${strength}%`;
+
+}
+
+
+/* =========================================================
+   UPDATE RESUME MATCH
+   ========================================================= */
+
+function updateResumeMatch() {
+
+  const element =
+    $('resumeMatch');
+
+  if (!element) {
+    return;
+  }
+
+
+  const resumeSkills =
+    getResumeSkills()
+      .map(normalize);
+
+
+  if (!resumeSkills.length) {
+
+    element.textContent =
+      'Add your skills to see job matches.';
+
+    updateProfileStrength();
+
+    return;
+
+  }
+
+
+  let matchedJobs = 0;
+
+
+  state.jobs.forEach(job => {
+
+    const jobSkills =
+      getJobSkills(job)
+        .map(normalize);
+
+
+    const hasMatch =
+      resumeSkills.some(
+        skill =>
+          jobSkills.some(
+            jobSkill =>
+              jobSkill.includes(skill) ||
+              skill.includes(jobSkill)
+          )
+      );
+
+
+    if (hasMatch) {
+      matchedJobs++;
     }
 
-
-    element.addEventListener(
-      "input",
-      () => {
-
-        applyFilters();
-      }
-    );
-
-
-    element.addEventListener(
-      "change",
-      () => {
-
-        /* Skill is also used
-           by the Career Agent */
-
-        if (id === "skill") {
-
-          handleSkillChange(
-            element.value
-          );
-
-        } else {
-
-          applyFilters();
-        }
-      }
-    );
   });
 
 
-  /* -----------------------------------------
-     CLEAR FILTERS
-  ----------------------------------------- */
+  element.textContent =
+    `${matchedJobs} jobs match your current skills.`;
 
-  const clearButton =
-    $("#clearFilters");
 
-  if (clearButton) {
+  updateProfileStrength();
 
-    clearButton.addEventListener(
-      "click",
-      () => {
+}
 
-        clearFilters();
-      }
-    );
+
+/* =========================================================
+   UPDATE SUGGESTED SKILL
+   ========================================================= */
+
+function updateSuggestedSkill() {
+
+  const element =
+    $('suggestedSkill');
+
+  if (!element) {
+    return;
   }
 
 
-  /* -----------------------------------------
-     SHOW SAVED
-  ----------------------------------------- */
+  const resumeSkills =
+    getResumeSkills()
+      .map(normalize);
 
-  const savedButton =
-    $("#showSaved");
 
-  if (savedButton) {
+  const skillFrequency = {};
 
-    savedButton.addEventListener(
-      "click",
-      () => {
 
-        showSavedJobs();
+  state.jobs.forEach(job => {
+
+    getJobSkills(job).forEach(skill => {
+
+      const cleanSkill =
+        text(skill);
+
+
+      const key =
+        normalize(cleanSkill);
+
+
+      if (!key) {
+        return;
       }
-    );
+
+
+      if (
+        resumeSkills.includes(key)
+      ) {
+        return;
+      }
+
+
+      skillFrequency[key] =
+        (skillFrequency[key] || 0) + 1;
+
+  });
+
+  });
+
+
+  const suggestions =
+    Object.entries(
+      skillFrequency
+    )
+      .sort(
+        (a, b) =>
+          b[1] - a[1]
+      );
+
+
+  if (!suggestions.length) {
+
+    element.textContent =
+      'Add more skills to discover suggestions.';
+
+    return;
+
   }
 
 
-  /* -----------------------------------------
-     INITIAL FILTER
-  ----------------------------------------- */
-
-  applyFilters();
-}/* =========================================
-   PART 29 — CSV EXPORT + KEYBOARD EVENTS
-========================================= */
+  const suggested =
+    suggestions[0][0];
 
 
-/* =========================================
+  element.textContent =
+    `Consider learning: ${suggested}`;
+
+}
+
+
+/* =========================================================
+   UPDATE RESUME PAGE
+   ========================================================= */
+
+function updateResumePage() {
+
+  loadResumeProfile();
+
+  updateProfileStrength();
+
+  updateResumeMatch();
+
+  updateSuggestedSkill();
+
+}/* =========================================================
+   APP.JS — PART 8
+   Skill Gap + Career Insights + AI Career Agent
+   ========================================================= */
+
+
+/* =========================================================
+   GET SKILL GAP
+   ========================================================= */
+
+function getSkillGap() {
+
+  const resumeSkills =
+    getResumeSkills()
+      .map(normalize);
+
+
+  const frequency = {};
+
+
+  state.jobs.forEach(job => {
+
+    getJobSkills(job).forEach(skill => {
+
+      const cleanSkill =
+        text(skill);
+
+      const key =
+        normalize(cleanSkill);
+
+      if (!key) {
+        return;
+      }
+
+      if (
+        resumeSkills.includes(key)
+      ) {
+        return;
+      }
+
+      frequency[key] =
+        (frequency[key] || 0) + 1;
+
+    });
+
+  });
+
+
+  return Object.entries(frequency)
+    .sort(
+      (a, b) =>
+        b[1] - a[1]
+    )
+    .slice(0, 8)
+    .map(item => ({
+      skill: item[0],
+      count: item[1]
+    }));
+
+}
+
+
+/* =========================================================
+   UPDATE SKILL GAP
+   ========================================================= */
+
+function updateSkillGap() {
+
+  const element =
+    $('skillGap');
+
+  if (!element) {
+    return;
+  }
+
+
+  const gaps =
+    getSkillGap();
+
+
+  if (!gaps.length) {
+
+    element.innerHTML = `
+
+      <div class="empty-card">
+        Add your skills to generate a skill gap.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  element.innerHTML =
+    gaps
+      .map(item => `
+
+        <div class="skill-gap-item">
+
+          <div>
+            <strong>
+              ${escapeHTML(item.skill)}
+            </strong>
+
+            <span>
+              Seen in ${item.count} jobs
+            </span>
+          </div>
+
+          <span class="skill-gap-tag">
+            Learn
+          </span>
+
+        </div>
+
+      `)
+      .join('');
+
+}
+
+
+/* =========================================================
+   CAREER INSIGHTS
+   ========================================================= */
+
+function updateCareerInsights() {
+
+  const element =
+    $('careerInsights');
+
+  if (!element) {
+    return;
+  }
+
+
+  const profile =
+    state.resumeProfile;
+
+
+  const skills =
+    getResumeSkills();
+
+
+  const projects =
+    getResumeProjects();
+
+
+  const insights = [];
+
+
+  /* -------------------------------------------------------
+     PROFILE
+     ------------------------------------------------------- */
+
+  if (!text(profile.role)) {
+
+    insights.push(
+      'Add a target role to make your job matching more focused.'
+    );
+
+  }
+
+
+  if (skills.length < 3) {
+
+    insights.push(
+      'Add more technical skills to improve job matching.'
+    );
+
+  }
+
+
+  if (!projects.length) {
+
+    insights.push(
+      'Add at least one project to strengthen your profile.'
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     JOB DATA INSIGHTS
+     ------------------------------------------------------- */
+
+  const remoteJobs =
+    state.jobs.filter(
+      job => isRemote(job)
+    ).length;
+
+
+  if (remoteJobs > 0) {
+
+    insights.push(
+      `${remoteJobs} remote opportunities are currently in the dataset.`
+    );
+
+  }
+
+
+  const strongMatches =
+    state.jobs.filter(
+      job =>
+        Number(job.score || 0) >= 70
+    ).length;
+
+
+  if (strongMatches > 0) {
+
+    insights.push(
+      `${strongMatches} jobs currently have a score of 70 or above.`
+    );
+
+  }
+
+
+  if (!insights.length) {
+
+    insights.push(
+      'Your profile has enough information for basic career insights.'
+    );
+
+  }
+
+
+  element.innerHTML =
+    insights
+      .slice(0, 5)
+      .map(item => `
+
+        <div class="insight-item">
+
+          <span class="insight-dot"></span>
+
+          <p>
+            ${escapeHTML(item)}
+          </p>
+
+        </div>
+
+      `)
+      .join('');
+
+}
+
+
+/* =========================================================
+   MATCHING JOBS FOR RESUME
+   ========================================================= */
+
+function getResumeMatchingJobs() {
+
+  const resumeSkills =
+    getResumeSkills()
+      .map(normalize);
+
+
+  if (!resumeSkills.length) {
+    return [];
+  }
+
+
+  return state.jobs
+    .map(job => {
+
+      const jobSkills =
+        getJobSkills(job)
+          .map(normalize);
+
+
+      let matches = 0;
+
+
+      resumeSkills.forEach(
+        skill => {
+
+          if (
+            jobSkills.some(
+              jobSkill =>
+                jobSkill.includes(skill) ||
+                skill.includes(jobSkill)
+            )
+          ) {
+
+            matches++;
+
+          }
+
+        }
+      );
+
+
+      return {
+        job,
+        matches
+      };
+
+    })
+    .filter(
+      item =>
+        item.matches > 0
+    )
+    .sort(
+      (a, b) =>
+        b.matches - a.matches
+    )
+    .slice(0, 5);
+
+}
+
+
+/* =========================================================
+   UPDATE MATCHING JOBS
+   ========================================================= */
+
+function updateMatchingJobs() {
+
+  const element =
+    $('matchingJobs');
+
+  if (!element) {
+    return;
+  }
+
+
+  const matches =
+    getResumeMatchingJobs();
+
+
+  if (!matches.length) {
+
+    element.innerHTML = `
+
+      <div class="empty-card">
+        No matching jobs yet.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  element.innerHTML =
+    matches
+      .map(item => {
+
+        const job =
+          item.job;
+
+
+        return `
+
+          <button
+            type="button"
+            class="matching-job"
+            data-job-id="${escapeHTML(getId(job))}"
+          >
+
+            <div>
+
+              <strong>
+                ${escapeHTML(getJobTitle(job))}
+              </strong>
+
+              <span>
+                ${escapeHTML(getCompany(job))}
+              </span>
+
+            </div>
+
+            <b>
+              ${item.matches} match
+              ${item.matches === 1 ? '' : 'es'}
+            </b>
+
+          </button>
+
+        `;
+
+      })
+      .join('');
+
+}
+
+
+/* =========================================================
+   AI CAREER AGENT — GREETING
+   ========================================================= */
+
+function updateAgentGreeting() {
+
+  const element =
+    $('agentGreeting');
+
+  if (!element) {
+    return;
+  }
+
+
+  const name =
+    text(
+      state.resumeProfile.name
+    );
+
+
+  if (name) {
+
+    element.textContent =
+      `Hi ${name}. Here's your current career snapshot.`;
+
+  } else {
+
+    element.textContent =
+      'Build your profile to get personalized career guidance.';
+
+  }
+
+}
+
+
+/* =========================================================
+   AI CAREER AGENT — SKILL GAP
+   ========================================================= */
+
+function updateAgentSkillGap() {
+
+  const element =
+    $('agentSkillGap');
+
+  if (!element) {
+    return;
+  }
+
+
+  const gaps =
+    getSkillGap();
+
+
+  if (!gaps.length) {
+
+    element.textContent =
+      'No major skill gap detected yet.';
+
+    return;
+
+  }
+
+
+  const topSkills =
+    gaps
+      .slice(0, 3)
+      .map(item => item.skill);
+
+
+  element.textContent =
+    `Skills to explore: ${topSkills.join(', ')}`;
+
+}
+
+
+/* =========================================================
+   AI CAREER AGENT — INTERVIEW
+   ========================================================= */
+
+function updateAgentInterview() {
+
+  const element =
+    $('agentInterview');
+
+  if (!element) {
+    return;
+  }
+
+
+  const strongMatches =
+    state.jobs.filter(
+      job =>
+        Number(job.score || 0) >= 70
+    ).length;
+
+
+  if (strongMatches > 0) {
+
+    element.textContent =
+      'Prepare a short introduction, project explanation, and technical fundamentals.';
+
+  } else {
+
+    element.textContent =
+      'Start with your core technical concepts and project explanation.';
+
+  }
+
+}
+
+
+/* =========================================================
+   AI CAREER AGENT — CAREER DIRECTION
+   ========================================================= */
+
+function updateAgentCareer() {
+
+  const element =
+    $('agentCareer');
+
+  if (!element) {
+    return;
+  }
+
+
+  const role =
+    text(
+      state.resumeProfile.role
+    );
+
+
+  if (role) {
+
+    element.textContent =
+      `Your current target role is ${role}. Focus your projects and skills around it.`;
+
+    return;
+
+  }
+
+
+  element.textContent =
+    'Add a target role to receive more focused career guidance.';
+
+}
+
+
+/* =========================================================
+   GENERATE CAREER AGENT OUTPUT
+   ========================================================= */
+
+function generateCareerAgentOutput() {
+
+  const element =
+    $('agentOutput');
+
+  if (!element) {
+    return;
+  }
+
+
+  const profile =
+    state.resumeProfile;
+
+
+  const skills =
+    getResumeSkills();
+
+
+  const gaps =
+    getSkillGap();
+
+
+  const matches =
+    getResumeMatchingJobs();
+
+
+  const role =
+    text(profile.role);
+
+
+  const topGap =
+    gaps.length
+      ? gaps[0].skill
+      : 'a relevant technical skill';
+
+
+  const matchCount =
+    matches.length;
+
+
+  let message = '';
+
+
+  if (role) {
+
+    message +=
+      `Target role: ${role}. `;
+
+  } else {
+
+    message +=
+      'Set a target role first. ';
+
+  }
+
+
+  message +=
+    `You currently have ${skills.length} listed skill${skills.length === 1 ? '' : 's'}. `;
+
+
+  if (matchCount) {
+
+    message +=
+      `${matchCount} jobs show a skill match with your profile. `;
+
+  } else {
+
+    message +=
+      'There are no direct skill matches yet. ';
+
+  }
+
+
+  if (gaps.length) {
+
+    message +=
+      `A useful skill to explore next is ${topGap}.`;
+
+  } else {
+
+    message +=
+      'Keep strengthening your existing technical skills and projects.';
+
+  }
+
+
+  element.textContent =
+    message;
+
+}
+
+
+/* =========================================================
+   UPDATE COMPLETE CAREER AGENT
+   ========================================================= */
+
+function updateCareerAgent() {
+
+  updateAgentGreeting();
+
+  updateAgentSkillGap();
+
+  updateAgentInterview();
+
+  updateAgentCareer();
+
+  generateCareerAgentOutput();
+
+}
+
+
+/* =========================================================
+   UPDATE ALL RESUME / CAREER SECTIONS
+   ========================================================= */
+
+function updateCareerSections() {
+
+  updateResumeMatch();
+
+  updateProfileStrength();
+
+  updateSuggestedSkill();
+
+  updateSkillGap();
+
+  updateCareerInsights();
+
+  updateMatchingJobs();
+
+  updateCareerAgent();
+
+}/* =========================================================
+   APP.JS — PART 9
+   Resume Upload
+   ========================================================= */
+
+
+/* =========================================================
+   OPEN RESUME UPLOAD MODAL
+   ========================================================= */
+
+function openResumeModal() {
+
+  const modal =
+    $('resumeModal');
+
+  if (!modal) {
+    return;
+  }
+
+
+  modal.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+  modal.classList.add(
+    'open'
+  );
+
+  document.body.classList.add(
+    'modal-open'
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE RESUME UPLOAD MODAL
+   ========================================================= */
+
+function closeResumeModal() {
+
+  const modal =
+    $('resumeModal');
+
+  if (!modal) {
+    return;
+  }
+
+
+  modal.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  modal.classList.remove(
+    'open'
+  );
+
+  document.body.classList.remove(
+    'modal-open'
+  );
+
+}
+
+
+/* =========================================================
+   SHOW SELECTED RESUME FILE NAME
+   ========================================================= */
+
+function updateResumeFileName() {
+
+  const input =
+    $('resumeFile');
+
+  const fileName =
+    $('resumeFileName');
+
+
+  if (!input || !fileName) {
+    return;
+  }
+
+
+  if (!input.files || !input.files.length) {
+
+    fileName.textContent =
+      'No file selected.';
+
+    return;
+
+  }
+
+
+  const file =
+    input.files[0];
+
+
+  fileName.textContent =
+    file.name;
+
+}
+
+
+/* =========================================================
+   VALIDATE RESUME FILE
+   ========================================================= */
+
+function validateResumeFile(file) {
+
+  if (!file) {
+
+    showToast(
+      'Please choose a resume file.'
+    );
+
+    return false;
+
+  }
+
+
+  const allowedTypes = [
+
+    'application/pdf',
+
+    'application/msword',
+
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
+  ];
+
+
+  const allowedExtensions = [
+
+    '.pdf',
+    '.doc',
+    '.docx'
+
+  ];
+
+
+  const fileName =
+    file.name.toLowerCase();
+
+
+  const validType =
+    allowedTypes.includes(
+      file.type
+    );
+
+
+  const validExtension =
+    allowedExtensions.some(
+      extension =>
+        fileName.endsWith(
+          extension
+        )
+    );
+
+
+  if (
+    !validType &&
+    !validExtension
+  ) {
+
+    showToast(
+      'Please select a PDF, DOC, or DOCX file.'
+    );
+
+    return false;
+
+  }
+
+
+  /* -------------------------------------------------------
+     MAX FILE SIZE: 5 MB
+     ------------------------------------------------------- */
+
+  const maxSize =
+    5 * 1024 * 1024;
+
+
+  if (file.size > maxSize) {
+
+    showToast(
+      'Resume file must be smaller than 5 MB.'
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   HANDLE RESUME FILE SELECTION
+   ========================================================= */
+
+function handleResumeFileSelection() {
+
+  const input =
+    $('resumeFile');
+
+  if (!input) {
+    return;
+  }
+
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  if (!file) {
+
+    updateResumeFileName();
+
+    return;
+
+  }
+
+
+  if (
+    !validateResumeFile(file)
+  ) {
+
+    input.value = '';
+
+    updateResumeFileName();
+
+    return;
+
+  }
+
+
+  updateResumeFileName();
+
+
+  showToast(
+    'Resume selected.'
+  );
+
+}
+
+
+/* =========================================================
+   UPLOAD / SAVE RESUME FILE
+   ========================================================= */
+
+function uploadResumeFile() {
+
+  const input =
+    $('resumeFile');
+
+
+  if (!input) {
+    return;
+  }
+
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  if (
+    !validateResumeFile(file)
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+   * This version keeps the selected file
+   * inside the browser session only.
+   *
+   * No file is sent to an external server.
+   */
+
+  try {
+
+    sessionStorage.setItem(
+      'jobRadarResumeFileName',
+      file.name
+    );
+
+  } catch (error) {
+
+    console.warn(
+      'Could not save resume file name.',
+      error
+    );
+
+  }
+
+
+  updateResumeFileName();
+
+
+  closeResumeModal();
+
+
+  showToast(
+    'Resume uploaded for this session.'
+  );
+
+}
+
+
+/* =========================================================
+   RESTORE PREVIOUS FILE NAME
+   ========================================================= */
+
+function restoreResumeFileName() {
+
+  const fileName =
+    $('resumeFileName');
+
+  if (!fileName) {
+    return;
+  }
+
+
+  try {
+
+    const savedName =
+      sessionStorage.getItem(
+        'jobRadarResumeFileName'
+      );
+
+
+    if (savedName) {
+
+      fileName.textContent =
+        savedName;
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      'Could not restore resume file name.',
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR SELECTED RESUME FILE
+   ========================================================= */
+
+function clearResumeFile() {
+
+  const input =
+    $('resumeFile');
+
+  const fileName =
+    $('resumeFileName');
+
+
+  if (input) {
+
+    input.value =
+      '';
+
+  }
+
+
+  if (fileName) {
+
+    fileName.textContent =
+      'No file selected.';
+
+  }
+
+
+  try {
+
+    sessionStorage.removeItem(
+      'jobRadarResumeFileName'
+    );
+
+  } catch (error) {
+
+    console.warn(
+      'Could not clear resume file.',
+      error
+    );
+
+  }
+
+
+  showToast(
+    'Resume file cleared.'
+  );
+
+}
+
+
+/* =========================================================
+   BIND RESUME UPLOAD EVENTS
+   ========================================================= */
+
+function bindResumeUploadEvents() {
+
+  const uploadButton =
+    $('uploadResume');
+
+  if (uploadButton) {
+
+    uploadButton.addEventListener(
+      'click',
+      openResumeModal
+    );
+
+  }
+
+
+  const fileInput =
+    $('resumeFile');
+
+  if (fileInput) {
+
+    fileInput.addEventListener(
+      'change',
+      handleResumeFileSelection
+    );
+
+  }
+
+
+  const closeButton =
+    $('closeResumeModal');
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      'click',
+      closeResumeModal
+    );
+
+  }
+
+
+  const modal =
+    $('resumeModal');
+
+  if (modal) {
+
+    modal.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target === modal ||
+          event.target.matches(
+            '[data-close-resume-modal]'
+          )
+        ) {
+
+          closeResumeModal();
+
+        }
+
+      }
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESTORE UPLOAD STATE
+   ========================================================= */
+
+function initializeResumeUpload() {
+
+  restoreResumeFileName();
+
+}/* =========================================================
+   APP.JS — PART 10
+   Home Dashboard
+   ========================================================= */
+
+
+/* =========================================================
+   UPDATE HOME DASHBOARD
+   ========================================================= */
+
+function updateDashboard() {
+
+  const jobs =
+    state.jobs;
+
+
+  /* -------------------------------------------------------
+     TOTAL JOBS
+     ------------------------------------------------------- */
+
+  setText(
+    'totalJobs',
+    jobs.length
+  );
+
+
+  /* -------------------------------------------------------
+     RECENT JOBS
+     ------------------------------------------------------- */
+
+  const recentJobs =
+    jobs.filter(
+      job =>
+        isRecentJob(job)
+    ).length;
+
+
+  setText(
+    'recentJobs',
+    recentJobs
+  );
+
+
+  /* -------------------------------------------------------
+     SAVED JOBS
+     ------------------------------------------------------- */
+
+  setText(
+    'savedJobs',
+    state.savedJobs.size
+  );
+
+
+  /* -------------------------------------------------------
+     STRONG MATCHES
+     ------------------------------------------------------- */
+
+  const strongMatches =
+    jobs.filter(
+      job =>
+        Number(job.score || 0) >= 70
+    ).length;
+
+
+  setText(
+    'strongMatches',
+    strongMatches
+  );
+
+
+  /* -------------------------------------------------------
+     NEXT JOB
+     ------------------------------------------------------- */
+
+  updateNextJob();
+
+
+  /* -------------------------------------------------------
+     TOP SKILLS
+     ------------------------------------------------------- */
+
+  updateTopSkills();
+
+
+  /* -------------------------------------------------------
+     AVOIDED JOBS
+     ------------------------------------------------------- */
+
+  updateAvoidList();
+
+
+  /* -------------------------------------------------------
+     LIVE STATUS
+     ------------------------------------------------------- */
+
+  updateLiveStatus();
+
+}
+
+
+/* =========================================================
+   CHECK RECENT JOB
+   ========================================================= */
+
+function isRecentJob(job) {
+
+  const dateValue =
+    job.date_posted ||
+    job.datePosted ||
+    job.posted_at ||
+    job.postedAt;
+
+
+  if (!dateValue) {
+    return false;
+  }
+
+
+  const date =
+    new Date(dateValue);
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return false;
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  const difference =
+    now.getTime() -
+    date.getTime();
+
+
+  const days =
+    difference /
+    (1000 * 60 * 60 * 24);
+
+
+  return (
+    days >= 0 &&
+    days <= 7
+  );
+
+}
+
+
+/* =========================================================
+   NEXT JOB RECOMMENDATION
+   ========================================================= */
+
+function updateNextJob() {
+
+  const element =
+    $('nextJob');
+
+  if (!element) {
+    return;
+  }
+
+
+  const candidates =
+    state.jobs
+      .filter(
+        job =>
+          !isAvoided(job)
+      )
+      .sort(
+        (a, b) =>
+          Number(b.score || 0) -
+          Number(a.score || 0)
+      );
+
+
+  if (!candidates.length) {
+
+    element.innerHTML = `
+
+      <div class="empty-card">
+        No job recommendation available yet.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const job =
+    candidates[0];
+
+
+  element.innerHTML = `
+
+    <div class="next-job-card">
+
+      <div>
+
+        <span class="eyebrow">
+          Suggested opportunity
+        </span>
+
+        <h3>
+          ${escapeHTML(
+            getJobTitle(job)
+          )}
+        </h3>
+
+        <p>
+          ${escapeHTML(
+            getCompany(job)
+          )}
+        </p>
+
+        <span>
+          ${escapeHTML(
+            getLocation(job)
+          )}
+        </span>
+
+      </div>
+
+      <div class="next-job-score">
+
+        ${Number(job.score || 0)}%
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  element
+    .querySelector(
+      '.next-job-card'
+    )
+    ?.addEventListener(
+      'click',
+      () => openJobModal(job)
+    );
+
+}
+
+
+/* =========================================================
+   TOP SKILLS FROM JOB DATA
+   ========================================================= */
+
+function updateTopSkills() {
+
+  const element =
+    $('topSkills');
+
+  if (!element) {
+    return;
+  }
+
+
+  const frequency = {};
+
+
+  state.jobs.forEach(job => {
+
+    getJobSkills(job).forEach(skill => {
+
+      const clean =
+        text(skill);
+
+      const key =
+        normalize(clean);
+
+
+      if (!key) {
+        return;
+      }
+
+
+      if (!frequency[key]) {
+
+        frequency[key] = {
+          name: clean,
+          count: 0
+        };
+
+      }
+
+
+      frequency[key].count++;
+
+    });
+
+  });
+
+
+  const skills =
+    Object.values(frequency)
+      .sort(
+        (a, b) =>
+          b.count - a.count
+      )
+      .slice(0, 8);
+
+
+  if (!skills.length) {
+
+    element.innerHTML = `
+
+      <span class="muted">
+        No skill data available.
+      </span>
+
+    `;
+
+    return;
+
+  }
+
+
+  element.innerHTML =
+    skills
+      .map(skill => `
+
+        <span class="skill-badge">
+
+          ${escapeHTML(
+            skill.name
+          )}
+
+          <small>
+            ${skill.count}
+          </small>
+
+        </span>
+
+      `)
+      .join('');
+
+}
+
+
+/* =========================================================
+   AVOIDED JOB SUMMARY
+   ========================================================= */
+
+function updateAvoidList() {
+
+  const element =
+    $('avoidList');
+
+  if (!element) {
+    return;
+  }
+
+
+  const avoidedCount =
+    state.avoidedJobs.size;
+
+
+  if (!avoidedCount) {
+
+    element.innerHTML = `
+
+      <div class="empty-card">
+        No jobs marked as avoided.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const avoidedJobs =
+    state.jobs
+      .filter(
+        job =>
+          isAvoided(job)
+      )
+      .slice(0, 5);
+
+
+  element.innerHTML = `
+
+    <div class="avoid-summary">
+
+      <strong>
+        ${avoidedCount}
+      </strong>
+
+      <span>
+        job${avoidedCount === 1 ? '' : 's'} avoided
+      </span>
+
+    </div>
+
+    ${
+      avoidedJobs.length
+        ? `
+          <div class="avoid-items">
+
+            ${avoidedJobs
+              .map(job => `
+
+                <div class="avoid-item">
+
+                  <span>
+                    ${escapeHTML(
+                      getJobTitle(job)
+                    )}
+                  </span>
+
+                  <button
+                    type="button"
+                    data-restore-job="${escapeHTML(
+                      getId(job)
+                    )}"
+                  >
+                    Restore
+                  </button>
+
+                </div>
+
+              `)
+              .join('')}
+
+          </div>
+        `
+        : ''
+    }
+
+  `;
+
+}
+
+
+/* =========================================================
+   RESTORE AVOIDED JOB FROM HOME
+   ========================================================= */
+
+function handleAvoidListAction(event) {
+
+  const button =
+    event.target.closest(
+      '[data-restore-job]'
+    );
+
+
+  if (!button) {
+    return;
+  }
+
+
+  const id =
+    button.dataset.restoreJob;
+
+
+  const job =
+    state.jobs.find(
+      item =>
+        getId(item) === id
+    );
+
+
+  if (!job) {
+    return;
+  }
+
+
+  restoreAvoidedJob(job);
+
+}
+
+
+/* =========================================================
+   LIVE STATUS
+   ========================================================= */
+
+function updateLiveStatus() {
+
+  const element =
+    $('liveStatus');
+
+  if (!element) {
+    return;
+  }
+
+
+  if (state.isLoading) {
+
+    element.textContent =
+      'Updating job radar...';
+
+    return;
+
+  }
+
+
+  if (!state.jobs.length) {
+
+    element.textContent =
+      'No jobs loaded yet.';
+
+    return;
+
+  }
+
+
+  const strongMatches =
+    state.jobs.filter(
+      job =>
+        Number(job.score || 0) >= 70
+    ).length;
+
+
+  element.textContent =
+    `Live radar: ${state.jobs.length} jobs loaded · ${strongMatches} strong matches`;
+
+}
+
+
+/* =========================================================
+   DASHBOARD REFRESH
+   ========================================================= */
+
+function refreshDashboard() {
+
+  updateDashboard();
+
+  updateResumePage();
+
+  updateCareerSections();
+
+  updateTracker();
+
+}/* =========================================================
+   APP.JS — PART 11
+   Navigation + Export + Job Controls
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE NAVIGATION
+   ========================================================= */
+
+function showPage(pageName) {
+
+  const pages =
+    document.querySelectorAll(
+      '.page'
+    );
+
+  const buttons =
+    document.querySelectorAll(
+      '.nav-btn'
+    );
+
+
+  pages.forEach(page => {
+
+    page.classList.toggle(
+      'active',
+      page.id === `page-${pageName}`
+    );
+
+  });
+
+
+  buttons.forEach(button => {
+
+    button.classList.toggle(
+      'active',
+      button.dataset.page === pageName
+    );
+
+  });
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+
+  if (pageName === 'home') {
+
+    updateDashboard();
+
+  }
+
+
+  if (pageName === 'jobs') {
+
+    renderJobs();
+
+  }
+
+
+  if (pageName === 'resume') {
+
+    updateResumePage();
+
+    updateCareerSections();
+
+  }
+
+
+  if (pageName === 'tracker') {
+
+    updateTracker();
+
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGATION EVENT
+   ========================================================= */
+
+function handleNavigation(event) {
+
+  const button =
+    event.target.closest(
+      '.nav-btn'
+    );
+
+
+  if (!button) {
+    return;
+  }
+
+
+  const page =
+    button.dataset.page;
+
+
+  if (!page) {
+    return;
+  }
+
+
+  showPage(page);
+
+}
+
+
+/* =========================================================
    EXPORT JOBS TO CSV
-========================================= */
+   ========================================================= */
 
 function exportJobsCSV() {
 
   const jobs =
-    state.filtered.length
-      ? state.filtered
-      : state.jobs;
+    state.filteredJobs;
 
 
   if (!jobs.length) {
 
     showToast(
-      "No jobs available to export"
+      'There are no jobs to export.'
     );
 
     return;
+
   }
 
 
   const headers = [
-    "Title",
-    "Company",
-    "Location",
-    "Job Type",
-    "Work Mode",
-    "Match Score",
-    "Status",
-    "URL"
+
+    'Title',
+    'Company',
+    'Location',
+    'Job Type',
+    'Work Mode',
+    'Score',
+    'Source',
+    'Status',
+    'Job URL'
+
   ];
 
 
   const rows =
-    jobs.map(job => {
+    jobs.map(job => [
 
-      const values = [
+      getJobTitle(job),
 
-        text(job.title),
+      getCompany(job),
 
-        text(job.company),
+      getLocation(job),
 
-        text(job.location),
+      getJobType(job),
 
-        text(job.job_type),
+      getWorkMode(job),
 
-        text(job.work_mode),
+      Number(job.score || 0),
 
-        getMatchScore(
-          job,
-          state.selectedSkill
-        ),
+      getSource(job),
 
-        getStatus(job) ||
-          "Not Applied",
+      getStatus(job),
 
-        getJobURL(job)
+      getJobURL(job)
 
-      ];
+    ]);
 
 
-      return values.map(value => {
+  const csvRows = [
 
-        const clean =
-          text(value)
-            .replace(/"/g, '""');
+    headers,
 
-        return `"${clean}"`;
+    ...rows
 
-      }).join(",");
-    });
+  ];
 
 
   const csv =
-    [
-      headers.join(","),
-      ...rows
-    ].join("\n");
+    csvRows
+      .map(row =>
+        row
+          .map(value =>
+            csvEscape(value)
+          )
+          .join(',')
+      )
+      .join('\n');
 
 
   const blob =
@@ -3746,7 +5516,7 @@ function exportJobsCSV() {
       [csv],
       {
         type:
-          "text/csv;charset=utf-8;"
+          'text/csv;charset=utf-8;'
       }
     );
 
@@ -3759,13 +5529,15 @@ function exportJobsCSV() {
 
   const link =
     document.createElement(
-      "a"
+      'a'
     );
 
-  link.href = url;
+
+  link.href =
+    url;
 
   link.download =
-    "job-radar-jobs.csv";
+    'job-radar-jobs.csv';
 
 
   document.body.appendChild(
@@ -3783,2131 +5555,923 @@ function exportJobsCSV() {
 
 
   showToast(
-    "Jobs exported successfully"
+    `${jobs.length} jobs exported.`
   );
+
 }
 
 
-/* =========================================
-   EXPORT BUTTON EVENT
-========================================= */
+/* =========================================================
+   CSV ESCAPE
+   ========================================================= */
 
-function bindExportEvents() {
+function csvEscape(value) {
+
+  const clean =
+    text(value);
+
+
+  return `"${clean
+    .replace(/"/g, '""')
+    .replace(/\r?\n/g, ' ')}"`;
+
+}
+
+
+/* =========================================================
+   SHOW SAVED JOBS
+   ========================================================= */
+
+function showSavedJobs() {
 
   const button =
-    $("#exportCSV");
-
-  if (!button) {
-    return;
-  }
+    $('showSaved');
 
 
-  button.addEventListener(
-    "click",
-    () => {
-
-      exportJobsCSV();
-
-    }
-  );
-}
+  state.showSavedOnly =
+    !state.showSavedOnly;
 
 
-/* =========================================
-   KEYBOARD EVENTS
-========================================= */
+  if (button) {
 
-function bindKeyboardEvents() {
+    button.textContent =
+      state.showSavedOnly
+        ? 'Show All'
+        : 'Show Saved';
 
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      /* -------------------------------------
-         ESC = CLOSE MODAL
-      ------------------------------------- */
-
-      if (
-        event.key === "Escape"
-      ) {
-
-        closeJobModal();
-
-      }
-
-
-      /* -------------------------------------
-         ENTER = OPEN SELECTED JOB
-      ------------------------------------- */
-
-      if (
-        event.key === "Enter" &&
-        event.target.classList.contains(
-          "tracker-item"
-        )
-      ) {
-
-        const id =
-          event.target.dataset.id;
-
-        const job =
-          findJobById(id);
-
-        if (job) {
-
-          openJobModal(job);
-
-        }
-      }
-
-    }
-  );
-}/* =========================================
-   PART 32 — FINAL INITIALIZATION
-========================================= */
-
-function startJobRadar() {
-
-  bindNavigation();
-
-  bindFilterEvents();
-
-  bindJobEvents();
-
-  bindModalEvents();
-
-  bindResumeEvents();
-
-  bindTrackerEvents();
-
-  bindSkillEvent();
-
-  bindExportEvents();
-
-  bindKeyboardEvents();
-
-  bindAgentEvents();
-
-  loadJobs();
-}
-
-
-/* =========================================
-   DOM READY
-========================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    startJobRadar();
+    button.classList.toggle(
+      'active',
+      state.showSavedOnly
+    );
 
   }
-);/* =========================================
-   PART 33 — FINAL SAFETY CHECK
-========================================= */
 
-
-/* =========================================
-   REFRESH DASHBOARD DATA
-========================================= */
-
-function refreshDashboard() {
-
-  updateDashboard();
-
-  renderTracker();
-
-  renderAvoidJobs();
-
-  updateBestOpportunity(
-    state.selectedSkill
-  );
-
-  applyFilters();
-}
-
-
-/* =========================================
-   SAVE DATA WHEN PAGE CLOSES
-========================================= */
-
-window.addEventListener(
-  "beforeunload",
-  () => {
-
-    saveLocalData();
-
-  }
-);
-
-
-/* =========================================
-   ONLINE / OFFLINE STATUS
-========================================= */
-
-window.addEventListener(
-  "online",
-  () => {
-
-    updateLiveStatus("online");
-
-  }
-);
-
-
-window.addEventListener(
-  "offline",
-  () => {
-
-    updateLiveStatus("offline");
-
-  }
-);/* =========================================
-   PART 34 — AVOID JOBS STORAGE
-========================================= */
-
-const avoidDetails =
-  JSON.parse(
-    localStorage.getItem("jobRadarAvoidDetails") || "{}"
-  );
-
-
-function saveAvoidDetails() {
-
-  localStorage.setItem(
-    "jobRadarAvoidDetails",
-    JSON.stringify(avoidDetails)
-  );
-}
-
-
-/* =========================================
-   SHOW AVOIDED JOBS
-========================================= */
-
-function renderAvoidJobs() {
-
-  const container =
-    $("#avoidList");
-
-  if (!container) {
-    return;
-  }
-
-
-  const ids =
-    Object.keys(avoidDetails);
-
-
-  if (!ids.length) {
-
-    container.innerHTML = `
-      <div class="avoid-empty">
-        No avoided jobs yet.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML =
-    ids.map(id => {
-
-      const job =
-        avoidDetails[id];
-
-      return `
-        <div class="avoid-job">
-
-          <div class="avoid-job-info">
-
-            <strong>
-              ${escapeHTML(job.title)}
-            </strong>
-
-            <span>
-              ${escapeHTML(job.company)}
-            </span>
-
-          </div>
-
-          <button
-            type="button"
-            class="restore-avoid"
-            data-id="${escapeHTML(id)}"
-          >
-            Restore
-          </button>
-
-        </div>
-      `;
-
-    }).join("");
-
-
-  container
-    .querySelectorAll(".restore-avoid")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          restoreAvoidedJob(
-            button.dataset.id
-          );
-
-        }
-      );
-
-    });
-}
-
-
-/* =========================================
-   RESTORE AVOIDED JOB
-========================================= */
-
-function restoreAvoidedJob(id) {
-
-  const job =
-    avoidDetails[id];
-
-  if (!job) {
-    return;
-  }
-
-
-  delete avoidDetails[id];
-
-  saveAvoidDetails();
-
-
-  /* Put job back into main list */
-
-  if (
-    !state.jobs.some(
-      item => getId(item) === id
-    )
-  ) {
-
-    state.jobs.push(job);
-
-  }
-
-
-  saveLocalData();
-
-  updateDashboard();
 
   applyFilters();
 
-  renderAvoidJobs();
+}
+
+
+/* =========================================================
+   HANDLE SEARCH / FILTER CHANGES
+   ========================================================= */
+
+function handleFilterChange() {
+
+  applyFilters();
+
+}
+
+
+/* =========================================================
+   CLEAR ALL FILTERS
+   ========================================================= */
+
+function handleClearFilters() {
+
+  clearFilters();
 
   showToast(
-    "Job restored successfully"
+    'Filters cleared.'
   );
-}/* =========================================
-   PART 35 — SAVE AVOIDED JOB DETAILS
-========================================= */
 
-function avoidJob(job) {
+}
 
-  if (!job) {
+
+/* =========================================================
+   SORT JOBS
+   ========================================================= */
+
+function sortJobs(jobs) {
+
+  const sort =
+    $('sort')?.value ||
+    'score';
+
+
+  const sorted =
+    [...jobs];
+
+
+  if (sort === 'score') {
+
+    sorted.sort(
+      (a, b) =>
+        Number(b.score || 0) -
+        Number(a.score || 0)
+    );
+
+  }
+
+
+  else if (sort === 'recent') {
+
+    sorted.sort(
+      (a, b) =>
+        getDateValue(b) -
+        getDateValue(a)
+    );
+
+  }
+
+
+  else if (sort === 'company') {
+
+    sorted.sort(
+      (a, b) =>
+        getCompany(a)
+          .localeCompare(
+            getCompany(b)
+          )
+    );
+
+  }
+
+
+  else if (sort === 'title') {
+
+    sorted.sort(
+      (a, b) =>
+        getJobTitle(a)
+          .localeCompare(
+            getJobTitle(b)
+          )
+    );
+
+  }
+
+
+  return sorted;
+
+}
+
+
+/* =========================================================
+   DATE VALUE FOR SORTING
+   ========================================================= */
+
+function getDateValue(job) {
+
+  const value =
+    job.date_posted ||
+    job.datePosted ||
+    job.posted_at ||
+    job.postedAt;
+
+
+  if (!value) {
+    return 0;
+  }
+
+
+  const time =
+    new Date(value)
+      .getTime();
+
+
+  return Number.isNaN(time)
+    ? 0
+    : time;
+
+}
+
+
+/* =========================================================
+   UPDATE FILTERED JOB ORDER
+   ========================================================= */
+
+function applySorting() {
+
+  state.filteredJobs =
+    sortJobs(
+      state.filteredJobs
+    );
+
+
+  renderJobs();
+
+  updateResultCount();
+
+}
+
+
+/* =========================================================
+   OPEN MATCHING JOB FROM RESUME PAGE
+   ========================================================= */
+
+function handleMatchingJobClick(event) {
+
+  const button =
+    event.target.closest(
+      '[data-job-id]'
+    );
+
+
+  if (!button) {
     return;
   }
 
 
   const id =
-    getId(job);
+    button.dataset.jobId;
 
 
-  /* Save complete job details */
-
-  avoidDetails[id] = {
-    ...job
-  };
-
-
-  saveAvoidDetails();
-
-
-  /* Remove from saved jobs */
-
-  state.saved =
-    state.saved.filter(
-      savedId => savedId !== id
+  const job =
+    state.jobs.find(
+      item =>
+        getId(item) === id
     );
 
 
-  /* Remove application status */
-
-  delete state.apps[id];
-
-
-  /* Mark as avoided */
-
-  if (!state.avoid.includes(id)) {
-
-    state.avoid.push(id);
-
+  if (!job) {
+    return;
   }
 
 
-  saveLocalData();
-
-
-  /* Remove from active job list */
-
-  state.jobs =
-    state.jobs.filter(
-      item => getId(item) !== id
-    );
-
-
-  /* Close modal */
-
-  closeJobModal();
-
-
-  /* Refresh everything */
-
-  updateDashboard();
-
-  applyFilters();
-
-  renderTracker();
-
-  renderAvoidJobs();
-
-  showToast(
-    "Job moved to Avoid Jobs"
-  );
-}/* =========================================
-   PART 36 — DASHBOARD REFRESH
-========================================= */
-
-function refreshAll() {
-
-  /* Dashboard numbers */
-  updateDashboard();
-
-
-  /* Top skills */
-  renderTopSkills();
-
-
-  /* Avoid jobs */
-  renderAvoidJobs();
-
-
-  /* Best opportunity */
-  updateBestOpportunity(
-    state.selectedSkill
-  );
-
-
-  /* Job results */
-  applyFilters();
-
-
-  /* Application tracker */
-  renderTracker();
-}
-
-
-/* =========================================
-   REFRESH BUTTON SUPPORT
-========================================= */
-
-function bindRefreshEvents() {
-
-  const buttons = $$(
-    "#refreshJobs, .refresh-jobs"
-  );
-
-
-  buttons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      async () => {
-
-        showToast(
-          "Refreshing jobs..."
-        );
-
-
-        await loadJobs();
-
-
-        refreshAll();
-
-
-        showToast(
-          "Jobs refreshed"
-        );
-
-      }
-    );
-
-  });
-}/* =========================================
-   PART 37 — CONNECT REFRESH EVENTS
-========================================= */
-
-function bindRefreshButton() {
-
-  const refreshButtons = $$(
-    "#refreshJobs, .refresh-jobs"
-  );
-
-
-  refreshButtons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      async () => {
-
-        button.disabled = true;
-
-        button.textContent =
-          "Refreshing...";
-
-
-        try {
-
-          await loadJobs();
-
-          refreshAll();
-
-          showToast(
-            "Jobs refreshed successfully"
-          );
-
-        } catch (error) {
-
-          console.error(
-            "Refresh error:",
-            error
-          );
-
-          showToast(
-            "Unable to refresh jobs"
-          );
-
-        }
-
-
-        button.disabled = false;
-
-        button.textContent =
-          "Refresh Jobs";
-
-      }
-    );
-
-  });
-}/* =========================================
-   PART 38 — REFRESH INITIALIZATION
-========================================= */
-
-function bindExtraEvents() {
-
-  bindRefreshEvents();
-
-  bindRefreshButton();
+  openJobModal(job);
 
 }
 
 
-/* =========================================
-   FINAL START UPDATE
-========================================= */
-
-const previousStartJobRadar =
-  startJobRadar;
-
-
-function finalStartJobRadar() {
-
-  previousStartJobRadar();
-
-  bindExtraEvents();
-
-}
-
-
-/* =========================================
-   START JOB RADAR
-========================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    finalStartJobRadar();
-
-  }
-);/* =========================================
-   PART 39 — FINAL START FUNCTION
-========================================= */
-
-function startJobRadar() {
-
-  bindNavigation();
-
-  bindFilterEvents();
-
-  bindJobEvents();
-
-  bindModalEvents();
-
-  bindResumeEvents();
-
-  bindTrackerEvents();
-
-  bindSkillEvent();
-
-  bindExportEvents();
-
-  bindKeyboardEvents();
-
-  bindAgentEvents();
-
-  bindExtraEvents();
-
-  loadJobs();
-
-}/* =========================================
-   PART 40 — JOB DATA SAFETY
-========================================= */
-
-function normalizeJob(job) {
-
-  return {
-    ...job,
-
-    id: getId(job),
-
-    title:
-      text(job.title) ||
-      "Untitled Job",
-
-    company:
-      text(job.company) ||
-      "Unknown Company",
-
-    location:
-      text(job.location) ||
-      "India",
-
-    description:
-      text(job.description) ||
-      "No description available.",
-
-    job_type:
-      text(job.job_type),
-
-    work_mode:
-      text(job.work_mode),
-
-    url:
-      getJobURL(job)
-  };
-}
-
-
-/* =========================================
-   SAFE JOB LIST
-========================================= */
-
-function getSafeJobs(jobs) {
-
-  if (!Array.isArray(jobs)) {
-    return [];
-  }
-
-
-  return jobs
-    .filter(job => job && typeof job === "object")
-    .map(normalizeJob);
-}
-
-
-/* =========================================
-   DUPLICATE REMOVAL
-========================================= */
-
-function removeDuplicateJobs(jobs) {
-
-  const seen =
-    new Set();
-
-
-  return jobs.filter(job => {
-
-    const id =
-      getId(job);
-
-
-    if (seen.has(id)) {
-      return false;
-    }
-
-
-    seen.add(id);
-
-    return true;
-
-  });
-}/* =========================================
-   PART 41 — SAFE JOB LOADING
-========================================= */
-
-async function reloadJobData() {
-
-  try {
-
-    updateLiveStatus("syncing");
-
-
-    const response =
-      await fetch(
-        "../data/processed_jobs.json",
-        {
-          cache: "no-store"
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `HTTP ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    let jobs =
-      Array.isArray(data)
-        ? data
-        : data.jobs;
-
-
-    jobs =
-      getSafeJobs(jobs);
-
-
-    jobs =
-      removeDuplicateJobs(jobs);
-
-
-    /* Remove avoided jobs
-       from active results */
-
-    jobs =
-      jobs.filter(
-        job =>
-          !state.avoid.includes(
-            getId(job)
-          )
-      );
-
-
-    state.jobs = jobs;
-
-
-    state.filtered = [...jobs];
-
-
-    updateLiveStatus("online");
-
-
-    refreshAll();
-
-
-    return jobs;
-
-  } catch (error) {
-
-    console.error(
-      "Job loading error:",
-      error
-    );
-
-
-    updateLiveStatus("offline");
-
-
-    showToast(
-      "Unable to load job data"
-    );
-
-
-    return [];
-
-  }
-}/* =========================================
-   PART 42 — FINAL LOAD JOBS
-========================================= */
-
-async function loadJobs() {
-
-  try {
-
-    updateLiveStatus("syncing");
-
-
-    const response =
-      await fetch(
-        "../data/processed_jobs.json",
-        {
-          cache: "no-store"
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `HTTP ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    let jobs =
-      Array.isArray(data)
-        ? data
-        : data.jobs;
-
-
-    jobs =
-      getSafeJobs(jobs);
-
-
-    jobs =
-      removeDuplicateJobs(jobs);
-
-
-    /* Remove avoided jobs */
-
-    jobs =
-      jobs.filter(
-        job =>
-          !state.avoid.includes(
-            getId(job)
-          )
-      );
-
-
-    state.jobs =
-      jobs;
-
-
-    state.filtered =
-      [...jobs];
-
-
-    updateLiveStatus("online");
-
-    updateDashboard();
-
-    renderTopSkills();
-
-    renderTracker();
-
-    renderAvoidJobs();
-
-    updateBestOpportunity(
-      state.selectedSkill
-    );
-
-    applyFilters();
-
-
-  } catch (error) {
-
-    console.error(
-      "Job loading error:",
-      error
-    );
-
-
-    updateLiveStatus("offline");
-
-
-    const results =
-      $("#results");
-
-    if (results) {
-
-      results.innerHTML = `
-        <div class="empty-state">
-          <h3>Unable to load jobs</h3>
-          <p>
-            Please check the job data
-            and try again.
-          </p>
-        </div>
-      `;
-
-    }
-
-
-    showToast(
-      "Unable to load job data"
-    );
-
-  }
-}/* =========================================
-   PART 43 — SEARCH SAFETY
-========================================= */
-
-function normalizeSearchText(value) {
-
-  return text(value)
-    .toLowerCase()
-    .trim();
-}
-
-
-/* =========================================
-   CHECK SEARCH MATCH
-========================================= */
-
-function matchesSearch(job, searchTerm) {
-
-  if (!searchTerm) {
-    return true;
-  }
-
-
-  const jobText =
-    getJobText(job);
-
-
-  const words =
-    searchTerm
-      .split(/\s+/)
-      .filter(Boolean);
-
-
-  return words.every(
-    word =>
-      jobText.includes(word)
-  );
-}
-
-
-/* =========================================
-   SAFE LOCATION MATCH
-========================================= */
-
-function matchesLocation(
-  job,
-  location
-) {
-
-  if (!location) {
-    return true;
-  }
-
-
-  return normalizeSearchText(
-    job.location
-  ).includes(
-    normalizeSearchText(location)
-  );
-}/* =========================================
-   PART 44 — BETTER FILTER MATCHING
-========================================= */
-
-function applyFilters() {
+/* =========================================================
+   SEARCH BUTTON SUPPORT
+   ========================================================= */
+
+function focusSearch() {
 
   const search =
-    normalizeSearchText(
-      $("#search")?.value
-    );
-
-  const location =
-    normalizeSearchText(
-      $("#location")?.value
-    );
-
-  const jobType =
-    normalizeSearchText(
-      $("#jobType")?.value
-    );
-
-  const workMode =
-    normalizeSearchText(
-      $("#workMode")?.value
-    );
-
-  const posted =
-    normalizeSearchText(
-      $("#posted")?.value
-    );
-
-  const skill =
-    normalizeSearchText(
-      $("#skill")?.value
-    );
-
-  const appStatus =
-    normalizeSearchText(
-      $("#appStatus")?.value
-    );
-
-  const minimum =
-    Number(
-      $("#minimum")?.value || 0
-    );
-
-  const sort =
-    normalizeSearchText(
-      $("#sort")?.value
-    );
+    $('search');
 
 
-  let results =
-    state.jobs.filter(job => {
-
-      /* Search */
-      if (
-        !matchesSearch(
-          job,
-          search
-        )
-      ) {
-        return false;
-      }
-
-
-      /* Location */
-      if (
-        !matchesLocation(
-          job,
-          location
-        )
-      ) {
-        return false;
-      }
-
-
-      /* Job type */
-      if (
-        jobType &&
-        !lower(job.job_type)
-          .includes(jobType)
-      ) {
-        return false;
-      }
-
-
-      /* Work mode */
-      if (
-        workMode &&
-        !lower(job.work_mode)
-          .includes(workMode)
-      ) {
-        return false;
-      }
-
-
-      /* Skill */
-      if (
-        skill &&
-        !skillMatchesJob(
-          job,
-          skill
-        )
-      ) {
-        return false;
-      }
-
-
-      /* Application status */
-      if (
-        appStatus &&
-        getStatus(job) !== appStatus
-      ) {
-        return false;
-      }
-
-
-      /* Minimum score */
-      if (
-        minimum &&
-        getMatchScore(
-          job,
-          state.selectedSkill
-        ) < minimum
-      ) {
-        return false;
-      }
-
-
-      /* Posted date */
-      if (
-        posted === "today" &&
-        !isRecentJob(job, 1)
-      ) {
-        return false;
-      }
-
-
-      if (
-        posted === "last3" &&
-        !isRecentJob(job, 3)
-      ) {
-        return false;
-      }
-
-
-      if (
-        posted === "last7" &&
-        !isRecentJob(job, 7)
-      ) {
-        return false;
-      }
-
-
-      if (
-        posted === "last30" &&
-        !isRecentJob(job, 30)
-      ) {
-        return false;
-      }
-
-
-      return true;
-    });
-
-
-  /* =====================================
-     SORT RESULTS
-  ===================================== */
-
-  if (sort === "best") {
-
-    results.sort(
-      (a, b) =>
-        getMatchScore(
-          b,
-          state.selectedSkill
-        ) -
-        getMatchScore(
-          a,
-          state.selectedSkill
-        )
-    );
-
-  } else if (sort === "company") {
-
-    results.sort(
-      (a, b) =>
-        lower(a.company)
-          .localeCompare(
-            lower(b.company)
-          )
-    );
-
-  } else {
-
-    results.sort(
-      (a, b) =>
-        new Date(
-          getJobDate(b)
-        ) -
-        new Date(
-          getJobDate(a)
-        )
-    );
-  }
-
-
-  state.filtered =
-    results;
-
-
-  renderJobs(
-    state.filtered
-  );
-
-
-  const count =
-    $("#resultCount");
-
-  if (count) {
-
-    count.textContent =
-      `${state.filtered.length} jobs found`;
-
-  }
-}/* =========================================
-   PART 45 — RESULT UI
-========================================= */
-
-function updateResultCount() {
-
-  const count =
-    $("#resultCount");
-
-  if (!count) {
+  if (!search) {
     return;
   }
 
 
-  const total =
-    state.filtered.length;
+  showPage('jobs');
 
+  search.focus();
 
-  count.textContent =
-    total === 1
-      ? "1 job found"
-      : `${total} jobs found`;
 }
 
 
-/* =========================================
-   EMPTY RESULT MESSAGE
-========================================= */
+/* =========================================================
+   KEYBOARD SHORTCUT
+   ========================================================= */
 
-function showEmptyResults() {
-
-  const results =
-    $("#results");
-
-  const empty =
-    $("#emptyState");
-
-
-  if (results) {
-    results.innerHTML = "";
-  }
-
-
-  if (empty) {
-
-    empty.classList.add(
-      "show"
-    );
-
-    empty.innerHTML = `
-      <div class="empty-icon">
-        ⌕
-      </div>
-
-      <h3>No matching jobs</h3>
-
-      <p>
-        Try changing your search,
-        skill, location or score filter.
-      </p>
-
-      <button
-        type="button"
-        id="emptyClearFilters"
-        class="secondary-btn"
-      >
-        Clear Filters
-      </button>
-    `;
-
-
-    const button =
-      $("#emptyClearFilters");
-
-
-    if (button) {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          clearFilters();
-
-        }
-      );
-
-    }
-
-  }
-
-
-  updateResultCount();
-}
-
-
-/* =========================================
-   SHOW JOB RESULTS
-========================================= */
-
-function showJobResults() {
-
-  const empty =
-    $("#emptyState");
-
-
-  if (empty) {
-
-    empty.classList.remove(
-      "show"
-    );
-
-  }
-
-
-  updateResultCount();
-}/* =========================================
-   PART 46 — JOB RESULTS UI
-========================================= */
-
-function renderJobs(jobs) {
-
-  const results =
-    $("#results");
-
-  const empty =
-    $("#emptyState");
-
-
-  if (!results) {
-    return;
-  }
-
-
-  /* No results */
+function handleKeyboardShortcuts(event) {
 
   if (
-    !Array.isArray(jobs) ||
-    jobs.length === 0
+    event.ctrlKey &&
+    event.key.toLowerCase() === 'k'
   ) {
 
-    showEmptyResults();
+    event.preventDefault();
 
-    return;
-  }
-
-
-  /* Hide empty state */
-
-  if (empty) {
-
-    empty.classList.remove(
-      "show"
-    );
+    focusSearch();
 
   }
 
-
-  /* Render cards */
-
-  results.innerHTML =
-    jobs
-      .map(job => {
-
-        return createJobCard(
-          job
-        );
-
-      })
-      .join("");
-
-
-  /* Update count */
-
-  showJobResults();
-
-
-  /* Re-bind card buttons */
-
-  bindJobEvents();
-}/* =========================================
-   PART 47 — JOB CARD EVENTS
-========================================= */
-
-function bindJobEvents() {
-
-  const results =
-    $("#results");
-
-  if (!results) {
-    return;
-  }
-
-
-  /* Remove old listener */
 
   if (
-    results._jobRadarHandler
+    event.key === '/' &&
+    document.activeElement?.tagName !== 'INPUT' &&
+    document.activeElement?.tagName !== 'TEXTAREA'
   ) {
 
-    results.removeEventListener(
-      "click",
-      results._jobRadarHandler
-    );
+    event.preventDefault();
+
+    focusSearch();
 
   }
 
-
-  const handler =
-    event => {
-
-      const viewButton =
-        event.target.closest(
-          ".view-job"
-        );
-
-
-      const saveButton =
-        event.target.closest(
-          ".save-job"
-        );
-
-
-      const avoidButton =
-        event.target.closest(
-          ".avoid-job"
-        );
-
-
-      /* View job */
-
-      if (viewButton) {
-
-        const job =
-          findJobById(
-            viewButton.dataset.id
-          );
-
-
-        if (job) {
-
-          openJobModal(job);
-
-        }
-
-        return;
-      }
-
-
-      /* Save job */
-
-      if (saveButton) {
-
-        const job =
-          findJobById(
-            saveButton.dataset.id
-          );
-
-
-        if (job) {
-
-          saveJob(job);
-
-          renderJobs(
-            state.filtered
-          );
-
-        }
-
-        return;
-      }
-
-
-      /* Avoid job */
-
-      if (avoidButton) {
-
-        const job =
-          findJobById(
-            avoidButton.dataset.id
-          );
-
-
-        if (job) {
-
-          avoidJob(job);
-
-        }
-
-        return;
-      }
-
-    };
-
-
-  results.addEventListener(
-    "click",
-    handler
-  );
-
-
-  results._jobRadarHandler =
-    handler;
-}/* =========================================
-   PART 48 — JOB CARD ACTION SAFETY
-========================================= */
-
-function getJobActionURL(job) {
-
-  if (!job) {
-    return "";
-  }
-
-
-  return (
-    job.job_url ||
-    job.url ||
-    job.link ||
-    job.apply_url ||
-    ""
-  ).trim();
 }
 
 
-/* =========================================
-   OPEN JOB SAFELY
-========================================= */
-
-function openJobLink(job) {
-
-  const url =
-    getJobActionURL(job);
-
-
-  if (!url) {
-
-    showToast(
-      "Job link is not available"
-    );
-
-    return;
-  }
-
-
-  try {
-
-    const validURL =
-      new URL(
-        url,
-        window.location.href
-      );
-
-
-    window.open(
-      validURL.href,
-      "_blank",
-      "noopener,noreferrer"
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Invalid job URL:",
-      error
-    );
-
-
-    showToast(
-      "Invalid job link"
-    );
-
-  }
-}
-
-
-/* =========================================
-   GET JOB URL
-========================================= */
-
-function getJobURL(job) {
-
-  return getJobActionURL(job);
-
-}/* =========================================
-   PART 49 — MODAL SAFETY
-========================================= */
-
-function setModalText(
-  selector,
-  value
-) {
-
-  const element =
-    $(selector);
-
-  if (!element) {
-    return;
-  }
-
-
-  element.textContent =
-    text(value);
-}
-
-
-/* =========================================
-   SAFE MODAL OPEN
-========================================= */
-
-function showJobModal(job) {
-
-  if (!job) {
-    return;
-  }
-
-
-  state.current =
-    job;
-
-
-  setModalText(
-    "#mTitle",
-    job.title || "Untitled Job"
-  );
-
-
-  setModalText(
-    "#mCompany",
-    job.company || "Unknown Company"
-  );
-
-
-  setModalText(
-    "#mMeta",
-    [
-      job.location,
-      job.job_type,
-      job.work_mode
-    ]
-      .filter(Boolean)
-      .join(" • ")
-  );
-
-
-  const score =
-    getMatchScore(
-      job,
-      state.selectedSkill
-    );
-
-
-  setModalText(
-    "#mScore",
-    `${score}% Match`
-  );
-
-
-  const bar =
-    $("#mBar");
-
-  if (bar) {
-
-    bar.style.width =
-      `${score}%`;
-
-  }
-
-
-  setModalText(
-    "#mDescription",
-    job.description ||
-      "No description available."
-  );
-
-
-  /* Skills */
-
-  const skills =
-    $("#mSkills");
-
-  if (skills) {
-
-    const skillText =
-      text(
-        job.skills ||
-        job.requirements
-      );
-
-
-    skills.textContent =
-      skillText ||
-      "Skills not specified";
-
-  }
-
-
-  /* Status */
-
-  const status =
-    $("#mStatus");
-
-  if (status) {
-
-    status.value =
-      getStatus(job) || "";
-
-  }
-
-
-  const modal =
-    $("#modal");
-
-  if (modal) {
-
-    modal.classList.add(
-      "show"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
-  }
-}/* =========================================
-   PART 50 — MODAL EVENTS
-========================================= */
-
-function bindModalEvents() {
-
-  const modal =
-    $("#modal");
-
-  const closeButton =
-    $("#closeModal");
-
-  const saveButton =
-    $("#mSave");
-
-  const avoidButton =
-    $("#mAvoid");
-
-  const openButton =
-    $("#mOpen");
-
-  const statusSelect =
-    $("#mStatus");
-
-
-  /* -----------------------------------------
-     CLOSE
-  ----------------------------------------- */
-
-  if (closeButton) {
-
-    closeButton.addEventListener(
-      "click",
-      () => {
-
-        closeJobModal();
-
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     CLICK OUTSIDE MODAL
-  ----------------------------------------- */
-
-  if (modal) {
-
-    modal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target === modal
-        ) {
-
-          closeJobModal();
-
-        }
-
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     SAVE
-  ----------------------------------------- */
-
-  if (saveButton) {
-
-    saveButton.addEventListener(
-      "click",
-      () => {
-
-        if (!state.current) {
-          return;
-        }
-
-
-        saveJob(
-          state.current
-        );
-
-
-        openJobModal(
-          state.current
-        );
-
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     AVOID
-  ----------------------------------------- */
-
-  if (avoidButton) {
-
-    avoidButton.addEventListener(
-      "click",
-      () => {
-
-        if (!state.current) {
-          return;
-        }
-
-
-        avoidJob(
-          state.current
-        );
-
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     OPEN ORIGINAL JOB
-  ----------------------------------------- */
-
-  if (openButton) {
-
-    openButton.addEventListener(
-      "click",
-      () => {
-
-        if (!state.current) {
-          return;
-        }
-
-
-        openJobLink(
-          state.current
-        );
-
-      }
-    );
-  }
-
-
-  /* -----------------------------------------
-     APPLICATION STATUS
-  ----------------------------------------- */
-
-  if (statusSelect) {
-
-    statusSelect.addEventListener(
-      "change",
-      () => {
-
-        if (!state.current) {
-          return;
-        }
-
-
-        setJobStatus(
-          state.current,
-          statusSelect.value
-        );
-
-
-        updateDashboard();
-
-        renderTracker();
-
-        renderJobs(
-          state.filtered
-        );
-
-
-        showToast(
-          "Application status updated"
-        );
-
-      }
-    );
-  }
-}/* =========================================
-   PART 51 — FIX VIEW + SAVED JOBS
-========================================= */
-
-function bindFinalJobButtons() {
-
-  const results = $("#results");
-
-  if (!results) {
-    return;
-  }
-
-
-  /* Remove previous handler */
-
-  if (results._finalJobHandler) {
-
-    results.removeEventListener(
-      "click",
-      results._finalJobHandler
-    );
-
-  }
-
-
-  const handler = event => {
-
-    /* VIEW BUTTON */
-
-    const viewButton =
-      event.target.closest(".job-view");
-
-
-    if (viewButton) {
-
-      const job =
-        findJobById(
-          viewButton.dataset.id
-        );
-
-
-      if (job) {
-
-        openJobModal(job);
-
-      }
-
-      return;
-    }
-
-
-    /* SAVE BUTTON */
-
-    const saveButton =
-      event.target.closest(".job-save");
-
-
-    if (saveButton) {
-
-      const job =
-        findJobById(
-          saveButton.dataset.id
-        );
-
-
-      if (job) {
-
-        saveJob(job);
-
-      }
-
-      return;
-    }
-
-  };
-
-
-  results.addEventListener(
-    "click",
-    handler
-  );
-
-
-  results._finalJobHandler =
-    handler;
-}
-
-
-/* =========================================
-   SAVED JOBS BUTTON
-========================================= */
-
-function bindSavedJobsButton() {
+/* =========================================================
+   UPDATE SAVE FILTER BUTTON
+   ========================================================= */
+
+function updateSavedButton() {
 
   const button =
-    $("#showSaved");
-
+    $('showSaved');
 
   if (!button) {
     return;
   }
 
 
-  button.addEventListener(
-    "click",
-    () => {
-
-      const status =
-        $("#appStatus");
+  button.textContent =
+    state.showSavedOnly
+      ? 'Show All'
+      : 'Show Saved';
 
 
-      if (status) {
-
-        status.value =
-          "saved";
-
-      }
-
-
-      applyFilters();
-
-
-      showToast(
-        "Showing saved jobs"
-      );
-
-    }
+  button.classList.toggle(
+    'active',
+    state.showSavedOnly
   );
+
 }
 
 
-/* =========================================
-   FINAL BUTTON SETUP
-========================================= */
+/* =========================================================
+   FINAL FILTER + SORT REFRESH
+   ========================================================= */
 
-function setupFinalButtons() {
+function refreshJobResults() {
 
-  bindFinalJobButtons();
+  applyFilters();
 
-  bindSavedJobsButton();
+  applySorting();
 
-}/* =========================================
-   PART 52 — BEST MATCH BUTTON FIX
-========================================= */
+  updateSavedButton();
 
-function bindBestMatchButton() {
-
-  const container =
-    $("#nextJob");
+}/* =========================================================
+   APP.JS — PART 12
+   Event Listeners
+   ========================================================= */
 
 
-  if (!container) {
-    return;
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function bindNavigationEvents() {
+
+  const nav =
+    document.querySelector('.nav');
+
+  if (nav) {
+
+    nav.addEventListener(
+      'click',
+      handleNavigation
+    );
+
   }
 
+}
 
-  /* Remove old handler */
 
-  if (container._bestMatchHandler) {
+/* =========================================================
+   JOB FILTER EVENTS
+   ========================================================= */
 
-    container.removeEventListener(
-      "click",
-      container._bestMatchHandler
+function bindFilterEvents() {
+
+  const filterIds = [
+
+    'search',
+    'location',
+    'jobType',
+    'workMode',
+    'posted',
+    'skill',
+    'appStatus',
+    'minimum',
+    'sort'
+
+  ];
+
+
+  filterIds.forEach(id => {
+
+    const element =
+      $(id);
+
+    if (!element) {
+      return;
+    }
+
+
+    element.addEventListener(
+      'input',
+      handleFilterChange
+    );
+
+
+    element.addEventListener(
+      'change',
+      handleFilterChange
+    );
+
+  });
+
+
+  const clearButton =
+    $('clearFilters');
+
+  if (clearButton) {
+
+    clearButton.addEventListener(
+      'click',
+      handleClearFilters
     );
 
   }
 
 
-  const handler = event => {
+  const savedButton =
+    $('showSaved');
 
-    const button =
-      event.target.closest(
-        ".agent-open"
-      );
+  if (savedButton) {
 
+    savedButton.addEventListener(
+      'click',
+      showSavedJobs
+    );
 
-    if (!button) {
-      return;
-    }
-
-
-    const id =
-      button.dataset.id;
+  }
 
 
-    const job =
-      findJobById(id);
+  const exportButton =
+    $('exportCSV');
 
+  if (exportButton) {
 
-    if (!job) {
+    exportButton.addEventListener(
+      'click',
+      exportJobsCSV
+    );
 
-      showToast(
-        "Job not found"
-      );
+  }
 
-      return;
-    }
-
-
-    openJobModal(job);
-
-  };
-
-
-  container.addEventListener(
-    "click",
-    handler
-  );
-
-
-  container._bestMatchHandler =
-    handler;
 }
 
 
-/* =========================================
-   FINAL UI BUTTON SETUP
-========================================= */
+/* =========================================================
+   JOB RESULTS
+   ========================================================= */
 
-function setupAllButtons() {
+function bindJobResultEvents() {
 
-  setupFinalButtons();
+  const results =
+    $('results');
 
-  bindBestMatchButton();
+  if (results) {
 
-}function startJobRadar() {
-  bindNavigation();
-  bindFilterEvents();
-  bindJobEvents();
-  bindModalEvents();
-  bindResumeEvents();
-  bindTrackerEvents();
-  bindSkillEvent();
-  bindExportEvents();
-  bindKeyboardEvents();
-  bindAgentEvents();
-  bindExtraEvents();
+    results.addEventListener(
+      'click',
+      handleJobAction
+    );
 
-  // Final button connections
-  setupAllButtons();
 
-  loadJobs();
-}document.addEventListener("input", (event) => {
-  if (event.target.id !== "search") return;
+    results.addEventListener(
+      'change',
+      handleJobStatusChange
+    );
 
-  const status = $("#appStatus");
-
-  if (status && status.value === "saved") {
-    status.value = "";
   }
 
+}
+
+
+/* =========================================================
+   TRACKER EVENTS
+   ========================================================= */
+
+function bindTrackerEvents() {
+
+  const tracker =
+    document.querySelector(
+      '#page-tracker'
+    );
+
+  if (tracker) {
+
+    tracker.addEventListener(
+      'click',
+      handleTrackerAction
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESUME EVENTS
+   ========================================================= */
+
+function bindResumeEvents() {
+
+  const saveButton =
+    $('saveResume');
+
+  if (saveButton) {
+
+    saveButton.addEventListener(
+      'click',
+      saveResumeProfile
+    );
+
+  }
+
+
+  const clearButton =
+    $('clearResume');
+
+  if (clearButton) {
+
+    clearButton.addEventListener(
+      'click',
+      clearResumeProfile
+    );
+
+  }
+
+
+  const matchingJobs =
+    $('matchingJobs');
+
+  if (matchingJobs) {
+
+    matchingJobs.addEventListener(
+      'click',
+      handleMatchingJobClick
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   HOME EVENTS
+   ========================================================= */
+
+function bindHomeEvents() {
+
+  const avoidList =
+    $('avoidList');
+
+  if (avoidList) {
+
+    avoidList.addEventListener(
+      'click',
+      handleAvoidListAction
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MODAL EVENTS
+   ========================================================= */
+
+function bindAllModalEvents() {
+
+  bindModalEvents();
+
+  bindResumeUploadEvents();
+
+}
+
+
+/* =========================================================
+   AI AGENT BUTTONS
+   ========================================================= */
+
+function bindAgentEvents() {
+
+  const greeting =
+    $('agentGreeting');
+
+  const skillGap =
+    $('agentSkillGap');
+
+  const interview =
+    $('agentInterview');
+
+  const career =
+    $('agentCareer');
+
+
+  if (greeting) {
+
+    greeting.addEventListener(
+      'click',
+      generateCareerAgentOutput
+    );
+
+  }
+
+
+  if (skillGap) {
+
+    skillGap.addEventListener(
+      'click',
+      updateSkillGap
+    );
+
+  }
+
+
+  if (interview) {
+
+    interview.addEventListener(
+      'click',
+      updateAgentInterview
+    );
+
+  }
+
+
+  if (career) {
+
+    career.addEventListener(
+      'click',
+      updateAgentCareer
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESUME FILE MODAL
+   ========================================================= */
+
+function bindResumeFileEvents() {
+
+  const uploadButton =
+    $('uploadResume');
+
+  if (uploadButton) {
+
+    uploadButton.addEventListener(
+      'click',
+      openResumeModal
+    );
+
+  }
+
+
+  const uploadConfirm =
+    document.querySelector(
+      '#resumeModal [data-upload-resume]'
+    );
+
+  if (uploadConfirm) {
+
+    uploadConfirm.addEventListener(
+      'click',
+      uploadResumeFile
+    );
+
+  }
+
+
+  const clearButton =
+    document.querySelector(
+      '#resumeModal [data-clear-resume]'
+    );
+
+  if (clearButton) {
+
+    clearButton.addEventListener(
+      'click',
+      clearResumeFile
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   GLOBAL KEYBOARD EVENTS
+   ========================================================= */
+
+function bindKeyboardEvents() {
+
+  document.addEventListener(
+    'keydown',
+    handleKeyboardShortcuts
+  );
+
+}
+
+
+/* =========================================================
+   WINDOW EVENTS
+   ========================================================= */
+
+function bindWindowEvents() {
+
+  window.addEventListener(
+    'storage',
+    () => {
+
+      loadLocalState();
+
+      refreshDashboard();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ALL EVENT LISTENERS
+   ========================================================= */
+
+function bindAllEvents() {
+
+  bindNavigationEvents();
+
+  bindFilterEvents();
+
+  bindJobResultEvents();
+
+  bindTrackerEvents();
+
+  bindResumeEvents();
+
+  bindHomeEvents();
+
+  bindAllModalEvents();
+
+  bindAgentEvents();
+
+  bindResumeFileEvents();
+
+  bindKeyboardEvents();
+
+  bindWindowEvents();
+
+}/* =========================================================
+   APP.JS — PART 13
+   Final Initialization
+   ========================================================= */
+
+
+/* =========================================================
+   INITIALIZE APPLICATION
+   ========================================================= */
+
+async function initializeApp() {
+
+  console.log(
+    'Job Radar starting...'
+  );
+
+
+  /* -------------------------------------------------------
+     LOAD SAVED LOCAL DATA
+     ------------------------------------------------------- */
+
+  loadLocalState();
+
+
+  /* -------------------------------------------------------
+     INITIAL BASIC UI
+     ------------------------------------------------------- */
+
+  loadResumeProfile();
+
+  initializeResumeUpload();
+
+
+  /* -------------------------------------------------------
+     BIND ALL EVENTS
+     ------------------------------------------------------- */
+
+  bindAllEvents();
+
+
+  /* -------------------------------------------------------
+     SHOW LOADING STATE
+     ------------------------------------------------------- */
+
+  state.isLoading =
+    true;
+
+  updateLiveStatus();
+
+
+  /* -------------------------------------------------------
+     LOAD JOB DATA
+     ------------------------------------------------------- */
+
+  await loadJobs();
+
+
+  /* -------------------------------------------------------
+     APPLY FILTERS
+     ------------------------------------------------------- */
+
   applyFilters();
-});
+
+
+  /* -------------------------------------------------------
+     UPDATE DASHBOARD
+     ------------------------------------------------------- */
+
+  updateDashboard();
+
+
+  /* -------------------------------------------------------
+     UPDATE RESUME / CAREER SECTIONS
+     ------------------------------------------------------- */
+
+  updateResumePage();
+
+  updateCareerSections();
+
+
+  /* -------------------------------------------------------
+     UPDATE TRACKER
+     ------------------------------------------------------- */
+
+  updateTracker();
+
+
+  /* -------------------------------------------------------
+     REFRESH MODAL STATE
+     ------------------------------------------------------- */
+
+  refreshModalState();
+
+
+  /* -------------------------------------------------------
+     FINAL LOADING STATE
+     ------------------------------------------------------- */
+
+  state.isLoading =
+    false;
+
+  updateLiveStatus();
+
+
+  console.log(
+    `Job Radar ready — ${state.jobs.length} jobs loaded.`
+  );
+
+}
+
+
+/* =========================================================
+   GLOBAL ERROR HANDLER
+   ========================================================= */
+
+window.addEventListener(
+  'error',
+  event => {
+
+    console.error(
+      'Job Radar error:',
+      event.error || event.message
+    );
+
+  }
+);
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+
+    initializeApp()
+      .catch(error => {
+
+        console.error(
+          'Job Radar initialization failed:',
+          error
+        );
+
+
+        state.isLoading =
+          false;
+
+
+        const status =
+          $('liveStatus');
+
+
+        if (status) {
+
+          status.textContent =
+            'Unable to load job data. Check the data file.';
+
+        }
+
+
+        showToast(
+          'Job Radar could not finish loading.'
+        );
+
+      });
+
+  }
+);
