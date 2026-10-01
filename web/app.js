@@ -3729,8 +3729,6 @@ function bindAllEvents() {
 
     bindResumeInsightEvents();
 
-    bindCareerAgentEvents();
-
     bindDashboardEvents();
 
     bindExportEvents();
