@@ -9,7 +9,7 @@
 
   <title>Job Radar</title>
 
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
@@ -59,7 +59,9 @@
 
 </header>
 
-<main class="main"><!-- HOME PAGE -->
+<main class="main">
+
+<!-- HOME PAGE -->
 
 <section id="page-home" class="page active">
 
@@ -152,7 +154,10 @@
 
     </div>
 
-  </section>  <!-- JOB RADAR AGENT -->
+  </section>
+
+
+  <!-- JOB RADAR AGENT -->
 
   <section class="panel agent-panel">
 
@@ -194,10 +199,7 @@
 
     </div>
 
-  </section>
-
-
-  <!-- TOP SKILLS -->
+  </section>  <!-- TOP SKILLS -->
 
   <section class="panel">
 
@@ -267,7 +269,10 @@
   </section>
 
 
-</section><!-- JOBS PAGE -->
+</section>
+
+
+<!-- JOBS PAGE -->
 
 <section id="page-jobs" class="page">
 
@@ -502,10 +507,7 @@
 
         </select>
 
-      </div>
-
-
-      <!-- APPLICATION STATUS -->
+      </div>      <!-- APPLICATION STATUS -->
 
       <div class="filter-field">
 
@@ -604,13 +606,13 @@
     </div>
 
 
-    <!-- BUTTONS -->
+    <!-- FILTER ACTIONS -->
 
     <div class="filter-actions">
 
       <button
         id="clearFilters"
-        class="secondary"
+        class="secondary-btn"
         type="button"
       >
         Clear Filters
@@ -618,7 +620,7 @@
 
       <button
         id="showSaved"
-        class="secondary"
+        class="secondary-btn"
         type="button"
       >
         Saved Jobs
@@ -626,7 +628,7 @@
 
       <button
         id="exportCSV"
-        class="primary"
+        class="secondary-btn"
         type="button"
       >
         Export CSV
@@ -634,52 +636,58 @@
 
     </div>
 
-  </section>  <!-- JOB RESULTS -->
+  </section>
 
-  <div class="results-header">
+
+  <!-- RESULTS HEADER -->
+
+  <section class="results-header">
 
     <div>
 
       <p class="eyebrow">
-        LIVE RESULTS
+        JOB RESULTS
       </p>
 
-      <h2>
-        Recommended Opportunities
+      <h2 id="resultCount">
+        0 jobs found
       </h2>
 
     </div>
 
-    <span id="resultCount">
-      0 jobs
-    </span>
-
-  </div>
+  </section>
 
 
-  <div
+  <!-- JOB RESULTS -->
+
+  <section
     id="results"
-    class="results-grid"
-  ></div>
+    class="job-grid"
+  >
+  </section>
 
 
   <!-- EMPTY STATE -->
 
-  <div
+  <section
     id="emptyState"
-    class="panel empty-state"
-    hidden
+    class="empty-state"
   >
 
+    <div class="empty-icon">
+      ⌕
+    </div>
+
     <h3>
-      No jobs found
+      No matching jobs
     </h3>
 
     <p>
-      Try changing your filters or search keywords.
+      Try changing your search,
+      skill, location or score filter.
     </p>
 
-  </div>
+  </section>
 
 </section><!-- RESUME PAGE -->
 
@@ -694,11 +702,11 @@
       </p>
 
       <h1>
-        Build your career profile.
+        Resume & Career Agent
       </h1>
 
       <p class="page-subtitle">
-        Upload your resume and track the skills you need.
+        Build your profile and connect it with relevant opportunities.
       </p>
 
     </div>
@@ -706,107 +714,116 @@
   </div>
 
 
-  <!-- RESUME UPLOAD -->
+  <!-- RESUME PANEL -->
 
-  <section class="panel resume-upload">
+  <section class="panel resume-panel">
 
     <div class="panel-title">
-      MY RESUME
+      RESUME PROFILE
     </div>
 
-    <label
-      for="resumeFile"
-      class="upload-box"
-    >
 
-      <span class="upload-icon">
-        ↑
-      </span>
+    <div class="resume-grid">
 
-      <strong>
-        Upload your resume
-      </strong>
+      <div class="resume-field">
 
-      <span>
-        PDF, DOC or DOCX
-      </span>
+        <label for="resumeName">
+          Name
+        </label>
 
-      <span class="primary upload-button">
-        Choose Resume
-      </span>
-
-      <span
-        id="resumeName"
-        class="resume-name"
-      >
-        No resume selected
-      </span>
-
-    </label>
-
-    <input
-      id="resumeFile"
-      type="file"
-      accept=".pdf,.doc,.docx"
-      hidden
-    >
-
-  </section>
-
-
-  <!-- PROFILE SCORE -->
-
-  <section class="panel profile-score">
-
-    <div class="profile-score-header">
-
-      <div>
-
-        <p class="eyebrow">
-          PROFILE SCORE
-        </p>
+        <input
+          id="resumeName"
+          type="text"
+          placeholder="Your name"
+        >
 
       </div>
 
-      <strong id="profileScore">
-        0%
-      </strong>
+
+      <div class="resume-field">
+
+        <label for="resumeRole">
+          Target Role
+        </label>
+
+        <input
+          id="resumeRole"
+          type="text"
+          placeholder="e.g. Embedded Engineer"
+        >
+
+      </div>
+
+
+      <div class="resume-field">
+
+        <label for="resumeSkills">
+          Skills
+        </label>
+
+        <textarea
+          id="resumeSkills"
+          rows="4"
+          placeholder="Python, IoT, Java, SQL..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="resume-field">
+
+        <label for="resumeProjects">
+          Projects
+        </label>
+
+        <textarea
+          id="resumeProjects"
+          rows="4"
+          placeholder="Add your projects"
+        ></textarea>
+
+      </div>
 
     </div>
 
 
-    <div class="profile-bar">
+    <div class="resume-actions">
 
-      <div
-        id="profileBar"
-        class="profile-bar-fill"
-        style="width: 0%"
-      ></div>
+      <button
+        id="saveResume"
+        class="primary"
+        type="button"
+      >
+        Save Profile
+      </button>
+
+      <button
+        id="clearResume"
+        class="secondary-btn"
+        type="button"
+      >
+        Clear
+      </button>
 
     </div>
-
-
-    <p id="profileMessage">
-      Your profile score will appear here.
-    </p>
 
   </section>
 
 
-  <!-- SKILL ROADMAP -->
+  <!-- CAREER AGENT -->
 
-  <section class="panel roadmap">
+  <section class="panel">
 
     <div class="section-title">
 
       <div>
 
         <p class="eyebrow">
-          DEVELOPMENT PLAN
+          AI CAREER AGENT
         </p>
 
         <h2>
-          Skill Gap & Learning Roadmap
+          Career Insights
         </h2>
 
       </div>
@@ -815,90 +832,45 @@
 
 
     <div
-      id="roadmapList"
-      class="roadmap-list"
+      id="careerInsights"
+      class="insight-grid"
     >
 
-      <div class="roadmap-item">
+      <div class="insight-card">
 
-        <div class="roadmap-number">
-          01
-        </div>
+        <span>
+          Profile strength
+        </span>
 
-        <div>
-
-          <strong>
-            Core Programming
-          </strong>
-
-          <p>
-            Improve Java, Python and problem solving.
-          </p>
-
-        </div>
+        <strong id="profileStrength">
+          —
+        </strong>
 
       </div>
 
 
-      <div class="roadmap-item">
+      <div class="insight-card">
 
-        <div class="roadmap-number">
-          02
-        </div>
+        <span>
+          Suggested skill
+        </span>
 
-        <div>
-
-          <strong>
-            Data & SQL
-          </strong>
-
-          <p>
-            Practice SQL and database concepts.
-          </p>
-
-        </div>
+        <strong id="suggestedSkill">
+          —
+        </strong>
 
       </div>
 
 
-      <div class="roadmap-item">
+      <div class="insight-card">
 
-        <div class="roadmap-number">
-          03
-        </div>
+        <span>
+          Matching jobs
+        </span>
 
-        <div>
-
-          <strong>
-            Projects
-          </strong>
-
-          <p>
-            Build practical projects for your portfolio.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="roadmap-item">
-
-        <div class="roadmap-number">
-          04
-        </div>
-
-        <div>
-
-          <strong>
-            Interview Preparation
-          </strong>
-
-          <p>
-            Improve DSA and technical concepts.
-          </p>
-
-        </div>
+        <strong id="matchingJobs">
+          —
+        </strong>
 
       </div>
 
@@ -906,7 +878,8 @@
 
   </section>
 
-</section><!-- APPLICATION TRACKER -->
+
+</section><!-- TRACKER PAGE -->
 
 <section id="page-tracker" class="page">
 
@@ -915,7 +888,7 @@
     <div>
 
       <p class="eyebrow">
-        APPLICATION CONTROL
+        APPLICATION PIPELINE
       </p>
 
       <h1>
@@ -923,7 +896,7 @@
       </h1>
 
       <p class="page-subtitle">
-        Track every opportunity from saved to closed.
+        Keep your saved jobs and application progress organized.
       </p>
 
     </div>
@@ -931,108 +904,804 @@
   </div>
 
 
-  <div class="tracker-grid">
+  <!-- TRACKER COLUMNS -->
+
+  <section class="panel tracker-panel">
+
+    <div class="tracker-grid">
 
 
-    <!-- SAVED -->
+      <!-- SAVED -->
 
-    <div class="tracker-column saved-column">
+      <div class="tracker-column">
 
-      <div class="tracker-header">
+        <div class="tracker-column-header">
+
+          <div>
+
+            <p class="eyebrow">
+              SAVED
+            </p>
+
+            <h2>
+              Saved Jobs
+            </h2>
+
+          </div>
+
+          <span
+            id="cSaved"
+            class="tracker-count"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div
+          id="colSaved"
+          class="tracker-list"
+        >
+
+          <div class="tracker-empty">
+            No jobs here yet
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- APPLIED -->
+
+      <div class="tracker-column">
+
+        <div class="tracker-column-header">
+
+          <div>
+
+            <p class="eyebrow">
+              APPLIED
+            </p>
+
+            <h2>
+              Applied
+            </h2>
+
+          </div>
+
+          <span
+            id="cApplied"
+            class="tracker-count"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div
+          id="colApplied"
+          class="tracker-list"
+        >
+
+          <div class="tracker-empty">
+            No jobs here yet
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- INTERVIEW -->
+
+      <div class="tracker-column">
+
+        <div class="tracker-column-header">
+
+          <div>
+
+            <p class="eyebrow">
+              INTERVIEW
+            </p>
+
+            <h2>
+              Interview
+            </h2>
+
+          </div>
+
+          <span
+            id="cInterview"
+            class="tracker-count"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div
+          id="colInterview"
+          class="tracker-list"
+        >
+
+          <div class="tracker-empty">
+            No jobs here yet
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CLOSED -->
+
+      <div class="tracker-column">
+
+        <div class="tracker-column-header">
+
+          <div>
+
+            <p class="eyebrow">
+              CLOSED
+            </p>
+
+            <h2>
+              Closed
+            </h2>
+
+          </div>
+
+          <span
+            id="cClosed"
+            class="tracker-count"
+          >
+            0
+          </span>
+
+        </div>
+
+
+        <div
+          id="colClosed"
+          class="tracker-list"
+        >
+
+          <div class="tracker-empty">
+            No jobs here yet
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- CAREER DASHBOARD -->
+
+  <section class="panel">
+
+    <div class="section-title">
+
+      <div>
+
+        <p class="eyebrow">
+          CAREER DASHBOARD
+        </p>
+
+        <h2>
+          Application Insights
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="metrics">
+
+      <div class="metric-card">
 
         <span>
-          SAVED
+          Saved
         </span>
 
-        <strong id="cSaved">
+        <strong id="trackerSaved">
           0
         </strong>
 
       </div>
 
-      <div
-        id="colSaved"
-        class="tracker-list"
-      ></div>
 
-    </div>
-
-
-    <!-- APPLIED -->
-
-    <div class="tracker-column applied-column">
-
-      <div class="tracker-header">
+      <div class="metric-card">
 
         <span>
-          APPLIED
+          Applied
         </span>
 
-        <strong id="cApplied">
+        <strong id="trackerApplied">
           0
         </strong>
 
       </div>
 
-      <div
-        id="colApplied"
-        class="tracker-list"
-      ></div>
 
-    </div>
-
-
-    <!-- INTERVIEW -->
-
-    <div class="tracker-column interview-column">
-
-      <div class="tracker-header">
+      <div class="metric-card">
 
         <span>
-          INTERVIEW
+          Interviews
         </span>
 
-        <strong id="cInterview">
+        <strong id="trackerInterview">
           0
         </strong>
 
       </div>
 
-      <div
-        id="colInterview"
-        class="tracker-list"
-      ></div>
 
-    </div>
-
-
-    <!-- CLOSED -->
-
-    <div class="tracker-column closed-column">
-
-      <div class="tracker-header">
+      <div class="metric-card">
 
         <span>
-          CLOSED
+          Closed
         </span>
 
-        <strong id="cClosed">
+        <strong id="trackerClosed">
           0
         </strong>
 
       </div>
 
-      <div
-        id="colClosed"
-        class="tracker-list"
-      ></div>
+    </div>
+
+  </section>
+
+
+</section><!-- RESUME PAGE -->
+
+<section id="page-resume" class="page">
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        CAREER PROFILE
+      </p>
+
+      <h1>
+        Resume & Profile
+      </h1>
+
+      <p class="page-subtitle">
+        Build your profile and keep your resume ready for opportunities.
+      </p>
 
     </div>
 
+  </div>
+
+
+  <section class="panel">
+
+    <div class="section-title">
+
+      <div>
+
+        <p class="eyebrow">
+          YOUR PROFILE
+        </p>
+
+        <h2>
+          Resume Information
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label for="resumeName">
+          Name
+        </label>
+
+        <input
+          id="resumeName"
+          type="text"
+          placeholder="Your name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="resumeEmail">
+          Email
+        </label>
+
+        <input
+          id="resumeEmail"
+          type="email"
+          placeholder="Your email"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="resumeRole">
+          Target Role
+        </label>
+
+        <input
+          id="resumeRole"
+          type="text"
+          placeholder="Software Developer"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="resumeLocation">
+          Preferred Location
+        </label>
+
+        <input
+          id="resumeLocation"
+          type="text"
+          placeholder="Chennai, Bengaluru, Coimbatore"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="resumeSkills">
+        Skills
+      </label>
+
+      <textarea
+        id="resumeSkills"
+        rows="4"
+        placeholder="Python, Java, SQL, IoT..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="resume-actions">
+
+      <button
+        id="saveResume"
+        class="primary-btn"
+        type="button"
+      >
+        Save Profile
+      </button>
+
+      <button
+        id="clearResume"
+        class="secondary-btn"
+        type="button"
+      >
+        Clear
+      </button>
+
+    </div>
+
+
+    <p
+      id="resumeStatus"
+      class="form-status"
+    ></p>
+
+  </section>
+
+
+  <!-- RESUME MATCH -->
+
+  <section class="panel">
+
+    <div class="section-title">
+
+      <div>
+
+        <p class="eyebrow">
+          JOB MATCH
+        </p>
+
+        <h2>
+          Resume ↔ Job Match
+        </h2>
+
+        <p>
+          Compare your profile with saved opportunities.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="resumeMatch"
+      class="resume-match"
+    >
+
+      <div class="empty-state">
+
+        <strong>
+          No match calculated yet
+        </strong>
+
+        <span>
+          Save your profile and select a job to see matching skills.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+</section><!-- AI CAREER AGENT -->
+
+<section class="panel">
+
+  <div class="section-title">
+
+    <div>
+
+      <p class="eyebrow">
+        AI CAREER AGENT
+      </p>
+
+      <h2>
+        Career Assistant
+      </h2>
+
+      <p>
+        Get guidance based on your jobs, skills and applications.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="agent-box">
+
+    <div class="agent-avatar">
+      AI
+    </div>
+
+
+    <div class="agent-content">
+
+      <h3>
+        Job Radar Agent
+      </h3>
+
+      <p id="agentGreeting">
+        Your career assistant is ready.
+      </p>
+
+
+      <div class="agent-actions">
+
+        <button
+          id="agentSkillGap"
+          class="secondary-btn"
+          type="button"
+        >
+          Skill Gap
+        </button>
+
+        <button
+          id="agentInterview"
+          class="secondary-btn"
+          type="button"
+        >
+          Interview Prep
+        </button>
+
+        <button
+          id="agentCareer"
+          class="secondary-btn"
+          type="button"
+        >
+          Career Advice
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="agentOutput"
+    class="agent-output"
+  >
+
+    <div class="empty-state">
+
+      <strong>
+        Ask your Career Agent
+      </strong>
+
+      <span>
+        Choose an option above to get started.
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SKILL GAP -->
+
+<section class="panel">
+
+  <div class="section-title">
+
+    <div>
+
+      <p class="eyebrow">
+        SKILL DEVELOPMENT
+      </p>
+
+      <h2>
+        Skill Gap & Learning Roadmap
+      </h2>
+
+      <p>
+        Identify missing skills and plan what to learn next.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="skillGap"
+    class="skill-gap"
+  >
+
+    <div class="empty-state">
+
+      <strong>
+        No skill analysis yet
+      </strong>
+
+      <span>
+        Your job data will be used to identify commonly requested skills.
+      </span>
+
+    </div>
 
   </div>
 
 </section><!-- JOB DETAILS MODAL -->
+
+<div
+  id="jobModal"
+  class="modal"
+  aria-hidden="true"
+>
+
+  <div class="modal-backdrop"></div>
+
+
+  <div
+    class="modal-card"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <button
+      id="closeModal"
+      class="modal-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div class="modal-header">
+
+      <p class="eyebrow">
+        JOB DETAILS
+      </p>
+
+      <h2 id="modalTitle">
+        Job Title
+      </h2>
+
+      <p id="modalCompany">
+        Company
+      </p>
+
+    </div>
+
+
+    <div class="modal-meta">
+
+      <span id="modalLocation">
+        Location
+      </span>
+
+      <span id="modalType">
+        Job Type
+      </span>
+
+      <span id="modalWorkMode">
+        Work Mode
+      </span>
+
+      <span id="modalScore">
+        Match: 0%
+      </span>
+
+    </div>
+
+
+    <div class="modal-section">
+
+      <h3>
+        Description
+      </h3>
+
+      <div id="modalDescription">
+        Job description will appear here.
+      </div>
+
+    </div>
+
+
+    <div class="modal-section">
+
+      <h3>
+        Matched Skills
+      </h3>
+
+      <div
+        id="modalSkills"
+        class="skill-tags"
+      ></div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        id="modalSave"
+        class="secondary-btn"
+        type="button"
+      >
+        Save Job
+      </button>
+
+      <button
+        id="modalApply"
+        class="primary-btn"
+        type="button"
+      >
+        Open Job
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- RESUME UPLOAD MODAL -->
+
+<div
+  id="resumeModal"
+  class="modal"
+  aria-hidden="true"
+>
+
+  <div class="modal-backdrop"></div>
+
+
+  <div
+    class="modal-card"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <button
+      id="closeResumeModal"
+      class="modal-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div class="modal-header">
+
+      <p class="eyebrow">
+        RESUME
+      </p>
+
+      <h2>
+        Upload Resume
+      </h2>
+
+      <p>
+        Add your resume to improve job matching.
+      </p>
+
+    </div>
+
+
+    <div class="upload-area">
+
+      <input
+        id="resumeFile"
+        type="file"
+        accept=".pdf,.doc,.docx"
+      >
+
+      <label
+        for="resumeFile"
+        class="upload-label"
+      >
+        Choose Resume
+      </label>
+
+      <p id="resumeFileName">
+        No file selected
+      </p>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        id="uploadResume"
+        class="primary-btn"
+        type="button"
+      >
+        Upload
+      </button>
+
+    </div>
+
+  </div>
+
+</div><!-- JOB DETAILS MODAL -->
 
 <div
   id="modal"
@@ -1048,6 +1717,101 @@
     <button
       id="closeModal"
       class="modal-close"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div class="modal-header">
+
+      <p class="eyebrow">
+        JOB DETAILS
+      </p>
+
+      <h2 id="modalTitle">
+        Job Title
+      </h2>
+
+      <p id="modalCompany">
+        Company
+      </p>
+
+    </div>
+
+
+    <div class="modal-meta">
+
+      <span id="modalLocation">
+        Location
+      </span>
+
+      <span id="modalType">
+        Job Type
+      </span>
+
+      <span id="modalWorkMode">
+        Work Mode
+      </span>
+
+      <span id="modalScore">
+        Match: 0%
+      </span>
+
+    </div>
+
+
+    <div class="modal-section">
+
+      <h3>
+        Description
+      </h3>
+
+      <div id="modalDescription">
+        Job description will appear here.
+      </div>
+
+    </div>
+
+
+    <div class="modal-section">
+
+      <h3>
+        Matched Skills
+      </h3>
+
+      <div
+        id="modalSkills"
+        class="skill-tags"
+      ></div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        id="modalSave"
+        class="secondary"
+        type="button"
+      >
+        Save Job
+      </button>
+
+      <button
+        id="modalApply"
+        class="primary"
+        type="button"
+      >
+        Open Job
+      </button>
+
+    </div>
+
+  </div>
+
+</div>      class="modal-close"
       type="button"
       aria-label="Close"
     >
@@ -1081,8 +1845,6 @@
     </p>
 
 
-    <!-- MATCH SCORE -->
-
     <div class="match-box">
 
       <div class="match-score">
@@ -1111,8 +1873,6 @@
     </div>
 
 
-    <!-- WHY MATCH -->
-
     <div class="modal-section">
 
       <h3>
@@ -1123,8 +1883,6 @@
 
     </div>
 
-
-    <!-- SKILLS -->
 
     <div class="modal-section">
 
@@ -1139,8 +1897,6 @@
 
     </div>
 
-
-    <!-- DESCRIPTION -->
 
     <div class="modal-section">
 
@@ -1157,8 +1913,6 @@
 
     </div>
 
-
-    <!-- ACTIONS -->
 
     <div class="modal-actions">
 
@@ -1220,20 +1974,17 @@
 </div>
 
 
-<!-- TOAST -->
-
 <div
   id="toast"
   class="toast"
   hidden
 >
   Saved
-</div><!-- CLOSE MAIN -->
+</div>
+
 
 </main>
 
-
-<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -1244,9 +1995,7 @@
 </footer>
 
 
-<!-- JAVASCRIPT -->
-
-<script src="./app.js"></script>
+<script src="/app.js"></script>
 
 </body>
 
