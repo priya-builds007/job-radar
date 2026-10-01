@@ -1,6 +1,291 @@
 {
   "jobs": [
     {
+      "company": "QuantZent",
+      "date_posted": "2026-09-30",
+      "description": "**Atlassian can hire people in any country where we have a legal entity. Assuming you have eligible working rights and a sufficient time zone overlap with your team, you can choose to work remotely or return to an office as they reopen (unless it’s necessary for your role to be performed in the office). Interviews and onboarding are conducted virtually, a part of being a distributed\\-first company.**\n\nJoin Atlassian as an intern and spend your summer with us having an impact on how millions of users collaborate and use software. We're in the business of developing software to help teams everywhere get amazing ideas on the ground and into the world. Sound like an exciting place to start your career? Here you'll be encouraged to use your imagination and try new things. You'll be guided (as we are) by our core values, and you'll be supported by some of the best minds in tech.\n\nApply for our Summer 2023 Intern Program and start an awesome career! Our paid internship program runs for 12 weeks between May/June \\- August/September 2023\\.\n\n***Not eligible for Visa sponsorship. Unfortunately, we do not offer U.S. work visa sponsorship to F\\-1/OPT/CPT, J\\-1/TN****,* ***or H\\-1B student graduates at this time.***\n\n**Please note: At this time, this role is only open to entry level candidates with less than a year of professional experience (this does not include internships/co\\-ops)**\n\n**More about our team**\n\nYou'll join a team that is smart and direct. We challenge each other to improve our work, learn, and ask hard questions. We're dedicated to Agile methodology and are big believers in 'lean' (which means we don't do documentation for documentation's sake). We know the importance of validating assumptions about users and use multiple types of testing to figure out whether we're right (or wrong). Our bottom line is improving our user's experience—no matter what.\n\nOn your first day, we'll expect you to:\n\n* Be currently enrolled in a full\\-time degree program and returning to the program after the completion of the internship, graduating by June 2024\n* Have experience with Java, Python, C, C\\+\\+, or other related object\\-oriented programming language\n* Be able to commit to a full\\-time (40hrs / week) internship during summer 2023\n\nIt's great, but not required, if you:\n\n* Have experience with software engineering, expressed by previous internships, work experience, projects, or publications\n* Understand data structures \\- in particular how they are implemented and how to apply them\n* Be familiar with the application of common design patterns\n\n**Our perks \\& benefits**\n\nTo support you at work and play, our perks and benefits include ample time off, an annual education budget, paid volunteer days, and so much more.\n\n**About Atlassian**\n\nThe world’s best teams work better together with Atlassian. From medicine and space travel, to disaster response and pizza deliveries, Atlassian software products help teams all over the planet. At Atlassian, we're motivated by a common goal: to unleash the potential of every team.\n\nWe believe that the unique contributions of all Atlassians create our success. To ensure that our products and culture continue to incorporate everyone's perspectives and experience, we never discriminate based on race, religion, national origin, gender identity or expression, sexual orientation, age, or marital, veteran, or disability status. All your information will be kept confidential according to EEO guidelines.\n\nTo learn more about our culture and hiring process, explore our Candidate Resource Hub.\n\nPay: From ₹10,000\\.00 per month\n\nBenefits:\n\n* Internet reimbursement\n* Leave encashment\n* Paid sick time\n* Paid time off\n* Work from home\n\nAbility to commute/relocate:\n\n* Kolkata, West Bengal: Reliably commute or planning to relocate before starting work (Required)\n\nEducation:\n\n* Bachelor's (Required)\n\nExperience:\n\n* total work: 1 year (Required)\n\nLanguage:\n\n* English (Required)\n\nWork Location: In person",
+      "id": "77e989caa5e20bd47f49",
+      "is_remote": true,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=7d90f6a8fb5d913e",
+      "location": "WB, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Java",
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Java, Python",
+        "Remote"
+      ],
+      "relevant": true,
+      "score": 100,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 10,
+        "skills": 20,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-7d90f6a8fb5d913e",
+      "title": "Fresher Software Developer"
+    },
+    {
+      "company": "Dotcod Innovation Private Limited",
+      "date_posted": "2026-09-30",
+      "description": "We are looking for a motivated **Full Stack Developer Intern** to join our development team. The candidate will get hands\\-on experience working with **React.js for frontend development and Node.js/NestJS for backend development** on real\\-world applications.\n\nKey Responsibilities\n\n* Develop responsive web applications using **React.js**.\n* Build backend applications and REST APIs using **Node.js and NestJS**.\n* Integrate frontend applications with backend APIs.\n* Work with databases such as **MySQL, PostgreSQL, or MongoDB**.\n* Implement CRUD operations and basic authentication.\n* Debug and troubleshoot frontend and backend issues.\n* Write clean, reusable, and maintainable code.\n* Test APIs using tools such as **Postman**.\n* Use **Git/GitHub** for source\\-code management.\n* Collaborate with developers, designers, and QA teams.\n\nRequired Skills\n\n* Basic knowledge of **React.js**.\n* Good understanding of **JavaScript** and preferably **TypeScript**.\n* Basic knowledge of **Node.js**.\n* Familiarity with **NestJS**.\n* Understanding of **REST APIs** and HTTP methods.\n* Basic knowledge of databases.\n* Understanding of HTML and CSS.\n* Familiarity with Git/GitHub.\n* Good problem\\-solving and debugging skills.\n* Strong willingness to learn.\n\nPreferred Skills\n\n* React Hooks and component\\-based development.\n* TypeScript.\n* JWT authentication.\n* API integration and Postman.\n* Basic knowledge of Docker.\n* Experience with academic or personal projects using React and Node.js.\n\nPay: ₹6,000\\.00 \\- ₹1,538,592\\.78 per month\n\nWork Location: In person",
+      "id": "d8d2e85a12f7806f1de6",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=55a1ad7b5022ac2f",
+      "location": "TN, IN",
+      "matched_skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-55a1ad7b5022ac2f",
+      "title": "Full Stack Developer Intern"
+    },
+    {
+      "company": "ASCENT E-DIGIT SOLUTIONS PVT LTD",
+      "date_posted": "2026-09-30",
+      "description": "**About the Role**\n\nWe are looking for a motivated and enthusiastic **App Developer Intern** to join our development team. The intern will work closely with experienced developers to design, develop, test, and maintain mobile applications while gaining hands\\-on experience with real\\-world software development.\n\n**Key Responsibilities**\n\n* Assist in developing and maintaining mobile applications for Android and/or iOS.\n* Write clean, efficient, and maintainable code.\n* Work with developers and designers to implement new app features.\n* Debug and resolve application issues and performance problems.\n* Integrate APIs and third\\-party services into mobile applications.\n* Perform application testing and help identify and fix bugs.\n* Participate in code reviews and team development activities.\n* Stay updated with current mobile development technologies and best practices.\n* Prepare technical documentation when required.\n\n**Requirements**\n\n* Currently pursuing or recently completed a degree/diploma in **Computer Science, Information Technology, Software Engineering**, or a related field.\n* Basic knowledge of mobile application development.\n* Familiarity with at least one of the following:\n* **Flutter / Dart**\n* **React Native / JavaScript / TypeScript**\n* **Android / Kotlin / Java**\n* **iOS / Swift**\n* Understanding of programming fundamentals, OOP, an\n* d data structures.\n* Basic knowledge of REST APIs and JSON.\n* Familiarity with Git/GitHub is preferred.\n* Good problem\\-solving and debugging skills.\n* Willingness to learn and work in a collaborative environment.\n\n**Good to Have**\n\n* Academic or personal mobile app projects.\n* Experience integrating Firebase or similar backend services.\n* Knowledge of UI/UX principles.\n* Familiarity with databases such as SQLite, MySQL, or Firebase.\n* Published apps or projects available on GitHub or an app store.\n\n**Skills**\n\n**Technical:** Flutter, Dart, React Native, JavaScript/TypeScript, Kotlin/Java, Swift, REST APIs, Git/GitHub\n\n**Soft Skills:** Problem\\-solving, communication, teamwork, adaptability, and willingness to learn.\n\n**HR:** 82200 04866\n\nPay: ₹5,000\\.00 per month\n\nApplication Question(s):\n\n* What development tools have you used?\n* Are you willing to work without compensation?\n\nWork Location: In person",
+      "id": "d2c3d1fd2042eef0ac53",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=e45f8d6d41922e2f",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Java",
+        "JavaScript",
+        "Firebase"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Java, JavaScript, Firebase",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-e45f8d6d41922e2f",
+      "title": "App Developer Intern"
+    },
+    {
+      "company": "VertoX Labs Private Limited",
+      "date_posted": "2026-09-30",
+      "description": "**Job Summary:**\n\nWe are seeking a skilled and self\\-motivated Embedded Developer Intern with hands\\-on knowledge in bare\\-metal programming for **microcontrollers and microprocessors.** The ideal candidate will excel at reading datasheets, writing efficient, clean, and custom code without relying on external libraries or AI\\-based assistance, and working independently to design and implement robust embedded solutions.\n\nThe candidate should demonstrate expertise in low\\-level **hardware\\-software integration,** serial and wireless communication protocols, and a solid understanding of embedded platforms such as **AVR, STM32,** or similar architectures.\n\n**Key Responsibilities:**\n\n**1\\. Firmware Development:**\n\no Develop, test, and debug firmware for embedded systems, primarily for **AVR, STM32, or similar platforms.**\n\no Implement optimized, lightweight code for bare\\-metal applications.\n\no Integrate hardware peripherals **(GPIO, ADC, UART, SPI, I2C, etc.)** with custom firmware.\n\n**2\\. Hardware Interaction:**\n\no Analyze and interpret datasheets, reference manuals, and schematics to enable seamless hardware\\-software integration.\n\no Collaborate with the hardware team to design and validate **embedded hardware interfaces.**\n\n**3\\. Protocol Implementation:**\n\no Design and implement communication protocols, including UART, I2C, SPI, and CAN.\n\no Develop wireless communication solutions using LoRa, Bluetooth, ZigBee, or equivalent technologies.\n\n**4\\. Testing \\& Debugging:**\n\no Perform hardware\\-in\\-the\\-loop (HIL) testing to validate embedded designs.\n\no Use debugging tools such as logic analyzers, oscilloscopes, and protocol analyzers.\n\n**5\\. Documentation \\& Collaboration:**\n\no Maintain comprehensive documentation of firmware designs, processes, and debugging steps.\n\no Work closely with cross\\-functional teams to ensure project timelines and deliverables are met.\n\n\\-\\-\\-\n\nRequired Skills and Qualifications:\n\n**· Technical Proficiency:**\n\no Strong proficiency in C, C\\+\\+, and low\\-level assembly programming.\n\no Experience with bare\\-metal development and RTOS is highly desirable.\n\no Familiarity with microcontrollers like AVR, STM32, or SoCs with ARM Cortex cores.\n\n**· Peripheral Knowledge:**\n\no Deep understanding of hardware peripherals such as ADC, PWM, Timers, and DMA.\n\no Knowledge of interfacing sensors, displays, and actuators with embedded platforms.\n\n· Communication Protocols:\n\no Proficient in serial communication protocols **(UART, I2C, SPI, etc.).**\n\no Experience in wireless protocols like **LoRa, Bluetooth, or ZigBee.**\n\n**· Debugging \\& Tools:**\n\no Hands\\-on experience with debugging tools such as **JTAG, SWD, and software like Keil, IAR, or STM32CubeIDE.**\n\no Proficiency in using lab equipment: logic analyzers, oscilloscopes, and multimeters.\n\n· Soft Skills:\n\no Strong problem\\-solving ability and a proactive approach to debugging and optimization.\n\no Ability to work independently and deliver high\\-quality, scalable solutions with minimal supervision.\n\n\\-\\-\\-\n\n**Preferred Qualifications:**\n\n· Knowledge of low\\-power design principles for **embedded systems.**\n\n· Familiarity with SoCs or microprocessors **(e.g., ESP32, Raspberry Pi, or ARM Cortex).**\n\n· Understanding of bootloaders, firmware\\-over\\-the\\-air (FOTA) updates, and secure firmware practices.\n\n.Knowledge in version control systems like Git.\n\n· Exposure to automotive or industrial\\-grade embedded systems (optional but a plus).\n\nJob Types: Full\\-time, Permanent\n\nPay: ₹5,000\\.00 \\- ₹6,000\\.00 per month\n\nBenefits:\n\n* Flexible schedule\n* Leave encashment\n* Paid sick time\n* Provident Fund\n\nApplication Question(s):\n\n* HOW WELL YOU KNOW C\\+\\+?? RATE YOURSELF FROM 10?\n* Can you code effectively without using ChatGPT, Copilot, Stack Overflow, or similar AI/online assistance? Explain your approach?\n* A hardware engineer insists the problem is software. The software engineer insists it's hardware. What would you do?\n\nEducation:\n\n* Bachelor's (Required)\n\nWork Location: In person",
+      "id": "92613fc8f24d3bd771b1",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=fe69457fce036204",
+      "location": "OR, IN",
+      "matched_skills": [
+        "C++",
+        "C",
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: C++, C, Embedded Systems",
+        "Preferred geography from source location: OR, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-fe69457fce036204",
+      "title": "Embedded R&D Engineer intern"
+    },
+    {
+      "company": "Schoenen DIS LLP",
+      "date_posted": "2026-09-30",
+      "description": "We are looking for enthusiastic and motivated candidates to join our **Full Stack Development Internship** and gain hands\\-on experience through live projects and real\\-time development work.\n\n**Responsibilities**\n\n* Assist in developing and maintaining web applications\n* Work on both frontend and backend development\n* Develop responsive and user\\-friendly web interfaces\n* Assist with backend development and server\\-side programming\n* Work with databases and database integration\n* Assist in developing and integrating APIs\n* Debug, test, and fix application issues\n* Improve application performance and functionality\n* Collaborate with the development team on live projects\n* Participate in real\\-time software development activities\n\n**Eligibility**\n\n* Students, graduates, and freshers interested in Full Stack Development\n* Basic knowledge of programming and web development\n* Knowledge of HTML, CSS, JavaScript, or any programming language is preferred\n* Basic understanding of databases and APIs is an advantage\n* Good problem\\-solving and learning skills\n* Personal laptop is mandatory\n* Only candidates from Kanyakumari District can apply\n\nBenefits\n\n* Live project experience\n* Practical full stack development exposure\n* Hands\\-on experience with frontend and backend technologies\n* Internship Certificate\n* Career\\-oriented technical skill development\n* Real\\-time industry experience\n\n**Company:** Schoenen Dis LLP  \n**Location:** Nagercoil, Kanyakumari  \n**Contact:** 78454 57974\n\nWork Location: In person",
+      "id": "89b17e4c4992b68d1228",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://in.indeed.com/viewjob?jk=7c6ec9a8911a4d5f",
+      "location": "TN, IN",
+      "matched_skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: HTML, CSS, JavaScript",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 85,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 15,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-7c6ec9a8911a4d5f",
+      "title": "Full Stack Developer Intern"
+    },
+    {
+      "company": "Indo Thai Securities",
+      "date_posted": "2026-09-30",
+      "description": "Company:\\* Indo Thai Securities Ltd.\n\n\\*Location:\\* Indore, Madhya Pradesh\n\n\\*Work Mode:\\* \\*Strictly On\\-Site\\*\n\n\\*Duration:\\* \\*4 Months\\*\n\n\\*Stipend:\\* ₹8,000 – ₹10,000/month\n\n\\*Experience:\\* Freshers / Students / 0–1 yearAbout the Role\n\nIndo Thai Securities Ltd. is looking for an enthusiastic \\*SDE Intern\\* to join our technology team in Indore.\n\nAs an SDE Intern, you will work with \\*large volumes of real\\-time financial data\\* and build software systems that help our quantitative and trading teams monitor, analyze, and work with market data effectively.\n\nThis is a hands\\-on engineering internship where you will gain practical exposure to \\*backend development, frontend development, databases, real\\-time systems, and financial technology\\*.\n\n\\#\\# What You'll Work On\n\n\\* Build and maintain \\*real\\-time monitoring and analytics tools\\* for quantitative and trading teams.\n\n\\* Work with \\*large volumes of real\\-time financial/market data\\* and build systems to process, store, and visualize it.\n\n\\* Develop backend services and APIs using \\*Python\\*.\n\n\\* Build interactive dashboards and internal applications using \\*React and Next.js\\*.\n\n\\* Design and work with \\*PostgreSQL databases\\*, including queries, schemas, and data optimization.\n\n\\* Develop tools that help quants monitor strategies, data pipelines, systems, and key metrics.\n\n\\* Work on internal applications used by technology, quantitative, and trading teams.\n\n\\* Debug issues, improve system performance, and contribute to production\\-quality software.\n\n\\* Collaborate with developers and quants to understand requirements and turn them into working software.\n\n\\* Learn and apply concepts related to \\*real\\-time systems, financial markets, data engineering, and scalable software development\\*.\n\n\\#\\# What We're Looking For\n\n\\#\\#\\# Must Have\n\n\\* Good understanding of \\*Python\\*.\n\n\\* Working knowledge of \\*React.js\\* and \\*Next.js\\*.\n\n\\* Good understanding of \\*PostgreSQL / SQL\\*.\n\n\\* Strong grasp of \\*Core Computer Science fundamentals\\*, including:\n\n\\* Data Structures \\& Algorithms\n\n\\* Object\\-Oriented Programming\n\n\\* DBMS\n\n\\* Operating Systems\n\n\\* Computer Networks\n\n\\* Basic Software Engineering concepts\n\n\\* Strong problem\\-solving and debugging skills.\n\n\\* Ability to write clean, readable, and maintainable code.\n\n\\* Willingness to learn quickly and work with unfamiliar technologies.\n\n\\#\\#\\# Good to Have\n\n\\* Understanding of \\*REST APIs\\*.\n\n\\* Familiarity with \\*Git/GitHub\\*.\n\n\\* Experience building personal, college, or open\\-source projects.\n\n\\* Basic understanding of \\*WebSockets, event\\-driven systems, real\\-time data, or data pipelines\\*.\n\n\\* Interest in \\*financial markets, quantitative trading, or fintech\\*.\n\n\\#\\# Who Should Apply?\n\nThis internship is ideal for students or recent graduates who:\n\n\\* Enjoy solving technical problems.\n\n\\* Want to work on \\*real\\-world production systems\\* rather than only academic projects.\n\n\\* Are curious about how software handles \\*large\\-scale, real\\-time data\\*.\n\n\\* Want exposure to the intersection of \\*software engineering, quantitative finance, and financial markets\\*.\n\n\\* Are comfortable learning quickly and taking ownership of their work.\n\n\\* Can commit to working \\*full\\-time from our Indore office for the complete 4\\-month internship\\*.\n\n\\#\\# What You'll Get\n\n\\* Hands\\-on experience working with \\*real\\-time financial data\\*.\n\n\\* Opportunity to work closely with \\*quantitative, trading, and technology teams\\*.\n\n\\* Exposure to production\\-grade software development.\n\n\\* Practical experience with \\*Python, React, Next.js, PostgreSQL, APIs, and real\\-time systems\\*.\n\n\\* Opportunity to understand how technology supports \\*trading and quantitative workflows\\*.\n\n\\* Mentorship and learning opportunities from experienced professionals.\n\nJob Type: Full\\-time\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nBenefits:\n\n* Food provided\n\nLocation:\n\n* Indore, Madhya Pradesh (Required)\n\nWork Location: In person",
+      "id": "c311fc5940551dc045d1",
+      "is_remote": false,
+      "job_type": "fulltime",
+      "job_url": "https://in.indeed.com/viewjob?jk=691187d2e2e0d0d5",
+      "location": "MP, IN",
+      "matched_skills": [
+        "Python",
+        "JavaScript"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python, JavaScript",
+        "Preferred geography from source location: MP, IN"
+      ],
+      "relevant": true,
+      "score": 80,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 10,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-691187d2e2e0d0d5",
+      "title": "SDE Intern"
+    },
+    {
+      "company": "Schoenen DIS LLP",
+      "date_posted": "2026-09-30",
+      "description": "We are looking for motivated candidates interested in **Python Development** to work on practical projects and gain real\\-time development experience.\n\n**Responsibilities**\n\n* Assist in developing applications using Python\n* Write, test, and debug Python code\n* Work on backend development and application features\n* Assist with API development and integration\n* Work with databases and data processing\n* Identify and fix bugs and programming issues\n* Assist with real\\-time Python development projects\n\n**Eligibility**\n\n* Students, graduates, and freshers interested in Python Development\n* Basic Python programming knowledge preferred\n* Basic knowledge of databases and APIs is an advantage\n* Good problem\\-solving and logical thinking skills\n* Must have a personal laptop\n* Only Kanyakumari candidates can apply\n\n**Benefits**\n\n* Live project experience\n* Practical Python development exposure\n* Hands\\-on programming experience\n* Internship Certificate\n* Technical skill development\n\n**Company:** Schoenen Dis LLP  \n**Location:** Nagercoil, Kanyakumari  \n**Contact:** 78454 57974\n\nWork Location: In person",
+      "id": "6a356b6383658c2b780f",
+      "is_remote": false,
+      "job_type": "internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=3b8b573367e7233f",
+      "location": "TN, IN",
+      "matched_skills": [
+        "Python"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Python",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-3b8b573367e7233f",
+      "title": "Python Developer Intern"
+    },
+    {
+      "company": "Unistanz Software Pvt Ltd",
+      "date_posted": "2026-09-30",
+      "description": "**Unistanz Software Pvt Ltd** is hiring **.NET Core Interns** who will gain hands\\-on experience in real\\-time development projects. **Interested candidates can send** their resume to **Keyurir.unistanz@outlook.com** with the subject line: Application for .NET Core Internship.\n\n**Unistanz Software Pvt Ltd** is an IT services and consulting company specializing in Software Product Development, Customized Application Development, and Client Deputation. We work on the latest technologies including .NET Core, MS SQL Server, and ReactJS with AI integration.\n\n**Visit us:** www.unistanz.com\n\n**Location \\-** Borivali East( 5 mins walk from Magathane Metro Station)\n\n**Responsibilities:**\n\n**Assist** in **developing** and **maintaining applications** using **.NET Core**\n\n**Work** with **MS SQL Serve**r for database design and queries\n\n**Collaborate** with the team on **ReactJS front\\-end integration**\n\n**Participate** in **debugging, testing, and performance optimization**\n\n**Contribute** to **product features** involving AI integration\n\n**Desired Skills:**\n\n**Basic knowledge** of **C\\#** and **.NET Core framework**\n\n**Understanding** of **OOP concepts** and **software development fundamentals**\n\n**Familiarity** with **MS SQL/Entity Framework**\n\nExposure to **ReactJS** is a plus\n\nStrong analytical and problem\\-solving skills\n\nEagerness to learn and adapt quickly\n\n**Internship Details:**\n\n**3‑month full‑time** internship **(9:30 AM to 6:00 PM)** in Mumbai\n\n**Paid internship**\n\nHands\\-on experience with live projects\n\n**Mentorship** from **industry experts**\n\n**Exposure** to **modern tools, frameworks, and best practices**\n\n**Opportunity** to convert into a **full\\-time role** based on performance\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nApplication Question(s):\n\n* 1\\.Are you interested for Dotnet core internship (conversion to full time job within or post 3 months)?\n* 2\\.Do you have any months of experience in dotnet core?\n* 3\\.Do you have any months of experience in MS SQL server?\n* 4\\.The stipend would be in range of 8k to 10k per month. (varies as per candidature). Are you ready for the same?\n* 5\\. Have you made any project from scratch for an academic project or in a previous internship?\n* 6\\.Internship would be work from the office from Mon \\- Fri(9\\.30 am to 6 pm). Are you ready for the same?\n* 7\\.Where are you located in Mumbai. Are you ready to commute to office Mon to Fri?\n* 8\\.Post selection, we want you to start immediately. Are you ready for the same?\n* 9\\.Please mention your scores in academics X, XII and Degree\n\nWork Location: In person",
+      "id": "c56e17c7960a9b1b6bef",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=7503e0ab596905ca",
+      "location": "MH, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: MH, IN"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-7503e0ab596905ca",
+      "title": ".NET Core Developer Intern"
+    },
+    {
+      "company": "Marberx Technologies Pvt Ltd",
+      "date_posted": "2026-09-30",
+      "description": "We are looking for a detail\\-oriented and enthusiastic **Mobile Application Testing Intern** to join our team. The candidate will gain hands\\-on experience testing mobile applications, identifying bugs, validating app functionality, and ensuring a smooth user experience across different devices and operating systems.\n\nYou will work closely with developers and the product team to test real\\-world **iOS and Android applications** throughout the development and release process.\n\n**Key Responsibilities**\n\n* Perform functional testing of **iOS and Android mobile applications**\n* Test new features and application updates before release\n* Prepare and execute test cases and test scenarios\n* Identify, document, and track bugs and issues\n* Perform UI and usability testing\n* Verify app navigation, buttons, forms, notifications, media, and other interactive elements\n* Test application performance, stability, and basic compatibility\n* Validate app behavior under different network conditions\n* Test in\\-app purchases, subscriptions, notifications, and other app\\-specific features when required\n* Perform exploratory testing to identify unexpected issues\n* Work closely with developers to communicate and verify bug fixes\n* Assist in pre\\-release testing and final quality checks\n\n**Skills We’re Looking For**\n\n* Basic understanding of **Mobile Application Testing**\n* Knowledge of software testing concepts and QA processes\n* Understanding of test cases, test scenarios, bug reporting, and regression testing\n* Familiarity with **iOS and Android applications**\n* Good analytical and problem\\-solving skills\n* Ability to identify UI, functional, and usability issues\n* Good communication and documentation skills\n* Willingness to learn new testing tools and techniques\n\n**Knowledge of tools such as Jira, Trello, TestFlight or similar QA/testing tools is an advantage.**\n\n**Who Can Apply?**\n\n* Freshers and recent graduates\n* Students who have completed a course in Software Testing, QA, Computer Science, or a related field\n* Candidates interested in **Mobile Application Testing and Quality Assurance**\n* Candidates who are detail\\-oriented, analytical, and willing to learn\n\n**Internship \\& Career Opportunity**  \n6 months internship with practical training and exposure to real\\-world projects.  \nBased on performance, selected candidates will be offered an on\\-roll position with a good salary package.\n\n**Location**  \nB39, Gandhima Nagar Road,  \nHudco Colony, Murugan Nagar,  \nCoimbatore, Tamil Nadu – 641004  \nPh: 8122256106/ 8122256206\n\nPay: ₹8,000\\.00 \\- ₹10,000\\.00 per month\n\nWork Location: In person",
+      "id": "022c83c36a46c16048bb",
+      "is_remote": false,
+      "job_type": "fulltime, internship",
+      "job_url": "https://in.indeed.com/viewjob?jk=fc7a91f1d1fcd681",
+      "location": "TN, IN",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: TN, IN"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "indeed",
+      "source_id": "in-fc7a91f1d1fcd681",
+      "title": "Software Testing Intern"
+    },
+    {
       "company": "",
       "date_posted": "2026-09-29",
       "description": "**Position:** Software Development Intern  \n**Openings:** 3  \n**Duration:** 30 Days  \n**Work Mode:** Remote  \n**Internship Type:** Unpaid, Project\\-Based  \n**Organization:** BuildGPT  \n**Founder \\& Operator:** Saivignesh Koturi\n\nAbout BuildGPT\n\nBuildGPT is an independent AI studio focused on building practical AI\\-powered tools for students, freelancers, job seekers, and first\\-time founders.\n\nBuildGPT is being developed around four core experiences:\n\n**Chat \\| MVP Studio \\| Portfolio \\| ATS Resume**\n\nOur goal is to make AI a practical working partner that helps people turn real ideas and experience into finished work.\n\nAbout the Role\n\nWe are looking for **Software Development Interns** who want hands\\-on experience building a real AI\\-powered web product.\n\nYou will work with the early BuildGPT team on frontend, backend, integrations, testing, and product functionality.\n\nResponsibilities\n\n* Develop and improve BuildGPT web application features.\n* Work on frontend and backend components.\n* Build and integrate APIs.\n* Connect AI functionality with application workflows.\n* Work with databases and user data where required.\n* Implement authentication and basic application security.\n* Fix bugs and improve application performance.\n* Test features before deployment.\n* Collaborate with AI, UI/UX, Product, and HR interns.\n* Document technical work and development decisions.\n* Participate in code reviews and feedback sessions.\n* Help improve the overall usability and reliability of BuildGPT.\n\nSkills Required\n\n* Basic knowledge of **HTML, CSS and JavaScript**\n* Knowledge of at least one programming language.\n* Basic understanding of frontend or backend development.\n* Understanding of APIs and web applications.\n* Basic Git/GitHub knowledge.\n* Problem\\-solving ability.\n* Willingness to learn new technologies.\n* Good communication and teamwork.\n\nPreferred Skills\n\nKnowledge of any of the following is useful:\n\n* React / Next.js\n* Node.js / Express\n* Python\n* REST APIs\n* SQL / PostgreSQL / MySQL\n* Firebase / Supabase\n* Git \\& GitHub\n* AI API integration\n* Authentication systems\n* Responsive web design\n\n**You do not need to know everything.** Strong fundamentals, willingness to learn, and the ability to build are more important.\n\nWhat You Will Work On\n\nDuring the internship, you may contribute to:\n\n* BuildGPT Chat\n* MVP Studio\n* Portfolio Builder\n* ATS Resume Builder\n* User authentication\n* Database systems\n* AI/API integrations\n* Dashboard and UI functionality\n* Testing and bug fixing\n* Deployment and product improvements\n\nInternship Structure\n\n**Week 1 — Understand \\& Setup**\n\n* Introduction to BuildGPT\n* Development environment setup\n* Understand the product architecture\n* Git/GitHub workflow\n* Receive initial development task\n\n**Week 2 — Development**\n\n* Build assigned features\n* API/database integration\n* Regular testing and feedback\n\n**Week 3 — Product Integration**\n\n* Connect features with the main application\n* Fix bugs\n* Improve performance and usability\n\n**Week 4 — Finalization**\n\n* Testing\n* Documentation\n* Bug fixing\n* Final feature delivery\n* Internship evaluation\n\nWhat You Will Get\n\n* Hands\\-on experience working on a real AI product\n* Practical software development experience\n* Mentorship and feedback\n* Team collaboration experience\n* Opportunity to contribute to BuildGPT\n* Internship completion certificate based on successful completion\n* Experience/Completion Letter where applicable\n* Performance\\-based recommendation/reference where appropriate\n* Opportunity to showcase eligible work in your portfolio\n\nImportant Terms\n\n* This is a **30\\-day unpaid, project\\-based internship**.\n* There is **no application, registration, training, certificate, or placement fee**.\n* This internship does not guarantee employment after completion.\n* Interns must provide truthful information about their skills and experience.\n* Confidential BuildGPT information, credentials, source code, and internal materials must not be shared without authorization.\n* Work must follow BuildGPT's confidentiality, security, IP, and code\\-of\\-conduct requirements.\n\nWho Can Apply?\n\n* B.Tech / B.E. students\n* BCA / MCA students\n* B.Sc. Computer Science / IT students\n* Diploma students with relevant development skills\n* Self\\-taught developers\n* Recent graduates\n* Developers building their first professional portfolio\n\n**Students with strong projects are encouraged to apply even without prior internship experience.**\n\nSelection Process\n\n**Application → Resume/Portfolio Screening → Technical Discussion → Selection → Onboarding**\n\nApply\n\n**Organization:** BuildGPT  \n**Role:** Software Development Intern  \n**Openings:** 3  \n**Work Mode:** Remote  \n**Duration:** 30 Days\n\n**Build the small thing. Tell the story. Pass the screen.**\n\nBenefits:\n\n* Flexible schedule\n* Work from home\n\nWork Location: Remote",
@@ -93,6 +378,38 @@
       "source": "indeed",
       "source_id": "in-0e6930be2bfb3d2e",
       "title": "Flutter Developer Intern"
+    },
+    {
+      "company": "Revin Krishi",
+      "date_posted": "2026-09-29",
+      "description": "",
+      "id": "e15607b0601a8485525a",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4471703492",
+      "location": "Palghat, Kerala, India",
+      "matched_skills": [
+        "Embedded Systems"
+      ],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Skills in title/description: Embedded Systems",
+        "Preferred geography from source location: Palghat, Kerala, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 75,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 5,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4471703492",
+      "title": "Embedded Software Engineer - Intern"
     },
     {
       "company": "GREEN TREE SOFT TECH SOLUTIONS",
@@ -2161,14 +2478,14 @@
       "title": "Web Developer Intern"
     },
     {
-      "company": "Revin Krishi",
+      "company": "Smowcode",
       "date_posted": null,
       "description": "",
-      "id": "e15607b0601a8485525a",
+      "id": "b6ad2c034a1c1e21daa2",
       "is_remote": false,
       "job_type": "",
-      "job_url": "https://www.linkedin.com/jobs/view/4471703492",
-      "location": "Palghat, Kerala, India",
+      "job_url": "https://www.linkedin.com/jobs/view/4472123836",
+      "location": "Mumbai, Maharashtra, India",
       "matched_skills": [
         "Embedded Systems"
       ],
@@ -2176,7 +2493,7 @@
         "Target role detected in title",
         "Internship, fresher or entry-level cue detected",
         "Skills in title/description: Embedded Systems",
-        "Preferred geography from source location: Palghat, Kerala, India",
+        "Preferred geography from source location: Mumbai, Maharashtra, India",
         "Description unavailable; skill evidence may be incomplete"
       ],
       "relevant": true,
@@ -2189,8 +2506,8 @@
         "target_role": 35
       },
       "source": "linkedin",
-      "source_id": "li-4471703492",
-      "title": "Embedded Software Engineer - Intern"
+      "source_id": "li-4472123836",
+      "title": "Embedded Systems Intern"
     },
     {
       "company": "CLUIX Pvt Ltd",
@@ -2225,6 +2542,35 @@
       "title": "Embedded Intern"
     },
     {
+      "company": "GreedyGame",
+      "date_posted": null,
+      "description": "",
+      "id": "b7fc991f4a7c0e25b46b",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4473724223",
+      "location": "Bengaluru, Karnataka, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Bengaluru, Karnataka, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4473724223",
+      "title": "Fullstack Developer- Internship"
+    },
+    {
       "company": "Vigilant Forensic Research And Analytics Pvt. Ltd.",
       "date_posted": null,
       "description": "",
@@ -2252,6 +2598,35 @@
       "source": "linkedin",
       "source_id": "li-4471008694",
       "title": "Full-Stack Developer Intern"
+    },
+    {
+      "company": "Radiolinq",
+      "date_posted": null,
+      "description": "",
+      "id": "53009465a42b0409a2a9",
+      "is_remote": false,
+      "job_type": "",
+      "job_url": "https://www.linkedin.com/jobs/view/4472134082",
+      "location": "Chennai, Tamil Nadu, India",
+      "matched_skills": [],
+      "reasons": [
+        "Target role detected in title",
+        "Internship, fresher or entry-level cue detected",
+        "Preferred geography from source location: Chennai, Tamil Nadu, India",
+        "Description unavailable; skill evidence may be incomplete"
+      ],
+      "relevant": true,
+      "score": 70,
+      "score_breakdown": {
+        "preferred_location": 15,
+        "remote": 0,
+        "skills": 0,
+        "student_level": 20,
+        "target_role": 35
+      },
+      "source": "linkedin",
+      "source_id": "li-4472134082",
+      "title": "Software Development Engineer - Intern"
     }
   ],
   "schema_version": 1
