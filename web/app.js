@@ -5658,4 +5658,229 @@ function bindModalEvents() {
       }
     );
   }
+}/* =========================================
+   PART 51 — FIX VIEW + SAVED JOBS
+========================================= */
+
+function bindFinalJobButtons() {
+
+  const results = $("#results");
+
+  if (!results) {
+    return;
+  }
+
+
+  /* Remove previous handler */
+
+  if (results._finalJobHandler) {
+
+    results.removeEventListener(
+      "click",
+      results._finalJobHandler
+    );
+
+  }
+
+
+  const handler = event => {
+
+    /* VIEW BUTTON */
+
+    const viewButton =
+      event.target.closest(".job-view");
+
+
+    if (viewButton) {
+
+      const job =
+        findJobById(
+          viewButton.dataset.id
+        );
+
+
+      if (job) {
+
+        openJobModal(job);
+
+      }
+
+      return;
+    }
+
+
+    /* SAVE BUTTON */
+
+    const saveButton =
+      event.target.closest(".job-save");
+
+
+    if (saveButton) {
+
+      const job =
+        findJobById(
+          saveButton.dataset.id
+        );
+
+
+      if (job) {
+
+        saveJob(job);
+
+      }
+
+      return;
+    }
+
+  };
+
+
+  results.addEventListener(
+    "click",
+    handler
+  );
+
+
+  results._finalJobHandler =
+    handler;
+}
+
+
+/* =========================================
+   SAVED JOBS BUTTON
+========================================= */
+
+function bindSavedJobsButton() {
+
+  const button =
+    $("#showSaved");
+
+
+  if (!button) {
+    return;
+  }
+
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      const status =
+        $("#appStatus");
+
+
+      if (status) {
+
+        status.value =
+          "saved";
+
+      }
+
+
+      applyFilters();
+
+
+      showToast(
+        "Showing saved jobs"
+      );
+
+    }
+  );
+}
+
+
+/* =========================================
+   FINAL BUTTON SETUP
+========================================= */
+
+function setupFinalButtons() {
+
+  bindFinalJobButtons();
+
+  bindSavedJobsButton();
+
+}/* =========================================
+   PART 52 — BEST MATCH BUTTON FIX
+========================================= */
+
+function bindBestMatchButton() {
+
+  const container =
+    $("#nextJob");
+
+
+  if (!container) {
+    return;
+  }
+
+
+  /* Remove old handler */
+
+  if (container._bestMatchHandler) {
+
+    container.removeEventListener(
+      "click",
+      container._bestMatchHandler
+    );
+
+  }
+
+
+  const handler = event => {
+
+    const button =
+      event.target.closest(
+        ".agent-open"
+      );
+
+
+    if (!button) {
+      return;
+    }
+
+
+    const id =
+      button.dataset.id;
+
+
+    const job =
+      findJobById(id);
+
+
+    if (!job) {
+
+      showToast(
+        "Job not found"
+      );
+
+      return;
+    }
+
+
+    openJobModal(job);
+
+  };
+
+
+  container.addEventListener(
+    "click",
+    handler
+  );
+
+
+  container._bestMatchHandler =
+    handler;
+}
+
+
+/* =========================================
+   FINAL UI BUTTON SETUP
+========================================= */
+
+function setupAllButtons() {
+
+  setupFinalButtons();
+
+  bindBestMatchButton();
+
 }
