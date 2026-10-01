@@ -2375,4 +2375,66 @@ a:focus-visible {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #28634d;
+}/* MOBILE OVERFLOW FIX */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.job-card,
+.panel,
+.results-grid,
+.filter-panel,
+.modal-box {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.job-description {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.job-card {
+  overflow: hidden;
+}
+
+.job-actions {
+  width: 100%;
+}
+
+.job-actions button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .main {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .job-card {
+    width: 100%;
+  }
+
+  .job-description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .job-meta {
+    flex-wrap: wrap;
+  }
+
+  .job-skills {
+    flex-wrap: wrap;
+  }
 }
