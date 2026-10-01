@@ -35,7 +35,7 @@
         JR
       </div>
 
-      <div>
+      <div class="brand-text">
 
         <strong>
           Job Radar
@@ -60,6 +60,7 @@
         Home
       </button>
 
+
       <button
         class="nav-btn"
         data-page="jobs"
@@ -68,6 +69,7 @@
         Jobs
       </button>
 
+
       <button
         class="nav-btn"
         data-page="resume"
@@ -75,6 +77,7 @@
       >
         Resume
       </button>
+
 
       <button
         class="nav-btn"
@@ -115,135 +118,102 @@
           </p>
 
           <h1>
-            Find the right jobs
-            without the noise.
+            Find the right jobs without the noise.
           </h1>
 
           <p class="subtitle">
-            Track fresher opportunities,
-            analyze matches and manage
-            your applications.
+            Track fresher opportunities, analyze matches
+            and manage your applications.
           </p>
 
         </div>
 
+      </div>
 
-        <div class="live-pill">
 
-          <span
-            id="liveStatus"
-            class="live"
-          >
-            LIVE
+      <!-- RADAR SIGNAL -->
+
+      <div class="panel signal-panel">
+
+        <div class="panel-title">
+          RADAR SIGNAL
+        </div>
+
+        <div class="signal-status">
+
+          <span class="signal-dot"></span>
+
+          <span id="liveStatus">
+            JOB RADAR
           </span>
 
         </div>
 
+        <p class="muted">
+          Your job pipeline is being monitored from live job data.
+        </p>
+
       </div>
 
 
-      <!-- HOME CONTENT -->
+      <!-- QUICK STATS -->
 
-      <div class="dashboard-grid">
+      <div class="panel">
 
-
-        <div class="panel signal-panel">
-
-          <div class="panel-title">
-            <span>
-              RADAR SIGNAL
-            </span>
-
-            <span>
-              ●
-            </span>
-          </div>
-
-
-          <div class="signal-circle">
-
-            <div class="signal-inner">
-
-              <strong>
-                JOB
-              </strong>
-
-              <span>
-                RADAR
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <p class="muted">
-            Your job pipeline is being
-            monitored from live job data.
-          </p>
-
+        <div class="panel-title">
+          QUICK STATS
         </div>
 
+        <div class="metrics">
 
-        <div class="panel">
+          <div class="metric">
 
-          <div class="panel-title">
-            QUICK STATS
+            <span>
+              Total Jobs
+            </span>
+
+            <strong id="totalJobs">
+              0
+            </strong>
+
           </div>
 
 
-          <div class="metrics">
+          <div class="metric">
 
-            <div class="metric">
+            <span>
+              Recent
+            </span>
 
-              <span>
-                Total Jobs
-              </span>
+            <strong id="recentJobs">
+              0
+            </strong>
 
-              <strong id="totalJobs">
-                0
-              </strong>
-
-            </div>
+          </div>
 
 
-            <div class="metric">
+          <div class="metric">
 
-              <span>
-                Recent
-              </span>
+            <span>
+              Saved
+            </span>
 
-              <strong id="recentJobs">
-                0
-              </strong>
+            <strong id="savedJobs">
+              0
+            </strong>
 
-            </div>
-
-
-            <div class="metric">
-
-              <span>
-                Saved
-              </span>
-
-              <strong id="savedJobs">
-                0
-              </strong>
-
-            </div>
+          </div>
 
 
-            <div class="metric">
+          <div class="metric">
 
-              <span>
-                Strong Matches
-              </span>
+            <span>
+              Strong Matches
+            </span>
 
-              <strong id="strongMatches">
-                0
-              </strong>
-
-            </div>
+            <strong id="strongMatches">
+              0
+            </strong>
 
           </div>
 
@@ -252,28 +222,22 @@
       </div>
 
 
-      <!-- AGENT -->
+      <!-- JOB RADAR AGENT -->
 
       <div class="panel agent-panel">
 
         <div class="panel-title">
-
-          <span>
-            JOB RADAR AGENT
-          </span>
-
-          <span>
-            AI
-          </span>
-
+          JOB RADAR AGENT AI
         </div>
+
+        <p class="eyebrow">
+          BEST CURRENT MATCH
+        </p>
 
 
         <div id="nextJob">
 
-          <p class="muted">
-            Finding your best opportunity...
-          </p>
+          Loading your best opportunity...
 
         </div>
 
@@ -290,7 +254,7 @@
 
         <div
           id="topSkills"
-          class="skills-list"
+          class="skills-cloud"
         ></div>
 
       </div>
@@ -304,10 +268,11 @@
           AVOID JOBS
         </div>
 
-        <div
-          id="avoidList"
-          class="avoid-list"
-        ></div>
+        <div id="avoidList">
+
+          No low-match jobs found.
+
+        </div>
 
       </div>
 
@@ -333,8 +298,7 @@
           </h1>
 
           <p class="subtitle">
-            Search, filter and analyze
-            jobs from your radar.
+            Search, filter and analyze jobs from your radar.
           </p>
 
         </div>
@@ -342,21 +306,21 @@
       </div>
 
 
-      <!-- JOB FILTER PANEL -->
+      <!-- FILTER BOX -->
 
-      <div class="panel filters-panel">
+      <div class="panel filter-panel">
 
         <div class="panel-title">
           FILTER JOBS
         </div>
 
 
-        <div class="filters-grid">
+        <div class="filter-grid">
 
 
-          <!-- Search -->
+          <!-- SEARCH -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="search">
               Search
@@ -365,15 +329,15 @@
             <input
               id="search"
               type="text"
-              placeholder="Python, Embedded, VLSI..."
+              placeholder="Job title or company"
             >
 
           </div>
 
 
-          <!-- Location -->
+          <!-- LOCATION -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="location">
               Location
@@ -385,19 +349,19 @@
                 All locations
               </option>
 
-              <option value="Chennai">
+              <option value="chennai">
                 Chennai
               </option>
 
-              <option value="Bengaluru">
+              <option value="bengaluru">
                 Bengaluru
               </option>
 
-              <option value="Coimbatore">
+              <option value="coimbatore">
                 Coimbatore
               </option>
 
-              <option value="Remote">
+              <option value="remote">
                 Remote
               </option>
 
@@ -406,9 +370,9 @@
           </div>
 
 
-          <!-- Job Type -->
+          <!-- JOB TYPE -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="jobType">
               Job Type
@@ -420,15 +384,15 @@
                 All types
               </option>
 
-              <option value="Internship">
+              <option value="internship">
                 Internship
               </option>
 
-              <option value="Full-time">
+              <option value="fulltime">
                 Full-time
               </option>
 
-              <option value="Contract">
+              <option value="contract">
                 Contract
               </option>
 
@@ -437,9 +401,9 @@
           </div>
 
 
-          <!-- Work Mode -->
+          <!-- WORK MODE -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="workMode">
               Work Mode
@@ -451,15 +415,15 @@
                 All modes
               </option>
 
-              <option value="Remote">
+              <option value="remote">
                 Remote
               </option>
 
-              <option value="Hybrid">
+              <option value="hybrid">
                 Hybrid
               </option>
 
-              <option value="On-site">
+              <option value="onsite">
                 On-site
               </option>
 
@@ -468,9 +432,9 @@
           </div>
 
 
-          <!-- Posted -->
+          <!-- POSTED -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="posted">
               Posted
@@ -503,26 +467,60 @@
           </div>
 
 
-          <!-- Skill -->
+          <!-- SKILL -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="skill">
               Skill
             </label>
 
-            <input
-              id="skill"
-              type="text"
-              placeholder="Java, Python, SQL..."
-            >
+            <select id="skill">
+
+              <option value="">
+                All skills
+              </option>
+
+              <option value="iot">
+                IoT
+              </option>
+
+              <option value="embedded">
+                Embedded Systems
+              </option>
+
+              <option value="python">
+                Python
+              </option>
+
+              <option value="java">
+                Java
+              </option>
+
+              <option value="c++">
+                C++
+              </option>
+
+              <option value="sql">
+                SQL
+              </option>
+
+              <option value="vlsi">
+                VLSI
+              </option>
+
+              <option value="electronics">
+                Electronics
+              </option>
+
+            </select>
 
           </div>
 
 
-          <!-- Application Status -->
+          <!-- APPLICATION STATUS -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="appStatus">
               Application Status
@@ -530,7 +528,7 @@
 
             <select id="appStatus">
 
-              <option value="all">
+              <option value="">
                 All
               </option>
 
@@ -555,9 +553,9 @@
           </div>
 
 
-          <!-- Minimum Match -->
+          <!-- MINIMUM MATCH -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="minimum">
               Minimum Match
@@ -567,10 +565,6 @@
 
               <option value="0">
                 Any score
-              </option>
-
-              <option value="40">
-                40%+
               </option>
 
               <option value="60">
@@ -585,14 +579,18 @@
                 80%+
               </option>
 
+              <option value="90">
+                90%+
+              </option>
+
             </select>
 
           </div>
 
 
-          <!-- Sort -->
+          <!-- SORT -->
 
-          <div class="field">
+          <div class="filter-field">
 
             <label for="sort">
               Sort
@@ -610,10 +608,6 @@
 
               <option value="company">
                 Company
-              </option>
-
-              <option value="title">
-                Title
               </option>
 
             </select>
@@ -660,7 +654,7 @@
 
       <!-- JOB RESULTS -->
 
-      <div class="section-heading">
+      <div class="results-header">
 
         <div>
 
@@ -679,7 +673,7 @@
 
       <div
         id="results"
-        class="results"
+        class="results-grid"
       ></div>
 
 
@@ -692,507 +686,586 @@
       >
 
         <h3>
-          No jobs found.
+          No opportunities found.
         </h3>
 
         <p>
-          Try changing your filters
-          or search keywords.
+          Try changing your filters or search terms.
         </p>
 
       </div>
 
-    </section><section id="page-resume" class="page">
-
-  <div class="page-header">
-    <div>
-      <p class="eyebrow">CAREER PROFILE</p>
-
-      <h1>Build your career profile.</h1>
-
-      <p class="subtitle">
-        Upload your resume and track the skills you need to grow.
-      </p>
-    </div>
-  </div>
-
-
-  <div class="panel resume-panel">
-
-    <div class="panel-title">
-      MY RESUME
-    </div>
-
-    <div class="resume-upload">
-
-      <div class="resume-icon">
-        ↑
-      </div>
-
-      <h2>Upload your resume</h2>
-
-      <p class="muted">
-        PDF, DOC or DOCX
-      </p>
-
-      <label
-        for="resumeFile"
-        class="primary upload-button"
-      >
-        Choose Resume
-      </label>
-
-      <input
-        id="resumeFile"
-        type="file"
-        accept=".pdf,.doc,.docx"
-        hidden
-      >
-
-      <p id="resumeName" class="resume-name">
-        No resume selected
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="panel-title">
-      <span>PROFILE SCORE</span>
-
-      <strong id="profileScore">
-        0%
-      </strong>
-    </div>
-
-    <div class="progress">
-
-      <div
-        id="profileBar"
-        class="progress-bar"
-        style="width: 0%"
-      ></div>
-
-    </div>
-
-    <p class="muted">
-      Your profile score will appear here.
-    </p>
-
-  </div>
-
-
-  <div class="panel">
-
-    <div class="panel-title">
-      SKILL GAP & LEARNING ROADMAP
-    </div>
-
-    <div class="roadmap">
-
-      <div class="roadmap-item">
-
-        <div class="roadmap-number">
-          01
-        </div>
-
-        <div>
-          <h3>Core Programming</h3>
-
-          <p>
-            Improve Java, Python and problem solving.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="roadmap-item">
-
-        <div class="roadmap-number">
-          02
-        </div>
-
-        <div>
-          <h3>Data & SQL</h3>
-
-          <p>
-            Practice SQL and database concepts.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="roadmap-item">
-
-        <div class="roadmap-number">
-          03
-        </div>
-
-        <div>
-          <h3>Projects</h3>
-
-          <p>
-            Build practical projects for your portfolio.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="roadmap-item">
-
-        <div class="roadmap-number">
-          04
-        </div>
-
-        <div>
-          <h3>Interview Preparation</h3>
-
-          <p>
-            Improve DSA and technical concepts.
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section><section id="page-tracker" class="page">
-
-  <div class="page-header">
-
-    <div>
-
-      <p class="eyebrow">
-        APPLICATION TRACKER
-      </p>
-
-      <h1>
-        Track your applications.
-      </h1>
-
-      <p class="subtitle">
-        Keep every job application organized in one place.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="tracker-grid">
-
-
-    <!-- SAVED -->
-
-    <div class="tracker-column">
-
-      <div class="tracker-header">
-
-        <span>
-          SAVED
-        </span>
-
-        <strong id="cSaved">
-          0
-        </strong>
-
-      </div>
-
-      <div
-        id="colSaved"
-        class="tracker-list"
-      ></div>
-
-    </div>
-
-
-    <!-- APPLIED -->
-
-    <div class="tracker-column">
-
-      <div class="tracker-header">
-
-        <span>
-          APPLIED
-        </span>
-
-        <strong id="cApplied">
-          0
-        </strong>
-
-      </div>
-
-      <div
-        id="colApplied"
-        class="tracker-list"
-      ></div>
-
-    </div>
-
-
-    <!-- INTERVIEW -->
-
-    <div class="tracker-column">
-
-      <div class="tracker-header">
-
-        <span>
-          INTERVIEW
-        </span>
-
-        <strong id="cInterview">
-          0
-        </strong>
-
-      </div>
-
-      <div
-        id="colInterview"
-        class="tracker-list"
-      ></div>
-
-    </div>
-
-
-    <!-- CLOSED -->
-
-    <div class="tracker-column">
-
-      <div class="tracker-header">
-
-        <span>
-          CLOSED
-        </span>
-
-        <strong id="cClosed">
-          0
-        </strong>
-
-      </div>
-
-      <div
-        id="colClosed"
-        class="tracker-list"
-      ></div>
-
-    </div>
-
-
-  </div>
-
-</section><!-- =========================
-     JOB DETAILS MODAL
-========================== -->
-
-<div
-  id="modal"
-  class="modal"
-  aria-hidden="true"
->
-
-  <div class="modal-overlay"></div>
-
-
-  <div class="modal-box">
-
-    <!-- CLOSE -->
-
-    <button
-      id="closeModal"
-      class="modal-close"
-      type="button"
-      aria-label="Close"
+    </section>    <!-- =========================
+         RESUME PAGE
+    ========================== -->
+
+    <section
+      id="page-resume"
+      class="page"
     >
-      ×
-    </button>
 
+      <div class="page-header">
 
-    <!-- JOB TITLE -->
+        <div>
 
-    <p class="eyebrow">
-      JOB DETAILS
-    </p>
+          <p class="eyebrow">
+            CAREER PROFILE
+          </p>
 
-    <h2 id="mTitle">
-      Job Title
-    </h2>
+          <h1>
+            Build your career profile.
+          </h1>
 
-    <p id="mCompany" class="modal-company">
-      Company
-    </p>
+          <p class="subtitle">
+            Upload your resume and track the skills you need.
+          </p>
 
-    <p id="mMeta" class="modal-meta">
-      Location • Job Type • Work Mode
-    </p>
-
-
-    <!-- MATCH SCORE -->
-
-    <div class="match-box">
-
-      <div class="match-score">
-
-        <span>
-          MATCH SCORE
-        </span>
-
-        <strong id="mScore">
-          0%
-        </strong>
+        </div>
 
       </div>
 
 
-      <div class="progress">
+      <!-- RESUME -->
 
-        <div
-          id="mBar"
-          class="progress-bar"
-          style="width: 0%"
-        ></div>
+      <div class="panel resume-panel">
+
+        <div class="panel-title">
+          MY RESUME
+        </div>
+
+
+        <div class="resume-upload">
+
+          <div class="resume-icon">
+            ↑
+          </div>
+
+
+          <h2>
+            Upload your resume
+          </h2>
+
+
+          <p class="muted">
+            PDF, DOC or DOCX
+          </p>
+
+
+          <label
+            for="resumeFile"
+            class="primary upload-button"
+          >
+            Choose Resume
+          </label>
+
+
+          <input
+            id="resumeFile"
+            type="file"
+            accept=".pdf,.doc,.docx"
+            hidden
+          >
+
+
+          <p
+            id="resumeName"
+            class="resume-name"
+          >
+            No resume selected
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE SCORE -->
+
+      <div class="panel">
+
+        <div class="panel-title">
+
+          <span>
+            PROFILE SCORE
+          </span>
+
+          <strong id="profileScore">
+            0%
+          </strong>
+
+        </div>
+
+
+        <div class="progress">
+
+          <div
+            id="profileBar"
+            class="progress-bar"
+            style="width: 0%"
+          ></div>
+
+        </div>
+
+
+        <p class="muted">
+          Your profile score will appear here.
+        </p>
+
+      </div>
+
+
+      <!-- SKILL ROADMAP -->
+
+      <div class="panel">
+
+        <div class="panel-title">
+          SKILL GAP & LEARNING ROADMAP
+        </div>
+
+
+        <div class="roadmap">
+
+
+          <div class="roadmap-item">
+
+            <div class="roadmap-number">
+              01
+            </div>
+
+            <div>
+
+              <h3>
+                Core Programming
+              </h3>
+
+              <p>
+                Improve Java, Python and problem solving.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="roadmap-item">
+
+            <div class="roadmap-number">
+              02
+            </div>
+
+            <div>
+
+              <h3>
+                Data & SQL
+              </h3>
+
+              <p>
+                Practice SQL and database concepts.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="roadmap-item">
+
+            <div class="roadmap-number">
+              03
+            </div>
+
+            <div>
+
+              <h3>
+                Projects
+              </h3>
+
+              <p>
+                Build practical projects for your portfolio.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="roadmap-item">
+
+            <div class="roadmap-number">
+              04
+            </div>
+
+            <div>
+
+              <h3>
+                Interview Preparation
+              </h3>
+
+              <p>
+                Improve DSA and technical concepts.
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>    <!-- =========================
+         TRACKER PAGE
+    ========================== -->
+
+    <section
+      id="page-tracker"
+      class="page"
+    >
+
+      <div class="page-header">
+
+        <div>
+
+          <p class="eyebrow">
+            APPLICATION TRACKER
+          </p>
+
+          <h1>
+            Track your applications.
+          </h1>
+
+          <p class="subtitle">
+            Keep every opportunity organized in one place.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="tracker-grid">
+
+
+        <!-- SAVED -->
+
+        <div class="tracker-column">
+
+          <div class="tracker-header">
+
+            <span>
+              SAVED
+            </span>
+
+            <strong id="cSaved">
+              0
+            </strong>
+
+          </div>
+
+          <div
+            id="colSaved"
+            class="tracker-list"
+          ></div>
+
+        </div>
+
+
+        <!-- APPLIED -->
+
+        <div class="tracker-column">
+
+          <div class="tracker-header">
+
+            <span>
+              APPLIED
+            </span>
+
+            <strong id="cApplied">
+              0
+            </strong>
+
+          </div>
+
+          <div
+            id="colApplied"
+            class="tracker-list"
+          ></div>
+
+        </div>
+
+
+        <!-- INTERVIEW -->
+
+        <div class="tracker-column">
+
+          <div class="tracker-header">
+
+            <span>
+              INTERVIEW
+            </span>
+
+            <strong id="cInterview">
+              0
+            </strong>
+
+          </div>
+
+          <div
+            id="colInterview"
+            class="tracker-list"
+          ></div>
+
+        </div>
+
+
+        <!-- CLOSED -->
+
+        <div class="tracker-column">
+
+          <div class="tracker-header">
+
+            <span>
+              CLOSED
+            </span>
+
+            <strong id="cClosed">
+              0
+            </strong>
+
+          </div>
+
+          <div
+            id="colClosed"
+            class="tracker-list"
+          ></div>
+
+        </div>
+
+
+      </div>
+
+    </section>    <!-- =========================
+         JOB DETAILS MODAL
+    ========================== -->
+
+    <div
+      id="modal"
+      class="modal"
+      hidden
+    >
+
+      <div class="modal-overlay"></div>
+
+
+      <div class="modal-box">
+
+
+        <!-- CLOSE -->
+
+        <button
+          id="closeModal"
+          class="modal-close"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+
+        <!-- TITLE -->
+
+        <p class="eyebrow">
+          JOB DETAILS
+        </p>
+
+
+        <h2 id="mTitle">
+          Job Title
+        </h2>
+
+
+        <p
+          id="mCompany"
+          class="modal-company"
+        >
+          Company
+        </p>
+
+
+        <p
+          id="mMeta"
+          class="modal-meta"
+        >
+          Location • Source
+        </p>
+
+
+        <!-- MATCH -->
+
+        <div class="match-box">
+
+          <div class="match-score">
+
+            <span>
+              MATCH SCORE
+            </span>
+
+            <strong id="mScore">
+              0%
+            </strong>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              id="mBar"
+              class="progress-bar"
+              style="width: 0%"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- REASONS -->
+
+        <div class="modal-section">
+
+          <h3>
+            Why this job matches
+          </h3>
+
+          <ul id="mReasons"></ul>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="modal-section">
+
+          <h3>
+            Skills
+          </h3>
+
+          <div
+            id="mSkills"
+            class="skill-list"
+          ></div>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="modal-section">
+
+          <h3>
+            Job Description
+          </h3>
+
+          <div
+            id="mDescription"
+            class="job-description"
+          >
+            Job description will appear here.
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="modal-actions">
+
+
+          <select id="mStatus">
+
+            <option value="">
+              Application Status
+            </option>
+
+            <option value="saved">
+              Saved
+            </option>
+
+            <option value="applied">
+              Applied
+            </option>
+
+            <option value="interview">
+              Interview
+            </option>
+
+            <option value="closed">
+              Closed
+            </option>
+
+          </select>
+
+
+          <button
+            id="mSave"
+            class="secondary"
+            type="button"
+          >
+            Save Job
+          </button>
+
+
+          <button
+            id="mOpen"
+            class="primary"
+            type="button"
+          >
+            Open Job ↗
+          </button>
+
+
+        </div>
 
       </div>
 
     </div>
 
 
-    <!-- WHY MATCH -->
+    <!-- =========================
+         TOAST
+    ========================== -->
 
-    <div class="modal-section">
+    <div
+      id="toast"
+      class="toast"
+      hidden
+    >
+      Saved
+    </div>    <!-- =========================
+         FOOTER
+    ========================== -->
 
-      <h3>
-        Why this job matches
-      </h3>
-
-      <ul id="mReasons"></ul>
-
-    </div>
-
-
-    <!-- SKILLS -->
-
-    <div class="modal-section">
-
-      <h3>
-        Skills
-      </h3>
-
-      <div id="mSkills" class="skill-list"></div>
-
-    </div>
+  </main>
 
 
-    <!-- DESCRIPTION -->
+  <footer class="footer">
 
-    <div class="modal-section">
+    <p>
+      Job Radar • Better leads. Less noise.
+    </p>
 
-      <h3>
-        Job Description
-      </h3>
-
-      <div
-        id="mDescription"
-        class="job-description"
-      >
-        Job description will appear here.
-      </div>
-
-    </div>
+  </footer>
 
 
-    <!-- ACTIONS -->
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
-    <div class="modal-actions">
-
-      <select
-        id="mStatus"
-        class="select"
-      >
-
-        <option value="">
-          Application Status
-        </option>
-
-        <option value="saved">
-          Saved
-        </option>
-
-        <option value="applied">
-          Applied
-        </option>
-
-        <option value="interview">
-          Interview
-        </option>
-
-        <option value="closed">
-          Closed
-        </option>
-
-      </select>
+  <script src="./app.js"></script>
 
 
-      <button
-        id="mSave"
-        class="secondary"
-        type="button"
-      >
-        Save Job
-      </button>
-
-
-      <a
-        id="mOpen"
-        class="primary"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Open Job
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     TOAST MESSAGE
-========================== -->
-
-<div
-  id="toast"
-  class="toast"
->
-  Saved
-</div>    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-
-      <p>
-        Job Radar • Better leads. Less noise.
-      </p>
-
-    </footer>
-
-
-    <!-- JAVASCRIPT -->
-
-    <script src="./app.js"></script>
-
-  </body>
+</body>
 
 </html>
