@@ -1,5 +1,29 @@
+/* =========================
+   JOB RADAR — BASE
+========================= */
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --bg: #06100d;
+  --panel: #0b1915;
+  --panel-2: #0e211b;
+  --border: #173c30;
+
+  --green: #39ff88;
+  --green-2: #20d878;
+  --green-soft: #9cffc4;
+
+  --text: #eafff1;
+  --muted: #8ba99b;
+  --danger: #ff6b6b;
+  --warning: #ffd166;
+
+  --radius: 18px;
 }
 
 html {
@@ -7,104 +31,134 @@ html {
 }
 
 body {
-  margin: 0;
-  background: #00130c;
-  color: #e8fff0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(57, 255, 136, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(32, 216, 120, 0.05),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
   line-height: 1.5;
 }
 
-button,
-input,
-select {
-  font: inherit;
-}
 
-
-/* ================= TOP BAR ================= */
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar {
-  background: linear-gradient(
-    180deg,
-    #002116,
-    #00160f
-  );
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-  border-bottom: 1px solid #075137;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  padding: 28px 18px 14px;
+  min-height: 72px;
+  padding: 12px 5%;
+
+  background: rgba(6, 16, 13, 0.92);
+  border-bottom: 1px solid var(--border);
+
+  backdrop-filter: blur(14px);
 }
 
 .brand {
-  max-width: 780px;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.eyebrow {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  color: #36e49a;
-  text-transform: uppercase;
+.brand-mark {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--green);
+  border-radius: 12px;
+
+  color: var(--green);
+  font-weight: 800;
+
+  box-shadow:
+    0 0 18px rgba(57, 255, 136, 0.15);
 }
 
-.brand h1 {
-  font-size: 42px;
-  line-height: 0.98;
-  letter-spacing: -2px;
-  margin: 7px 0 12px;
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
 
-.brand h1 span {
-  color: #00f79b;
+.brand-text strong {
+  font-size: 17px;
 }
 
-.brand p {
-  color: #b1c9bb;
-  max-width: 650px;
-  margin: 0;
+.brand-text span {
+  color: var(--muted);
+  font-size: 11px;
 }
 
 
-/* ================= NAVIGATION ================= */
+/* =========================
+   NAVIGATION
+========================= */
 
 .nav {
-  max-width: 780px;
-  margin: 18px auto 0;
-
   display: flex;
-  gap: 5px;
-
-  overflow-x: auto;
+  gap: 6px;
 }
 
-.nav button {
-  background: #032219;
-  color: #79a992;
+.nav-btn {
+  border: 1px solid transparent;
+  background: transparent;
 
-  border: 1px solid #08462f;
-  border-radius: 6px;
+  color: var(--muted);
 
-  padding: 8px 12px;
+  padding: 9px 14px;
+  border-radius: 10px;
 
-  white-space: nowrap;
   cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.nav button:hover {
-  color: #00f79b;
-  border-color: #0b8b59;
+.nav-btn:hover {
+  color: var(--text);
+  background: rgba(57, 255, 136, 0.06);
+}
+
+.nav-btn.active {
+  color: var(--green);
+  border-color: var(--border);
+  background: rgba(57, 255, 136, 0.08);
 }
 
 
-/* ================= MAIN ================= */
+/* =========================
+   MAIN
+========================= */
 
-main {
-  max-width: 780px;
-  margin: auto;
-
-  padding: 12px 12px 60px;
+.main {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+  padding: 40px 0 70px;
 }
+
+
+/* =========================
+   PAGE SYSTEM
+========================= */
 
 .page {
   display: none;
@@ -115,910 +169,2210 @@ main {
 }
 
 
-/* ================= LIVE STATUS ================= */
+/* =========================
+   COMMON TEXT
+========================= */
 
-.live-row {
-  display: flex;
-  justify-content: space-between;
-
-  gap: 10px;
-
-  color: #86a999;
-
+.eyebrow {
+  color: var(--green);
   font-size: 11px;
-
-  padding: 7px 2px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-.status {
-  color: #00f79b;
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
 
-  font-size: 9px;
-
-  border: 1px solid #086440;
-
-  padding: 2px 6px;
+.muted {
+  color: var(--muted);
 }
 
 
-/* ================= COMMON PANEL ================= */
-
-.panel,
-.metrics > div,
-.insights > div,
-.track-col {
-  background:
-    linear-gradient(
-      180deg,
-      #01291c,
-      #012016
-    );
-
-  border: 1px solid #075137;
-
-  border-radius: 10px;
-}
+/* =========================
+   PANELS
+========================= */
 
 .panel {
-  padding: 14px;
-  margin: 10px 0;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14, 33, 27, 0.95),
+      rgba(8, 22, 17, 0.95)
+    );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  padding: 24px;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.18);
 }
 
 
-/* ================= COMMON TEXT ================= */
+/* =========================
+   FOOTER
+========================= */
 
-.panel p,
-.note p,
-.agent p,
-.section-heading p,
-.insights p {
-  color: #9ab5a6;
-  font-size: 11px;
-}/* ================= SIGNAL ================= */
+.footer {
+  padding: 25px 5%;
+  text-align: center;
 
-.signal-line {
-  color: #2ae994;
-  font-size: 25px;
-  margin: 5px 0;
-}
+  border-top: 1px solid var(--border);
 
-.signal-stats {
+  color: var(--muted);
+  font-size: 12px;
+}/* =========================
+   HOME PAGE
+========================= */
+
+.page-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-.signal-stats span {
-  border: 1px solid #0b4832;
-  background: #02291d;
-
-  border-radius: 5px;
-
-  padding: 5px 7px;
-
-  color: #8eae9e;
-
-  font-size: 9px;
+.page-header h1 {
+  margin-top: 6px;
+  font-size: clamp(28px, 5vw, 46px);
+  letter-spacing: -0.03em;
 }
 
-.signal-stats b {
-  color: #31e99b;
+.page-header p {
+  margin-top: 8px;
+  max-width: 650px;
+  color: var(--muted);
 }
 
 
-/* ================= METRICS ================= */
+/* =========================
+   LIVE STATUS
+========================= */
+
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 11px;
+  border-radius: 999px;
+
+  border: 1px solid var(--border);
+  background: rgba(57, 255, 136, 0.06);
+
+  color: var(--green-soft);
+  font-size: 12px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+
+  box-shadow: 0 0 12px var(--green);
+}
+
+
+/* =========================
+   SIGNAL PANEL
+========================= */
+
+.signal-panel {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 250px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: 18px;
+}
+
+.signal-panel::before {
+  content: "";
+
+  position: absolute;
+  width: 280px;
+  height: 280px;
+
+  right: -80px;
+  top: -100px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(57, 255, 136, 0.16);
+
+  box-shadow:
+    0 0 0 35px rgba(57, 255, 136, 0.025),
+    0 0 0 70px rgba(57, 255, 136, 0.018);
+}
+
+.signal-panel::after {
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  right: 0;
+  top: 25px;
+
+  border-radius: 50%;
+
+  border: 1px dashed rgba(57, 255, 136, 0.22);
+}
+
+.signal-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+}
+
+.signal-content h2 {
+  margin-top: 8px;
+  font-size: clamp(24px, 4vw, 38px);
+}
+
+.signal-content p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+
+/* =========================
+   METRICS
+========================= */
 
 .metrics {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 8px;
-
-  margin: 10px 0;
+  margin: 18px 0;
 }
 
-.metrics > div {
-  padding: 12px;
-}
-
-.metrics small {
-  display: block;
-
-  color: #86a999;
-
-  font-size: 8px;
-
-  letter-spacing: 0.5px;
-}
-
-.metrics strong {
-  display: block;
-
-  color: #23e697;
-
-  font-size: 22px;
-
-  margin-top: 2px;
-}
-
-
-/* ================= NOTE ================= */
-
-.note {
-  border-color: #075137;
-}
-
-.note .eyebrow {
-  margin-bottom: 5px;
-}
-
-
-/* ================= JOB RADAR AGENT ================= */
-
-.agent {
-  background:
-    linear-gradient(
-      150deg,
-      #063f2a,
-      #002219
-    );
-
-  border-color: #0b7650;
-}
-
-.agent h2 {
-  font-size: 23px;
-
-  line-height: 1.1;
-
-  margin: 3px 0;
-}
-
-.next-job {
-  border: 1px solid #0c6b49;
-
-  background: #01291c;
-
-  border-radius: 7px;
-
-  padding: 11px;
-
-  margin-top: 12px;
-}
-
-.next-title {
-  font-size: 16px;
-
-  font-weight: bold;
-}
-
-.company {
-  color: #7fae98;
-
-  margin: 3px 0;
-}
-
-.score {
-  color: #00f79b;
-
-  font-size: 20px;
-
-  font-weight: bold;
-}
-
-.mini-block {
-  border-top: 1px solid #0a4832;
-
-  margin-top: 9px;
-
-  padding-top: 8px;
-}
-
-.mini-block small {
-  color: #769989;
-}
-
-
-/* ================= SECTION HEADING ================= */
-
-.section-heading {
-  margin: 25px 2px 10px;
-}
-
-.section-heading h2 {
-  font-size: 23px;
-
-  line-height: 1.1;
-
-  margin: 3px 0;
-}
-
-.section-heading p {
-  margin: 3px 0;
-}
-
-
-/* ================= INSIGHTS ================= */
-
-.insights {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 7px;
-}
-
-.insights > div {
-  padding: 12px;
-}
-
-.insights small {
-  display: block;
-
-  color: #86a999;
-
-  font-size: 8px;
-}
-
-.insights strong {
-  display: block;
-
-  color: #27e899;
-
-  font-size: 22px;
-
-  margin-top: 2px;
-}
-
-.insights p {
-  margin: 4px 0 0;
-}
-
-
-/* ================= SKILLS ================= */
-
-.skills {
-  margin-top: 8px;
-}
-
-.chips {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 5px;
-
-  margin-top: 8px;
-}
-
-.chip {
-  font-size: 9px;
-
-  border: 1px solid #0b5137;
-
-  color: #9ddab9;
-
-  background: #022419;
-
-  border-radius: 4px;
-
-  padding: 4px 6px;
-}/* ================= FILTERS ================= */
-
-.filters label {
-  display: block;
-
-  color: #719888;
-
-  font-size: 8px;
-
-  margin-bottom: 8px;
-}
-
-.filters input,
-.filters select {
-  display: block;
-
-  width: 100%;
-
-  margin-top: 4px;
-
-  background: #00180f;
-
-  color: #dff9e9;
-
-  border: 1px solid #075137;
-
-  border-radius: 5px;
-
-  padding: 8px;
-
-  outline: none;
-}
-
-.filters input::placeholder {
-  color: #557568;
-}
-
-.filters input:focus,
-.filters select:focus {
-  border-color: #1b9b67;
-}
-
-
-/* ================= FILTER BUTTONS ================= */
-
-.filter-actions {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 6px;
-
-  margin-top: 4px;
-}
-
-.primary,
-.secondary,
-.upload {
-  display: inline-block;
-
-  border-radius: 6px;
-
-  padding: 9px 12px;
-
-  border: 1px solid #0b704b;
-
-  cursor: pointer;
-}
-
-.primary {
-  background: #00e990;
-
-  color: #002116;
-
-  font-weight: bold;
-}
-
-.primary:hover {
-  background: #27f5aa;
-}
-
-.secondary {
-  background: #02291d;
-
-  color: #9ce1bd;
-}
-
-.secondary:hover {
-  border-color: #00e990;
-
-  color: #00f79b;
-}
-
-
-/* ================= AVOID JOBS ================= */
-
-.avoid {
-  border-color: #65403b;
-}
-
-.avoid h2 {
-  margin: 2px 0;
-}
-
-.avoid-item {
-  padding: 8px 0;
-
-  border-top: 1px solid #153a2c;
-}
-
-.avoid-item b {
-  display: block;
-
-  font-size: 11px;
-}
-
-.avoid-item small {
-  color: #ff8d8d;
-
-  font-size: 9px;
-}
-
-
-/* ================= JOB RESULTS ================= */
-
-.results {
-  display: grid;
-
-  gap: 8px;
-
-  margin-top: 10px;
-}
-
-.job-card {
-  background:
-    linear-gradient(
-      180deg,
-      #012a1d,
-      #011d14
-    );
-
-  border: 1px solid #075137;
-
-  border-radius: 9px;
-
-  padding: 13px;
+.metric-card {
+  padding: 20px;
+
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
 
   transition:
     transform 0.2s ease,
     border-color 0.2s ease;
 }
 
-.job-card:hover {
-  transform: translateY(-2px);
-
-  border-color: #0b8b59;
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(57, 255, 136, 0.35);
 }
 
-.job-top {
-  display: flex;
+.metric-card span {
+  display: block;
 
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.metric-card strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: var(--green);
+  font-size: 30px;
+}
+
+
+/* =========================
+   NOTE
+========================= */
+
+.note {
+  margin: 18px 0;
+
+  padding: 14px 16px;
+
+  border-left: 2px solid var(--green);
+  background: rgba(57, 255, 136, 0.035);
+
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   AGENT
+========================= */
+
+.agent-panel {
+  margin-top: 20px;
+
+  border: 1px solid rgba(57, 255, 136, 0.24);
+
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(57, 255, 136, 0.08),
+      transparent 30%
+    ),
+    var(--panel);
+}
+
+.agent-header {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 18px;
 }
 
-.job-title {
-  font-size: 16px;
-
-  font-weight: bold;
+.agent-header h2 {
+  margin-top: 5px;
 }
 
-.job-company {
-  color: #83a997;
+.agent-badge {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  color: var(--green);
+  background: rgba(57, 255, 136, 0.08);
+
+  border: 1px solid rgba(57, 255, 136, 0.2);
 
   font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
-.job-score {
-  color: #00f79b;
+.agent-result {
+  min-height: 90px;
 
-  font-size: 19px;
+  padding: 18px;
 
-  font-weight: bold;
+  border: 1px solid var(--border);
+  border-radius: 14px;
 
-  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.agent-result h3 {
+  margin-bottom: 6px;
+}
+
+.agent-result p {
+  color: var(--muted);
+  font-size: 13px;
 }
 
 
-/* ================= JOB META ================= */
+/* =========================
+   INSIGHTS
+========================= */
 
-.meta {
+.section-title {
   display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 5px;
-
-  margin: 8px 0;
-}
-
-.meta span {
-  border: 1px solid #0a4933;
-
-  border-radius: 4px;
-
-  padding: 3px 5px;
-
-  color: #82a794;
-
-  font-size: 8px;
-}
-
-
-/* ================= JOB ACTIONS ================= */
-
-.job-actions {
-  display: flex;
-
+  align-items: center;
   justify-content: space-between;
 
-  gap: 5px;
-
-  margin-top: 10px;
+  margin: 32px 0 14px;
 }
 
-.job-actions button {
-  padding: 7px 9px;
-
-  font-size: 10px;
+.section-title h2 {
+  font-size: 20px;
 }
 
+.section-title span {
+  color: var(--muted);
+  font-size: 12px;
+}
 
-/* ================= MOBILE JOB BUTTONS ================= */
-
-@media (max-width: 560px) {
-
-  .job-actions {
-    flex-wrap: wrap;
-  }
-
-  .job-actions button {
-    flex: 1;
-    min-width: 90px;
-  }
-
-}/* ================= RESUME ================= */
-
-.resume-grid {
+.insights-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
 
-  grid-template-columns:
-    repeat(2, 1fr);
+.insight-card {
+  padding: 20px;
 
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--panel);
+}
+
+.insight-card strong {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--green);
+}
+
+.insight-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   TOP SKILLS
+========================= */
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
-.upload {
-  margin-top: 10px;
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
 
-  background: #00e990;
+  padding: 7px 11px;
 
-  color: #002116;
+  border-radius: 999px;
 
-  font-weight: bold;
-}
+  border: 1px solid var(--border);
+  background: rgba(57, 255, 136, 0.045);
 
-.resume-grid input {
-  display: none;
-}
-
-.muted {
-  color: #6f9180 !important;
-}
-
-
-/* ================= PROFILE SCORE ================= */
-
-.score-big {
-  font-size: 52px;
-
-  color: #00f79b;
-
-  font-weight: bold;
-
-  margin: 8px 0;
-}
-
-.bar {
-  height: 7px;
-
-  background: #063021;
-
-  border-radius: 10px;
-
-  overflow: hidden;
-}
-
-.bar i {
-  display: block;
-
-  width: 0;
-
-  height: 100%;
-
-  background: #00e990;
-
-  transition: width 0.5s ease;
-}
-
-
-/* ================= ROADMAP ================= */
-
-.roadmap > div:not(.eyebrow) {
-  border-top: 1px solid #0a4531;
-
-  padding: 10px 0;
-}
-
-.roadmap strong {
-  display: block;
+  color: var(--green-soft);
 
   font-size: 12px;
 }
 
-.roadmap small {
-  color: #85a895;
 
-  font-size: 10px;
+/* =========================
+   AVOID JOBS
+========================= */
+
+.avoid-panel {
+  margin-top: 18px;
+
+  border-color: rgba(255, 107, 107, 0.18);
 }
 
-
-/* ================= APPLICATION TRACKER ================= */
-
-.tracker {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 7px;
+.avoid-panel .panel-title {
+  color: #ff9292;
 }
 
-.track-col {
-  padding: 9px;
-
-  min-height: 230px;
+.avoid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.track-col h3 {
+.avoid-item {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 107, 107, 0.06);
+  border: 1px solid rgba(255, 107, 107, 0.16);
+
+  color: #ffaaaa;
+
+  font-size: 12px;
+}/* =========================
+   FILTER JOBS
+========================= */
+
+.filter-panel {
+  margin-bottom: 22px;
+}
+
+.panel-title {
+  margin-bottom: 18px;
+
+  color: var(--green);
+
   font-size: 11px;
-
-  color: #8eac9e;
-
-  border-bottom: 1px solid #0b4732;
-
-  padding-bottom: 8px;
-
-  margin-top: 0;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-.track-col h3 b {
-  float: right;
 
-  color: #00f79b;
+/* =========================
+   FILTER GRID
+========================= */
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
 
-.track-card {
-  background: #052b20;
-
-  border: 1px solid #0b4f37;
-
-  border-radius: 5px;
-
-  padding: 8px;
-
-  margin: 6px 0;
-
-  font-size: 10px;
+.filter-field {
+  min-width: 0;
 }
 
-.track-card small {
+.filter-field label {
   display: block;
 
-  color: #77998a;
+  margin-bottom: 7px;
 
-  margin-top: 3px;
+  color: var(--muted);
+
+  font-size: 11px;
+  font-weight: 700;
 }
 
 
-/* ================= JOB DETAILS MODAL ================= */
+/* =========================
+   INPUTS + SELECTS
+========================= */
 
-.modal {
-  position: fixed;
+.filter-field input,
+.filter-field select,
+.modal-actions select {
+  width: 100%;
 
-  inset: 0;
+  min-height: 44px;
 
-  z-index: 100;
+  padding: 0 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #081611;
+  color: var(--text);
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.modal[hidden],
-.toast[hidden] {
-  display: none;
+.filter-field input::placeholder {
+  color: #607c70;
 }
 
-.shade {
-  position: absolute;
+.filter-field input:focus,
+.filter-field select:focus,
+.modal-actions select:focus {
+  border-color: rgba(57, 255, 136, 0.55);
 
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.75);
+  box-shadow:
+    0 0 0 3px rgba(57, 255, 136, 0.07);
 }
 
-.modal-box {
-  position: absolute;
+.filter-field select {
+  cursor: pointer;
+}
 
-  left: 50%;
-  top: 50%;
 
-  transform: translate(-50%, -50%);
+/* =========================
+   FILTER ACTIONS
+========================= */
 
-  width: min(700px, 94vw);
+.filter-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
-  max-height: 88vh;
+  flex-wrap: wrap;
 
-  overflow-y: auto;
+  gap: 10px;
 
-  background: #012218;
+  margin-top: 18px;
+}
 
-  border: 1px solid #0b6a48;
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+  font-family: inherit;
+}
+
+.primary,
+.secondary {
+  min-height: 42px;
+
+  padding: 0 16px;
 
   border-radius: 10px;
 
-  padding: 17px;
+  cursor: pointer;
 
-  box-shadow: 0 20px 80px #000;
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
-.x {
-  position: absolute;
+.primary {
+  border: 1px solid var(--green);
 
-  right: 8px;
+  background: var(--green);
+  color: #031009;
+}
 
-  top: 5px;
+.primary:hover {
+  transform: translateY(-2px);
 
-  background: none;
+  background: var(--green-soft);
 
-  border: 0;
+  box-shadow:
+    0 8px 24px rgba(57, 255, 136, 0.14);
+}
 
-  color: #83a997;
+.secondary {
+  border: 1px solid var(--border);
 
-  font-size: 25px;
+  background: rgba(57, 255, 136, 0.035);
+  color: var(--green-soft);
+}
+
+.secondary:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(57, 255, 136, 0.35);
+
+  background: rgba(57, 255, 136, 0.08);
+}
+
+
+/* =========================
+   RESULTS HEADER
+========================= */
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin: 25px 0 14px;
+}
+
+.results-header h2 {
+  font-size: 20px;
+}
+
+.results-count {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  text-align: center;
+
+  padding: 50px 20px;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   MOBILE FILTERS
+========================= */
+
+@media (max-width: 850px) {
+  .filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-actions {
+    justify-content: stretch;
+  }
+
+  .filter-actions button {
+    flex: 1;
+  }
+
+  .results-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}/* =========================
+   FILTER JOBS
+========================= */
+
+.filter-panel {
+  margin-bottom: 22px;
+}
+
+.panel-title {
+  margin-bottom: 18px;
+
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================
+   FILTER GRID
+========================= */
+
+.filter-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.filter-field {
+  min-width: 0;
+}
+
+.filter-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================
+   INPUTS + SELECTS
+========================= */
+
+.filter-field input,
+.filter-field select,
+.modal-actions select {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 13px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #071510;
+  color: var(--text);
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filter-field input::placeholder {
+  color: #60786d;
+}
+
+.filter-field input:focus,
+.filter-field select:focus,
+.modal-actions select:focus {
+  border-color: rgba(57, 255, 136, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(57, 255, 136, 0.07);
+}
+
+.filter-field select {
+  cursor: pointer;
+}
+
+.filter-field select option,
+.modal-actions select option {
+  background: #071510;
+  color: var(--text);
+}
+
+
+/* =========================
+   FILTER ACTIONS
+========================= */
+
+.filter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+  font-family: inherit;
+}
+
+.primary,
+.secondary {
+  min-height: 42px;
+
+  padding: 0 16px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.primary {
+  border: 1px solid var(--green);
+
+  background: var(--green);
+  color: #041009;
+
+  box-shadow:
+    0 0 20px rgba(57, 255, 136, 0.08);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+
+  background: var(--green-soft);
+}
+
+.secondary {
+  border: 1px solid var(--border);
+
+  background: rgba(57, 255, 136, 0.04);
+
+  color: var(--green-soft);
+}
+
+.secondary:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(57, 255, 136, 0.4);
+
+  background: rgba(57, 255, 136, 0.08);
+}
+
+
+/* =========================
+   RESULTS HEADER
+========================= */
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin: 25px 0 14px;
+}
+
+.results-header strong {
+  font-size: 16px;
+}
+
+.results-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================
+   RESULTS GRID
+========================= */
+
+.results-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================
+   DESKTOP FILTER IMPROVEMENT
+========================= */
+
+@media (min-width: 1000px) {
+  .filter-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}/* =========================
+   JOB CARD
+========================= */
+
+.job-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 260px;
+  padding: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14, 33, 27, 0.96),
+      rgba(7, 18, 14, 0.96)
+    );
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(57, 255, 136, 0.32);
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================
+   JOB CARD HEADER
+========================= */
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+.job-card h3 {
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.job-company {
+  margin-top: 5px;
+
+  color: var(--green-soft);
+  font-size: 12px;
+}
+
+.job-score {
+  flex-shrink: 0;
+
+  padding: 6px 9px;
+
+  border: 1px solid rgba(57, 255, 136, 0.22);
+  border-radius: 999px;
+
+  background: rgba(57, 255, 136, 0.07);
+
+  color: var(--green);
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   JOB META
+========================= */
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin: 14px 0;
+}
+
+.job-meta span {
+  padding: 5px 8px;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   JOB DESCRIPTION
+========================= */
+
+.job-description {
+  display: -webkit-box;
+
+  margin-bottom: 15px;
+
+  overflow: hidden;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+
+/* =========================
+   MATCH BAR
+========================= */
+
+.match-box {
+  margin-top: auto;
+}
+
+.match-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 6px;
+
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.match-top strong {
+  color: var(--green);
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #13251e;
+}
+
+.progress-bar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green-2),
+      var(--green)
+    );
+
+  box-shadow:
+    0 0 10px rgba(57, 255, 136, 0.3);
+
+  transition: width 0.4s ease;
+}
+
+
+/* =========================
+   CARD SKILLS
+========================= */
+
+.job-skills {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin: 14px 0;
+}
+
+.job-skills .skill-chip {
+  padding: 5px 8px;
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   JOB ACTIONS
+========================= */
+
+.job-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 16px;
+}
+
+.job-actions button,
+.job-actions a {
+  flex: 1;
+
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 10px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  text-decoration: none;
 
   cursor: pointer;
 }
 
-.modal-box h2 {
-  margin: 4px 0;
+.job-actions .view-job {
+  border: 1px solid var(--border);
+
+  background: rgba(57, 255, 136, 0.05);
+
+  color: var(--green-soft);
 }
 
-.modal-box h3 {
+.job-actions .view-job:hover {
+  border-color: rgba(57, 255, 136, 0.4);
+}
+
+.job-actions .save-job {
+  border: 1px solid var(--green);
+
+  background: var(--green);
+
+  color: #041009;
+}
+
+
+/* =========================
+   SAVED STATE
+========================= */
+
+.job-card.saved {
+  border-color: rgba(57, 255, 136, 0.35);
+}
+
+.job-card.saved::before {
+  content: "SAVED";
+
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  padding: 3px 6px;
+
+  border-radius: 5px;
+
+  background: rgba(57, 255, 136, 0.1);
+
+  color: var(--green);
+
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================
+   JOB STATUS
+========================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-top: 8px;
+  padding: 5px 8px;
+
+  border-radius: 7px;
+
+  background: rgba(57, 255, 136, 0.06);
+  border: 1px solid var(--border);
+
+  color: var(--green-soft);
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   RESPONSIVE JOB GRID
+========================= */
+
+@media (max-width: 760px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+}/* =========================
+   RESUME PAGE
+========================= */
+
+.resume-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.resume-upload {
+  min-height: 230px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1px dashed rgba(57, 255, 136, 0.3);
+  border-radius: 16px;
+
+  background: rgba(57, 255, 136, 0.025);
+}
+
+.resume-upload h3 {
+  margin: 10px 0 6px;
+}
+
+.resume-upload p {
+  max-width: 420px;
+
+  color: var(--muted);
   font-size: 12px;
-
-  margin: 17px 0 5px;
 }
 
-.description {
-  color: #9ab5a6;
+.resume-upload input[type="file"] {
+  width: 100%;
+  max-width: 360px;
+
+  margin-top: 18px;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: #071510;
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   RESUME NAME
+========================= */
+
+.resume-name {
+  margin-top: 12px;
+
+  color: var(--green-soft);
+
+  font-size: 12px;
+  text-align: center;
+}
+
+
+/* =========================
+   PROFILE SCORE
+========================= */
+
+.profile-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 230px;
+}
+
+.profile-score-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.profile-score-header span {
+  color: var(--muted);
+
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.profile-score-header strong {
+  color: var(--green);
+
+  font-size: 34px;
+}
+
+.profile-score p {
+  margin-top: 12px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   PROFILE BAR
+========================= */
+
+.profile-bar {
+  width: 100%;
+  height: 10px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #13251e;
+}
+
+.profile-bar-fill {
+  height: 100%;
+
+  width: 0;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--green-2),
+      var(--green)
+    );
+
+  box-shadow:
+    0 0 14px rgba(57, 255, 136, 0.3);
+
+  transition: width 0.6s ease;
+}
+
+
+/* =========================
+   ROADMAP
+========================= */
+
+.roadmap {
+  margin-top: 24px;
+}
+
+.roadmap h2 {
+  margin-bottom: 14px;
+
+  font-size: 20px;
+}
+
+.roadmap-list {
+  display: grid;
+  gap: 10px;
+}
+
+.roadmap-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--panel);
+}
+
+.roadmap-number {
+  flex-shrink: 0;
+
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background: rgba(57, 255, 136, 0.08);
+  border: 1px solid rgba(57, 255, 136, 0.2);
+
+  color: var(--green);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.roadmap-item h3 {
+  margin-bottom: 4px;
+
+  font-size: 14px;
+}
+
+.roadmap-item p {
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   RESUME SKILL TAGS
+========================= */
+
+.resume-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+.resume-skills span {
+  padding: 6px 9px;
+
+  border-radius: 8px;
+
+  background: rgba(57, 255, 136, 0.05);
+  border: 1px solid var(--border);
+
+  color: var(--green-soft);
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   MOBILE RESUME
+========================= */
+
+@media (max-width: 760px) {
+  .resume-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-upload,
+  .profile-score {
+    min-height: 200px;
+  }
+}/* =========================
+   APPLICATION TRACKER
+========================= */
+
+.tracker-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 22px;
+}
+
+.tracker-column {
+  min-height: 300px;
+
+  padding: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--panel);
+}
+
+
+/* =========================
+   TRACKER HEADER
+========================= */
+
+.tracker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.tracker-header span {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+.tracker-header strong {
+  min-width: 26px;
+  height: 26px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background: rgba(57, 255, 136, 0.08);
+
+  color: var(--green);
 
   font-size: 11px;
 }
 
 
-/* ================= MODAL SCORE ================= */
+/* =========================
+   TRACKER LIST
+========================= */
 
-.score-line {
+.tracker-list {
   display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
 
-  justify-content: space-between;
 
-  margin-top: 13px;
+/* =========================
+   TRACKER ITEM
+========================= */
 
-  color: #7fa693;
+.tracker-item {
+  padding: 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.015);
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.tracker-item:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(57, 255, 136, 0.3);
+}
+
+.tracker-item h4 {
+  margin-bottom: 4px;
+
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.tracker-item p {
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   TRACKER SCORE
+========================= */
+
+.tracker-score {
+  display: inline-block;
+
+  margin-top: 8px;
+  padding: 4px 7px;
+
+  border-radius: 6px;
+
+  background: rgba(57, 255, 136, 0.06);
+
+  color: var(--green);
 
   font-size: 9px;
-}
-
-.score-line strong {
-  color: #00f79b;
-
-  font-size: 18px;
+  font-weight: 800;
 }
 
 
-/* ================= MODAL BUTTONS ================= */
+/* =========================
+   TRACKER EMPTY
+========================= */
 
-.modal-buttons {
+.tracker-empty {
+  padding: 30px 10px;
+
+  text-align: center;
+
+  color: #5d746a;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   TRACKER STATUS COLORS
+========================= */
+
+.tracker-column:nth-child(1) {
+  border-top: 2px solid rgba(57, 255, 136, 0.35);
+}
+
+.tracker-column:nth-child(2) {
+  border-top: 2px solid rgba(80, 180, 255, 0.35);
+}
+
+.tracker-column:nth-child(3) {
+  border-top: 2px solid rgba(255, 209, 102, 0.35);
+}
+
+.tracker-column:nth-child(4) {
+  border-top: 2px solid rgba(255, 107, 107, 0.35);
+}
+
+
+/* =========================
+   TRACKER RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+  .tracker-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .tracker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-column {
+    min-height: 180px;
+  }
+}/* =========================
+   JOB DETAILS MODAL
+========================= */
+
+.modal[hidden],
+.toast[hidden] {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+
   display: flex;
+  align-items: center;
+  justify-content: center;
 
-  flex-wrap: wrap;
+  padding: 20px;
+}
 
-  justify-content: flex-end;
+.modal-overlay {
+  position: absolute;
+  inset: 0;
 
-  gap: 6px;
+  background: rgba(0, 0, 0, 0.72);
 
-  margin-top: 17px;
+  backdrop-filter: blur(8px);
+}
+
+.modal-box {
+  position: relative;
+  z-index: 2;
+
+  width: min(720px, 100%);
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 28px;
+
+  border: 1px solid rgba(57, 255, 136, 0.22);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d2119,
+      #07130f
+    );
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.5);
 }
 
 
-/* ================= TOAST ================= */
+/* =========================
+   MODAL CLOSE
+========================= */
+
+.modal-close {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  color: var(--muted);
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text);
+
+  border-color: rgba(57, 255, 136, 0.35);
+}
+
+
+/* =========================
+   MODAL TITLE
+========================= */
+
+.modal-box h2 {
+  max-width: 90%;
+
+  margin-top: 7px;
+
+  font-size: 26px;
+}
+
+.modal-company {
+  margin-top: 6px;
+
+  color: var(--green-soft);
+
+  font-size: 13px;
+}
+
+.modal-meta {
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   MODAL MATCH BOX
+========================= */
+
+.modal-box .match-box {
+  margin: 22px 0;
+
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 13px;
+
+  background: rgba(57, 255, 136, 0.025);
+}
+
+.match-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 9px;
+}
+
+.match-score span {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.match-score strong {
+  color: var(--green);
+
+  font-size: 22px;
+}
+
+
+/* =========================
+   MODAL SECTIONS
+========================= */
+
+.modal-section {
+  margin-top: 22px;
+}
+
+.modal-section h3 {
+  margin-bottom: 10px;
+
+  font-size: 14px;
+}
+
+.modal-section ul {
+  padding-left: 18px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.modal-section li {
+  margin-bottom: 6px;
+}
+
+.modal-section .skill-list {
+  margin-top: 4px;
+}
+
+.modal-section .skill-chip {
+  font-size: 10px;
+}
+
+
+/* =========================
+   MODAL DESCRIPTION
+========================= */
+
+.modal-box .job-description {
+  display: block;
+
+  max-height: 190px;
+
+  overflow-y: auto;
+
+  padding: 13px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.12);
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MODAL ACTIONS
+========================= */
+
+.modal-actions {
+  display: grid;
+
+  grid-template-columns: 1.2fr 1fr 1fr;
+
+  gap: 9px;
+
+  margin-top: 25px;
+}
+
+.modal-actions select {
+  height: 42px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
 
 .toast {
   position: fixed;
 
-  bottom: 15px;
+  right: 22px;
+  bottom: 22px;
 
-  left: 50%;
+  z-index: 700;
 
-  transform: translateX(-50%);
+  padding: 12px 16px;
 
-  background: #063e2a;
+  border: 1px solid rgba(57, 255, 136, 0.3);
+  border-radius: 10px;
 
-  color: #00f79b;
+  background: #0d2119;
 
-  border: 1px solid #0c7650;
+  color: var(--green);
 
-  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
 
-  border-radius: 6px;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35);
 
-  font-size: 10px;
+  animation: toastIn 0.25s ease;
+}
 
-  z-index: 150;
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
-/* ================= DESKTOP ================= */
+/* =========================
+   MOBILE MODAL
+========================= */
 
-@media (min-width: 781px) {
+@media (max-width: 600px) {
 
-  body {
-    font-size: 14px;
+  .modal {
+    padding: 10px;
   }
 
-  .brand h1 {
-    font-size: 58px;
+  .modal-box {
+    max-height: 94vh;
+
+    padding: 22px 17px;
+    border-radius: 16px;
   }
 
-  .filters {
+  .modal-box h2 {
+    font-size: 21px;
+  }
+
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .toast {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+
+    text-align: center;
+  }
+}/* =========================
+   FINAL RESPONSIVE POLISH
+========================= */
+
+@media (max-width: 900px) {
+
+  .topbar {
+    padding: 12px 4%;
+  }
+
+  .main {
+    width: 94%;
+    padding-top: 30px;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .resume-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .topbar {
+    position: relative;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .nav {
+    width: 100%;
+
     display: grid;
-
-    grid-template-columns:
-      repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 5px;
   }
 
-  .filters label {
-    margin: 0;
+  .nav-btn {
+    padding: 9px 5px;
+
+    font-size: 11px;
   }
 
-  .filter-actions {
-    grid-column: 1 / -1;
+  .main {
+    width: 94%;
+    padding: 26px 0 50px;
   }
 
-  .results {
-    grid-template-columns:
-      repeat(2, 1fr);
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 560px) {
-
-  .resume-grid {
-    grid-template-columns: 1fr;
+  .page-header h1 {
+    font-size: 30px;
   }
 
-  .tracker {
-    grid-template-columns:
-      repeat(2, 1fr);
+  .signal-panel {
+    min-height: 220px;
   }
 
-  .brand h1 {
-    font-size: 39px;
+  .signal-panel::before {
+    right: -150px;
   }
 
   .metrics {
-    grid-template-columns:
-      repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
-  .metrics > div {
-    padding: 9px 7px;
+  .metric-card {
+    padding: 15px;
   }
 
-  .metrics strong {
-    font-size: 18px;
+  .metric-card strong {
+    font-size: 24px;
   }
 
-  .filters {
-    padding: 11px;
+  .filter-grid {
+    grid-template-columns: 1fr;
   }
 
-  .modal-buttons {
-    justify-content: stretch;
+  .filter-actions {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
-  .modal-buttons button {
-    flex: 1;
+  .filter-actions button {
+    width: 100%;
   }
 
+  .results-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 480px) {
+
+  .brand-text strong {
+    font-size: 15px;
+  }
+
+  .brand-text span {
+    font-size: 10px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metric-card {
+    padding: 13px;
+  }
+
+  .metric-card span {
+    font-size: 9px;
+  }
+
+  .metric-card strong {
+    font-size: 21px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .agent-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .agent-badge {
+    align-self: flex-start;
+  }
+
+  .job-card {
+    padding: 16px;
+  }
+
+  .job-card-header {
+    flex-direction: column;
+  }
+
+  .job-score {
+    align-self: flex-start;
+  }
+
+  .job-actions {
+    flex-direction: column;
+  }
+
+  .job-actions button,
+  .job-actions a {
+    width: 100%;
+  }
+
+  .roadmap-item {
+    padding: 13px;
+  }
+}
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1b4939;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #28634d;
 }
