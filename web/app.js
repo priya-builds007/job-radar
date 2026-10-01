@@ -5900,4 +5900,14 @@ function setupAllButtons() {
   setupAllButtons();
 
   loadJobs();
-}
+}document.addEventListener("input", (event) => {
+  if (event.target.id !== "search") return;
+
+  const status = $("#appStatus");
+
+  if (status && status.value === "saved") {
+    status.value = "";
+  }
+
+  applyFilters();
+});
