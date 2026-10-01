@@ -3083,7 +3083,7 @@ function showPage(pageName) {
         page.classList.remove("active");
     });
 
-    const targetPage = $(`${pageName}Page`);
+    const targetPage = $(`page-${pageName}`);
 
     if (targetPage) {
         targetPage.classList.add("active");
