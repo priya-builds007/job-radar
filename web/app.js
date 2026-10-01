@@ -5883,4 +5883,21 @@ function setupAllButtons() {
 
   bindBestMatchButton();
 
+}function startJobRadar() {
+  bindNavigation();
+  bindFilterEvents();
+  bindJobEvents();
+  bindModalEvents();
+  bindResumeEvents();
+  bindTrackerEvents();
+  bindSkillEvent();
+  bindExportEvents();
+  bindKeyboardEvents();
+  bindAgentEvents();
+  bindExtraEvents();
+
+  // Final button connections
+  setupAllButtons();
+
+  loadJobs();
 }
