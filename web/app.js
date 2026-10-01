@@ -1,160 +1,125 @@
 const state = {
   jobs: [],
   filtered: [],
-
-  saved: JSON.parse(
-    localStorage.getItem("jobRadarSaved") || "[]"
-  ),
-
-  apps: JSON.parse(
-    localStorage.getItem("jobRadarApplications") || "{}"
-  ),
-
+  saved: JSON.parse(localStorage.getItem("jobRadarSaved") || "[]"),
+  apps: JSON.parse(localStorage.getItem("jobRadarApplications") || "{}"),
   current: null
 };
-
 
 const $ = (id) => document.getElementById(id);
 
 const DATA_URL = "../data/processed_jobs.json";
 
-
-/* ================= HELPERS ================= */
-
-const escapeHTML = (value) => {
-
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    (char) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[char])
-  );
-
-};
-
-
-const getId = (job) => {
-
+function getId(job) {
   return String(
     job.id ||
     job.job_id ||
-    `${job.title || job.job_title}-${job.company || job.company_name}-${job.location || ""}`
+    job.url ||
+    job.link ||
+    `${getCompany(job)}-${getTitle(job)}`
   );
+}
 
-};
-
-
-const getTitle = (job) => {
-
-  return job.title ||
+function getTitle(job) {
+  return (
+    job.title ||
     job.job_title ||
-    "Untitled role";
+    job.position ||
+    "Untitled Job"
+  );
+}
 
-};
-
-
-const getCompany = (job) => {
-
-  return job.company ||
+function getCompany(job) {
+  return (
+    job.company ||
     job.company_name ||
-    "Company not listed";
+    "Unknown Company"
+  );
+}
 
-};
-
-
-const getLocation = (job) => {
-
-  return job.location ||
+function getLocation(job) {
+  return (
+    job.location ||
     job.city ||
-    "Location not specified";
+    "India"
+  );
+}
 
-};
-
-
-const getSource = (job) => {
-
-  return job.site ||
+function getSource(job) {
+  return (
     job.source ||
-    job.platform ||
-    "Job board";
+    job.site ||
+    "Job Board"
+  );
+}
 
-};
-
-
-const getDescription = (job) => {
-
-  return job.description ||
+function getDescription(job) {
+  return (
+    job.description ||
     job.job_description ||
-    "No description available.";
-
-};
-
-
-const getScore = (job) => {
-
-  return Math.round(
-    Number(
-      job.match_score ??
-      job.score ??
-      job.match ??
-      0
-    ) || 0
+    "No description available."
   );
+}
 
-};
+function getScore(job) {
+  const value =
+    job.match_score ??
+    job.match ??
+    job.score ??
+    job.personal_match ??
+    0;
 
+  const number = Number(value);
 
-const getSkills = (job) => {
+  return Number.isFinite(number)
+    ? Math.round(number)
+    : 0;
+}
 
-  if (Array.isArray(job.skills)) {
-    return job.skills;
+function getSkills(job) {
+  const skills =
+    job.skills ||
+    job.required_skills ||
+    job.matched_skills ||
+    [];
+
+  if (Array.isArray(skills)) {
+    return skills;
   }
 
-  if (typeof job.skills === "string") {
-    return job.skills
-      .split(",")
-      .map(skill => skill.trim())
-      .filter(Boolean);
+  return String(skills)
+    .split(",")
+    .map((skill) => skill.trim())
+    .filter(Boolean);
+}
+
+function getReasons(job) {
+  const reasons =
+    job.reasons ||
+    job.match_reasons ||
+    job.why_match ||
+    [];
+
+  if (Array.isArray(reasons)) {
+    return reasons;
   }
 
-  return [];
-
-};
-
-
-const getReasons = (job) => {
-
-  if (Array.isArray(job.reasons)) {
-    return job.reasons;
+  if (reasons) {
+    return [String(reasons)];
   }
 
-  if (typeof job.reasons === "string") {
-    return job.reasons
-      .split(/\n|•/)
-      .map(reason => reason.trim())
-      .filter(Boolean);
-  }
+  return [
+    "Matches your selected job preferences.",
+    "Relevant skills were detected.",
+    "Suitable for an entry-level profile."
+  ];
+}
 
-  return [];
-
-};
-
-
-const isSaved = (job) => {
-
-  return state.saved.includes(
-    getId(job)
-  );
-
-};
-
+function isSaved(jobId) {
+  return state.saved.includes(jobId);
+}
 
 function saveState() {
-
   localStorage.setItem(
     "jobRadarSaved",
     JSON.stringify(state.saved)
@@ -164,725 +129,380 @@ function saveState() {
     "jobRadarApplications",
     JSON.stringify(state.apps)
   );
-
 }
-
 
 function showToast(message) {
-
   const toast = $("toast");
 
-  toast.textContent = message;
+  if (!toast) {
+    return;
+  }
 
+  toast.textContent = message;
   toast.hidden = false;
 
-  setTimeout(() => {
-    toast.hidden = true;
-  }, 1700);
+  clearTimeout(window.__toastTimer);
 
+  window.__toastTimer = setTimeout(() => {
+    toast.hidden = true;
+  }, 2200);
 }
 
-
-/* ================= PAGE NAVIGATION ================= */
-
-function goToPage(pageId) {
-
+function goToPage(page) {
   document
     .querySelectorAll(".page")
-    .forEach(page => {
-      page.classList.remove("active");
+    .forEach((section) => {
+      section.classList.remove("active");
     });
 
-  const page = $(pageId);
+  const target = $(`page-${page}`);
 
-  if (page) {
-    page.classList.add("active");
+  if (target) {
+    target.classList.add("active");
   }
+
+  document
+    .querySelectorAll("[data-page]")
+    .forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.page === page
+      );
+    });
 
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
-
-}
-
-
-document
-  .querySelectorAll("[data-go]")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-        goToPage(button.dataset.go);
-      }
-    );
-
-  });/* ================= LOAD JOB DATA ================= */
-
-async function loadJobs() {
-
+}async function loadJobs() {
   try {
-
-    const response = await fetch(
-      DATA_URL,
-      {
-        cache: "no-store"
-      }
-    );
+    const response = await fetch(DATA_URL);
 
     if (!response.ok) {
-      throw new Error("Job data could not be loaded");
+      throw new Error("Unable to load jobs");
     }
 
     const data = await response.json();
 
-    /*
-      Supports both:
-
-      [
-        {...},
-        {...}
-      ]
-
-      and:
-
-      {
-        "jobs": [
-          {...}
-        ]
-      }
-    */
-
     state.jobs = Array.isArray(data)
       ? data
-      : (data.jobs || []);
+      : Array.isArray(data.jobs)
+        ? data.jobs
+        : [];
 
+    const liveStatus = $("liveStatus");
 
-    $("loadStatus").textContent =
-      `Loaded ${state.jobs.length} real jobs.`;
-
-    $("dataStatus").textContent =
-      "LIVE";
-
+    if (liveStatus) {
+      liveStatus.textContent = "LIVE";
+      liveStatus.classList.add("live");
+    }
 
     renderSkills();
-
     renderNextJob();
-
     applyFilters();
 
   } catch (error) {
+    console.error("Job loading error:", error);
 
-    console.error(
-      "Job Radar data error:",
-      error
-    );
+    state.jobs = [];
 
-    $("loadStatus").textContent =
-      "Could not load job data.";
+    const liveStatus = $("liveStatus");
 
-    $("dataStatus").textContent =
-      "OFFLINE";
+    if (liveStatus) {
+      liveStatus.textContent = "OFFLINE";
+      liveStatus.classList.remove("live");
+    }
 
-    $("results").innerHTML = `
-      <div class="panel">
+    applyFilters();
 
-        <b>
-          Job data unavailable.
-        </b>
-
-        <p>
-          Check data/processed_jobs.json
-        </p>
-
-      </div>
-    `;
-
+    showToast("Unable to load job data");
   }
-
 }
 
 
-/* ================= DATE HELPER ================= */
-
 function getPostedDays(job) {
-
   const date =
     job.date_posted ||
     job.posted_date ||
-    job.date;
+    job.posted ||
+    "";
 
   if (!date) {
     return 999;
   }
 
-  const timestamp =
-    Date.parse(date);
+  const postedTime = new Date(date).getTime();
 
-  if (!Number.isFinite(timestamp)) {
+  if (Number.isNaN(postedTime)) {
     return 999;
   }
 
-  return Math.floor(
-    (Date.now() - timestamp) /
-    86400000
-  );
+  const difference =
+    Date.now() - postedTime;
 
+  return Math.max(
+    0,
+    Math.floor(
+      difference / (1000 * 60 * 60 * 24)
+    )
+  );
 }
 
-
-/* ================= FILTER JOBS ================= */
 
 function applyFilters() {
 
   const search =
-    $("search").value
+    ($("search")?.value || "")
       .trim()
       .toLowerCase();
 
-
   const location =
-    $("location").value
+    ($("location")?.value || "")
       .toLowerCase();
-
 
   const jobType =
-    $("jobType").value
+    ($("jobType")?.value || "")
       .toLowerCase();
-
 
   const workMode =
-    $("workMode").value
+    ($("workMode")?.value || "")
       .toLowerCase();
-
 
   const skill =
-    $("skill").value
+    ($("skill")?.value || "")
+      .toLowerCase();
+
+  const posted =
+    ($("posted")?.value || "")
+      .toLowerCase();
+
+  const appStatus =
+    ($("appStatus")?.value || "all")
+      .toLowerCase();
+
+  const minimum =
+    Number($("minimum")?.value || 0);
+
+
+  state.filtered = state.jobs.filter((job) => {
+
+    const text = [
+      getTitle(job),
+      getCompany(job),
+      getLocation(job),
+      getSource(job),
+      getDescription(job),
+      getSkills(job).join(" ")
+    ]
+      .join(" ")
       .toLowerCase();
 
 
-  const appStatus =
-    $("appStatus").value;
+    if (
+      search &&
+      !text.includes(search)
+    ) {
+      return false;
+    }
 
 
-  const minimum =
-    Number(
-      $("minimum").value
-    );
+    if (
+      location &&
+      !getLocation(job)
+        .toLowerCase()
+        .includes(location)
+    ) {
+      return false;
+    }
 
 
-  const posted =
-    $("posted").value;
+    if (
+      jobType &&
+      !text.includes(jobType)
+    ) {
+      return false;
+    }
 
 
-  state.filtered =
-    state.jobs.filter(job => {
+    if (workMode) {
 
-      const searchableText = `
-        ${getTitle(job)}
-        ${getCompany(job)}
-        ${getLocation(job)}
-        ${getDescription(job)}
-        ${getSkills(job).join(" ")}
-      `.toLowerCase();
+      const modeText = [
+        job.work_mode,
+        job.workMode,
+        job.remote,
+        job.location_type,
+        getDescription(job)
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      if (!modeText.includes(workMode)) {
+        return false;
+      }
+    }
 
 
-      /* Search */
+    if (skill) {
+
+      const skillsText =
+        getSkills(job)
+          .join(" ")
+          .toLowerCase();
 
       if (
-        search &&
-        !searchableText.includes(search)
+        !skillsText.includes(skill) &&
+        !text.includes(skill)
       ) {
         return false;
       }
+    }
 
 
-      /* Location */
+    if (minimum > 0) {
 
-      if (
-        location !== "all" &&
-        !getLocation(job)
-          .toLowerCase()
-          .includes(location)
-      ) {
+      if (getScore(job) < minimum) {
+        return false;
+      }
+    }
+
+
+    if (posted) {
+
+      const days =
+        getPostedDays(job);
+
+      if (posted === "today" && days > 0) {
         return false;
       }
 
-
-      /* Job type */
-
-      const typeText = String(
-        job.job_type ||
-        job.type ||
-        ""
-      ).toLowerCase();
-
-
-      if (
-        jobType !== "all" &&
-        !typeText.includes(jobType)
-      ) {
+      if (posted === "3" && days > 3) {
         return false;
       }
 
-
-      /* Work mode */
-
-      const modeText = `
-        ${getLocation(job)}
-        ${job.remote === true ? "remote" : ""}
-        ${job.work_mode || ""}
-      `.toLowerCase();
-
-
-      if (
-        workMode !== "all" &&
-        !modeText.includes(workMode)
-      ) {
+      if (posted === "7" && days > 7) {
         return false;
       }
 
-
-      /* Skill */
-
-      if (
-        skill !== "all" &&
-        !getSkills(job)
-          .some(
-            item =>
-              item.toLowerCase() === skill
-          )
-      ) {
+      if (posted === "30" && days > 30) {
         return false;
       }
+    }
 
 
-      /* Posted date */
+    if (
+      appStatus &&
+      appStatus !== "all"
+    ) {
 
-      if (
-        posted !== "all" &&
-        getPostedDays(job) >
-        Number(posted)
-      ) {
+      const id = getId(job);
+
+      const status =
+        state.apps[id] || "new";
+
+      if (status !== appStatus) {
         return false;
       }
+    }
 
 
-      /* Match score */
-
-      if (
-        getScore(job) <
-        minimum
-      ) {
-        return false;
-      }
-
-
-      /* Application status */
-
-      const currentStatus =
-        state.apps[getId(job)] ||
-        "new";
-
-
-      if (appStatus !== "all") {
-
-        if (
-          appStatus === "saved" &&
-          !isSaved(job)
-        ) {
-          return false;
-        }
-
-        if (
-          appStatus !== "saved" &&
-          currentStatus !== appStatus
-        ) {
-          return false;
-        }
-
-      }
-
-
-      return true;
-
-    });
+    return true;
+  });
 
 
   sortJobs();
 
   renderResults();
-
-  renderAvoidJobs();
-
   updateDashboard();
+  renderTracker();
+}function sortJobs() {
 
-}/* ================= SORT JOBS ================= */
-
-function sortJobs() {
-
-  const sortType =
-    $("sort").value;
-
-
-  state.filtered.sort(
-    (a, b) => {
-
-      if (sortType === "score") {
-
-        return (
-          getScore(b) -
-          getScore(a)
-        );
-
-      }
+  const sort =
+    ($("sort")?.value || "recent")
+      .toLowerCase();
 
 
-      if (sortType === "company") {
+  state.filtered.sort((a, b) => {
 
-        return getCompany(a)
-          .localeCompare(
-            getCompany(b)
-          );
-
-      }
-
-
-      if (sortType === "title") {
-
-        return getTitle(a)
-          .localeCompare(
-            getTitle(b)
-          );
-
-      }
-
-
-      /* Default: newest */
-
-      return (
-        getPostedDays(a) -
-        getPostedDays(b)
-      );
-
+    if (sort === "match") {
+      return getScore(b) - getScore(a);
     }
-  );
 
+
+    if (sort === "company") {
+      return getCompany(a)
+        .localeCompare(
+          getCompany(b)
+        );
+    }
+
+
+    if (sort === "title") {
+      return getTitle(a)
+        .localeCompare(
+          getTitle(b)
+        );
+    }
+
+
+    return (
+      getPostedDays(a) -
+      getPostedDays(b)
+    );
+  });
 }
 
-
-/* ================= RENDER JOBS ================= */
 
 function renderResults() {
 
   const results =
     $("results");
 
+  const emptyState =
+    $("emptyState");
+
+  if (!results) {
+    return;
+  }
+
+
+  results.innerHTML = "";
+
 
   if (!state.filtered.length) {
 
-    results.innerHTML = `
-      <div class="panel">
-
-        <b>
-          No matching jobs
-        </b>
-
-        <p>
-          Try clearing a filter
-          or changing your search.
-        </p>
-
-      </div>
-    `;
-
-    $("resultCount").textContent =
-      "0";
+    if (emptyState) {
+      emptyState.hidden = false;
+    }
 
     return;
-
   }
 
 
-  results.innerHTML =
-    state.filtered
-      .map(
-        job => createJobCard(job)
-      )
-      .join("");
+  if (emptyState) {
+    emptyState.hidden = true;
+  }
 
 
-  $("resultCount").textContent =
-    state.filtered.length;
+  state.filtered.forEach((job) => {
 
+    results.appendChild(
+      createJobCard(job)
+    );
+
+  });
 }
 
-
-/* ================= JOB CARD ================= */
 
 function createJobCard(job) {
 
+  const card =
+    document.createElement("article");
+
+  card.className = "job-card";
+
+
   const id =
     getId(job);
-
-
-  const title =
-    escapeHTML(
-      getTitle(job)
-    );
-
-
-  const company =
-    escapeHTML(
-      getCompany(job)
-    );
-
-
-  const location =
-    escapeHTML(
-      getLocation(job)
-    );
-
-
-  const source =
-    escapeHTML(
-      getSource(job)
-    );
-
-
-  const type =
-    escapeHTML(
-      job.job_type ||
-      job.type ||
-      "Job"
-    );
-
-
-  const score =
-    getScore(job);
-
-
-  const status =
-    state.apps[id] ||
-    "New";
-
-
-  const saved =
-    isSaved(job);
-
-
-  const skills =
-    getSkills(job)
-      .slice(0, 6)
-      .map(
-        skill => `
-          <span class="chip">
-            ${escapeHTML(skill)}
-          </span>
-        `
-      )
-      .join("");
-
-
-  return `
-
-    <article class="job-card">
-
-      <div class="job-top">
-
-        <div>
-
-          <div class="job-title">
-            ${title}
-          </div>
-
-          <div class="job-company">
-            ${company}
-          </div>
-
-        </div>
-
-
-        <div class="job-score">
-          ${score}%
-        </div>
-
-      </div>
-
-
-      <div class="meta">
-
-        <span>
-          ${location}
-        </span>
-
-        <span>
-          ${source}
-        </span>
-
-        <span>
-          ${type}
-        </span>
-
-        <span>
-          ${escapeHTML(status)}
-        </span>
-
-      </div>
-
-
-      <div class="chips">
-
-        ${
-          skills ||
-          `<span class="chip">
-            Skills not specified
-          </span>`
-        }
-
-      </div>
-
-
-      <div class="job-actions">
-
-        <button
-          class="secondary"
-          onclick="openJob('${escapeHTML(id)}')"
-        >
-          View details
-        </button>
-
-
-        <button
-          class="secondary"
-          onclick="toggleSave('${escapeHTML(id)}')"
-        >
-          ${saved ? "Saved" : "Save"}
-        </button>
-
-
-        <button
-          class="primary"
-          onclick="openSource('${escapeHTML(id)}')"
-        >
-          Open Job ↗
-        </button>
-
-      </div>
-
-    </article>
-
-  `;
-
-}
-
-
-/* ================= FIND JOB ================= */
-
-function findJob(jobId) {
-
-  return state.jobs.find(
-    job =>
-      getId(job) === String(jobId)
-  );
-
-}
-
-
-/* ================= SAVE JOB ================= */
-
-function toggleSave(jobId) {
-
-  const id =
-    String(jobId);
-
-
-  const index =
-    state.saved.indexOf(id);
-
-
-  if (index === -1) {
-
-    state.saved.push(id);
-
-    if (!state.apps[id]) {
-      state.apps[id] = "saved";
-    }
-
-    showToast(
-      "Job saved"
-    );
-
-  } else {
-
-    state.saved.splice(
-      index,
-      1
-    );
-
-    showToast(
-      "Removed from saved"
-    );
-
-  }
-
-
-  saveState();
-
-  applyFilters();
-
-}
-
-
-/* ================= OPEN JOB LINK ================= */
-
-function openSource(jobId) {
-
-  const job =
-    findJob(jobId);
-
-
-  if (!job) {
-    return;
-  }
-
-
-  const url =
-    job.job_url ||
-    job.url ||
-    job.link ||
-    job.job_link;
-
-
-  if (!url) {
-
-    showToast(
-      "Job link unavailable"
-    );
-
-    return;
-
-  }
-
-
-  window.open(
-    url,
-    "_blank",
-    "noopener,noreferrer"
-  );
-
-}/* ================= JOB DETAILS ================= */
-
-function openJob(jobId) {
-
-  const job = findJob(jobId);
-
-  if (!job) {
-    return;
-  }
-
-  state.current = job;
 
   const title =
     getTitle(job);
@@ -896,316 +516,617 @@ function openJob(jobId) {
   const source =
     getSource(job);
 
-  const type =
-    job.job_type ||
-    job.type ||
-    "Job";
-
   const score =
     getScore(job);
-
-
-  $("mTitle").textContent =
-    title;
-
-  $("mCompany").textContent =
-    company;
-
-
-  $("mMeta").innerHTML = `
-
-    <span>
-      ${escapeHTML(location)}
-    </span>
-
-    <span>
-      ${escapeHTML(source)}
-    </span>
-
-    <span>
-      ${escapeHTML(type)}
-    </span>
-
-  `;
-
-
-  $("mScore").textContent =
-    `${score}%`;
-
-  $("mBar").style.width =
-    `${Math.min(100, score)}%`;
-
-
-  $("mDescription").textContent =
-    getDescription(job);
-
-
-  /* ================= REASONS ================= */
-
-  const reasons =
-    getReasons(job);
-
-
-  if (reasons.length) {
-
-    $("mReasons").innerHTML =
-      reasons
-        .map(
-          reason => `
-            <p>
-              ✓ ${escapeHTML(reason)}
-            </p>
-          `
-        )
-        .join("");
-
-  } else {
-
-    $("mReasons").innerHTML = `
-      <p>
-        ✓ Matches the current
-        Job Radar profile signal.
-      </p>
-    `;
-
-  }
-
-
-  /* ================= SKILLS ================= */
 
   const skills =
     getSkills(job);
 
+  const saved =
+    isSaved(id);
 
-  $("mSkills").innerHTML =
+  const status =
+    state.apps[id] || "new";
+
+
+  const skillHTML =
     skills.length
       ? skills
+          .slice(0, 6)
           .map(
-            skill => `
-              <span class="chip">
-                ${escapeHTML(skill)}
-              </span>
-            `
+            (skill) =>
+              `<span class="skill-chip">${escapeHTML(skill)}</span>`
           )
           .join("")
-      : `
-        <span class="chip">
-          Skills not specified
-        </span>
-      `;
+      : `<span class="skill-chip">Relevant skills</span>`;
 
 
-  /* ================= SAVE BUTTON ================= */
+  card.innerHTML = `
+    <div class="job-card-top">
 
-  $("mSave").textContent =
-    isSaved(job)
-      ? "Remove Saved"
-      : "Save Job";
+      <div>
+        <div class="job-source">
+          ${escapeHTML(source)}
+        </div>
+
+        <h3>
+          ${escapeHTML(title)}
+        </h3>
+
+        <p class="job-company">
+          ${escapeHTML(company)}
+        </p>
+      </div>
+
+      <div class="match-score">
+        ${score}%
+      </div>
+
+    </div>
 
 
-  /* ================= STATUS BUTTON ================= */
+    <div class="job-meta">
 
-  const currentStatus =
-    state.apps[getId(job)] ||
-    "new";
+      <span>
+        📍 ${escapeHTML(location)}
+      </span>
+
+      <span>
+        💼 ${escapeHTML(
+          job.job_type ||
+          job.type ||
+          "Job"
+        )}
+      </span>
+
+    </div>
 
 
-  if (currentStatus === "applied") {
+    <div class="job-skills">
+      ${skillHTML}
+    </div>
 
-    $("mStatus").textContent =
-      "Mark Interview";
 
-  } else if (
-    currentStatus === "interview"
-  ) {
+    <div class="job-card-actions">
 
-    $("mStatus").textContent =
-      "Mark Closed";
+      <button
+        class="secondary"
+        data-view-job="${escapeHTML(id)}"
+      >
+        View details
+      </button>
+
+
+      <button
+        class="secondary"
+        data-save-job="${escapeHTML(id)}"
+      >
+        ${saved ? "Saved" : "Save"}
+      </button>
+
+
+      <button
+        class="primary"
+        data-open-job="${escapeHTML(id)}"
+      >
+        Open Job ↗
+      </button>
+
+    </div>
+
+
+    <div class="job-status">
+      Status:
+      <strong>
+        ${escapeHTML(status)}
+      </strong>
+    </div>
+  `;
+
+
+  return card;
+}
+
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}function findJob(jobId) {
+  return state.jobs.find(
+    (job) => getId(job) === String(jobId)
+  );
+}
+
+
+function toggleSave(jobId) {
+
+  const id = String(jobId);
+
+  if (isSaved(id)) {
+
+    state.saved =
+      state.saved.filter(
+        (savedId) => savedId !== id
+      );
+
+    showToast("Job removed from saved");
 
   } else {
 
-    $("mStatus").textContent =
-      "Mark Applied";
+    state.saved.push(id);
 
+    showToast("Job saved successfully");
   }
 
 
-  $("modal").hidden = false;
+  saveState();
 
+  renderResults();
+  renderTracker();
+  updateDashboard();
+
+
+  if (
+    state.current &&
+    getId(state.current) === id
+  ) {
+    updateModalButtons();
+  }
 }
 
 
-/* ================= CLOSE MODAL ================= */
+function openSource(jobId) {
+
+  const job =
+    findJob(jobId);
+
+  if (!job) {
+    showToast("Job not found");
+    return;
+  }
+
+
+  const url =
+    job.url ||
+    job.job_url ||
+    job.link ||
+    job.apply_url ||
+    "";
+
+
+  if (!url) {
+    showToast("Job link not available");
+    return;
+  }
+
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+
+
+function openJob(jobId) {
+
+  const job =
+    findJob(jobId);
+
+  if (!job) {
+    showToast("Job not found");
+    return;
+  }
+
+
+  state.current = job;
+
+
+  const title =
+    $("mTitle");
+
+  const company =
+    $("mCompany");
+
+  const meta =
+    $("mMeta");
+
+  const score =
+    $("mScore");
+
+  const bar =
+    $("mBar");
+
+  const reasons =
+    $("mReasons");
+
+  const skills =
+    $("mSkills");
+
+  const description =
+    $("mDescription");
+
+  const status =
+    $("mStatus");
+
+
+  if (title) {
+    title.textContent =
+      getTitle(job);
+  }
+
+
+  if (company) {
+    company.textContent =
+      getCompany(job);
+  }
+
+
+  if (meta) {
+
+    meta.textContent =
+      `${getLocation(job)} • ${getSource(job)}`;
+  }
+
+
+  const match =
+    getScore(job);
+
+
+  if (score) {
+    score.textContent =
+      `${match}%`;
+  }
+
+
+  if (bar) {
+    bar.style.width =
+      `${Math.max(
+        0,
+        Math.min(100, match)
+      )}%`;
+  }
+
+
+  if (reasons) {
+
+    reasons.innerHTML =
+      getReasons(job)
+        .map(
+          (reason) =>
+            `<li>${escapeHTML(reason)}</li>`
+        )
+        .join("");
+  }
+
+
+  if (skills) {
+
+    skills.innerHTML =
+      getSkills(job)
+        .map(
+          (skill) =>
+            `<span class="skill-chip">${escapeHTML(skill)}</span>`
+        )
+        .join("");
+  }
+
+
+  if (description) {
+
+    description.textContent =
+      getDescription(job);
+  }
+
+
+  if (status) {
+
+    status.value =
+      state.apps[getId(job)] ||
+      "new";
+  }
+
+
+  updateModalButtons();
+
+
+  const modal =
+    $("modal");
+
+  if (modal) {
+    modal.hidden = false;
+  }
+}
+
+
+function updateModalButtons() {
+
+  if (!state.current) {
+    return;
+  }
+
+
+  const id =
+    getId(state.current);
+
+
+  const saveButton =
+    $("mSave");
+
+  if (saveButton) {
+
+    saveButton.textContent =
+      isSaved(id)
+        ? "Saved"
+        : "Save Job";
+  }
+}
+
 
 function closeJobModal() {
 
-  $("modal").hidden = true;
+  const modal =
+    $("modal");
+
+  if (modal) {
+    modal.hidden = true;
+  }
 
   state.current = null;
-
 }
 
 
-/* ================= SAVE FROM MODAL ================= */
+function updateApplicationStatus(status) {
 
-$("mSave").addEventListener(
+  if (!state.current) {
+    return;
+  }
+
+
+  const id =
+    getId(state.current);
+
+
+  state.apps[id] =
+    status;
+
+
+  saveState();
+
+  renderResults();
+  renderTracker();
+  updateDashboard();
+
+  showToast(
+    `Status updated to ${status}`
+  );
+}
+
+
+function cycleApplicationStatus() {
+
+  if (!state.current) {
+    return;
+  }
+
+
+  const id =
+    getId(state.current);
+
+
+  const current =
+    state.apps[id] || "new";
+
+
+  const order = [
+    "new",
+    "saved",
+    "applied",
+    "interview",
+    "closed"
+  ];
+
+
+  const index =
+    order.indexOf(current);
+
+
+  const next =
+    order[
+      (index + 1) % order.length
+    ];
+
+
+  updateApplicationStatus(next);
+
+
+  const status =
+    $("mStatus");
+
+  if (status) {
+    status.value = next;
+  }
+}
+
+
+document.addEventListener(
   "click",
-  () => {
+  (event) => {
 
-    if (!state.current) {
+    const viewButton =
+      event.target.closest(
+        "[data-view-job]"
+      );
+
+    if (viewButton) {
+
+      openJob(
+        viewButton.getAttribute(
+          "data-view-job"
+        )
+      );
+
       return;
     }
 
-    toggleSave(
-      getId(state.current)
-    );
 
-    $("mSave").textContent =
-      isSaved(state.current)
-        ? "Remove Saved"
-        : "Save Job";
+    const saveButton =
+      event.target.closest(
+        "[data-save-job]"
+      );
 
+    if (saveButton) {
+
+      toggleSave(
+        saveButton.getAttribute(
+          "data-save-job"
+        )
+      );
+
+      return;
+    }
+
+
+    const openButton =
+      event.target.closest(
+        "[data-open-job]"
+      );
+
+    if (openButton) {
+
+      openSource(
+        openButton.getAttribute(
+          "data-open-job"
+        )
+      );
+
+      return;
+    }
   }
 );
 
 
-/* ================= APPLICATION STATUS ================= */
+const closeModalButton =
+  $("closeModal");
 
-$("mStatus").addEventListener(
-  "click",
-  () => {
+if (closeModalButton) {
 
-    if (!state.current) {
-      return;
-    }
-
-
-    const id =
-      getId(state.current);
-
-
-    const current =
-      state.apps[id] ||
-      "new";
-
-
-    if (current === "new" ||
-        current === "saved") {
-
-      state.apps[id] =
-        "applied";
-
-    } else if (
-      current === "applied"
-    ) {
-
-      state.apps[id] =
-        "interview";
-
-    } else if (
-      current === "interview"
-    ) {
-
-      state.apps[id] =
-        "closed";
-
-    } else {
-
-      state.apps[id] =
-        "applied";
-
-    }
-
-
-    /*
-      A tracked job should remain
-      saved so it appears in
-      Application Tracker.
-    */
-
-    if (!state.saved.includes(id)) {
-
-      state.saved.push(id);
-
-    }
-
-
-    saveState();
-
-    showToast(
-      "Application status updated"
-    );
-
-
-    openJob(id);
-
-    applyFilters();
-
-  }
-);
-
-
-/* ================= MODAL OPEN JOB ================= */
-
-$("mOpen").addEventListener(
-  "click",
-  () => {
-
-    if (!state.current) {
-      return;
-    }
-
-    openSource(
-      getId(state.current)
-    );
-
-  }
-);
-
-
-/* ================= CLOSE BUTTON ================= */
-
-$("closeModal").addEventListener(
-  "click",
-  closeJobModal
-);
-
-
-/* ================= BACKGROUND CLOSE ================= */
-
-document
-  .querySelector(".shade")
-  .addEventListener(
+  closeModalButton.addEventListener(
     "click",
     closeJobModal
   );
+}
 
 
-/* ================= ESCAPE KEY ================= */
+const modal =
+  $("modal");
+
+if (modal) {
+
+  modal.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target === modal
+      ) {
+        closeJobModal();
+      }
+
+    }
+  );
+}
+
+
+const modalSave =
+  $("mSave");
+
+if (modalSave) {
+
+  modalSave.addEventListener(
+    "click",
+    () => {
+
+      if (!state.current) {
+        return;
+      }
+
+      toggleSave(
+        getId(state.current)
+      );
+
+    }
+  );
+}
+
+
+const modalOpen =
+  $("mOpen");
+
+if (modalOpen) {
+
+  modalOpen.addEventListener(
+    "click",
+    () => {
+
+      if (!state.current) {
+        return;
+      }
+
+      openSource(
+        getId(state.current)
+      );
+
+    }
+  );
+}
+
+
+const modalStatus =
+  $("mStatus");
+
+if (modalStatus) {
+
+  modalStatus.addEventListener(
+    "change",
+    () => {
+
+      updateApplicationStatus(
+        modalStatus.value
+      );
+
+    }
+  );
+}
+
 
 document.addEventListener(
   "keydown",
   (event) => {
 
-    if (
-      event.key === "Escape" &&
-      !$("modal").hidden
-    ) {
-
+    if (event.key === "Escape") {
       closeJobModal();
-
     }
 
   }
-);/* ================= TOP SKILLS ================= */
+);function renderSkills() {
 
-function renderSkills() {
+  const skillBox = $("topSkills");
+
+  if (!skillBox) {
+    return;
+  }
 
   const counts = {};
 
-  state.jobs
-    .flatMap(getSkills)
-    .forEach(skill => {
+  state.jobs.forEach((job) => {
+
+    getSkills(job).forEach((skill) => {
 
       const name =
         String(skill).trim();
@@ -1214,395 +1135,331 @@ function renderSkills() {
         return;
       }
 
-      counts[name] =
-        (counts[name] || 0) + 1;
+      const key =
+        name.toLowerCase();
 
+      counts[key] =
+        (counts[key] || 0) + 1;
     });
-
-
-  const topSkills =
-    Object.entries(counts)
-      .sort(
-        (a, b) => b[1] - a[1]
-      )
-      .slice(0, 10);
-
-
-  $("topSkills").innerHTML =
-    topSkills.length
-      ? topSkills
-          .map(
-            ([skill, count]) => `
-              <span class="chip">
-                ${escapeHTML(skill)}
-                · ${count}
-              </span>
-            `
-          )
-          .join("")
-      : `
-          <span class="chip">
-            No skills found
-          </span>
-        `;
-
-
-  /*
-    Fill the Skill filter
-  */
-
-  $("skill").innerHTML = `
-    <option value="all">
-      All skills
-    </option>
-
-    ${
-      topSkills
-        .map(
-          ([skill]) => `
-            <option value="${escapeHTML(skill)}">
-              ${escapeHTML(skill)}
-            </option>
-          `
-        )
-        .join("")
-    }
-  `;
-
-}
-
-
-/* ================= NEXT OPPORTUNITY ================= */
-
-function renderNextJob() {
-
-  const job =
-    [...state.jobs]
-      .sort(
-        (a, b) =>
-          getScore(b) -
-          getScore(a)
-      )[0];
-
-
-  if (!job) {
-
-    $("nextJob").textContent =
-      "Waiting for job data...";
-
-    return;
-
-  }
+  });
 
 
   const skills =
-    getSkills(job)
-      .slice(0, 7)
-      .map(
-        skill => `
-          <span class="chip">
-            ${escapeHTML(skill)}
-          </span>
-        `
-      )
-      .join("");
+    Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8);
 
 
-  $("nextJob").innerHTML = `
-
-    <div class="job-top">
-
-      <div>
-
-        <div class="next-title">
-          ${escapeHTML(
-            getTitle(job)
-          )}
-        </div>
-
-        <div class="company">
-          ${escapeHTML(
-            getCompany(job)
-          )}
-        </div>
-
-      </div>
-
-      <span class="score">
-        ${getScore(job)}%
-      </span>
-
-    </div>
+  skillBox.innerHTML = "";
 
 
-    <div class="mini-block">
+  if (!skills.length) {
 
-      <small>
-        Matching skills
-      </small>
+    skillBox.innerHTML =
+      `<span class="skill-chip">No skills yet</span>`;
 
-      <div class="chips">
-
-        ${
-          skills ||
-          `
-            <span class="chip">
-              Profile signal
-            </span>
-          `
-        }
-
-      </div>
-
-    </div>
+    return;
+  }
 
 
-    <div class="mini-block">
+  skills.forEach(([skill, count]) => {
 
-      <small>
-        Next step
-      </small>
+    const item =
+      document.createElement("div");
 
-      <div>
-        Review the job requirements
-        before applying.
-      </div>
+    item.className =
+      "skill-row";
 
-    </div>
+    item.innerHTML = `
+      <span>${escapeHTML(skill)}</span>
+      <strong>${count}</strong>
+    `;
 
-
-    <button
-      class="primary"
-      style="margin-top:10px"
-      onclick="openJob('${escapeHTML(
-        getId(job)
-      )}')"
-    >
-      Analyze Opportunity
-    </button>
-
-  `;
-
+    skillBox.appendChild(item);
+  });
 }
 
 
-/* ================= AVOID JOBS ================= */
+/* ===============================
+   ANALYZE BEST OPPORTUNITY
+================================ */
 
-function renderAvoidJobs() {
+function renderNextJob() {
 
-  const threshold =
-    Math.max(
-      50,
-      Number(
-        $("minimum").value
-      )
+  const box =
+    $("nextJob");
+
+  if (!box) {
+    return;
+  }
+
+
+  if (!state.jobs.length) {
+
+    box.innerHTML = `
+      <p>No opportunities available yet.</p>
+    `;
+
+    return;
+  }
+
+
+  const sorted =
+    [...state.jobs].sort(
+      (a, b) =>
+        getScore(b) - getScore(a)
     );
 
 
-  const jobs =
-    state.jobs
-      .filter(
-        job =>
-          getScore(job) <
-          threshold
-      )
-      .sort(
-        (a, b) =>
-          getScore(a) -
-          getScore(b)
-      )
-      .slice(0, 5);
+  const job =
+    sorted[0];
 
 
-  if (!jobs.length) {
+  const id =
+    getId(job);
 
-    $("avoidList").innerHTML = `
-      <p>
-        No low-match jobs
-        in the current data.
+
+  box.innerHTML = `
+    <div class="agent-job">
+
+      <div class="job-source">
+        BEST CURRENT MATCH
+      </div>
+
+      <h3>
+        ${escapeHTML(getTitle(job))}
+      </h3>
+
+      <p class="job-company">
+        ${escapeHTML(getCompany(job))}
+      </p>
+
+      <p class="job-meta">
+        📍 ${escapeHTML(getLocation(job))}
+        &nbsp; • &nbsp;
+        ${escapeHTML(getSource(job))}
+      </p>
+
+      <div class="match-score large">
+        ${getScore(job)}% MATCH
+      </div>
+
+      <button
+        class="primary"
+        type="button"
+        data-analyze-job="${escapeHTML(id)}"
+      >
+        Analyze Opportunity
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* ===============================
+   ANALYZE BUTTON FIX
+================================ */
+
+document.addEventListener(
+  "click",
+  (event) => {
+
+    const button =
+      event.target.closest(
+        "[data-analyze-job]"
+      );
+
+    if (!button) {
+      return;
+    }
+
+
+    const jobId =
+      button.getAttribute(
+        "data-analyze-job"
+      );
+
+
+    if (!jobId) {
+      return;
+    }
+
+
+    openJob(jobId);
+  }
+);
+
+
+/* ===============================
+   AVOID JOBS
+================================ */
+
+function renderAvoidJobs() {
+
+  const box =
+    $("avoidList");
+
+  if (!box) {
+    return;
+  }
+
+
+  const avoided =
+    state.jobs.filter((job) => {
+
+      const score =
+        getScore(job);
+
+      return score < 40;
+    });
+
+
+  if (!avoided.length) {
+
+    box.innerHTML = `
+      <p class="muted">
+        No low-match jobs found.
       </p>
     `;
 
     return;
-
   }
 
 
-  $("avoidList").innerHTML =
-    jobs
-      .map(
-        job => `
+  box.innerHTML =
+    avoided
+      .slice(0, 6)
+      .map((job) => {
+
+        return `
           <div class="avoid-item">
 
-            <b>
-              ${escapeHTML(
-                getTitle(job)
-              )}
-            </b>
+            <div>
+              <strong>
+                ${escapeHTML(getTitle(job))}
+              </strong>
 
-            <small>
-              ${getScore(job)}% match
-              · Consider only if
-              the requirements fit you.
-            </small>
+              <small>
+                ${escapeHTML(getCompany(job))}
+              </small>
+            </div>
+
+            <span>
+              ${getScore(job)}%
+            </span>
 
           </div>
-        `
-      )
+        `;
+      })
       .join("");
-
 }
 
 
-/* ================= DASHBOARD ================= */
+/* ===============================
+   DASHBOARD STATS
+================================ */
 
 function updateDashboard() {
 
   const total =
-    state.jobs.length;
-
-
-  const remote =
-    state.jobs.filter(
-      job =>
-        /remote/i.test(
-          getLocation(job)
-        ) ||
-        job.remote === true
-    ).length;
-
-
-  const highScore =
-    state.jobs.filter(
-      job =>
-        getScore(job) >= 80
-    ).length;
-
-
-  const activeApplications =
-    Object.values(
-      state.apps
-    ).filter(
-      status =>
-        status === "applied" ||
-        status === "interview"
-    ).length;
-
+    $("totalJobs");
 
   const recent =
+    $("recentJobs");
+
+  const saved =
+    $("savedJobs");
+
+  const strong =
+    $("strongMatches");
+
+
+  if (total) {
+    total.textContent =
+      state.jobs.length;
+  }
+
+
+  const recentCount =
     state.jobs.filter(
-      job =>
+      (job) =>
         getPostedDays(job) <= 7
     ).length;
 
 
-  const sources =
-    new Set(
-      state.jobs.map(
-        getSource
-      )
-    ).size;
+  if (recent) {
+    recent.textContent =
+      recentCount;
+  }
 
 
-  const locations =
-    new Set(
-      state.jobs.map(
-        getLocation
-      )
-    ).size;
+  if (saved) {
+    saved.textContent =
+      state.saved.length;
+  }
 
 
-  const skills =
-    new Set(
-      state.jobs.flatMap(
-        getSkills
-      )
-    ).size;
-
-
-  $("relevant").textContent =
-    total;
-
-
-  $("recent").textContent =
-    recent;
-
-
-  $("sources").textContent =
-    sources;
-
-
-  $("roleCount").textContent =
-    total;
-
-
-  $("studentCount").textContent =
-    total;
-
-
-  $("skillCount").textContent =
-    skills;
-
-
-  $("locationCount").textContent =
-    locations;
-
-
-  $("remoteCount").textContent =
-    remote;
-
-
-  $("savedMetric").textContent =
+  const strongCount =
     state.jobs.filter(
-      isSaved
+      (job) =>
+        getScore(job) >= 70
     ).length;
 
 
-  $("remoteMetric").textContent =
-    remote;
+  if (strong) {
+    strong.textContent =
+      strongCount;
+  }
 
 
-  $("highMetric").textContent =
-    highScore;
+  renderAvoidJobs();
+}
 
 
-  $("activeMetric").textContent =
-    activeApplications;
+/* ===============================
+   PROFILE ANALYSIS
+================================ */
 
+function analyzeProfile() {
 
-  $("savedCount").textContent =
-    state.saved.length;
-
-
-  /* ================= PROFILE SCORE ================= */
-
-  const average =
-    total
+  const score =
+    state.jobs.length
       ? Math.round(
-          state.jobs.reduce(
-            (sum, job) =>
-              sum + getScore(job),
-            0
-          ) / total
+          state.jobs
+            .reduce(
+              (sum, job) =>
+                sum + getScore(job),
+              0
+            ) /
+          state.jobs.length
         )
       : 0;
 
 
-  $("profileScore").textContent =
-    total
-      ? `${average}%`
-      : "--%";
+  const profileScore =
+    $("profileScore");
+
+  const profileBar =
+    $("profileBar");
 
 
-  $("profileBar").style.width =
-    `${average}%`;
+  if (profileScore) {
+    profileScore.textContent =
+      `${score}%`;
+  }
 
 
-  renderTracker();
+  if (profileBar) {
+    profileBar.style.width =
+      `${score}%`;
+  }
 
-}/* ================= APPLICATION TRACKER ================= */
 
-function renderTracker() {
+  showToast(
+    `Profile analysis: ${score}%`
+  );
+}function renderTracker() {
 
   const columns = {
     saved: $("colSaved"),
@@ -1610,13 +1467,6 @@ function renderTracker() {
     interview: $("colInterview"),
     closed: $("colClosed")
   };
-
-
-  Object.values(columns).forEach(
-    column => {
-      column.innerHTML = "";
-    }
-  );
 
 
   const counts = {
@@ -1627,87 +1477,111 @@ function renderTracker() {
   };
 
 
-  state.jobs.forEach(job => {
+  Object.values(state.apps)
+    .forEach((status) => {
 
-    const id =
-      getId(job);
+      if (counts[status] !== undefined) {
+        counts[status]++;
+      }
 
-    const status =
-      state.apps[id];
-
-
-    /*
-      Jobs without an application
-      status are shown under Saved
-      only when actually saved.
-    */
-
-    let columnStatus = status;
-
-    if (
-      !columnStatus &&
-      isSaved(job)
-    ) {
-      columnStatus = "saved";
-    }
+    });
 
 
-    if (
-      !columnStatus ||
-      !columns[columnStatus]
-    ) {
-      return;
-    }
+  Object.keys(columns)
+    .forEach((status) => {
+
+      const column =
+        columns[status];
+
+      if (!column) {
+        return;
+      }
 
 
-    counts[columnStatus]++;
+      column.innerHTML = "";
 
 
-    columns[columnStatus]
-      .insertAdjacentHTML(
-        "beforeend",
-        `
-          <div class="track-card">
-
-            <b>
-              ${escapeHTML(
-                getTitle(job)
-              )}
-            </b>
-
-            <small>
-              ${escapeHTML(
-                getCompany(job)
-              )}
-            </small>
-
-            <small>
-              ${getScore(job)}% match
-            </small>
-
-          </div>
-        `
-      );
-
-  });
+      const jobs =
+        state.jobs.filter(
+          (job) =>
+            state.apps[getId(job)] === status
+        );
 
 
-  $("cSaved").textContent =
-    counts.saved;
+      if (!jobs.length) {
 
-  $("cApplied").textContent =
-    counts.applied;
+        column.innerHTML = `
+          <p class="muted">
+            No jobs here yet.
+          </p>
+        `;
 
-  $("cInterview").textContent =
-    counts.interview;
+        return;
+      }
 
-  $("cClosed").textContent =
-    counts.closed;
 
+      jobs.forEach((job) => {
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "tracker-job";
+
+
+        item.innerHTML = `
+          <strong>
+            ${escapeHTML(getTitle(job))}
+          </strong>
+
+          <small>
+            ${escapeHTML(getCompany(job))}
+          </small>
+
+          <span>
+            ${getScore(job)}% match
+          </span>
+        `;
+
+
+        item.addEventListener(
+          "click",
+          () => openJob(getId(job))
+        );
+
+
+        column.appendChild(item);
+      });
+
+    });
+
+
+  const counterMap = {
+    saved: "cSaved",
+    applied: "cApplied",
+    interview: "cInterview",
+    closed: "cClosed"
+  };
+
+
+  Object.entries(counterMap)
+    .forEach(([status, elementId]) => {
+
+      const element =
+        $(elementId);
+
+      if (element) {
+        element.textContent =
+          counts[status];
+      }
+
+    });
 }
 
 
-/* ================= FILTER EVENTS ================= */
+/* ===============================
+   FILTER EVENTS
+================================ */
 
 [
   "search",
@@ -1719,13 +1593,14 @@ function renderTracker() {
   "appStatus",
   "minimum",
   "sort"
-].forEach(id => {
+].forEach((id) => {
 
   const element = $(id);
 
   if (!element) {
     return;
   }
+
 
   element.addEventListener(
     "input",
@@ -1736,213 +1611,301 @@ function renderTracker() {
     "change",
     applyFilters
   );
-
 });
 
 
-/* ================= CLEAR FILTERS ================= */
+/* ===============================
+   CLEAR FILTERS
+================================ */
 
-$("clear").addEventListener(
-  "click",
-  () => {
+const clearFilters =
+  $("clearFilters");
 
-    $("search").value = "";
+if (clearFilters) {
 
-    $("location").value = "all";
+  clearFilters.addEventListener(
+    "click",
+    () => {
 
-    $("jobType").value = "all";
+      [
+        "search",
+        "location",
+        "jobType",
+        "workMode",
+        "posted",
+        "skill"
+      ].forEach((id) => {
 
-    $("workMode").value = "all";
+        const element = $(id);
 
-    $("posted").value = "all";
+        if (element) {
+          element.value = "";
+        }
 
-    $("skill").value = "all";
-
-    $("appStatus").value = "all";
-
-    $("minimum").value = "0";
-
-    $("sort").value = "recent";
-
-    applyFilters();
-
-    showToast(
-      "Filters cleared"
-    );
-
-  }
-);
+      });
 
 
-/* ================= SAVED JOBS ================= */
+      const appStatus =
+        $("appStatus");
 
-$("savedBtn").addEventListener(
-  "click",
-  () => {
-
-    $("appStatus").value =
-      "saved";
-
-    goToPage("jobs");
-
-    applyFilters();
-
-  }
-);
-
-
-/* ================= EXPORT CSV ================= */
-
-$("export").addEventListener(
-  "click",
-  exportSavedCSV
-);
-
-
-function exportSavedCSV() {
-
-  const saved =
-    state.jobs.filter(
-      isSaved
-    );
-
-
-  if (!saved.length) {
-
-    showToast(
-      "No saved jobs to export"
-    );
-
-    return;
-
-  }
-
-
-  const header = [
-    "Title",
-    "Company",
-    "Location",
-    "Source",
-    "Match",
-    "Status",
-    "URL"
-  ];
-
-
-  const rows =
-    saved.map(job => [
-
-      getTitle(job),
-
-      getCompany(job),
-
-      getLocation(job),
-
-      getSource(job),
-
-      getScore(job),
-
-      state.apps[getId(job)] ||
-        "saved",
-
-      job.job_url ||
-        job.url ||
-        job.link ||
-        ""
-
-    ]);
-
-
-  const csv = [
-    header,
-    ...rows
-  ]
-    .map(
-      row =>
-        row
-          .map(
-            value =>
-              `"${String(value)
-                .replace(/"/g, '""')}"`
-          )
-          .join(",")
-    )
-    .join("\n");
-
-
-  const blob =
-    new Blob(
-      [csv],
-      {
-        type:
-          "text/csv;charset=utf-8;"
+      if (appStatus) {
+        appStatus.value = "all";
       }
-    );
 
 
-  const url =
-    URL.createObjectURL(blob);
+      const minimum =
+        $("minimum");
+
+      if (minimum) {
+        minimum.value = "0";
+      }
 
 
-  const link =
-    document.createElement("a");
+      const sort =
+        $("sort");
+
+      if (sort) {
+        sort.value = "recent";
+      }
 
 
-  link.href = url;
+      applyFilters();
 
-  link.download =
-    "job-radar-saved-jobs.csv";
-
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
-
-  URL.revokeObjectURL(url);
-
-
-  showToast(
-    "CSV exported"
+      showToast(
+        "Filters cleared"
+      );
+    }
   );
-
 }
 
 
-/* ================= RESUME FILE ================= */
+/* ===============================
+   SAVED JOBS BUTTON
+================================ */
 
-$("resumeFile").addEventListener(
-  "change",
-  event => {
+const savedButton =
+  $("showSaved");
 
-    const file =
-      event.target.files[0];
+if (savedButton) {
+
+  savedButton.addEventListener(
+    "click",
+    () => {
+
+      const appStatus =
+        $("appStatus");
+
+      if (appStatus) {
+        appStatus.value = "saved";
+      }
 
 
-    if (!file) {
+      state.filtered =
+        state.jobs.filter(
+          (job) =>
+            isSaved(getId(job))
+        );
 
-      $("resumeName").textContent =
-        "No resume selected";
 
+      renderResults();
+
+      showToast(
+        "Showing saved jobs"
+      );
+    }
+  );
+}
+
+
+/* ===============================
+   EXPORT SAVED JOBS
+================================ */
+
+const exportButton =
+  $("exportCSV");
+
+if (exportButton) {
+
+  exportButton.addEventListener(
+    "click",
+    () => {
+
+      const saved =
+        state.jobs.filter(
+          (job) =>
+            isSaved(getId(job))
+        );
+
+
+      if (!saved.length) {
+
+        showToast(
+          "No saved jobs to export"
+        );
+
+        return;
+      }
+
+
+      const headers = [
+        "Title",
+        "Company",
+        "Location",
+        "Source",
+        "Match",
+        "URL"
+      ];
+
+
+      const rows =
+        saved.map((job) => [
+
+          getTitle(job),
+
+          getCompany(job),
+
+          getLocation(job),
+
+          getSource(job),
+
+          `${getScore(job)}%`,
+
+          job.url ||
+          job.job_url ||
+          job.link ||
+          ""
+
+        ]);
+
+
+      const csv = [
+        headers,
+        ...rows
+      ]
+        .map((row) =>
+          row
+            .map((value) =>
+              `"${String(value)
+                .replaceAll('"', '""')}"`
+            )
+            .join(",")
+        )
+        .join("\n");
+
+
+      const blob =
+        new Blob(
+          [csv],
+          {
+            type: "text/csv;charset=utf-8;"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(blob);
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href = url;
+      link.download =
+        "job-radar-saved-jobs.csv";
+
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+
+      showToast(
+        "CSV exported successfully"
+      );
+    }
+  );
+}
+
+
+/* ===============================
+   RESUME UPLOAD
+================================ */
+
+const resumeFile =
+  $("resumeFile");
+
+const resumeName =
+  $("resumeName");
+
+
+if (resumeFile) {
+
+  resumeFile.addEventListener(
+    "change",
+    () => {
+
+      const file =
+        resumeFile.files?.[0];
+
+      if (!file) {
+        return;
+      }
+
+
+      if (resumeName) {
+
+        resumeName.textContent =
+          file.name;
+      }
+
+
+      showToast(
+        "Resume selected"
+      );
+    }
+  );
+}
+
+
+/* ===============================
+   NAVIGATION
+================================ */
+
+document.addEventListener(
+  "click",
+  (event) => {
+
+    const button =
+      event.target.closest(
+        "[data-page]"
+      );
+
+    if (!button) {
       return;
-
     }
 
 
-    $("resumeName").textContent =
-      `Selected: ${file.name}`;
+    const page =
+      button.getAttribute(
+        "data-page"
+      );
 
 
-    showToast(
-      "Resume selected"
-    );
-
+    if (page) {
+      goToPage(page);
+    }
   }
 );
 
 
-/* ================= START JOB RADAR ================= */
+/* ===============================
+   INITIALIZE APP
+================================ */
 
 renderTracker();
 
