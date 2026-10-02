@@ -1,21 +1,6 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/web/index.html"
-    },
-    {
-      "source": "/styles.css",
-      "destination": "/web/styles.css"
-    },
-    {
-      "source": "/app.js",
-      "destination": "/web/app.js"
-    },
-    {
-      "source": "/data/:path*",
-      "destination": "/data/:path*"
-    }
+  "redirects": [
+    { "source": "/", "destination": "/web/", "permanent": false }
   ]
 }
