@@ -551,570 +551,431 @@ function updateAll() {
 
 // ==========================================
 // PART 1 END
-// ==========================================// ==========================================
-// JOB RADAR — PART 2/10
-// FILTERS + SEARCH + SORTING
+// ========================================== 
+//// ==========================================
+// PART 2 — FILTERS + SEARCH
 // ==========================================
 
+function getFilterValue(id) {
+    const element = $(id);
 
-// ==========================================
-// CHECK SAVED JOB
-// ==========================================
+    if (!element) {
+        return "";
+    }
 
-function isSaved(jobId) {
-
-    return state.savedJobs.some(
-        id => String(id) === String(jobId)
-    );
-
+    return String(element.value || "").trim();
 }
 
-
-// ==========================================
-// CHECK AVOIDED JOB
-// ==========================================
-
-function isAvoided(jobId) {
-
-    return state.avoidedJobs.some(
-        id => String(id) === String(jobId)
-    );
-
+function isSaved(job) {
+    const id = getJobId(job);
+    return state.savedJobs.includes(id);
 }
 
-
-// ==========================================
-// GET APPLICATION STATUS
-// ==========================================
+function isAvoided(job) {
+    const id = getJobId(job);
+    return state.avoidedJobs.includes(id);
+}
 
 function getApplicationStatus(jobId) {
+    const statuses = loadStorage(
+        STORAGE_KEYS.status,
+        {}
+    );
 
-    const statuses =
-        loadStorage(
-            STORAGE_KEYS.status,
-            {}
-        );
-
-    return statuses[jobId] || "Not Applied";
-
+    return statuses[jobId] || "saved";
 }
 
+function setApplicationStatus(jobId, status) {
 
-// ==========================================
-// SET APPLICATION STATUS
-// ==========================================
+    const statuses = loadStorage(
+        STORAGE_KEYS.status,
+        {}
+    );
 
-function setApplicationStatus(
-    jobId,
-    status
-) {
-
-    const statuses =
-        loadStorage(
-            STORAGE_KEYS.status,
-            {}
-        );
-
-    statuses[jobId] =
-        status;
+    if (!status || status === "saved") {
+        delete statuses[jobId];
+    } else {
+        statuses[jobId] = status;
+    }
 
     saveStorage(
         STORAGE_KEYS.status,
         statuses
     );
-
 }
 
 
 // ==========================================
-// GET ELEMENT VALUE SAFELY
+// JOB SEARCH TEXT
 // ==========================================
 
-function getFilterValue(id) {
+function getJobSearchText(job) {
 
-    const element =
-        $(id);
+    const skills = [
+        ...(Array.isArray(job.matched_skills)
+            ? job.matched_skills
+            : []),
 
-    if (!element) {
+        ...(Array.isArray(job.skills)
+            ? job.skills
+            : [])
+    ];
 
-        return "";
+    return [
+        job.title,
+        job.company,
+        job.location,
+        job.description,
+        job.job_type,
+        job.source,
+        ...skills
+    ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+}
 
+
+// ==========================================
+// SKILL MATCH
+// ==========================================
+
+function matchesSkill(job, skillInput) {
+
+    const skill = String(skillInput || "")
+        .trim()
+        .toLowerCase();
+
+    if (!skill) {
+        return true;
     }
 
-    return cleanText(
-        element.value
-    );
+    const text = getJobSearchText(job);
 
+    const skillGroups = {
+
+        iot: [
+            "iot",
+            "internet of things",
+            "embedded",
+            "embedded systems",
+            "esp32",
+            "arduino",
+            "raspberry pi",
+            "firmware",
+            "microcontroller",
+            "sensors"
+        ],
+
+        python: [
+            "python"
+        ],
+
+        java: [
+            "java"
+        ],
+
+        sql: [
+            "sql",
+            "mysql",
+            "postgresql"
+        ],
+
+        javascript: [
+            "javascript",
+            "typescript",
+            "node.js",
+            "node"
+        ],
+
+        embedded: [
+            "embedded",
+            "embedded systems",
+            "firmware",
+            "microcontroller",
+            "esp32",
+            "arduino",
+            "raspberry pi"
+        ],
+
+        electronics: [
+            "electronics",
+            "embedded",
+            "microcontroller",
+            "circuit",
+            "pcb",
+            "hardware"
+        ]
+    };
+
+    const keywords =
+        skillGroups[skill] || [skill];
+
+    return keywords.some(keyword =>
+        text.includes(keyword)
+    );
 }
 
 
 // ==========================================
-// APPLY ALL FILTERS
+// APPLY FILTERS
 // ==========================================
 
 function applyFilters() {
 
-    let jobs =
-        [...state.jobs];
-
-
-    // --------------------------------------
-    // SEARCH
-    // --------------------------------------
+    let jobs = [...state.jobs];
 
     const search =
-        String(
-            state.filters.search || ""
-        )
-            .toLowerCase()
-            .trim();
+        getFilterValue("search").toLowerCase();
 
+    const location =
+        getFilterValue("location").toLowerCase();
+
+    const jobType =
+        getFilterValue("jobType").toLowerCase();
+
+    const workMode =
+        getFilterValue("workMode").toLowerCase();
+
+    const posted =
+        getFilterValue("posted");
+
+    const skill =
+        getFilterValue("skill").toLowerCase();
+
+    const appStatus =
+        getFilterValue("appStatus").toLowerCase();
+
+    const minimum =
+        Number(getFilterValue("minimum") || 0);
+
+
+    // Remove avoided jobs
+    jobs = jobs.filter(
+        job => !isAvoided(job)
+    );
+
+
+    // Saved only
+    if (state.showSavedOnly) {
+
+        jobs = jobs.filter(
+            job => isSaved(job)
+        );
+    }
+
+
+    // ======================================
+    // SEARCH
+    // ======================================
 
     if (search) {
 
-        jobs =
-            jobs.filter(
-                job => {
+        const words =
+            search
+                .split(/\s+/)
+                .filter(Boolean);
 
-                    const searchable = [
+        jobs = jobs.filter(job => {
 
-                        job.title,
+            const text =
+                getJobSearchText(job);
 
-                        job.company,
-
-                        job.location,
-
-                        job.description,
-
-                        job.source,
-
-                        job.job_type,
-
-                        ...(job.matched_skills || [])
-
-                    ]
-                        .join(" ")
-                        .toLowerCase();
-
-
-                    return searchable.includes(
-                        search
-                    );
-
-                }
+            return words.every(word =>
+                text.includes(word)
             );
-
+        });
     }
 
 
-    // --------------------------------------
+    // ======================================
     // LOCATION
-    // --------------------------------------
-
-    const location =
-        String(
-            state.filters.location || ""
-        )
-            .toLowerCase()
-            .trim();
-
+    // ======================================
 
     if (location) {
 
-        jobs =
-            jobs.filter(
-                job =>
-                    String(
-                        job.location || ""
-                    )
-                        .toLowerCase()
-                        .includes(
-                            location
-                        )
-            );
+        jobs = jobs.filter(job => {
 
+            const jobLocation =
+                String(job.location || "")
+                    .toLowerCase();
+
+            return jobLocation.includes(
+                location
+            );
+        });
     }
 
 
-    // --------------------------------------
+    // ======================================
     // JOB TYPE
-    // --------------------------------------
-
-    const jobType =
-        String(
-            state.filters.jobType || ""
-        )
-            .toLowerCase()
-            .trim();
-
+    // ======================================
 
     if (jobType) {
 
-        jobs =
-            jobs.filter(
-                job =>
-                    String(
-                        job.job_type || ""
-                    )
-                        .toLowerCase()
-                        .includes(
-                            jobType
-                        )
-            );
+        jobs = jobs.filter(job => {
 
+            const text =
+                getJobSearchText(job);
+
+            return text.includes(jobType);
+        });
     }
 
 
-    // --------------------------------------
+    // ======================================
     // WORK MODE
-    // --------------------------------------
-
-    const workMode =
-        String(
-            state.filters.workMode || ""
-        )
-            .toLowerCase()
-            .trim();
-
+    // ======================================
 
     if (workMode) {
 
-        jobs =
-            jobs.filter(
-                job => {
+        jobs = jobs.filter(job => {
 
-                    const locationText =
-                        String(
-                            job.location || ""
-                        )
-                            .toLowerCase();
+            const text =
+                getJobSearchText(job);
 
+            if (workMode === "remote") {
+                return Boolean(job.is_remote);
+            }
 
-                    const descriptionText =
-                        String(
-                            job.description || ""
-                        )
-                            .toLowerCase();
+            if (workMode === "hybrid") {
+                return text.includes("hybrid");
+            }
 
+            if (workMode === "onsite") {
+                return (
+                    !Boolean(job.is_remote) &&
+                    !text.includes("hybrid")
+                );
+            }
 
-                    const combined =
-                        `${locationText} ${descriptionText}`;
-
-
-                    if (
-                        workMode === "remote"
-                    ) {
-
-                        return (
-                            job.is_remote ||
-                            combined.includes(
-                                "remote"
-                            )
-                        );
-
-                    }
-
-
-                    if (
-                        workMode === "hybrid"
-                    ) {
-
-                        return combined.includes(
-                            "hybrid"
-                        );
-
-                    }
-
-
-                    if (
-                        workMode === "onsite" ||
-                        workMode === "on-site"
-                    ) {
-
-                        return (
-                            !job.is_remote &&
-                            !combined.includes(
-                                "remote"
-                            )
-                        );
-
-                    }
-
-
-                    return true;
-
-                }
-            );
-
+            return true;
+        });
     }
 
 
-    // --------------------------------------
-    // SKILL SEARCH
-    // --------------------------------------
-
-    const skill =
-        String(
-            state.filters.skill || ""
-        )
-            .toLowerCase()
-            .trim();
-
+    // ======================================
+    // SKILL
+    // ======================================
 
     if (skill) {
 
-        jobs =
-            jobs.filter(
-                job => {
-
-                    const skills =
-                        Array.isArray(
-                            job.matched_skills
-                        )
-                            ? job.matched_skills
-                            : [];
-
-
-                    const skillText =
-                        skills
-                            .join(" ")
-                            .toLowerCase();
-
-
-                    const description =
-                        String(
-                            job.description || ""
-                        )
-                            .toLowerCase();
-
-
-                    const title =
-                        String(
-                            job.title || ""
-                        )
-                            .toLowerCase();
-
-
-                    return (
-
-                        skillText.includes(
-                            skill
-                        )
-
-                        ||
-
-                        description.includes(
-                            skill
-                        )
-
-                        ||
-
-                        title.includes(
-                            skill
-                        )
-
-                    );
-
-                }
-            );
-
+        jobs = jobs.filter(job =>
+            matchesSkill(job, skill)
+        );
     }
 
 
-    // --------------------------------------
+    // ======================================
     // MINIMUM SCORE
-    // --------------------------------------
-
-    const minimum =
-        Number(
-            state.filters.minimum || 0
-        );
-
+    // ======================================
 
     if (minimum > 0) {
 
-        jobs =
-            jobs.filter(
-                job =>
-                    Number(
-                        job.score || 0
-                    ) >= minimum
-            );
-
-    }
-
-
-    // --------------------------------------
-    // SAVED ONLY
-    // --------------------------------------
-
-    if (
-        state.showSavedOnly
-    ) {
-
-        jobs =
-            jobs.filter(
-                job =>
-                    isSaved(
-                        getJobId(job)
-                    )
-            );
-
-    }
-
-
-    // --------------------------------------
-    // ALWAYS HIDE AVOIDED JOBS
-    // --------------------------------------
-
-    jobs =
-        jobs.filter(
-            job =>
-                !isAvoided(
-                    getJobId(job)
-                )
+        jobs = jobs.filter(job =>
+            Number(job.score || 0) >= minimum
         );
+    }
 
 
-    // --------------------------------------
+    // ======================================
     // APPLICATION STATUS
-    // --------------------------------------
-
-    const appStatus =
-        String(
-            state.filters.appStatus || ""
-        )
-            .trim();
-
+    // ======================================
 
     if (appStatus) {
 
-        jobs =
-            jobs.filter(
-                job =>
-                    getApplicationStatus(
-                        getJobId(job)
-                    ) === appStatus
-            );
+        jobs = jobs.filter(job => {
 
+            const status =
+                getApplicationStatus(
+                    getJobId(job)
+                ).toLowerCase();
+
+            return status === appStatus;
+        });
     }
 
 
-    // --------------------------------------
+    // ======================================
+    // POSTED DATE
+    // ======================================
+
+    if (posted) {
+
+        const days = Number(posted);
+
+        if (days > 0) {
+
+            const cutoff =
+                Date.now() -
+                days *
+                24 *
+                60 *
+                60 *
+                1000;
+
+            jobs = jobs.filter(job => {
+
+                const date =
+                    new Date(
+                        job.date_posted
+                    ).getTime();
+
+                if (Number.isNaN(date)) {
+                    return true;
+                }
+
+                return date >= cutoff;
+            });
+        }
+    }
+
+
+    // ======================================
     // SORT
-    // --------------------------------------
+    // ======================================
 
     const sort =
-        state.filters.sort ||
-        "score";
+        getFilterValue("sort") || "score";
 
 
-    if (
-        sort === "score"
-    ) {
+    if (sort === "score") {
 
-        jobs.sort(
-            (a, b) =>
-                Number(
-                    b.score || 0
-                )
-                -
-                Number(
-                    a.score || 0
+        jobs.sort((a, b) =>
+            Number(b.score || 0) -
+            Number(a.score || 0)
+        );
+
+    } else if (sort === "newest") {
+
+        jobs.sort((a, b) =>
+            new Date(b.date_posted || 0) -
+            new Date(a.date_posted || 0)
+        );
+
+    } else if (sort === "company") {
+
+        jobs.sort((a, b) =>
+            String(a.company || "")
+                .localeCompare(
+                    String(b.company || "")
                 )
         );
 
-    }
+    } else if (sort === "title") {
 
-
-    else if (
-        sort === "recent"
-    ) {
-
-        jobs.sort(
-            (a, b) => {
-
-                const dateA =
-                    new Date(
-                        a.date_posted || 0
-                    )
-                        .getTime();
-
-
-                const dateB =
-                    new Date(
-                        b.date_posted || 0
-                    )
-                        .getTime();
-
-
-                return dateB - dateA;
-
-            }
-        );
-
-    }
-
-
-    else if (
-        sort === "company"
-    ) {
-
-        jobs.sort(
-            (a, b) =>
-                String(
-                    a.company || ""
+        jobs.sort((a, b) =>
+            String(a.title || "")
+                .localeCompare(
+                    String(b.title || "")
                 )
-                    .localeCompare(
-                        String(
-                            b.company || ""
-                        )
-                    )
         );
-
     }
 
 
-    else if (
-        sort === "title"
-    ) {
+    state.filteredJobs = jobs;
 
-        jobs.sort(
-            (a, b) =>
-                String(
-                    a.title || ""
-                )
-                    .localeCompare(
-                        String(
-                            b.title || ""
-                        )
-                    )
-        );
-
-    }
-
-
-    // --------------------------------------
-    // SAVE FILTERED RESULT
-    // --------------------------------------
-
-    state.filteredJobs =
-        jobs;
-
-
-    // --------------------------------------
-    // RENDER JOBS
-    // --------------------------------------
-
-    if (
-        typeof renderJobs ===
-        "function"
-    ) {
-
-        renderJobs();
-
-    }
-
+    renderJobs();
 }
 
 
@@ -1124,290 +985,94 @@ function applyFilters() {
 
 function clearFilters() {
 
-    state.filters = {
-
-        search: "",
-
-        location: "",
-
-        jobType: "",
-
-        workMode: "",
-
-        posted: "",
-
-        skill: "",
-
-        appStatus: "",
-
-        minimum: 0,
-
-        sort: "score"
-
-    };
-
-
-    state.showSavedOnly =
-        false;
-
-
     const ids = [
-
-        "searchInput",
-
-        "locationFilter",
-
-        "jobTypeFilter",
-
-        "workModeFilter",
-
-        "postedFilter",
-
-        "skillFilter",
-
-        "applicationFilter",
-
-        "minimumScore",
-
-        "sortFilter"
-
+        "search",
+        "location",
+        "jobType",
+        "workMode",
+        "posted",
+        "skill",
+        "appStatus",
+        "minimum"
     ];
 
+    ids.forEach(id => {
 
-    ids.forEach(
-        id => {
+        const element = $(id);
 
-            const element =
-                $(id);
-
-            if (element) {
-
-                element.value = "";
-
-            }
-
+        if (element) {
+            element.value = "";
         }
-    );
+    });
+
+
+    const sort = $("sort");
+
+    if (sort) {
+        sort.value = "score";
+    }
+
+
+    state.showSavedOnly = false;
 
 
     const savedButton =
-        $("savedOnly");
-
+        $("showSaved");
 
     if (savedButton) {
-
         savedButton.classList.remove(
             "active"
         );
-
     }
 
 
     applyFilters();
 
+    showToast("Filters cleared");
 }
 
 
 // ==========================================
-// BIND FILTER EVENTS
+// FILTER EVENTS
 // ==========================================
 
 function bindFilterEvents() {
 
-    const searchInput =
-        $("searchInput");
+    const filterIds = [
+        "search",
+        "location",
+        "jobType",
+        "workMode",
+        "posted",
+        "skill",
+        "appStatus",
+        "minimum",
+        "sort"
+    ];
 
 
-    if (searchInput) {
+    filterIds.forEach(id => {
 
-        searchInput.addEventListener(
+        const element = $(id);
+
+        if (!element) {
+            return;
+        }
+
+        element.addEventListener(
             "input",
-            event => {
-
-                state.filters.search =
-                    event.target.value;
-
-                applyFilters();
-
-            }
+            applyFilters
         );
 
-    }
-
-
-    const locationFilter =
-        $("locationFilter");
-
-
-    if (locationFilter) {
-
-        locationFilter.addEventListener(
+        element.addEventListener(
             "change",
-            event => {
-
-                state.filters.location =
-                    event.target.value;
-
-                applyFilters();
-
-            }
+            applyFilters
         );
-
-    }
-
-
-    const jobTypeFilter =
-        $("jobTypeFilter");
-
-
-    if (jobTypeFilter) {
-
-        jobTypeFilter.addEventListener(
-            "change",
-            event => {
-
-                state.filters.jobType =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const workModeFilter =
-        $("workModeFilter");
-
-
-    if (workModeFilter) {
-
-        workModeFilter.addEventListener(
-            "change",
-            event => {
-
-                state.filters.workMode =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const postedFilter =
-        $("postedFilter");
-
-
-    if (postedFilter) {
-
-        postedFilter.addEventListener(
-            "change",
-            event => {
-
-                state.filters.posted =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const skillFilter =
-        $("skillFilter");
-
-
-    if (skillFilter) {
-
-        skillFilter.addEventListener(
-            "input",
-            event => {
-
-                state.filters.skill =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const applicationFilter =
-        $("applicationFilter");
-
-
-    if (applicationFilter) {
-
-        applicationFilter.addEventListener(
-            "change",
-            event => {
-
-                state.filters.appStatus =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const minimumScore =
-        $("minimumScore");
-
-
-    if (minimumScore) {
-
-        minimumScore.addEventListener(
-            "input",
-            event => {
-
-                state.filters.minimum =
-                    Number(
-                        event.target.value || 0
-                    );
-
-                applyFilters();
-
-            }
-        );
-
-    }
-
-
-    const sortFilter =
-        $("sortFilter");
-
-
-    if (sortFilter) {
-
-        sortFilter.addEventListener(
-            "change",
-            event => {
-
-                state.filters.sort =
-                    event.target.value;
-
-                applyFilters();
-
-            }
-        );
-
-    }
+    });
 
 
     const clearButton =
         $("clearFilters");
-
 
     if (clearButton) {
 
@@ -1415,13 +1080,11 @@ function bindFilterEvents() {
             "click",
             clearFilters
         );
-
     }
 
 
     const savedButton =
-        $("savedOnly");
-
+        $("showSaved");
 
     if (savedButton) {
 
@@ -1432,21 +1095,24 @@ function bindFilterEvents() {
                 state.showSavedOnly =
                     !state.showSavedOnly;
 
-
                 savedButton.classList.toggle(
                     "active",
                     state.showSavedOnly
                 );
 
-
                 applyFilters();
-
             }
         );
-
     }
-
 }
+
+
+       
+    
+                    
+       
+    
+
 
 
 // ==========================================
